@@ -16,6 +16,16 @@
     <meta name="viewport" content="user-scalable=no, width=device-width" />
     <link rel="stylesheet" type="text/css" href="<?php print $GLOBALS['path']; ?>Views/theme/android.css" media="only screen and (min-width: 480px)" />
     <link rel="stylesheet" type="text/css" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/style.css" />
+
+    <!------------------------------------------------------------------
+    APPLE TWEAKS - thanks to Paul Dreed
+    ------------------------------------------------------------------->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-startup-image" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
+    <link rel="apple-touch-icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
+
+
     <title>emoncms</title>
   </head>
   <body>
