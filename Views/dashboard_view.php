@@ -61,7 +61,7 @@ $(function() {
     // Upload changes to server
     $.ajax({                                      
       type: "POST",
-      url: path+"api/dashboard?apikey="+apikey_write,           
+      url: path+"api/setdashboard?apikey="+apikey_write,           
       data: "&content="+encodeURIComponent($("#editarea").val()),
       dataType: 'json',   
       success: function() { }

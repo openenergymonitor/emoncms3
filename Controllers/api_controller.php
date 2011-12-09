@@ -102,12 +102,19 @@ function api_controller()
     $data = "ok";
   }
 
-  if ($args[1] == 'dashboard')
+  if ($args[1] == 'setdashboard')
   {
     $userid = get_apikey_write_user($apikey_in);
     if ($userid==0) { echo "valid write apikey required"; die; }
     $content = $_POST['content'];
     set_dashboard($userid,$content);
+  }
+
+  if ($args[1] == 'getdashboard')
+  {
+    $userid = get_apikey_read_user($apikey_in);
+    if ($userid==0) { echo "valid read apikey required"; die; }
+    $data = get_dashboard($userid);
   }
 
   return json_encode($data);
