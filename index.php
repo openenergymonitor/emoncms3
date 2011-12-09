@@ -16,8 +16,9 @@
 
   session_start();
 
-  error_reporting(E_ALL);
-  ini_set('display_errors','off');
+  //error_reporting(E_ALL);
+  ini_set('display_errors','on');
+  error_reporting(E_ALL ^ E_NOTICE);
 
   $path = dirname("http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'])."/";
 
