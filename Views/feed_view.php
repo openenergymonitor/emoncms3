@@ -48,7 +48,7 @@
         <input type="hidden" name="feedid" value="<?php echo $feed[0]; ?>">
         <input type="hidden" name="feedname" value="<?php echo $feed[1]; ?>">
 
-        <input type="submit" value="<?php echo $feed[1]; ?>" class="button05" style="width:100px"/>
+        <input type="submit" value="<?php echo $feed[1]; ?>" class="button05" style="width:150px"/>
       </form>
 
       </td>

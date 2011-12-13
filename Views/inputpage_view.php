@@ -40,7 +40,7 @@
  <form action="processingpage" method="post">
           <input type="hidden" name="form" value="input">
 	  <input type="hidden" name="id" value="<?php echo $input[0]; ?>">
-          <input type="submit" class="button05" style="width:100px" value="<?php echo $input[1]; ?>">
+          <input type="submit" class="button05" style="width:150px" value="<?php echo $input[1]; ?>">
 </input>
         </form>
 </td>
