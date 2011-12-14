@@ -47,7 +47,9 @@
             // 2) get feed name of id
             $feed_result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
             $feed_row = db_fetch_array($feed_result);
-            $feeds[] = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],$feed_row['time'],$feed_row['value']);
+            if ($feed_row['status'] != 1) { // if feed is not deleted
+              $feeds[] = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],$feed_row['time'],$feed_row['value']);
+            }
           }
         }
 
@@ -247,6 +249,10 @@ function compare($x, $y)
 
   function delete_feed($userid,$feedid)
   {
+    // feed status of 1 = deleted, this provides a way to soft delete so that if the delete was a mistake it can be taken out of the recycle bin as it where.
+    // It would be a good idea to have a hard delete option as well so that one can completely erase data.
+    db_query("UPDATE feeds SET status = 1 WHERE id='$feedid'");
+    //db_query("DELETE FROM feeds WHERE id = '$feedid'");
     //db_query("DELETE FROM feeds WHERE id = '$feedid'");
     //db_query("DELETE FROM feed_relation WHERE userid = '$userid' AND feedid = '$feedid' LIMIT 1");
     //db_query("DROP TABLE feed_".$feedid);

@@ -55,11 +55,11 @@ Select graph type:</h3>
 <input type="submit" value="Save" class="button05"/>
 </form>
 <h2>Delete feed?</h2>
-<form action="feed" method="post">
+<form action="confirmdelete" method="post">
 <input type="hidden" name="form" value="delete">
 <input type="hidden" name="feedid" value="<?php echo $id; ?>">
 <input type="hidden" name="feedname" value="<?php echo $name; ?>">
-<input type="submit" value="Yes please delete" class="button05"/>
+<input type="submit" value="delete" class="button05"/>
 </form>
 </div>
 

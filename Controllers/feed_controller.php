@@ -65,7 +65,9 @@ function feed_controller()
   if ($_POST["form"] == "delete")
   { 
     $feedid = intval($_POST["feedid"]);
-    delete_feed($userid,$feedid);
+    if (feed_belongs_user($feedid,$userid)) {
+      delete_feed($userid,$feedid);
+    }
   }
 
   $inputs = get_user_inputs($userid);

@@ -43,6 +43,7 @@
     tag text,
     time DATETIME,
     value FLOAT,
+    status int,
     today FLOAT,
     yesterday FLOAT,
     week FLOAT,
