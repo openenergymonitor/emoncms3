@@ -60,4 +60,10 @@
     return $GLOBALS['mysqli']->real_escape_string($string);
   }
 
+  function db_insert_id()
+  {
+    return $GLOBALS['mysqli']->insert_id;
+  }
+
+
 ?>

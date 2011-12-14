@@ -15,10 +15,11 @@
   function create_feed($userid,$name)
   {
     $result = db_query("INSERT INTO feeds (name) VALUES ('$name')");				// Create the feed entry
+    $ido = db_insert_id();
     $result = db_query("SELECT id FROM feeds WHERE name='$name'");				// Select the same feed to find the auto assigned id
     if ($result) {
       $array = db_fetch_array($result);
-      $feedid = $array['id'];											// Feed id
+      $feedid = $ido;											// Feed id
       db_query("INSERT INTO feed_relation (userid,feedid) VALUES ('$userid','$feedid')");	// Create a user->feed relation
 
       // create feed table
