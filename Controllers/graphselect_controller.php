@@ -19,8 +19,9 @@
     {
       $id = $_POST['feedid'];
       $name = $_POST['feedname'];
+      $tag = $_POST['tag'];
 
-      $content = view("graphselect_view.php", array('id'=>$id,'name'=>$name));
+      $content = view("graphselect_view.php", array('id'=>$id,'name'=>$name,'tag'=>$tag));
     }
     else 
     {

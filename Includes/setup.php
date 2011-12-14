@@ -40,6 +40,7 @@
     id int NOT NULL AUTO_INCREMENT, 
     PRIMARY KEY(id),
     name text,
+    tag text,
     time DATETIME,
     value FLOAT,
     today FLOAT,

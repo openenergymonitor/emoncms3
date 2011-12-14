@@ -7,7 +7,6 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 <h2><?php echo $name; ?></h2>
 <h3>
@@ -41,4 +40,26 @@ Select graph type:</h3>
 </input>
         </form>
 
+<h2>Tag feed</h2>
+<form action="feed" method="post">
+<input type="hidden" name="form" value="tag">
+<input type="hidden" name="feedid" value="<?php echo $id; ?>">
+<input type="text" name="tag" style="width:100px;" value="<?php echo $tag; ?>" />
+<input type="submit" value="Save" class="button05"/>
+</form>
+<h2>Rename feed</h2>
+<form action="feed" method="post">
+<input type="hidden" name="form" value="rename">
+<input type="hidden" name="feedid" value="<?php echo $id; ?>">
+<input type="text" name="feedname" style="width:100px;" value="<?php echo $name; ?>" />
+<input type="submit" value="Save" class="button05"/>
+</form>
+<h2>Delete feed?</h2>
+<form action="feed" method="post">
+<input type="hidden" name="form" value="delete">
+<input type="hidden" name="feedid" value="<?php echo $id; ?>">
+<input type="hidden" name="feedname" value="<?php echo $name; ?>">
+<input type="submit" value="Yes please delete" class="button05"/>
+</form>
 </div>
+

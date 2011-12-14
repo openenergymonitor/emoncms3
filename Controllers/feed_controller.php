@@ -44,7 +44,25 @@ function feed_controller()
     $input_processlist = get_input_processlist_desc($inputid);
   }
 
-  if ($_POST["form"] == "delete_feed")
+  if ($_POST["form"] == "tag")
+  { 
+    $feedid = intval($_POST["feedid"]);
+    if (feed_belongs_user($feedid,$userid)) {
+      $newfeedtag = $_POST["tag"];
+      set_feed_tag($feedid,$newfeedtag);
+    }
+  }
+
+  if ($_POST["form"] == "rename")
+  { 
+    $feedid = intval($_POST["feedid"]);
+    if (feed_belongs_user($feedid,$userid)) {
+      $newfeedname = $_POST["feedname"];
+      set_feed_name($feedid,$newfeedname);
+    }
+  }
+
+  if ($_POST["form"] == "delete")
   { 
     $feedid = intval($_POST["feedid"]);
     delete_feed($userid,$feedid);

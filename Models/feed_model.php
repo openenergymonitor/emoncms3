@@ -93,6 +93,15 @@ function compare($x, $y)
     else return 0;
   }
 
+  function set_feed_name($feedid,$name)
+  {
+    db_query("UPDATE feeds SET name = '$name' WHERE id='$feedid'");
+  }
+
+  function set_feed_tag($feedid,$tag)
+  {
+    db_query("UPDATE feeds SET tag = '$tag' WHERE id='$feedid'");
+  }
 
   //---------------------------------------------------------------------------
   // Function feed insert

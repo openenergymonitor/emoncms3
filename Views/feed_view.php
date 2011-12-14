@@ -13,7 +13,7 @@
   <h2>Feeds</h2>
 
   <?php if ($feeds) { ?>
-  <table class='catlist'><tr><th>id</th><th>Name</th><th>Updated</th><th>Value</th></tr>
+  <table class='catlist'><tr><th>id</th><th>Name</th><th>Tag</th><th>Updated</th><th>Value</th></tr>
   <?php 
     $i = 0;
     foreach ($feeds as $feed)
@@ -47,13 +47,14 @@
         <input type="hidden" name="form" value="graph">
         <input type="hidden" name="feedid" value="<?php echo $feed[0]; ?>">
         <input type="hidden" name="feedname" value="<?php echo $feed[1]; ?>">
+        <input type="hidden" name="tag" value="<?php echo $feed[2]; ?>">
 
         <input type="submit" value="<?php echo $feed[1]; ?>" class="button05" style="width:150px"/>
       </form>
 
       </td>
       
-      <!--<td><?php echo $feed[2]; ?></td>-->
+      <td><?php echo $feed[2]; ?></td>
       <td style="color:<?php echo $color; ?>"><?php echo $updated; ?></td>
       <td>
       <?php 
