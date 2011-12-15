@@ -19,6 +19,11 @@ function inputpage_controller()
 
   $userid = $_SESSION['userid'];
 
+  if ($_POST["form"] == "delete")
+  { 
+    delete_input($_POST["id"]);
+  }
+
   if ($_POST["form"] == "input")
   { 
     $inputid = intval($_POST["id"]);

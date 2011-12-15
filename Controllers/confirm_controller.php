@@ -13,19 +13,15 @@
   // The html content on this page could be seperated out into a view
   //---------------------------------------------------------------------
 
-  function confirmdelete_controller()
+  function confirm_controller()
   {
-    if ($_POST['form'] == "delete")
-    {
-      $id = $_POST['feedid'];
-      $name = $_POST['feedname'];
+    $message = $_POST['message'];
+    $id = $_POST['id'];
 
-      $content = view("confirmdelete_view.php", array('id'=>$id,'name'=>$name));
-    }
-    else 
-    {
-      $content = "Please select feed to delete from feed page";
-    }
+    $action = $_POST['action'];
+    $form = $_POST['form'];
+
+    $content = view("confirm_view.php", array('message'=>$message,'id'=>$id, 'action'=>$action,'form'=>$form));
 
     return $content;
   }

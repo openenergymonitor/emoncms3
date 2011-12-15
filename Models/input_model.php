@@ -42,7 +42,9 @@
     $inputs = array();
     if ($result) {
       while ($row = db_fetch_array($result)) {
+        if ($row['status']!=1){ // 1 is a deleted input
         $inputs[] = array($row['id'],$row['name'],$row['time'],$row['value']);
+        }
       }
     }
     return $inputs;
@@ -50,7 +52,7 @@
 
   function get_input_id($user,$name)
   {
-    $result = db_query("SELECT id FROM input WHERE name='$name' AND userid='$user'");
+    $result = db_query("SELECT id FROM input WHERE name='$name' AND userid='$user' AND status='0' ");
     if ($result) { $array = db_fetch_array($result); return $array['id']; } 
     else return 0;
   }
@@ -93,6 +95,12 @@
       }
     }
     return $list;
+  }
+
+  function delete_input($inputid)
+  {
+    // soft deletion
+    db_query("UPDATE input SET status = 1 WHERE id='$inputid'");
   }
 
 ?>

@@ -9,12 +9,11 @@
 -->
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 
-<h3>Are you sure you want to delete the feed: <?php echo $name; ?></h3>
-<p>This does not permanently delete the feed, deleted feeds will be recoverable from the recycle bin once this functionality is built.</p>
-<form action="feed" method="post">
-<input type="hidden" name="form" value="delete">
-<input type="hidden" name="feedid" value="<?php echo $id; ?>">
-<input type="submit" value="Yes please delete" class="button05"/>
+<?php echo $message; ?>
+<form action="<?php echo $action; ?>" method="post">
+<input type="hidden" name="form" value="<?php echo $form; ?>">
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="submit" value="Yes please" class="button05"/>
 </form>
 
 </div>
