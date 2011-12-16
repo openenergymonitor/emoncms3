@@ -32,6 +32,7 @@
     $list[9] = array( "kWh to kWh/d",		2,		"kwh_to_kwhd"		);
     $list[10] = array( "update feed @time",	2,		"update_feed_data"	);
     $list[11] = array( "+ input",		1,		"add_input"		);
+    $list[12] = array( "/ input" ,		0,		"divide"		);
 
     return $list;
   }
@@ -45,6 +46,11 @@
   function scale($arg,$time,$value)
   {
     return $value * $arg;
+  }
+
+  function divide($arg,$time,$value)
+  {
+    return $value / $arg;
   }
 
   function offset($arg,$time,$value)
