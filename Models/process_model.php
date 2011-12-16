@@ -209,7 +209,7 @@
       $last_time = strtotime($last_row['time']);
       // time elapsed calculation
       $time_elapsed = ($time_now - $last_time);
-      if ($value==1) {$new_kwh = $last_kwh + $time_elapsed;} else {$new_kwh = $last_kwh;}
+      if ($value>0) {$new_kwh = $last_kwh + $time_elapsed;} else {$new_kwh = $last_kwh;}
     }
 
     db_query("UPDATE $feedname SET data = '$new_kwh' WHERE time = '$time'");
