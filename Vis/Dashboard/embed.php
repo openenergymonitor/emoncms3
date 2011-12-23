@@ -167,7 +167,7 @@ $(function() {
       var res = ndp_in_window / ndp_target;
       if (res<1) res = 1;
       $.ajax({                                      
-          url: path+"feed/data",                         
+          url: path+"feed/data.json",                         
           data: "&apikey="+apikey_read+"&id="+feedid+"&start="+start+"&end="+0+"&res="+res,
           dataType: 'json',                           
           success: function(data) 
