@@ -59,6 +59,7 @@
         create_user($username,$password);
         $result = user_logon($username,$password);
         $output = "user created";
+        if ($format == 'html') header("Location: ../dashboard/view");
       } else { echo "there was a problem?"; }
     }
 
