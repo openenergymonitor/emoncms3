@@ -39,7 +39,7 @@
     {
       $dashboard = get_dashboard($_SESSION['userid']);
 
-      if ($format == 'json') $output = $dashboard;
+      if ($format == 'json') $output = json_encode($dashboard);
       if ($format == 'html') $output = view("dashboard_view.php", array('page'=>$dashboard));
     }
 
