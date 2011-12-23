@@ -168,7 +168,7 @@ $(function() {
       if (res<1) res = 1;
       $.ajax({                                      
           url: path+"feed/data",                         
-          data: "&apikey="+apikey_read+"&feedid="+feedid+"&start="+start+"&end="+0+"&resolution="+res,
+          data: "&apikey="+apikey_read+"&id="+feedid+"&start="+start+"&end="+0+"&res="+res,
           dataType: 'json',                           
           success: function(data) 
           { 
