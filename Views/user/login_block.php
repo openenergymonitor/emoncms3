@@ -26,21 +26,22 @@ Open source energy visualisation
 <div style="font-size:16px;">open source energy visualisation</div>
 </div>
 
-
 <div class="widget-container" style="max-width:350px; margin-right:20px;" >
 
 <div style="text-align:left">
-<form action="<?php echo $GLOBALS['path']; ?>" method="post">
+
+<form action="" method="get">
 
 <p><b>Email:</b><br/>
-<input class="inp01" type="text" name="username" style="width:94%"/></p>
+<input class="inp01" type="text" name="name" style="width:94%"/></p>
 <p><b>Password:</b><br/>
-<input class="inp01" type="password" name="password" style="width:94%"/></p>
+<input class="inp01" type="password" name="pass" style="width:94%"/></p>
 
-<input class="button04" type="submit" name="form" value="Login" /> or <input class="button04" type="submit" name="form" value="Register" />
+<input type="submit" class="button04" value="Login" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/login';" /> or <input type="submit" class="button04" value="Register" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />
   </table>
   <?php echo $error; ?>
 </form>
+
 </div>
 
 </div>

@@ -9,9 +9,7 @@
 -->
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
-  <h2>Input Configuration:   <?php echo get_input_name($inputsel); ?></h2>
-
-
+  <h2>Input Configuration:   <?php echo get_input_name($inputid); ?></h2>
 
   <?php 
   if (isset($input_processlist))
@@ -33,10 +31,9 @@
         
    ?>
         <tr><td>New</td><td>
-        <form action="" method="post">
-        <input type="hidden" name="form" value="process">
-        <input type="hidden" name="id" value="<?php echo $inputsel; ?>">
-        <select class="processSelect" name="sel">
+        <form action="add" method="get">
+        <input type="hidden" name="inputid" value="<?php echo $inputid; ?>">
+        <select class="processSelect" name="type">
 
         <?php for ($i=1; $i<=count($process_list); $i++) { ?>
         <option value="<?php echo $i; ?>"><?php echo $process_list[$i][0]; ?></option>
@@ -56,18 +53,17 @@
 
 <?php
 
-$name = get_input_name($inputsel);
+$name = get_input_name($inputid);
 
 ?>
 
 <?php $message = "<h2>Are you sure you want to delete input: ".$name."?</h2>"; ?>
 
-<form action="confirm" method="post">
+<form action="../confirm" method="post">
 <b>Delete input?</b>
 <input type="hidden" name="message" value="<?php echo $message; ?>">
-<input type="hidden" name="action" value="inputpage">
-<input type="hidden" name="form" value="delete">
-<input type="hidden" name="id" value="<?php echo $inputsel; ?>">
+<input type="hidden" name="action" value="input/delete">
+<input type="hidden" name="id" value="<?php echo $inputid; ?>">
 <input type="submit" value="delete" class="button05"/>
 </form>
 

@@ -7,8 +7,8 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-<form action="../user/logout" method="post">
-  <div style="margin:5px; float:right;">
-  <span style="margin:10px;"><?php echo $name; ?></span><input type="submit" value="Logout" class="button04" />
-  </div>
-</form>
+<li><a href='<?php echo $GLOBALS['path']; ?>input/list'>Inputs</a></li>
+<li><a href='<?php echo $GLOBALS['path']; ?>feed/list'>Feeds</a></li>
+<li><a href='<?php echo $GLOBALS['path']; ?>user/view'>API</a></li>
+<li><a href='<?php echo $GLOBALS['path']; ?>dashboard/view'>Dashboard</a></li>
+

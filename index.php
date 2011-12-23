@@ -25,28 +25,42 @@
   require "Includes/core.inc.php";
   require "Includes/db.php";
   require "Models/user_model.php";
-
-  $args = explode('/', $_GET['q']);
-  if (!$args[0]) $args[0] = "dashboard";
-
   $e = db_connect();
+
+  $q = preg_replace('/[^.\/a-z]/','',$_GET['q']); // filter out all except a-z / . 
+  $q = db_real_escape_string($q);		  // second layer
+  $args = preg_split( '/[\/.]/',$q);		  // split string at / .
+
+  $controller	= $args[0];
+  $action	= $args[1];
+  if ($args[2]) $format	= $args[2]; else $format = "html";
+
+
   if ($e == 2) {echo "no settings.php"; die;}
   if ($e == 3) {echo "db settings error"; die;}
   if ($e == 4) require "Includes/setup.php";
 
-  if ($args[0]=='api') 
+  $api_session = user_apikey_session_control();
+
+  $content = controller($controller);
+
+  if ($format == 'json')
   {
-    print controller('api');
+    print $content;
+    if (!$content) print "Sorry, you need a valid apikey or be logged in to see this page";
   }
-  else
+
+  if ($format == 'html')
   {
-    $user = controller('user_block');
-    $menu = controller('menu_block');
-    $content = controller($args[0]);
-    if (!$_SESSION['valid']) $content = view("user/login_block.php", array('error'=>$error));
-    if (!$content) $content = "no content";
+    if ($_SESSION['write']){
+      $user = view("user/account_block.php", array());
+      $menu = view("menu_view.php", array());
+    }
+    if (!$_SESSION['read']) $content = view("user/login_block.php", array());
     print view("theme/dark/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content));
   }
-
-
+  
+  //----------------------------------------------------
+  // If apikey login end session
+  if ($api_session == 1) user_logout();
 ?>

@@ -14,7 +14,7 @@
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   function create_feed($userid,$name)
   {
-    $result = db_query("INSERT INTO feeds (name) VALUES ('$name')");				// Create the feed entry
+    $result = db_query("INSERT INTO feeds (name,status) VALUES ('$name','0')");				// Create the feed entry
     $ido = db_insert_id();
     $result = db_query("SELECT id FROM feeds WHERE name='$name'");				// Select the same feed to find the auto assigned id
     if ($result) {
@@ -42,14 +42,8 @@
         if ($result)
         {
           while ($row = db_fetch_array($result)) {
-
-            $feedid = $row['feedid'];
-            // 2) get feed name of id
-            $feed_result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
-            $feed_row = db_fetch_array($feed_result);
-            if ($feed_row['status'] != 1) { // if feed is not deleted
-              $feeds[] = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],$feed_row['time'],$feed_row['value']);
-            }
+            $feed = get_feed($row['feedid']);
+            if ($feed) $feeds[] = $feed;
           }
         }
 
@@ -68,6 +62,16 @@ function compare($x, $y)
  else
   return 1;
 }
+
+  function get_feed($feedid)
+  {
+    $feed_result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
+    $feed_row = db_fetch_array($feed_result);
+    if ($feed_row['status'] != 1) { // if feed is not deleted
+      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],$feed_row['time'],$feed_row['value']);
+    }
+    return $feed;
+  }
 
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   // Gets a feeds ID from it's name and user ID

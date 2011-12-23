@@ -31,7 +31,8 @@
     name text,
     processList text,
     time DATETIME,
-    value float
+    value float,
+    status int
   )");
 
   db_query(

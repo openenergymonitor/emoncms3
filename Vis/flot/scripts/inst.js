@@ -13,8 +13,8 @@
 
        $('#loading').show();
        $.ajax({                                       //Using JQuery and AJAX
-         url: path+'api/getfeed',                         
-         data: "&apikey="+apikey+"&feedid="+feedid+"&start="+start+"&end="+end+"&resolution="+res,
+         url: path+'feed/data.json',                         
+         data: "&apikey="+apikey+"&id="+feedid+"&start="+start+"&end="+end+"&res="+res,
          dataType: 'json',                            //and passes it through as a JSON    
          success: function(data) 
          {

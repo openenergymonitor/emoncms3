@@ -10,8 +10,7 @@
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 
 <?php echo $message; ?>
-<form action="<?php echo $action; ?>" method="post">
-<input type="hidden" name="form" value="<?php echo $form; ?>">
+<form action="<?php echo $action; ?>" method="get">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 <input type="submit" value="Yes please" class="button05"/>
 </form>

@@ -37,12 +37,10 @@
     <tr class="<?php echo 'd'.($i & 1); ?> " >
 
       <td>
- <form action="processingpage" method="post">
-          <input type="hidden" name="form" value="input">
-	  <input type="hidden" name="id" value="<?php echo $input[0]; ?>">
-          <input type="submit" class="button05" style="width:150px" value="<?php echo $input[1]; ?>">
-</input>
-        </form>
+ <form action="../process/list.html" method="get">
+   <input type="hidden" name="inputid" value="<?php echo $input[0]; ?>">
+   <input type="submit" class="button05" style="width:150px" value="<?php echo $input[1]; ?>"></input>
+ </form>
 </td>
       <td style="color:<?php echo $color; ?>"><?php echo $updated; ?></td>     
       <td><?php echo $input[3]; ?></td>      

@@ -10,115 +10,80 @@
   */
 function api_controller()
 {
+  global $action;
   require "Models/input_model.php";
   require "Models/feed_model.php";
   require "Models/process_model.php";
-  require "Models/dashboard_model.php";
-  require "Controllers/api_component.php";
- 
-  $args = $GLOBALS['args'];
 
-  $apikey_in = db_real_escape_string($_GET['apikey']);
 
-  if ($args[1] == 'inputs')
-  { 
-    $userid = get_apikey_read_user($apikey_in);
-    if ($userid==0) { echo "valid read apikey required"; die; }
-    $data = get_user_inputs($userid);
-  }
+  // POST arduino posts up to emoncms 				
+  if ($action == 'post' && $_SESSION['write']) $json = db_real_escape_string($_GET['json']);			
 
-  if ($args[1] == 'feeds')
+  if ($json)
   {
-    $userid = get_apikey_read_user($apikey_in);
-    if ($userid==0) { echo "valid read apikey required"; die; }
-    $data = get_user_feeds($userid);
+    $datapairs = validate_json($json);				// validate json
+    $time = time();						// get the time - data recived time
+    if (isset($_GET["time"])) $time = intval($_GET["time"]);	// - or use sent timestamp if present
+    $inputs = register_inputs($_SESSION['userid'],$datapairs,$time);          // register inputs
+    process_inputs($_SESSION['userid'],$inputs,$time);                        // process inputs to feeds etc
+    $output = "ok";
   }
 
-  if ($args[1] == 'getfeedvalue')
-  {
-    $userid = get_apikey_read_user($apikey_in);
-    if ($userid==0) { echo "valid read apikey required"; die; }
-    $feedid = intval($_GET['feedid']);
-
-
-    if (feed_belongs_user($feedid,$userid))
-    {
-    $data = get_feed_value($feedid);
-    }
-  }
-
-  if ($args[1] == 'getfeed')
-  {
-    $userid = get_apikey_read_user($apikey_in);
-    if ($userid==0) { echo "valid read apikey required"; die; }
-
-    $feedid = intval($_GET['feedid']);
-
-    // Check if feed belongs to user
-    if (feed_belongs_user($feedid,$userid))
-    {
-    $start = floatval($_GET['start']);
-    $end = floatval($_GET['end']);
-    $resolution = intval($_GET['resolution']);
-    $data = get_feed_data($feedid,$start,$end,$resolution);
-    }
-
-  }
-
-  if ($args[1] == 'post')
-  {
-    $userid = get_apikey_write_user($apikey_in);
-    if ($userid==0) { echo "valid write apikey required"; die; }
-
-    $json = $_GET['json'];
-    //db_query("INSERT INTO dump (text) VALUES ('$json')");
-
-    $datapairs = validate_json($json);				// get and validate json
-
-    $time = time();
-    if (isset($_GET["time"])) $time = intval($apikey_in);	// use sent timestamp if present
-
-    $inputs = register_inputs($userid,$datapairs,$time);
-    process_inputs($inputs,$time);
-
-    $data = "ok";
-  }
-
-  if ($args[1] == 'fetch')
-  {
-    $userid = get_apikey_write_user($apikey_in);
-    if ($userid==0) { echo "valid write apikey required"; die; }
-
-    $url = $_GET['url'];
-    $json = file_get_contents($url);
-    $datapairs = validate_json_cat($json);				// get and validate json
-
-    $time = time();
-    if (isset($_GET["time"])) $time = intval($_GET["time"]);	// use sent timestamp if present
-
-    $inputs = register_inputs($userid,$datapairs,$time);
-    process_inputs($inputs,$time);
-
-    $data = "ok";
-  }
-
-  if ($args[1] == 'setdashboard')
-  {
-    $userid = get_apikey_write_user($apikey_in);
-    if ($userid==0) { echo "valid write apikey required"; die; }
-    $content = $_POST['content'];
-    set_dashboard($userid,$content);
-  }
-
-  if ($args[1] == 'getdashboard')
-  {
-    $userid = get_apikey_read_user($apikey_in);
-    if ($userid==0) { echo "valid read apikey required"; die; }
-    $data = get_dashboard($userid);
-  }
-
-  return json_encode($data);
+  return $output;
 }
+
+  //-------------------------------------------------------------------------
+  function register_inputs($userid,$datapairs,$time)
+  {
+
+  //--------------------------------------------------------------------------------------------------------------
+  // 2) Register incoming inputs
+  //--------------------------------------------------------------------------------------------------------------
+  $inputs = array();
+  foreach ($datapairs as $datapair)       
+  {
+    $datapair = explode(":", $datapair);
+    $name = preg_replace('/[^\w\s-.]/','',$datapair[0]); 	// filter out all except for alphanumeric white space and dash
+    $value = floatval($datapair[1]);		
+
+    $id = get_input_id($userid,$name);				// If input does not exist this return's a zero
+    if ($id==0) {
+      create_input_timevalue($userid,$name,$time,$value);	// Create input if it does not exist
+    } else {			
+      $inputs[] = array($id,$time,$value);	
+      set_input_timevalue($id,$time,$value);			// Set time and value if it does
+    }
+  }
+
+  return $inputs;
+  }
+
+  function process_inputs($userid,$inputs,$time)
+  {
+  //--------------------------------------------------------------------------------------------------------------
+  // 3) Process inputs according to input processlist
+  //--------------------------------------------------------------------------------------------------------------
+  foreach ($inputs as $input)            
+  {
+    $id = $input[0];
+    $input_processlist =  get_input_processlist($userid,$id);
+    if ($input_processlist)
+    {
+      $processlist = explode(",",$input_processlist);				
+      $value = $input[2];
+      foreach ($processlist as $inputprocess)    			        
+      {
+        $inputprocess = explode(":", $inputprocess); 		// Divide into process id and arg
+        $processid = $inputprocess[0];				// Process id
+        $arg = $inputprocess[1];	 			// Can be value or feed id
+
+        $process_list = get_process_list();
+        $process_function = $process_list[$processid][2];	// get process function name
+        $value = $process_function($arg,$time,$value);		// execute process function
+      }
+    }
+  }
+  }
 
 ?>
 

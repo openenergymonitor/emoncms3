@@ -15,7 +15,7 @@
 
   function create_input_timevalue($user,$name,$time,$value)
   {
-    db_query("INSERT INTO input (userid,name,time,value) VALUES ('$user','$name','$time','$value')");
+    db_query("INSERT INTO input (userid,name,time,value,status) VALUES ('$user','$name','$time','$value','0')");
   }
 
   function set_input_timevalue($id, $time, $value)
@@ -28,9 +28,9 @@
       $result = db_query("UPDATE input SET processList = '$processlist' WHERE id='$id'");
   }
 
-  function add_input_process($id,$type,$arg)
+  function add_input_process($userid,$id,$type,$arg)
   {
-    $list = get_input_processlist($id);
+    $list = get_input_processlist($userid,$id);
     if ($list) $list .=',';
     $list .= $type.':'.$arg;
     set_input_processlist($id,$list);
@@ -64,9 +64,9 @@
     else return 0;
   }
 
-  function get_input_processlist($id)
+  function get_input_processlist($userid,$id)
   {
-    $result = db_query("SELECT processList FROM input WHERE id='$id'");
+    $result = db_query("SELECT processList FROM input WHERE userid='$userid' AND id='$id'");
     $array = db_fetch_array($result);
     return $array['processList'];
   }
@@ -74,9 +74,9 @@
   //-----------------------------------------------------------------------------------------------
   // Gets the inputs process list and converts id's into descriptive text
   //-----------------------------------------------------------------------------------------------
-  function get_input_processlist_desc($id)
+  function get_input_processlist_desc($userid,$id)
   {
-    $process_list = get_input_processlist($id);			// Get the input's process list
+    $process_list = get_input_processlist($userid,$id);			// Get the input's process list
 
     $list = array();
     if ($process_list){		
@@ -97,10 +97,10 @@
     return $list;
   }
 
-  function delete_input($inputid)
+  function delete_input($userid,$inputid)
   {
     // soft deletion
-    db_query("UPDATE input SET status = 1 WHERE id='$inputid'");
+    db_query("UPDATE input SET status = 1 WHERE userid = '$userid' AND id='$inputid'");
   }
 
 ?>

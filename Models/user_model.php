@@ -8,6 +8,55 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
   */
+
+  function user_apikey_session_control()
+  {
+
+  //----------------------------------------------------
+  // Check for apikey login
+  //----------------------------------------------------
+  if (!$_SESSION['read'])
+  {
+    $api_session = 0;
+    $apikey_in = db_real_escape_string($_GET['apikey']);
+    $userid = get_apikey_read_user($apikey_in);
+    if ($userid!=0) 
+    {
+      session_regenerate_id(); 
+      $_SESSION['userid'] = $userid;
+      $_SESSION['read'] = 1;
+      $_SESSION['write'] = 0;
+
+      $api_session = 1;    
+    }
+
+    $userid = get_apikey_write_user($apikey_in);
+    if ($userid!=0) 
+    {
+      session_regenerate_id(); 
+      $_SESSION['userid'] = $userid;
+      $_SESSION['read'] = 1;
+      $_SESSION['write'] = 1;
+
+      $api_session = 1;    
+    }
+  }
+  //----------------------------------------------------
+  return $api_session;
+  }
+
+
+  function get_user($userid)
+  {
+    $result = db_query("SELECT * FROM users WHERE id=$userid");
+    if ($result)
+    {
+      $row = db_fetch_array($result);
+      $user = array('username'=>$row['username'],'apikey_read'=>$row['apikey_read'],'apikey_write'=>$row['apikey_write']);
+    }
+    return $user;
+  }
+
   function get_apikey_read($userid)
   {
     $result = db_query("SELECT apikey_read FROM users WHERE id=$userid");
@@ -60,7 +109,11 @@
     $string = md5(uniqid(rand(), true));
     $salt = substr($string, 0, 3);
     $hash = hash('sha256', $salt . $hash);
-    db_query("INSERT INTO users ( username, password, salt ) VALUES ( '$username' , '$hash' , '$salt' );"); 
+
+    $apikey_write = md5(uniqid(rand(), true));
+    $apikey_read = md5(uniqid(rand(), true));
+
+    db_query("INSERT INTO users ( username, password, salt ,apikey_read, apikey_write ) VALUES ( '$username' , '$hash' , '$salt', '$apikey_read', '$apikey_write' );"); 
   }
 
   function user_logon($username,$password)  
@@ -71,15 +124,17 @@
     
     if ((db_num_rows($result) < 1) || ($hash != $userData['password']))
     {
-      $_SESSION['valid'] = 0;
+      $_SESSION['read'] = 0;
+      $_SESSION['write'] = 0;
       $success = 0;
     }
     else
     {
       //this is a security measure
       session_regenerate_id(); 
-      $_SESSION['valid'] = 1;
       $_SESSION['userid'] = $userData['id'];
+      $_SESSION['read'] = 1;
+      $_SESSION['write'] = 1;
       $success = 1;
     }
     return $success;
@@ -87,7 +142,8 @@
 
   function user_logout()
   {
-    $_SESSION['valid'] = 0;
+    $_SESSION['read'] = 0;
+    $_SESSION['write'] = 0;
     session_destroy();
   }
 

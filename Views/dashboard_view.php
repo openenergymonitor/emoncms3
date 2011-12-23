@@ -7,13 +7,13 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-
+<?php global $path; ?>
 <!------------------------------------------------------------------------------------------
   Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php print $path; ?>flot/jquery.js"></script>
-<script type="text/javascript" src="<?php print $path; ?>flot/jquery.flot.js"></script>
-<script type="text/javascript" src="<?php print $path; ?>Dashboard/widgets/dial.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/dial.js"></script>
 
 <!------------------------------------------------------------------------------------------
   Dashboard HTML
@@ -61,7 +61,7 @@ $(function() {
     // Upload changes to server
     $.ajax({                                      
       type: "POST",
-      url: path+"api/setdashboard?apikey="+apikey_write,           
+      url: path+"dashboard/set",     
       data: "&content="+encodeURIComponent($("#editarea").val()),
       dataType: 'json',   
       success: function() { }
@@ -101,7 +101,7 @@ $(function() {
   function update()
   {
         $.ajax({                                      
-          url: path+"api/feeds?apikey="+apikey_read,                  
+          url: path+"feed/list.json",                
           dataType: 'json',
           success: function(data) 
           { 
@@ -191,8 +191,8 @@ $(function() {
       var res = ndp_in_window / ndp_target;
       if (res<1) res = 1;
       $.ajax({                                      
-          url: path+"api/getfeed",                         
-          data: "&apikey="+apikey_read+"&feedid="+feedid+"&start="+start+"&end="+0+"&resolution="+res,
+          url: path+"feed/data.json",                         
+          data: "&apikey="+apikey_read+"&id="+feedid+"&start="+start+"&end="+0+"&res="+res,
           dataType: 'json',                           
           success: function(data) 
           { 

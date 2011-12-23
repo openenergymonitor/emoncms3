@@ -45,7 +45,7 @@
       ------------------------------------------------------->
       <div class='top_menu'>
         <ul>
-          <?php print $menu; ?>
+        <?php print $menu; ?>
         </ul>
         <div style='clear:both;'></div>
       </div>

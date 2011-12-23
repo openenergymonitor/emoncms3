@@ -43,12 +43,8 @@
       <tr class="<?php echo 'd'.($i & 1); ?> " >
       <td><?php echo $feed[0]; ?></td>
       <td>
-      <form action="graphselect" method="post">
-        <input type="hidden" name="form" value="graph">
-        <input type="hidden" name="feedid" value="<?php echo $feed[0]; ?>">
-        <input type="hidden" name="feedname" value="<?php echo $feed[1]; ?>">
-        <input type="hidden" name="tag" value="<?php echo $feed[2]; ?>">
-
+      <form action="view" method="get">
+        <input type="hidden" name="id" value="<?php echo $feed[0]; ?>">
         <input type="submit" value="<?php echo $feed[1]; ?>" class="button05" style="width:150px"/>
       </form>
 

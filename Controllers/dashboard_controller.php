@@ -7,23 +7,43 @@
     Emoncms - open source energy visualisation
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
+
+    DASHBOARD ACTIONS		ACCESS
+    set				write
+    view			read
+
   */
+
   function dashboard_controller()
   {
-    if (!$_SESSION['valid']) return "Sorry, you must be logged in to see this page";
-
     require "Models/dashboard_model.php";
+    global $action, $format;
 
-    $userid = $_SESSION['userid'];
+    // /dashboard/set?content=<h2>HelloWorld</h2>
+    if ($action == 'set' && $_SESSION['write']) // write access required
+    {
+      $content = $_POST['content'];
+      if (!$content) $content = $_GET['content'];
 
-    $apikey_read = get_apikey_read($userid);
-    $apikey_write = get_apikey_write($userid);
-    $page = get_dashboard($userid);
+      // IMPORTANT: if you get problems with characters being removed check this line:
+      $content = preg_replace('/[^\w\s-.<>?",;:=&\/]/','',$content);	// filter out all except characters usually used
 
-    if (!$page) $page = "<h2>Welcome to your dashboard: please edit me!</h2>";
-    $content = view("dashboard_view.php", array('page'=>$page,'apikey_read'=>$apikey_read,'apikey_write'=>$apikey_write,'path'=>$GLOBALS['path']));
-   
-    return $content;
+      $content = db_real_escape_string($content);
+
+      set_dashboard($_SESSION['userid'],$content);
+      $output = "dashboard set";
+    }
+
+    // /dashboard/view
+    if ($action == 'view' && $_SESSION['read'])
+    {
+      $dashboard = get_dashboard($_SESSION['userid']);
+
+      if ($format == 'json') $output = $dashboard;
+      if ($format == 'html') $output = view("dashboard_view.php", array('page'=>$dashboard));
+    }
+
+    return $output;
   }
 
 ?>

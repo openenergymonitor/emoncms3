@@ -27,8 +27,8 @@
 
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script language="javascript" type="text/javascript" src="<?php echo $path;?>flot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path;?>flot/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
  </head>
  <body style="font-family:arial">
 
@@ -90,8 +90,8 @@
       function vis_feed_data(apikey,feedid,start,end,res)
       {
         $.ajax({                                      
-          url: path+'api/getfeed',                         
-          data: "&apikey="+apikey+"&feedid="+feedid+"&start="+start+"&end="+end+"&resolution="+res,
+          url: path+'feed/data.json',                         
+          data: "&apikey="+apikey+"&id="+feedid+"&start="+start+"&end="+end+"&res="+res,
           dataType: 'json',                           
           success: function(data) 
           { 
