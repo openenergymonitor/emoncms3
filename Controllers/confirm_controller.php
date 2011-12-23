@@ -9,10 +9,6 @@
     http://openenergymonitor.org
   */
 
-  //---------------------------------------------------------------------
-  // The html content on this page could be seperated out into a view
-  //---------------------------------------------------------------------
-
   function confirm_controller()
   {
     $message = preg_replace('/[^\w\s-.<>?:]/','',$_POST['message']);	// filter out all except for alphanumeric white space and dash
