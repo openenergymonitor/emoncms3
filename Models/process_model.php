@@ -33,6 +33,7 @@
     $list[10] = array( "update feed @time",	2,		"update_feed_data"	);
     $list[11] = array( "+ input",		1,		"add_input"		);
     $list[12] = array( "/ input" ,		0,		"divide"		);
+    $list[13] = array( "phaseshift" ,		0,		"phaseshift"		);
 
     return $list;
   }
@@ -274,7 +275,12 @@
     return $value;
   }
   //---------------------------------------------------------------------------------
-
+  function phaseshift($arg,$time,$value)
+  {
+    $rad = acos($value);
+    $rad = $rad + (($arg/360.0) * (2.0*3.14159265));
+    return cos($rad);
+  }
 
 ?>
 
