@@ -34,6 +34,7 @@
     $list[11] = array( "+ input",		1,		"add_input"		);
     $list[12] = array( "/ input" ,		0,		"divide"		);
     $list[13] = array( "phaseshift" ,		0,		"phaseshift"		);
+    $list[14] = array( "save_to_input" ,	3,		"save_to_input"		);
 
     return $list;
   }
@@ -281,6 +282,22 @@
     $rad = $rad + (($arg/360.0) * (2.0*3.14159265));
     return cos($rad);
   }
+
+function save_to_input($arg,$time,$value)
+{
+  $name = $arg;
+  $userid = $_SESSION['userid'];
+
+$id = get_input_id($userid,$name);				// If input does not exist this return's a zero
+    if ($id==0) {
+      create_input_timevalue($userid,$name,$time,$value);	// Create input if it does not exist
+    } else {			
+      $inputs[] = array($id,$time,$value);	
+      set_input_timevalue($id,$time,$value);			// Set time and value if it does
+    }
+
+
+}
 
 ?>
 
