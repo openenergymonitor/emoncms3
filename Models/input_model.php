@@ -90,6 +90,7 @@
         $processDescription = $process[0];			// gets process description
         if ($process[1] == 1) $arg = get_input_name($arg);	// if input: get input name
         if ($process[1] == 2) $arg = get_feed_name($arg);	// if feed: get feed name
+        if ($process[1] == 3) $arg = get_feed_name($arg);	// if feed: get feed name
 
         $list[]=array($processDescription,$arg);		// Populate list array
       }

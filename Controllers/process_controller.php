@@ -57,6 +57,7 @@
         if ($id==0)  $id = create_feed($_SESSION['userid'],$arg);
         $arg = $id;
       }
+      if ($process[1] == 3) $arg = get_feed_id($_SESSION['userid'],$arg);
       add_input_process($_SESSION['userid'],$inputid,$processid,$arg);
 
       if ($format == 'html') header("Location: list?inputid=".$inputid);

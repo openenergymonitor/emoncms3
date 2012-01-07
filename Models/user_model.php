@@ -106,12 +106,12 @@
   function create_user($username,$password)
   {
     $hash = hash('sha256', $password);
-    $string = md5(uniqid(rand(), true));
+    $string = md5(uniqid(mt_rand(), true));
     $salt = substr($string, 0, 3);
     $hash = hash('sha256', $salt . $hash);
 
-    $apikey_write = md5(uniqid(rand(), true));
-    $apikey_read = md5(uniqid(rand(), true));
+    $apikey_write = md5(uniqid(mt_rand(), true));
+    $apikey_read = md5(uniqid(mt_rand(), true));
 
     db_query("INSERT INTO users ( username, password, salt ,apikey_read, apikey_write ) VALUES ( '$username' , '$hash' , '$salt', '$apikey_read', '$apikey_write' );"); 
   }

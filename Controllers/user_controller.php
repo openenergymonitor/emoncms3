@@ -68,7 +68,7 @@
     // http://yoursite/emoncms/user/newapiread
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'newapiread' && $_SESSION['write']) {
-      $apikey_read = md5(uniqid(rand(), true));
+      $apikey_read = md5(uniqid(mt_rand(), true));
       set_apikey_read($_SESSION['userid'],$apikey_read);
       $output = "New read apikey: ".$apikey_read;
 
@@ -80,7 +80,7 @@
     // http://yoursite/emoncms/user/newapiwrite
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'newapiwrite' && $_SESSION['write']) {
-      $apikey_write = md5(uniqid(rand(), true));
+      $apikey_write = md5(uniqid(mt_rand(), true));
       set_apikey_write($_SESSION['userid'],$apikey_write);
       $output = "New write apikey: ".$apikey_write;
 
