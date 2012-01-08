@@ -17,16 +17,16 @@
 function input_controller()
 {
   require "Models/input_model.php";
-  global $action, $format;
+  global $session, $action, $format;
 
   //---------------------------------------------------------------------------------------------------------
   // List inputs
   // http://yoursite/emoncms/input/list.html
   // http://yoursite/emoncms/input/list.json
   //---------------------------------------------------------------------------------------------------------
-  if ($action == 'list' && $_SESSION['read'])
+  if ($action == 'list' && $session['read'])
   {
-    $inputs = get_user_inputs($_SESSION['userid']);
+    $inputs = get_user_inputs($session['userid']);
 
     if ($format == 'json') $output = json_encode($inputs);
     if ($format == 'html') $output = view("input/list_view.php", array('inputs' => $inputs));
@@ -36,9 +36,9 @@ function input_controller()
   // Delete an input
   // http://yoursite/emoncms/input/delete?id=1
   //---------------------------------------------------------------------------------------------------------
-  if ($action == "delete" && $_SESSION['write'])
+  if ($action == "delete" && $session['write'])
   { 
-    delete_input($_SESSION['userid'] ,intval($_GET["id"]));
+    delete_input($session['userid'] ,intval($_GET["id"]));
     $output = "input deleted";
     if ($format == 'html') header("Location: list");
   }

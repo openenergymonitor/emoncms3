@@ -22,7 +22,7 @@
   */
   function user_controller()
   {
-    global $action,$format;
+    global $session, $action,$format;
 
     //---------------------------------------------------------------------------------------------------------
     // Login user (PUBLIC ACTION)
@@ -67,9 +67,9 @@
     // NEW API READ
     // http://yoursite/emoncms/user/newapiread
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'newapiread' && $_SESSION['write']) {
+    if ($action == 'newapiread' && $session['write']) {
       $apikey_read = md5(uniqid(mt_rand(), true));
-      set_apikey_read($_SESSION['userid'],$apikey_read);
+      set_apikey_read($session['userid'],$apikey_read);
       $output = "New read apikey: ".$apikey_read;
 
       if ($format == 'html') header("Location: view");
@@ -79,9 +79,9 @@
     // NEW API WRITE
     // http://yoursite/emoncms/user/newapiwrite
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'newapiwrite' && $_SESSION['write']) {
+    if ($action == 'newapiwrite' && $session['write']) {
       $apikey_write = md5(uniqid(mt_rand(), true));
-      set_apikey_write($_SESSION['userid'],$apikey_write);
+      set_apikey_write($session['userid'],$apikey_write);
       $output = "New write apikey: ".$apikey_write;
 
       if ($format == 'html') header("Location: view");
@@ -91,7 +91,7 @@
     // Logout
     // http://yoursite/emoncms/user/logout
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'logout' && $_SESSION['read'])
+    if ($action == 'logout' && $session['read'])
     { 
       user_logout(); 
       $output = "logout"; 
@@ -103,8 +103,8 @@
     // GET API READ
     // http://yoursite/emoncms/user/getapiread
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'getapiread' && $_SESSION['read']) {
-      $apikey_read = get_apikey_read($_SESSION['userid']);
+    if ($action == 'getapiread' && $session['read']) {
+      $apikey_read = get_apikey_read($session['userid']);
       $output = $apikey_read;
     }
 
@@ -112,8 +112,8 @@
     // GET API WRITE
     // http://yoursite/emoncms/user/getapiwrite
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'getapiwrite' && $_SESSION['write']) {
-      $apikey_write = get_apikey_write($_SESSION['userid']);
+    if ($action == 'getapiwrite' && $session['write']) {
+      $apikey_write = get_apikey_write($session['userid']);
       $output = $apikey_write;
     }
 
@@ -121,8 +121,8 @@
     // GET USER
     // http://yoursite/emoncms/user/view
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'view' && $_SESSION['write']) {
-      $user = get_user($_SESSION['userid']);
+    if ($action == 'view' && $session['write']) {
+      $user = get_user($session['userid']);
 
       if ($format == 'json') $output = json_encode($user);
       if ($format == 'html') $output = view("user_view.php", array('user' => $user));

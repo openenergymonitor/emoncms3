@@ -40,7 +40,11 @@
   if ($e == 3) {echo "db settings error"; die;}
   if ($e == 4) require "Includes/setup.php";
 
-  $api_session = user_apikey_session_control();
+  $session['read'] = $_SESSION['read'];
+  $session['write'] = $_SESSION['write'];
+  $session['userid'] = $_SESSION['userid'];
+
+  if ($_GET['apikey']) $session = user_apikey_session_control($_GET['apikey']);
 
   $content = controller($controller);
 
@@ -52,15 +56,13 @@
 
   if ($format == 'html')
   {
-    if ($_SESSION['write']){
+    if ($session['write']){
       $user = view("user/account_block.php", array());
       $menu = view("menu_view.php", array());
     }
-    if (!$_SESSION['read']) $content = view("user/login_block.php", array());
+    if (!$session['read']) $content = view("user/login_block.php", array());
     print view("theme/dark/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content));
   }
   
   //----------------------------------------------------
-  // If apikey login end session
-  if ($api_session == 1) user_logout();
 ?>

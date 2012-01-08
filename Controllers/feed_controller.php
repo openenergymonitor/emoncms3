@@ -22,16 +22,16 @@
   function feed_controller()
   {
     require "Models/feed_model.php";
-    global $action, $format;
+    global $session, $action, $format;
 
     //---------------------------------------------------------------------------------------------------------
     // Set feed tag
     // http://yoursite/emoncms/feed/tag?id=1&tag=tag
     //---------------------------------------------------------------------------------------------------------
-    if ($action == "tag" && $_SESSION['write'])
+    if ($action == "tag" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid, $_SESSION['userid'])) {
+      if (feed_belongs_user($feedid, $session['userid'])) {
 
         $newfeedtag = preg_replace('/[^\w\s-.]/','',$_GET["tag"]);	// filter out all except for alphanumeric white space and dash and full stop
         $newfeedtag = db_real_escape_string($newfeedtag);
@@ -47,10 +47,10 @@
     // Rename a feed
     // http://yoursite/emoncms/feed/rename?id=1&name=newname
     //---------------------------------------------------------------------------------------------------------
-    if ($action == "rename" && $_SESSION['write'])
+    if ($action == "rename" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid, $_SESSION['userid'])) {
+      if (feed_belongs_user($feedid, $session['userid'])) {
 
         $newfeedname = preg_replace('/[^\w\s-.]/','',$_GET["name"]);	// filter out all except for alphanumeric white space and dash
         $newfeedname = db_real_escape_string($newfeedname);
@@ -66,10 +66,10 @@
     // Delete a feed
     // http://yoursite/emoncms/feed/delete?id=1
     //--------------------------------------------------------------------------------------------------------- 
-    if ($action == "delete" && $_SESSION['write'])
+    if ($action == "delete" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid, $_SESSION['userid'])) {
+      if (feed_belongs_user($feedid, $session['userid'])) {
         delete_feed($userid,$feedid);
         $output = "feed ".$feedid." deleted";
       } else $output = "feed does not exist";
@@ -83,9 +83,9 @@
     // http://yoursite/emoncms/feed/list.html
     // http://yoursite/emoncms/feed/list.json
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'list' && $_SESSION['read'])
+    if ($action == 'list' && $session['read'])
     {
-      $feeds = get_user_feeds($_SESSION['userid']);
+      $feeds = get_user_feeds($session['userid']);
     
       if ($format == 'json') $output = json_encode($feeds);
       if ($format == 'html') $output = view("feed/list_view.php", array('feeds' => $feeds));
@@ -96,10 +96,10 @@
     // http://yoursite/emoncms/feed/view.html?id=1
     // http://yoursite/emoncms/feed/view.json?id=1
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'view' && $_SESSION['read'])
+    if ($action == 'view' && $session['read'])
     {
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid,$_SESSION['userid']))
+      if (feed_belongs_user($feedid,$session['userid']))
       {
         $feed = get_feed($feedid);
       }
@@ -112,22 +112,22 @@
     // current feed value
     // http://yoursite/emoncms/feed/value?id=1
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'value' && $_SESSION['read'])
+    if ($action == 'value' && $session['read'])
     {
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid,$_SESSION['userid'])) $output = get_feed_value($feedid);
+      if (feed_belongs_user($feedid,$session['userid'])) $output = get_feed_value($feedid);
     }
 
     //---------------------------------------------------------------------------------------------------------
     // get feed data
     // http://yoursite/emoncms/feed/data?id=1&start=000&end=000&res=1
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'data' && $_SESSION['read'])
+    if ($action == 'data' && $session['read'])
     {
       $feedid = intval($_GET['id']);
 
       // Check if feed belongs to user
-      if (feed_belongs_user($feedid,$_SESSION['userid']))
+      if (feed_belongs_user($feedid,$session['userid']))
       {
         $start = floatval($_GET['start']);
         $end = floatval($_GET['end']);

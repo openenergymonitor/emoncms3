@@ -10,22 +10,22 @@
   */
 function api_controller()
 {
-  global $action;
+  global $session,$action;
   require "Models/input_model.php";
   require "Models/feed_model.php";
   require "Models/process_model.php";
 
 
   // POST arduino posts up to emoncms 				
-  if ($action == 'post' && $_SESSION['write']) $json = db_real_escape_string($_GET['json']);			
+  if ($action == 'post' && $session['write']) $json = db_real_escape_string($_GET['json']);			
 
   if ($json)
   {
     $datapairs = validate_json($json);				// validate json
     $time = time();						// get the time - data recived time
     if (isset($_GET["time"])) $time = intval($_GET["time"]);	// - or use sent timestamp if present
-    $inputs = register_inputs($_SESSION['userid'],$datapairs,$time);          // register inputs
-    process_inputs($_SESSION['userid'],$inputs,$time);                        // process inputs to feeds etc
+    $inputs = register_inputs($session['userid'],$datapairs,$time);          // register inputs
+    process_inputs($session['userid'],$inputs,$time);                        // process inputs to feeds etc
     $output = "ok";
   }
 

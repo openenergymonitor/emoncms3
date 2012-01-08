@@ -23,14 +23,14 @@
   function vis_controller()
   {
     require "Models/feed_model.php";
-    global $action, $format;
+    global $session, $action, $format;
 
-    if ($_SESSION['read']) $apikey = get_apikey_read($_SESSION['userid']);
+    if ($session['read']) $apikey = get_apikey_read($session['userid']);
 
     $content = '<div style="margin-right:3%; margin-left:3%;">';
 
     // emoncms/vis/realtime?feedid=16&feedname=power
-    if ($action == "realtime" && $_SESSION['read'])
+    if ($action == "realtime" && $session['read'])
     {
       $feedid = intval($_GET['feedid']); $feedname = get_feed_name($feedid);
 
@@ -44,7 +44,7 @@
     }
 
     // emoncms/vis/rawdata?feedid=16&feedname=power
-    if ($action == "rawdata" && $_SESSION['read'])
+    if ($action == "rawdata" && $session['read'])
     {
       $feedid = intval($_GET['feedid']); $feedname = get_feed_name($feedid);
 
@@ -58,7 +58,7 @@
     }
 
     // emoncms/vis/bargraph?feedid=16&feedname=power
-    if ($action == "bargraph" && $_SESSION['read'])
+    if ($action == "bargraph" && $session['read'])
     {
       $feedid = intval($_GET['feedid']); $feedname = get_feed_name($feedid);
 
