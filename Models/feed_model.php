@@ -82,9 +82,9 @@ function compare($x, $y)
     while ($row = db_fetch_array($result))
     {
       $feedid = $row['feedid'];
-      $result = db_query("SELECT name FROM feeds WHERE id='$feedid'");
-      $row_name = db_fetch_array($result);
-      if ($key == $row_name['name']) return $feedid;
+      $result2 = db_query("SELECT name FROM feeds WHERE id='$feedid' AND status = 0");
+      $row_name = db_fetch_array($result2);
+      if ($name == $row_name['name']) return $feedid;
     }
     return 0;
   }
