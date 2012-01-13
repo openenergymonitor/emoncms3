@@ -20,7 +20,12 @@
   ini_set('display_errors','on');
   error_reporting(E_ALL ^ E_NOTICE);
 
-  $path = dirname("http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'])."/";
+  // Thanks to seanwg for https addition
+  $ssl = $_SERVER['HTTPS'];
+  echo $ssl;
+  $proto = "http";
+  if ($ssl == "on") $proto = "https";
+  $path = dirname("$proto://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'])."/";
 
   require "Includes/core.inc.php";
   require "Includes/db.php";
