@@ -14,10 +14,10 @@
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/jquery.flot.stack.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/date.format.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.stack.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/date.format.js"></script>
     <script language="javascript" type="text/javascript" src="kwhd_functions.js"></script>
 
     <?php
