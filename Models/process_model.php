@@ -34,7 +34,8 @@
     $list[11] = array( "+ input",		1,		"add_input"		);
     $list[12] = array( "/ input" ,		0,		"divide"		);
     $list[13] = array( "phaseshift" ,		0,		"phaseshift"		);
-    $list[14] = array( "rate of change" ,	2,		"ratechange"		);
+    $list[14] = array( "accumulator" ,		2,		"accumulator"		);
+    $list[15] = array( "rate of change" ,	2,		"ratechange"		);
     // $list[14] = array( "save_to_input" ,	4,		"save_to_input"		);
     // $list[15] = array( "+ feed",		3,		"add_feed"		);
 
@@ -340,6 +341,19 @@ function save_to_input($arg,$time,$value)
     }
 
   return $value;
+}
+
+function accumulator($arg,$time,$value)
+{
+   $feedid = $arg;
+
+   $last_value = get_feed_value($feedid);
+
+   $value = $last_value+$value;
+
+   insert_feed_data($feedid,$time,$value);
+
+   return $value;
 }
 
 ?>
