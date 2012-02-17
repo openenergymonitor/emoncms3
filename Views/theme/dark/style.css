@@ -68,6 +68,10 @@ height:100%;
   padding:0px;
   }
 
+  .led {
+  padding:0px;
+  }
+
   .stats {
   width:100%;
   height:200px;
