@@ -29,6 +29,7 @@
 <script type="text/javascript" src="../flot/jquery.js"></script>
 <script type="text/javascript" src="../flot/jquery.flot.js"></script>
 <script type="text/javascript" src="widgets/dial.js"></script>
+<script type="text/javascript" src="widgets/led.js"></script>
 
     <title>emoncms</title>
   </head>
