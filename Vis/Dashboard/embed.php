@@ -109,6 +109,7 @@ $(function() {
   function fast_update()
   {
     draw_dials();
+    draw_leds();
   }
 
   function slow_update()
@@ -144,6 +145,27 @@ $(function() {
                 var ctx = canvas.getContext("2d");
                 draw_gauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
               }
+            });
+  }
+
+function draw_leds()
+  {
+           $('.led').each(function(index) {
+              var feed = $(this).attr("feed");
+              var val = assoc[feed];
+	         var id = "canled-"+feed+"-"+index;
+                if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
+                  $(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
+                  firstdraw = 1;
+                }
+
+       //   if ( firstdraw == 1){ //Only update graphs when there is a change to update
+
+                var canvas = document.getElementById(id);
+                var circle = canvas.getContext("2d");
+                draw_led(circle,val); 
+			firstdraw = 0;
+       //       }
             });
   }
 
