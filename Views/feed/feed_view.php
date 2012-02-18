@@ -57,5 +57,12 @@ Select graph type:</h3>
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 <input type="submit" value="delete" class="button05"/>
 </form>
+
+<h2>Notify</h2>
+      <form action="../notify/view" method="get">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="submit" value="Set notifications" class="button05" style="width:150px"/>
+      </form>
+
 </div>
 

@@ -12,6 +12,7 @@
 
     login?name=john&pass=test		all
     create?name=john&pass=test		all
+    changepass?old=sdgs43&new=sdsg345   write
     newapiread				write
     newapiwrite				write
     logout				read
@@ -61,6 +62,13 @@
         $output = "user created";
         if ($format == 'html') header("Location: ../dashboard/view");
       } else { echo "there was a problem?"; }
+    }
+
+    // http://yoursite/emoncms/user/changepass?old=sdgs43&new=sdsg345
+    if ($action == 'changepass' && $_SESSION['write']) {
+      $oldpass =  db_real_escape_string($_GET['oldpass']);
+      $newpass =  db_real_escape_string($_GET['newpass']);
+      if (change_password($_SESSION['userid'],$oldpass,$newpass)) $output = "Your password has been changed"; else $output = "Invalid old password";
     }
 
     //---------------------------------------------------------------------------------------------------------

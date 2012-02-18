@@ -66,5 +66,24 @@
     content text
   )");
 
+  db_query(
+  "CREATE TABLE notify
+  (
+    userid int,
+    feedid int,
+    onvalue FLOAT,
+    onvalue_sent bool,
+    oninactive bool,
+    oninactive_sent bool,
+    periodic bool
+  )");
+
+  db_query(
+  "CREATE TABLE notify_mail
+  (
+    userid int,
+    recipients text
+  )");
+
 
 ?>

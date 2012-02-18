@@ -154,4 +154,25 @@
     return $row['username'];
   }
 
+  function change_password($userid,$oldpass,$newpass)
+  {
+    $result = db_query("SELECT password, salt FROM users WHERE id = '$userid'");
+    $userData = db_fetch_array($result);
+    $hash = hash('sha256', $userData['salt'] . hash('sha256', $oldpass) );	// hash of oldpass
+
+    if ($hash == $userData['password']) 
+    {
+      $hash = hash('sha256', $newpass);
+      $string = md5(uniqid(rand(), true));
+      $salt = substr($string, 0, 3);
+      $hash = hash('sha256', $salt . $hash);
+      db_query("UPDATE users SET password = '$hash', salt = '$salt' WHERE id = '$userid'"); 
+      return 1;	// success
+    }
+    else
+    {
+      return 0; // failed
+    }
+  }
+
 ?>
