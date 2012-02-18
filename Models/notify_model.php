@@ -88,4 +88,16 @@
     return $row['recipients'];
   }
 
+  function get_notify_users()
+  {
+    $result = db_query("SELECT * FROM notify_mail");
+
+    $users = array();
+    while ($row = db_fetch_array($result))
+    {
+      $users[] = array('userid'=>$row['userid'], 'recipients'=>$row['recipients']);
+    }
+    return $users;
+  }
+
 

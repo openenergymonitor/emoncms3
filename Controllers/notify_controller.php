@@ -18,12 +18,6 @@
 
     $userid = $session['userid'];
 
-    // notify/run
-    if ($action == 'run' && $session['write'])
-    {
-      $output['content'] = run_notify($userid);
-    }
-
     // notify/set?feedid=1&onvalue=300&oninactive=1&periodic=1
     if ($action == 'set' && $session['write'])
     {
@@ -49,7 +43,6 @@
 
     if ($action == 'setrecipients' && $session['write'])
     {
-
       $recipients = preg_replace('/[^\w\s-.,@]/','',$_GET["recipients"]);
       set_notify_recipients($userid,$recipients);
 
