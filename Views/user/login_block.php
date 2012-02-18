@@ -37,7 +37,10 @@ Open source energy visualisation
 <p><b>Password:</b><br/>
 <input class="inp01" type="password" name="pass" style="width:94%"/></p>
 
-<input type="submit" class="button04" value="Login" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/login';" /> or <input type="submit" class="button04" value="Register" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />
+<input type="submit" class="button04" value="Login" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/login';" /> <br/><br/>
+<div style="background-color:#ddd;">
+<table style="font-size:13px"><tr><td width="265px">
+Or if your new enter your email and a <br/>password above and click register:</td><td><input type="submit" class="button05" value="Register" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" /></td></tr></table>
   </table>
   <?php echo $error; ?>
 </form>
