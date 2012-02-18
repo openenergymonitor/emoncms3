@@ -106,7 +106,12 @@
         $feed = get_feed($feedid);
       }
 
-      if ($format == 'json') $output['content'] = json_encode($feed);
+      if ($format == 'json')
+      {
+        $output['content'] = json_encode($feed);
+        // Allow for AJAX from remote source
+        if ($_GET["callback"]) $output['content'] = $_GET["callback"]."(".json_encode($feed).");";
+      }
       if ($format == 'html') $output['content'] = view("feed/feed_view.php", array('feed' => $feed));
     }
 
