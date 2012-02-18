@@ -24,6 +24,9 @@
     require "Models/feed_model.php";
     global $session, $action, $format;
 
+    $output['content'] = "";
+    $output['message'] = "";
+
     //---------------------------------------------------------------------------------------------------------
     // Set feed tag
     // http://yoursite/emoncms/feed/tag?id=1&tag=tag
@@ -37,8 +40,8 @@
         $newfeedtag = db_real_escape_string($newfeedtag);
 
         set_feed_tag($feedid,$newfeedtag);
-        $output = "feed tag changed";
-      } else $output = "feed does not exist";
+        $output['message'] = "feed tag changed";
+      } else $output['message'] = "feed does not exist";
 
       if ($format == 'html') header("Location: list");	// Return to feed list page
     }
@@ -56,8 +59,8 @@
         $newfeedname = db_real_escape_string($newfeedname);
 
         set_feed_name($feedid,$newfeedname);
-        $output = "feed renamed";
-      } else $output = "feed does not exist";
+        $output['message'] = "Feed renamed";
+      } else $output['message'] = "Feed does not exist";
 
       if ($format == 'html') header("Location: list");	// Return to feed list page
     }
@@ -71,10 +74,9 @@
       $feedid = intval($_GET["id"]);
       if (feed_belongs_user($feedid, $session['userid'])) {
         delete_feed($userid,$feedid);
-        $output = "feed ".$feedid." deleted";
-      } else $output = "feed does not exist";
+        $output['message'] = "feed ".get_feed_name($feedid)." deleted";
+      } else $output['message'] = "Feed does not exist";
 
-      if ($format == 'html') header("Location: list");	// Return to feed list page
     }
 
 
@@ -87,8 +89,8 @@
     {
       $feeds = get_user_feeds($session['userid']);
     
-      if ($format == 'json') $output = json_encode($feeds);
-      if ($format == 'html') $output = view("feed/list_view.php", array('feeds' => $feeds));
+      if ($format == 'json') $output['content'] = json_encode($feeds);
+      if ($format == 'html') $output['content'] = view("feed/list_view.php", array('feeds' => $feeds));
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -104,8 +106,8 @@
         $feed = get_feed($feedid);
       }
 
-      if ($format == 'json') $output = json_encode($feed);
-      if ($format == 'html') $output = view("feed/feed_view.php", array('feed' => $feed));
+      if ($format == 'json') $output['content'] = json_encode($feed);
+      if ($format == 'html') $output['content'] = view("feed/feed_view.php", array('feed' => $feed));
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -115,7 +117,7 @@
     if ($action == 'value' && $session['read'])
     {
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid,$session['userid'])) $output = get_feed_value($feedid);
+      if (feed_belongs_user($feedid,$session['userid'])) $output['content'] = get_feed_value($feedid);
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -133,7 +135,7 @@
         $end = floatval($_GET['end']);
         $resolution = intval($_GET['res']);
         $data = get_feed_data($feedid,$start,$end,$resolution);
-        $output = json_encode($data);
+        $output['content'] = json_encode($data);
       }
     }
 

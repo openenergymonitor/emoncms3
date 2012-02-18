@@ -21,7 +21,7 @@
     // notify/run
     if ($action == 'run' && $session['write'])
     {
-      $output = run_notify($userid);
+      $output['content'] = run_notify($userid);
     }
 
     // notify/set?feedid=1&onvalue=300&oninactive=1&periodic=1
@@ -32,7 +32,7 @@
       $oninactive = intval($_GET['oninactive']);
       $periodic = intval($_GET['periodic']);
 
-      $output = set_notify($userid,$feedid,$onvalue,$oninactive,$periodic);
+      $output['content'] = set_notify($userid,$feedid,$onvalue,$oninactive,$periodic);
 
       if ($format == 'html') header("Location: ../notify/view?id=".$feedid);
     }
@@ -42,7 +42,7 @@
       $feedid = intval($_GET['id']);
       $notify = get_notify($userid, $feedid);
       //if ($format == 'json') $output = json_encode($feeds);
-      if ($format == 'html') $output = view("notify_view.php", array('feedid'=>$feedid,'notify'=>$notify));
+      if ($format == 'html') $output['content'] = view("notify_view.php", array('feedid'=>$feedid,'notify'=>$notify));
     }
 
 
@@ -54,13 +54,13 @@
       set_notify_recipients($userid,$recipients);
 
       $recipients = get_notify_recipients($userid);
-      if ($format == 'html') $output = view("notify_settings_view.php", array('recipients'=>$recipients));
+      if ($format == 'html') $output['content'] = view("notify_settings_view.php", array('recipients'=>$recipients));
     }
 
     if ($action == 'settings' && $session['write'])
     {
       $recipients = get_notify_recipients($userid);
-      if ($format == 'html') $output = view("notify_settings_view.php", array('recipients'=>$recipients));
+      if ($format == 'html') $output['content'] = view("notify_settings_view.php", array('recipients'=>$recipients));
     }
 
     return $output;

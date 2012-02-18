@@ -22,6 +22,8 @@
 
     global $session, $action, $format;
 
+    $output['content'] = "";
+    $output['message'] = "";
     //---------------------------------------------------------------------------------------------------------
     // Get process list of input
     // http://yoursite/emoncms/process/list.html?inputid=1
@@ -32,8 +34,8 @@
       $inputid = intval($_GET["inputid"]);
       $input_processlist = get_input_processlist_desc($session['userid'],$inputid);
 
-      if ($format == 'json') $output = json_encode($input_processlist);
-      if ($format == 'html') $output = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
+      if ($format == 'json') $output['content'] = json_encode($input_processlist);
+      if ($format == 'html') $output['content'] = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
     }
 
     //---------------------------------------------------------------------------------------------------------

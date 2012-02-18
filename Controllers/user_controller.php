@@ -39,9 +39,9 @@
 
       $password = db_real_escape_string($_GET['pass']);
       $result = user_logon($username,$password);
-      if ($result == 0) $output['message'] = "invalid username or password"; else $output['message'] = "login successful";
+      if ($result == 0) $output['message'] = "Invalid username or password"; else { $output['message'] = "Welcome, you are now logged in";
 
-      if ($format == 'html') header("Location: ../dashboard/view");
+      if ($format == 'html') header("Location: ../dashboard/view");}
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -135,8 +135,8 @@
     if ($action == 'view' && $session['write']) {
       $user = get_user($session['userid']);
 
-      if ($format == 'json') $output = json_encode($user);
-      if ($format == 'html') $output = view("user_view.php", array('user' => $user));
+      if ($format == 'json') $output['content'] = json_encode($user);
+      if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user));
     }
 
     return $output;

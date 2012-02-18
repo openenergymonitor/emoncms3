@@ -26,7 +26,7 @@ function api_controller()
     if (isset($_GET["time"])) $time = intval($_GET["time"]);	// - or use sent timestamp if present
     $inputs = register_inputs($session['userid'],$datapairs,$time);          // register inputs
     process_inputs($session['userid'],$inputs,$time);                        // process inputs to feeds etc
-    $output = "ok";
+    $output['message'] = "ok";
   }
 
   return $output;

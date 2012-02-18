@@ -51,13 +51,14 @@
 
   if ($_GET['apikey']) $session = user_apikey_session_control($_GET['apikey']);
 
-  $content = controller($controller);
-  $message = $content['message'];
+  $output = controller($controller);
+  $message = $output['message'];
+  $content = $output['content']; 
 
   if ($format == 'json')
   {
-    print $content;
-    if (!$content) print "Sorry, you need a valid apikey or be logged in to see this page";
+    print $message.$content;
+    if (!($message.$content)) print "Sorry, you need a valid apikey or be logged in to see this page";
   }
 
   if ($format == 'html')

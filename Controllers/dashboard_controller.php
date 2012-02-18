@@ -19,6 +19,9 @@
     require "Models/dashboard_model.php";
     global $session, $action, $format;
 
+    $output['content'] = "";
+    $output['message'] = "";
+
     // /dashboard/set?content=<h2>HelloWorld</h2>
     if ($action == 'set' && $session['write']) // write access required
     {
@@ -31,7 +34,7 @@
       $content = db_real_escape_string($content);
 
       set_dashboard($session['userid'],$content);
-      $output = "dashboard set";
+      $output['message'] = "dashboard set";
     }
 
     // /dashboard/view
@@ -39,8 +42,8 @@
     {
       $dashboard = get_dashboard($session['userid']);
 
-      if ($format == 'json') $output = json_encode($dashboard);
-      if ($format == 'html') $output = view("dashboard_view.php", array('page'=>$dashboard));
+      if ($format == 'json') $output['content'] = json_encode($dashboard);
+      if ($format == 'html') $output['content'] = view("dashboard_view.php", array('page'=>$dashboard));
     }
 
     return $output;
