@@ -310,3 +310,14 @@ table.catlist tr.d1 td {
 	background-color: rgb(230,230,230);
 }
 
+#message {
+  border: 1px solid #22a4d9;
+  color: white;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  background-color: #33a4d9;
+  font-weight:bold;
+  line-height: 24px;
+  padding: 0 8px;
+  cursor:pointer
+}
+

@@ -52,6 +52,7 @@
   if ($_GET['apikey']) $session = user_apikey_session_control($_GET['apikey']);
 
   $content = controller($controller);
+  $message = $content['message'];
 
   if ($format == 'json')
   {
@@ -66,7 +67,7 @@
       $menu = view("menu_view.php", array());
     }
     if (!$session['read']) $content = view("user/login_block.php", array());
-    print view("theme/dark/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content));
+    print view("theme/dark/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
   }
   
   //----------------------------------------------------

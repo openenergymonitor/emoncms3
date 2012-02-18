@@ -53,6 +53,9 @@
         <div style='clear:both;'></div>
       </div>
 
+      <?php if ($message) { ?>
+      <div id="message"><?php print $message; ?></div>
+      <?php } ?>
       <!------------------------------------------------------
       CONTENT
       ------------------------------------------------------->

@@ -25,6 +25,9 @@
   {
     global $session, $action,$format;
 
+    $output['content'] = "";
+    $output['message'] = "";
+
     //---------------------------------------------------------------------------------------------------------
     // Login user (PUBLIC ACTION)
     // http://yoursite/emoncms/user/login?name=john&pass=test
@@ -36,7 +39,7 @@
 
       $password = db_real_escape_string($_GET['pass']);
       $result = user_logon($username,$password);
-      if ($result == 0) $output = "invalid username or password"; else $output = "login successful";
+      if ($result == 0) $output['message'] = "invalid username or password"; else $output['message'] = "login successful";
 
       if ($format == 'html') header("Location: ../dashboard/view");
     }
@@ -53,22 +56,22 @@
 
       $password = db_real_escape_string($_GET['pass']);
 
-      if (get_user_id($username)!=0) $output = "username already exists";
-      if (strlen($password) < 4 || strlen($password) > 30) $output = "password must be 4 to 30 characters<br/>";
-      if (strlen($username) < 4 || strlen($username) > 30) $output = "username must be 4 to 30 characters<br/>";
-      if (!$output) {
+      if (get_user_id($username)!=0) $output['message'] = "Sorry username already exists";
+      if (strlen($password) < 4 || strlen($password) > 30) $output['message'] = "Please enter a password that is 4 to 30 characters long<br/>";
+      if (strlen($username) < 4 || strlen($username) > 30) $output['message'] = "Please enter a username that is 4 to 30 characters long<br/>";
+      if (!$output['message']) {
         create_user($username,$password);
         $result = user_logon($username,$password);
-        $output = "user created";
+        $output['message'] = "Your new account has been created";
         if ($format == 'html') header("Location: ../dashboard/view");
-      } else { echo "there was a problem?"; }
+      }
     }
 
     // http://yoursite/emoncms/user/changepass?old=sdgs43&new=sdsg345
     if ($action == 'changepass' && $_SESSION['write']) {
       $oldpass =  db_real_escape_string($_GET['oldpass']);
       $newpass =  db_real_escape_string($_GET['newpass']);
-      if (change_password($_SESSION['userid'],$oldpass,$newpass)) $output = "Your password has been changed"; else $output = "Invalid old password";
+      if (change_password($_SESSION['userid'],$oldpass,$newpass)) $output['message'] = "Your password has been changed"; else $output['message'] = "Invalid old password";
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -78,7 +81,7 @@
     if ($action == 'newapiread' && $session['write']) {
       $apikey_read = md5(uniqid(mt_rand(), true));
       set_apikey_read($session['userid'],$apikey_read);
-      $output = "New read apikey: ".$apikey_read;
+      $output['message'] = "New read apikey: ".$apikey_read;
 
       if ($format == 'html') header("Location: view");
     }
@@ -90,7 +93,7 @@
     if ($action == 'newapiwrite' && $session['write']) {
       $apikey_write = md5(uniqid(mt_rand(), true));
       set_apikey_write($session['userid'],$apikey_write);
-      $output = "New write apikey: ".$apikey_write;
+      $output['message'] = "New write apikey: ".$apikey_write;
 
       if ($format == 'html') header("Location: view");
     }
@@ -102,7 +105,7 @@
     if ($action == 'logout' && $session['read'])
     { 
       user_logout(); 
-      $output = "logout"; 
+      $output['message'] = "You are logged out"; 
 
       if ($format == 'html') header("Location: ../");
     }
