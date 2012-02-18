@@ -42,7 +42,7 @@
       $feedid = intval($_GET['id']);
       $notify = get_notify($userid, $feedid);
       //if ($format == 'json') $output = json_encode($feeds);
-      if ($format == 'html') $output = view("notify_view.php", array('notify'=>$notify));
+      if ($format == 'html') $output = view("notify_view.php", array('feedid'=>$feedid,'notify'=>$notify));
     }
 
 
