@@ -73,7 +73,8 @@
  
     $content .=" </div>";
 
-    return $content;
+    $output['content'] = $content;
+    return $output;
   }
 
 ?>
