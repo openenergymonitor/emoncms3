@@ -1,5 +1,7 @@
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 <h1>Admin panel</h1>
+Total feed data disk space use: <?php echo number_format($total_memuse/1000,1); ?> KiB
+
 <h2>Users</h2>
 <h3><?php echo sizeof($userlist); ?> registered users</h3>
 

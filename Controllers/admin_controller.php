@@ -29,14 +29,16 @@
     //---------------------------------------------------------------------------------------------------------
     if ($action == '' && $session['write'] && $session['admin']) {
       $userlist = get_user_list();
-      $i=0;
+      $i=0; $total_memuse = 0;
       foreach ($userlist as $user) {
-        $userlist[$i]['memuse'] = get_user_feeds_size($user['userid']); $i++;
+        $userlist[$i]['memuse'] = get_user_feeds_size($user['userid']);
+        $total_memuse += $userlist[$i]['memuse'];
+        $i++;
       }
 
       usort($userlist, 'user_sort');	// sort by highest memory user first
 
-      $output['content'] = view("admin/admin_view.php", array('userlist'=>$userlist));
+      $output['content'] = view("admin/admin_view.php", array('userlist'=>$userlist,'total_memuse'=>$total_memuse));
     }
 
     return $output;
