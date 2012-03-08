@@ -187,7 +187,10 @@
     {
       $userlist[] = array('userid'=>$row['id'],'name'=>$row['username'],'admin'=>$row['admin']);
     }
+
     return $userlist;
   }
+
+
 
 ?>

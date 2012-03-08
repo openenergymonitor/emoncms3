@@ -33,10 +33,24 @@
       foreach ($userlist as $user) {
         $userlist[$i]['memuse'] = get_user_feeds_size($user['userid']); $i++;
       }
+
+      usort($userlist, 'user_sort');	// sort by highest memory user first
+
       $output['content'] = view("admin/admin_view.php", array('userlist'=>$userlist));
     }
 
     return $output;
   }
+
+
+function user_sort($x, $y)
+{
+ if ( $x['memuse'] == $y['memuse'] )
+  return 0;
+ else if ( $x['memuse'] > $y['memuse'] )
+  return -1;
+ else
+  return 1;
+}
 
 ?>
