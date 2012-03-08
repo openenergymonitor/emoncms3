@@ -13,7 +13,7 @@
   <h2>Feeds</h2>
 
   <?php if ($feeds) { ?>
-  <table class='catlist'><tr><th>id</th><th>Name</th><th>Tag</th><th>Updated</th><th>Value</th></tr>
+  <table class='catlist'><tr><th>id</th><th>Name</th><th>Tag</th><th>Size</th><th>Updated</th><th>Value</th></tr>
   <?php 
     $i = 0;
     foreach ($feeds as $feed)
@@ -51,6 +51,7 @@
       </td>
       
       <td><?php echo $feed[2]; ?></td>
+      <td><?php echo number_format($feed[5]/1000,1); ?> KiB</td>
       <td style="color:<?php echo $color; ?>"><?php echo $updated; ?></td>
       <td>
       <?php 
