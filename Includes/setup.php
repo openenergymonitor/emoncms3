@@ -19,7 +19,9 @@
         password varchar(64),
         salt varchar(3),
         apikey_write varchar(64),
-        apikey_read varchar(64)
+        apikey_read varchar(64),
+        lastlogin DATETIME,
+        admin INT NOT NULL
       )"); 
 
   db_query(
