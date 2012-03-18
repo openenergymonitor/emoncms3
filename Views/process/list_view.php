@@ -49,6 +49,13 @@
         </form>
 
   <?php } ?>
+
+<form action="../input/resetprocess" method="get">
+<b>Reset process list?</b>
+<input type="hidden" name="inputid" value="<?php echo $inputid; ?>">
+<input type="submit" value="Reset" class="button05"/>
+</form>
+
 <hr/>
 
 <?php

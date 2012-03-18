@@ -44,6 +44,14 @@ function input_controller()
     $output['message'] = "Input deleted";
   }
 
+  if ($action == "resetprocess" && $session['write'])
+  { 
+    $inputid = intval($_GET["inputid"]);
+    reset_input_process($session['userid'], $inputid );
+    $output['message'] = "Process list has been reset";
+    if ($format == 'html') header("Location: ../process/list?inputid=".$inputid);	// Return to feed list page
+  }
+
   return $output;
 }
 

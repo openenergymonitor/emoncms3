@@ -36,6 +36,11 @@
     set_input_processlist($id,$list);
   }
 
+  function reset_input_process($userid,$id)
+  {
+    set_input_processlist($id,"");
+  }
+
   function get_user_inputs($userid)
   {
     $result = db_query("SELECT * FROM input WHERE userid = '$userid'");
