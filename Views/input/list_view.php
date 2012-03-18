@@ -22,7 +22,7 @@
   var inputs = <?php echo json_encode($inputs); ?>;
 
   update_list();
-  setInterval(update_list,1000);
+  setInterval(update_list,2000);
 
   function update_list()
   {
@@ -30,8 +30,7 @@
       url: path+"input/list.json",                
       dataType: 'json',
       async: false,
-      success: function(data) { inputs = data; }
-    });
+      success: function(data) { inputs = data; 
 
     var i = 0;
     var out = "<table class='catlist'><tr><th>Name</th><th>Updated</th><th>Value</th></tr>";
@@ -64,6 +63,8 @@
     }
     out += "</table>";
     $("#inputlist").html(out);
+}
+    });
   }
 
 </script>

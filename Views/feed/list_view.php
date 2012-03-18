@@ -25,7 +25,7 @@
   var feeds = <?php echo json_encode($feeds); ?>;
 
   update_list();
-  setInterval(update_list,1000);
+  setInterval(update_list,2000);
 
   function update_list()
   {
