@@ -32,9 +32,7 @@
     $.ajax({                                      
       url: path+"feed/list.json",                
       dataType: 'json',
-      async: false,
-      success: function(data) { feeds = data; }
-    });
+      success: function(data) { feeds = data; 
 
     var lastfeed;
     var i = 0;
@@ -81,8 +79,11 @@
 
 
     }
+
     out += "</table>";
     $("#feedlist").html(out);
+    }
+    });
   }
 
 </script>
