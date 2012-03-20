@@ -54,7 +54,7 @@
 
       var secs = (now-update)/1000;
       var mins = secs/60;
-      var hour = secs/3600
+      var hour = secs/3600;
 
       var updated = secs.toFixed(0)+"s ago";
       if (secs>180) updated = mins.toFixed(0)+" mins ago";
