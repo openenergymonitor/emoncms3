@@ -27,6 +27,7 @@
 
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/excanvas.min.js"></script><![endif]-->
     <script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
  </head>
