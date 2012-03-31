@@ -48,7 +48,9 @@
 
       // FEED NAME AND BUTTON
       out += "<td><form action='view' method='get'><input type='hidden' name='id' value='"+feeds[z][0]+"'><input type='submit' value='"+feeds[z][1]+"' class='button05' style='width:150px'/ ></form></td>";
-      var now = (new Date()).getTime();
+      var localOffset = (new Date()).getTimezoneOffset() * 60000;
+      var now = (new Date()).getTime() + localOffset;
+
       var update = (new Date(feeds[z][3])).getTime();
       var lastupdate = (now-update)/1000;
 
