@@ -45,7 +45,7 @@
       var localOffset = (new Date()).getTimezoneOffset() * 60000;
       var now = (new Date()).getTime() + localOffset;
 
-      var update = (new Date(feeds[z][3])).getTime();
+      var update = (new Date(inputs[z][2])).getTime();
       var lastupdate = (now-update)/1000;
 
       var secs = (now-update)/1000;
