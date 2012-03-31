@@ -13,8 +13,15 @@
     http://openenergymonitor.org
   */
 
+  //=====================================================
+  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  //=====================================================
+
   require "Includes/db.php";
   $e = db_connect();
+  if ($e == 4) $runnable = TRUE;
+
+  if(!$runnable) {echo "to run script uncomment runnable"; die;}
 
   $shema = array();
 
