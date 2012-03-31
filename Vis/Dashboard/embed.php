@@ -26,6 +26,7 @@
 <!------------------------------------------------------------------------------------------
   Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
+    <!--[if IE]><script language="javascript" type="text/javascript" src="../flot/excanvas.min.js"></script><![endif]-->
 <script type="text/javascript" src="../flot/jquery.js"></script>
 <script type="text/javascript" src="../flot/jquery.flot.js"></script>
 <script type="text/javascript" src="widgets/dial.js"></script>
@@ -41,7 +42,7 @@
 
     <div id="page"></div>
    
-<script type="application/javascript">
+<script>
 
 $(function() {
   var path = "<?php echo $path; ?>";
