@@ -16,7 +16,7 @@
     <meta name="viewport" content="user-scalable=no, width=device-width" />
     <!-- Thanks to Baptiste Gaultier for the emoncms dial icon http://bit.ly/zXgScz -->
     <link rel="shortcut icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="<?php print $GLOBALS['path']; ?>Views/theme/android.css" media="only screen and (min-width: 480px)" />
+   
     <link rel="stylesheet" type="text/css" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/style.css" />
 
     <!------------------------------------------------------------------

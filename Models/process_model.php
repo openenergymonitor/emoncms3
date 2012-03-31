@@ -249,12 +249,12 @@
 
     $kwh_today = 0;
 
-    $result = db_query("SELECT * FROM tmpkwhd WHERE feedid = '$feedid'");
+    $result = db_query("SELECT * FROM kwhdproc WHERE feedid = '$feedid'");
     $row = db_fetch_array($result);
 
 
     $start_day_kwh_value = $row['kwh'];
-    if (!$row) db_query("INSERT INTO tmpkwhd (feedid,kwh) VALUES ('$feedid','0.0')");
+    if (!$row) db_query("INSERT INTO kwhdproc (feedid,kwh) VALUES ('$feedid','0.0')");
 
     $feedname = "feed_".trim($feedid)."";
 
@@ -266,7 +266,7 @@
     if (!$entry)
     {
       //Log start of day kwh
-      db_query("UPDATE tmpkwhd SET kwh = '$kwh' WHERE feedid='$feedid'");
+      db_query("UPDATE kwhdproc SET kwh = '$kwh' WHERE feedid='$feedid'");
       $result = db_query("INSERT INTO $feedname (time,data) VALUES ('$time','0.0')");
 
       $updatetime = date("Y-n-j H:i:s", $time_now);

@@ -87,5 +87,12 @@
     recipients text
   )");
 
+  db_query(
+  "CREATE TABLE kwhdproc
+  (
+    feedid int,
+    kwh FLOAT
+  )");
+
 
 ?>
