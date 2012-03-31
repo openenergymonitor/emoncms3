@@ -43,7 +43,7 @@
 
   if ($e == 2) {echo "no settings.php"; die;}
   if ($e == 3) {echo "db settings error"; die;}
-  if ($e == 4) require "Includes/setup.php";
+  if ($e == 4) header("Location: setup.php");
 
   $session['read'] = $_SESSION['read'];
   $session['write'] = $_SESSION['write'];
