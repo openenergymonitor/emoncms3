@@ -36,6 +36,7 @@ Dashboard HTML
 	{
 	$(".new-dashboard-button").button();
 	$(".delete-dashboard-button").button();	
+	$(".preview-dashboard-button").button();
 	
 	$(".new-dashboard-button").click(function(){
    	$.ajax({
@@ -43,34 +44,47 @@ Dashboard HTML
 			url :  "<?php echo $path;?>" + "dashboards/new",
 			data : "",
 			dataType : 'json',
-			success : function() { }
+			success : function() {  }
 		});
+		location.reload();
 		
 	});
 			
-	$(".delete-dashboard-button").click(function(){
+	$(".delete-dashboard-button").click(function(){	
    	$.ajax({
 			type : "POST",
 			url :  "<?php echo $path;?>" + "dashboards/delete",
-			data : "&content=9",
+			data : "&content="+this.id,
 			dataType : 'json',
 			success : function() { }
 		});
+		location.reload();
 	}); 
+	
+	$(".preview-dashboard-button").click(function(){		
+   	$.ajax({
+			type : "POST",
+			url :  "<?php echo $path;?>" + "dashboards/delete",
+			data : "&content="+this.id,
+			dataType : 'json',
+			success : function() { }
+		});
+		location.reload();
+	});
 	
 	});
 
 </script>
 
-<div class="new-dashboard-button">New dashboard</div>
+<br><div class="new-dashboard-button">New dashboard</div>
 
 <?php
 	
-	while ($row = $dashboards->fetch_array(MYSQLI_NUM)) {
-		//printf ("%s (%s)\n", $row[0], $row[1]);
-		
-	echo '<table><tr><td><div class="dashboard-preview"></div></td></tr><tr><td><div class="delete-dashboard-button">-</div><button>clone</button><button>rename</button><button>preview</button></td></tr><table>';
-
+	while ($row = $dashboards->fetch_array(MYSQLI_ASSOC)) {
+		echo $row['name'];
+		echo '<table><tr><td><div class="dashboard-preview"></div></td></tr><tr><td>';
+		echo '<div class="delete-dashboard-button" id="'.$row['id'].'">';
+		echo '-</div><div class="preview-dashboard-button" id="'.$row['id'].'">preview</div></td></tr></table>';
 	}
 			
 ?>
