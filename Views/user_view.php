@@ -53,7 +53,7 @@
 <h3>Account Statistics</h3>
 
 <table>
-  <tr><td>Disk space use:</td><td><?php echo number_format($stats['memory']/1000.0,1); ?> KiB</td></tr>
+  <tr><td>Disk space use:</td><td><?php echo number_format($stats['memory']/1024.0,1); ?> KiB</td></tr>
   <tr><td>Up hits:</td><td><?php echo $stats['uphits']; ?></td></tr>
   <tr><td>Down hits:</td><td><?php echo $stats['dnhits']; ?></td></tr>
 </table>
