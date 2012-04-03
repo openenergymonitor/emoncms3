@@ -33,5 +33,11 @@
   {
     $result = db_query("SELECT * FROM statistics WHERE userid='$userid'");
     $result = db_fetch_array($result);
+
+    if (!$result)
+    {
+      db_query("INSERT INTO statistics (`userid`,`uphits`,`dnhits`,`memory`) VALUES ('$userid','0','0','0')");
+    }
+
     return $result;
   }
