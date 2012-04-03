@@ -90,6 +90,12 @@
     'kwh'=> array('type'=>'FLOAT')
   );
 
+  $schema['statistics'] = array(
+    'userid'=> array('type'=>'int'),
+    'uphits'=> array('type'=>'int'),
+    'dnhits'=> array('type'=>'int'),
+    'memory'=> array('type'=>'int')
+  );
 
   $out = "<table style='font-size:12px'><tr><th width='220'></th><th></th></tr>";
 

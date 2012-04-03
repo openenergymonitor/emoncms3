@@ -18,5 +18,19 @@ if ($_GET['key'] == "xTC7005d")		// IMPORTANT SET THIS TO A UNIQUE PASSWORD OF Y
   {
     run_notify($user['userid']);
   }
+
+  //---------------------------------------------------------------------------------------------
+  // Calculates and updates user total memory use
+  require "Models/user_model.php";
+  require "Models/statistics_model.php";
+
+  $userlist = get_user_list();
+  $i=0; $total_memuse = 0;
+  foreach ($userlist as $user) {
+    $userlist[$i]['memuse'] = get_user_feeds_size($user['userid']);
+    $total_memuse += $userlist[$i]['memuse'];
+    set_memory_statistics($user['userid'],$userlist[$i]['memuse']);
+    $i++;
+  }
 }
 ?>

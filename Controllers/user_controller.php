@@ -64,6 +64,8 @@
         $result = user_logon($username,$password);
         $output['message'] = "Your new account has been created";
         if ($format == 'html') header("Location: ../dashboard/view");
+
+        if ($_SESSION['write']) create_user_statistics($_SESSION['userid']);
       }
     }
 
@@ -134,9 +136,10 @@
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'view' && $session['write']) {
       $user = get_user($session['userid']);
+      $stats = get_statistics($session['userid']);
 
       if ($format == 'json') $output['content'] = json_encode($user);
-      if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user));
+      if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
 
     return $output;
