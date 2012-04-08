@@ -12,8 +12,9 @@
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   // Creates a feed entry and relates the feed to the user
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  function create_feed($userid,$name)
+  function create_feed($userid,$name,$processid)
   {
+  	// PTA comment: Don't these need to handle the userid??
     $result = db_query("INSERT INTO feeds (name,status) VALUES ('$name','0')");				// Create the feed entry
     $ido = db_insert_id();
     $result = db_query("SELECT id FROM feeds WHERE name='$name'");				// Select the same feed to find the auto assigned id
@@ -24,12 +25,22 @@
 
       // create feed table
       $feedname = "feed_".$feedid;
-      $result = db_query(
-      "CREATE TABLE $feedname
-      (
-        time DATETIME,
-        data float
-      )");
+      if ($processid != 13) {
+	      $result = db_query(
+	      "CREATE TABLE $feedname
+	      (
+	        time DATETIME,
+	        data float
+	      )");
+      } else {				// Histogram tables require an extra data field
+	      $result = db_query(
+	      "CREATE TABLE $feedname
+	      (
+	        time DATETIME,
+	        data float,
+	        data2 float
+	        )");
+      } 
 
       return $feedid;												// Return created feed id
     } else return 0;
@@ -169,25 +180,43 @@ function compare($x, $y)
     $start = date("Y-n-j H:i:s", ($start/1000));		//Time format conversion
     $end = date("Y-n-j H:i:s", ($end/1000));  			//Time format conversion
 
-    //This mysql query selects data from the table at specified resolution
-    if ($resolution>1){
-      $result = db_query(
-      "SELECT * FROM 
-      (SELECT @row := @row +1 AS rownum, time,data FROM ( SELECT @row :=0) r, $feedname) 
-      ranked WHERE (rownum % $resolution = 1) AND (time>'$start' AND time<'$end') order by time Desc");
-    }
-    else
+    if ($feedid != 4)  // Histogram data PTA: need to get feed type instead!
     {
-      //When resolution is 1 the above query doesnt work so we use this one:
-      $result = db_query("select * from $feedname WHERE time>'$start' AND time<'$end' order by time Desc"); 
-    }
-
-    $data = array();                                     //create an array for them
-    while($row = db_fetch_array($result))             // for all the new lines
-    {
-      $dataValue = $row['data'] ;                        //get the datavalue
-      $time = (strtotime($row['time']))*1000;            //and the time value - converted to unix time * 1000
-      $data[] = array($time , $dataValue);               //add time and data to the array
+	    //This mysql query selects data from the table at specified resolution
+	    if ($resolution>1){
+	      $result = db_query(
+	      "SELECT * FROM 
+	      (SELECT @row := @row +1 AS rownum, time,data FROM ( SELECT @row :=0) r, $feedname) 
+	      ranked WHERE (rownum % $resolution = 1) AND (time>'$start' AND time<'$end')
+	      where data is  not null 
+	      order by time Desc");
+	    }
+	    else
+	    {
+	      //When resolution is 1 the above query doesnt work so we use this one:
+	      $result = db_query("select * from $feedname WHERE time>'$start' AND time<'$end'
+	      AND data is  not null 
+	      order by time Desc"); 
+	    }
+	
+	    $data = array();                                     //create an array for them
+	    while($row = db_fetch_array($result))             // for all the new lines
+	    {
+	      $dataValue = $row['data'] ;                        //get the datavalue
+	      $time = (strtotime($row['time']))*1000;            //and the time value - converted to unix time * 1000
+	      $data[] = array($time , $dataValue);               //add time and data to the array
+	    }
+    } else {
+      // Histogram has an extra dimension so a sum and group by needs to be used.
+      $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
+	
+	    $data = array();                                     //create an array for them
+	    while($row = db_fetch_array($result))             // for all the new lines
+	    {
+	      $dataValue = $row['kWh'];                        //get the datavalue
+	      $data2 = $row['data2'];            				//and the instant watts
+	      $data[] = array($data2 , $dataValue);               //add time and data to the array
+	    }
     }
     return $data;
   }

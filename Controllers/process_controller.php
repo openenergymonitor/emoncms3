@@ -22,6 +22,7 @@
 
     global $action, $format;
 
+error_log("process_controller:".$action." R:".$_SESSION['read']." W:".$_SESSION['write']);    	
     //---------------------------------------------------------------------------------------------------------
     // Get process list of input
     // http://yoursite/emoncms/process/list.html?inputid=1
@@ -54,13 +55,23 @@
       if ($process[1] == 2)
       {
         $id = get_feed_id($_SESSION['userid'],$arg);
-        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg);
+        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg,$processid);
         $arg = $id;
       }
       add_input_process($_SESSION['userid'],$inputid,$processid,$arg);
 
       if ($format == 'html') header("Location: list?inputid=".$inputid);
     }
+
+    if ($action == "test" && $_SESSION['write']) // write access required
+    {
+		set_time_limit(360);  // Increase PHP limit
+    	///$rows = histogram_history(4,1,"2011-08-01","2011-10-01");
+    	///$rows = histogram_history(4,1,"2008-01-01","2012-05-01");
+    	$rows = histogram_history(4,1,"2011-09-15","2012-05-01");
+    	error_log("histogram_history:".$rows);
+    }
+
     return $output;
   }
 ?>
