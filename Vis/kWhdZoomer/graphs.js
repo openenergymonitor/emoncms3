@@ -21,6 +21,15 @@
           });
         }
 
+        function histogram(data,barwidth)
+        {
+          $.plot($("#placeholder"), [{color: "#0096ff", data: data}], 
+          {
+            bars: { show: true,align: "center",barWidth: (barwidth*1000),fill: true },
+            grid: { show: true, hoverable: true, clickable: true },
+            xaxis: { mode: null}
+          });
+        }
 
 
      
