@@ -182,10 +182,9 @@ function compare($x, $y)
     $end = date("Y-n-j H:i:s", ($end/1000));  			//Time format conversion
 
     // Check to see type of feed table.
-/*	$result = db_query("SELECT * FROM $feedname LIMIT 1");
+	$result = db_query("SELECT * FROM $feedname LIMIT 1");
 	$row = db_fetch_array($result);
-	if(!isset($row['data2'])) */
-    if (true)
+	if(!isset($row['data2']))
     {
 	    //This mysql query selects data from the table at specified resolution
 	    if ($resolution>1){
