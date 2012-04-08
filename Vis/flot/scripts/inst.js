@@ -47,8 +47,8 @@
            graph_data = [];   
            graph_data = data;
       
-           if (feedid != 4) {plotGraph(start, end);}
-           else {plotHistogram(start, end);}
+           if (feedid == whw) {plotHistogram(start, end);}
+           else {plotGraph(start, end);}
            //on_inst_graph_load();
            $("#loading").hide();
          } 

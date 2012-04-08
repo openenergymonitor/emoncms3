@@ -16,8 +16,10 @@
           $("#return").val("View: monthly view");
           $("#out2").html("Daily view");
           $('#axislabely').html("Energy<br/ >(kWh)");
+          $('#axislabelx').html("Date");
           $("#bot_out").html(bot_kwhd_text);
           $("#return_ctr").show();
+          $("#enableHistogram").show();
         }
 
         function set_monthly_view()
@@ -27,7 +29,9 @@
           $("#return").val("View: annual view");               
           $("#out2").html("Monthly view");
           $('#axislabely').html("Energy<br/ >(kWh)");
+          $('#axislabelx').html("Date");
           $("#return_ctr").show();
+          $("#enableHistogram").show();
         }
 
         function set_annual_view()
@@ -36,7 +40,9 @@
           $("#out").html(""); view = 0; 
           $("#out2").html("Annual view");
           $('#axislabely').html("Energy<br/ >(kWh)");
+          $('#axislabelx').html("Date");
           $("#return_ctr").hide();
+          $("#enableHistogram").show();
         }
 
         function set_last30days_view()
@@ -46,8 +52,10 @@
           $("#return").val("View: monthly view");
           $("#out2").html("Last 30 days");
           $('#axislabely').html("Energy<br/ >(kWh)");
+          $('#axislabelx').html("Date");
           $("#bot_out").html(bot_kwhd_text);
           $("#return_ctr").show();
+          $("#enableHistogram").show();
         }
 
         //--------------------------------------------------------------------------
@@ -66,8 +74,10 @@
               $("#out2").html("Power view");
               $("#return").val("View: daily view");
               $('#axislabely').html("Power<br />(Watts)");
+              $('#axislabelx').html("Date / Time");
               $('#inst-buttons').show();
               $("#return_ctr").show();
+              $("#enableHistogram").show();
         }
 
         //--------------------------------------------------------------------------
@@ -84,10 +94,18 @@
 
               last_view = view;
               view = 5;
-              $("#out2").html("Histogram");
-              $("#return").val("View: back");
+              var ret;
+              if (last_view==0) ret = "annual";   
+              if (last_view==1) ret = "monthly";
+              if (last_view==2) ret = "daily";
+              if (last_view==3) ret = "daily";
+              $("#out2").html("Histogram "+ret);
+              //$("#return").val("View: back");
+              $("#return").val("View: "+ret);
               $('#axislabely').html("Energy<br/>(Watt<br/>hours)");
+              $('#axislabelx').html("Watts");
               $('#inst-buttons').hide();
               $("#return_ctr").show();
-              $('#enableHistogram').removeAttr('checked');  ///.prop("checked", false);
+              $("#enableHistogram").hide();
+              $('#enableHistogram').removeAttr('checked');
         }

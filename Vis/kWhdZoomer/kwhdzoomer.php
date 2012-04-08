@@ -16,7 +16,7 @@
 
   $power = $_GET['power'];
   $kwhd = $_GET['kwhd'];
-  $whw = $_GET['whw'];	// Histogram feed
+  if (isset($_GET['whw'])) {$whw = $_GET['whw'];} else {$whw = 0;}	// Histogram feed
   $apikey = $_GET['apikey'];
   ?>
 
@@ -43,7 +43,7 @@
       <div id="loading" style="position:absolute; top:40px; left:60px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
 
       <div style="position:absolute; top:0px; left:65px; font-size:18px;"><b><span id="out2"></span>
-      </b><span style="font-size:12px;"> (Hover for info, press to zoom in, histogram: 
+      </b><span style="font-size:12px;"> (Hover for info, press to zoom in. Histogram: 
       <input id="enableHistogram" type="checkbox">)
       </span></div>
       <h2 style="position:absolute; top:40px; left:80px;"><span id="out"></span></h2>
@@ -51,7 +51,7 @@
       <p id="bot_out" style="position:absolute; bottom:-10px; left:65px; font-size:18px; font-weight:bold;"></p>
 
       <b><p style="position:absolute; top: 200px; left:0px;"><span id="axislabely"></span></p>
-     <p style="position:absolute; bottom: 40px; left:450px;">Date / Time</p></b>
+     <p style="position:absolute; bottom: 40px; left:450px;"><span id="axislabelx">Date / Time</span></p></b>
   
     <div id="return_ctr" style="position:absolute; top:0px; right:10px;">
         <input id="return" type="button" value="Back" style="font-size:18px; height:40px;"/>
@@ -136,7 +136,7 @@
         {
           if (item!=null)
           {
-       		if ($("#enableHistogram:checked").length < 1) {
+       		if (($("#enableHistogram:checked").length < 1) || (whw == 0)) {
 	            if (view==2) set_inst_view(item.datapoint[0]);
 	
 	            if (view==1)
@@ -152,7 +152,8 @@
 	              months = get_months_year(data,d.getFullYear());
 	              set_monthly_view();
 	            }
-			} else {
+			} else {  
+				// Histogram view can be of any date range.
 	            if (view==2)
 	            {
 	              	start = item.datapoint[0];
@@ -185,6 +186,7 @@
           if (view==1) set_annual_view();
           if (view==2) set_monthly_view();
           if (view==3) set_daily_view();
+          if (view==4) set_daily_view();
         });
     
         //--------------------------------------------------------------
@@ -230,6 +232,15 @@
      $('#left').click(function () {inst_panleft();});
      $('.time').click(function () {inst_timewindow($(this).attr("time"));});
 
+	 $("#enableHistogram").click(function() 
+	 {
+		if (whw == 0)
+		{
+			alert("The whw parameter must be set in the dashboard to a histogram feed id.");
+            $('#enableHistogram').removeAttr('checked'); 
+		}
+	 });
+	 
      function on_inst_graph_load()
      {
        $('#loading').hide();
