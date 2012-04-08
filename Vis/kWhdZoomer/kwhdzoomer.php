@@ -16,8 +16,7 @@
 
   $power = $_GET['power'];
   $kwhd = $_GET['kwhd'];
-  if (isset($_GET["whw"])) {$whw = $_GET["whw"];}  		// Histogram feed
-  else {$whw = 4;}
+  $whw = $_GET['whw'];	// Histogram feed
   $apikey = $_GET['apikey'];
   ?>
 

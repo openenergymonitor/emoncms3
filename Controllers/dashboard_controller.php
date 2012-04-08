@@ -17,30 +17,33 @@
   function dashboard_controller()
   {
     require "Models/dashboard_model.php";
-    global $action, $format;
+    global $session, $action, $format;
+
+    $output['content'] = "";
+    $output['message'] = "";
 
     // /dashboard/set?content=<h2>HelloWorld</h2>
-    if ($action == 'set' && $_SESSION['write']) // write access required
+    if ($action == 'set' && $session['write']) // write access required
     {
       $content = $_POST['content'];
       if (!$content) $content = $_GET['content'];
 
       // IMPORTANT: if you get problems with characters being removed check this line:
-      $content = preg_replace('/[^\w\s-.<>?",;:=&\/]/','',$content);	// filter out all except characters usually used
+      $content = preg_replace('/[^\w\s-.<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
 
       $content = db_real_escape_string($content);
 
-      set_dashboard($_SESSION['userid'],$content);
-      $output = "dashboard set";
+      set_dashboard($session['userid'],$content);
+      $output['message'] = "dashboard set";
     }
 
     // /dashboard/view
-    if ($action == 'view' && $_SESSION['read'])
+    if ($action == 'view' && $session['read'])
     {
-      $dashboard = get_dashboard($_SESSION['userid']);
+      $dashboard = get_dashboard($session['userid']);
 
-      if ($format == 'json') $output = json_encode($dashboard);
-      if ($format == 'html') $output = view("dashboard_view.php", array('page'=>$dashboard));
+      if ($format == 'json') $output['content'] = json_encode($dashboard);
+      if ($format == 'html') $output['content'] = view("dashboard_view.php", array('page'=>$dashboard));
     }
 
     return $output;

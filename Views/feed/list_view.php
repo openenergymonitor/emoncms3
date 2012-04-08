@@ -7,69 +7,84 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
+<?php global $path; ?>
 
+<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
   <h2>Feeds</h2>
 
-  <?php if ($feeds) { ?>
-  <table class='catlist'><tr><th>id</th><th>Name</th><th>Tag</th><th>Updated</th><th>Value</th></tr>
-  <?php 
-    $i = 0;
-    foreach ($feeds as $feed)
+<div id="feedlist">
+</div>
+
+</div>
+
+<script type="application/javascript">
+
+  var path = "<?php echo $path; ?>";
+  var feeds = <?php echo json_encode($feeds); ?>;
+
+  update_list();
+  setInterval(update_list,2000);
+
+  function update_list()
+  {
+    $.ajax({                                      
+      url: path+"feed/list.json",                
+      dataType: 'json',
+      success: function(data) { feeds = data; 
+
+    var lastfeed;
+    var i = 0;
+    var out = "<table class='catlist'><tr><th>id</th><th>Name</th><th>Tag</th><th>Size</th><th>Updated</th><th>Value</th></tr>";
+    for (z in feeds)
     {
-      $timenow = time();
-      $time = strtotime($feed[3]);
-      $sec = ($timenow - $time);
-      $min = number_format($sec/60,0);
-      $hour = number_format($sec/3600,0);
+      i++;
+      // FEED ID
+      if (feeds[z][2] != lastfeed) {out+= "<tr><td></td></tr>"; }
+      lastfeed = feeds[z][2];
 
-      $updated = $sec."s ago";
-      if ($sec>180) $updated = $min." mins ago";
-      if ($sec>(3600*2)) $updated = $hour." hours ago";
-      if ($hour>24) $updated = "inactive";
+      out += "<tr class='d"+(i & 1)+"' ><td>"+feeds[z][0]+"</td>";
 
+      // FEED NAME AND BUTTON
+      out += "<td><form action='view' method='get'><input type='hidden' name='id' value='"+feeds[z][0]+"'><input type='submit' value='"+feeds[z][1]+"' class='button05' style='width:150px'/ ></form></td>";
 
-      $color = "rgb(255,125,20)";
-      if ($sec<60) $color = "rgb(240,180,20)";
-      if ($sec<25) $color = "rgb(50,200,50)";
+      var now = (new Date()).getTime();
+      var update = (new Date(feeds[z][3])).getTime();
+      var lastupdate = (now-update)/1000;
 
-      $i++;
-      ?>
-      <?php 
-        if ($feed[2] != $lastfeed) echo "<tr><td></td></tr>";
-        $lastfeed = $feed[2];
-      ?>
-      <tr class="<?php echo 'd'.($i & 1); ?> " >
-      <td><?php echo $feed[0]; ?></td>
-      <td>
-      <form action="view" method="get">
-        <input type="hidden" name="id" value="<?php echo $feed[0]; ?>">
-        <input type="submit" value="<?php echo $feed[1]; ?>" class="button05" style="width:150px"/>
-      </form>
+      var secs = (now-update)/1000;
+      var mins = secs/60;
+      var hour = secs/3600;
 
-      </td>
+      var updated = secs.toFixed(0)+"s ago";
+      if (secs>180) updated = mins.toFixed(0)+" mins ago";
+      if (secs>(3600*2)) updated = hour.toFixed(0)+" hours ago";
+      if (hour>24) updated = "inactive";
+
+      var color = "rgb(255,125,20)";
+      if (secs<60) color = "rgb(240,180,20)";
+      if (secs<25) color = "rgb(50,200,50)";
+
+      var value = 0;
+      if (feeds[z][4]>10) value = (1*feeds[z][4]).toFixed(1);
+      if (feeds[z][4]>100) value = (1*feeds[z][4]).toFixed(0);
+      if (feeds[z][4]<10) value = (1*feeds[z][4]).toFixed(2);
+ 
+      var tag = feeds[z][2];
+      if (!tag) tag="";
       
-      <td><?php echo $feed[2]; ?></td>
-      <td style="color:<?php echo $color; ?>"><?php echo $updated; ?></td>
-      <td>
-      <?php 
-        if ($feed[4]>10) $val = number_format($feed[4],1); 
-        if ($feed[4]>100) $val = number_format($feed[4],0); 
-        if ($feed[4]<10) $val = number_format($feed[4],2); 
-        echo $val;
-      ?>
-      </td>
-      </tr>
 
-
-    <?php } ?>
-    </table>
-    <?php } else { ?>
-      <p>You have no feeds</p>
-    <?php } ?>
-    </div>
+      out += "<td>"+tag+"</td><td>"+(feeds[z][5]/1000).toFixed(1)+" KiB</td><td style='color:"+color+";'>"+updated+"</td><td>"+value+"</td></tr>";
 
 
 
+    }
 
+    out += "</table>";
+    $("#feedlist").html(out);
+    }
+    });
+  }
+
+</script>

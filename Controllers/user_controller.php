@@ -12,6 +12,7 @@
 
     login?name=john&pass=test		all
     create?name=john&pass=test		all
+    changepass?old=sdgs43&new=sdsg345   write
     newapiread				write
     newapiwrite				write
     logout				read
@@ -22,7 +23,10 @@
   */
   function user_controller()
   {
-    global $action,$format;
+    global $session, $action,$format;
+
+    $output['content'] = "";
+    $output['message'] = "";
 
     //---------------------------------------------------------------------------------------------------------
     // Login user (PUBLIC ACTION)
@@ -35,9 +39,9 @@
 
       $password = db_real_escape_string($_GET['pass']);
       $result = user_logon($username,$password);
-      if ($result == 0) $output = "invalid username or password"; else $output = "login successful";
+      if ($result == 0) $output['message'] = "Invalid username or password"; else { $output['message'] = "Welcome, you are now logged in";
 
-      if ($format == 'html') header("Location: ../dashboard/view");
+      if ($format == 'html') header("Location: ../dashboard/view");}
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -52,25 +56,34 @@
 
       $password = db_real_escape_string($_GET['pass']);
 
-      if (get_user_id($username)!=0) $output = "username already exists";
-      if (strlen($password) < 4 || strlen($password) > 30) $output = "password must be 4 to 30 characters<br/>";
-      if (strlen($username) < 4 || strlen($username) > 30) $output = "username must be 4 to 30 characters<br/>";
-      if (!$output) {
+      if (get_user_id($username)!=0) $output['message'] = "Sorry username already exists";
+      if (strlen($password) < 4 || strlen($password) > 30) $output['message'] = "Please enter a password that is 4 to 30 characters long<br/>";
+      if (strlen($username) < 4 || strlen($username) > 30) $output['message'] = "Please enter a username that is 4 to 30 characters long<br/>";
+      if (!$output['message']) {
         create_user($username,$password);
         $result = user_logon($username,$password);
-        $output = "user created";
+        $output['message'] = "Your new account has been created";
         if ($format == 'html') header("Location: ../dashboard/view");
-      } else { echo "there was a problem?"; }
+
+        if ($_SESSION['write']) create_user_statistics($_SESSION['userid']);
+      }
+    }
+
+    // http://yoursite/emoncms/user/changepass?old=sdgs43&new=sdsg345
+    if ($action == 'changepass' && $_SESSION['write']) {
+      $oldpass =  db_real_escape_string($_GET['oldpass']);
+      $newpass =  db_real_escape_string($_GET['newpass']);
+      if (change_password($_SESSION['userid'],$oldpass,$newpass)) $output['message'] = "Your password has been changed"; else $output['message'] = "Invalid old password";
     }
 
     //---------------------------------------------------------------------------------------------------------
     // NEW API READ
     // http://yoursite/emoncms/user/newapiread
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'newapiread' && $_SESSION['write']) {
-      $apikey_read = md5(uniqid(rand(), true));
-      set_apikey_read($_SESSION['userid'],$apikey_read);
-      $output = "New read apikey: ".$apikey_read;
+    if ($action == 'newapiread' && $session['write']) {
+      $apikey_read = md5(uniqid(mt_rand(), true));
+      set_apikey_read($session['userid'],$apikey_read);
+      $output['message'] = "New read apikey: ".$apikey_read;
 
       if ($format == 'html') header("Location: view");
     }
@@ -79,10 +92,10 @@
     // NEW API WRITE
     // http://yoursite/emoncms/user/newapiwrite
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'newapiwrite' && $_SESSION['write']) {
-      $apikey_write = md5(uniqid(rand(), true));
-      set_apikey_write($_SESSION['userid'],$apikey_write);
-      $output = "New write apikey: ".$apikey_write;
+    if ($action == 'newapiwrite' && $session['write']) {
+      $apikey_write = md5(uniqid(mt_rand(), true));
+      set_apikey_write($session['userid'],$apikey_write);
+      $output['message'] = "New write apikey: ".$apikey_write;
 
       if ($format == 'html') header("Location: view");
     }
@@ -91,10 +104,10 @@
     // Logout
     // http://yoursite/emoncms/user/logout
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'logout' && $_SESSION['read'])
+    if ($action == 'logout' && $session['read'])
     { 
       user_logout(); 
-      $output = "logout"; 
+      $output['message'] = "You are logged out"; 
 
       if ($format == 'html') header("Location: ../");
     }
@@ -103,8 +116,8 @@
     // GET API READ
     // http://yoursite/emoncms/user/getapiread
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'getapiread' && $_SESSION['read']) {
-      $apikey_read = get_apikey_read($_SESSION['userid']);
+    if ($action == 'getapiread' && $session['read']) {
+      $apikey_read = get_apikey_read($session['userid']);
       $output = $apikey_read;
     }
 
@@ -112,8 +125,8 @@
     // GET API WRITE
     // http://yoursite/emoncms/user/getapiwrite
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'getapiwrite' && $_SESSION['write']) {
-      $apikey_write = get_apikey_write($_SESSION['userid']);
+    if ($action == 'getapiwrite' && $session['write']) {
+      $apikey_write = get_apikey_write($session['userid']);
       $output = $apikey_write;
     }
 
@@ -121,11 +134,12 @@
     // GET USER
     // http://yoursite/emoncms/user/view
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'view' && $_SESSION['write']) {
-      $user = get_user($_SESSION['userid']);
+    if ($action == 'view' && $session['write']) {
+      $user = get_user($session['userid']);
+      $stats = get_statistics($session['userid']);
 
-      if ($format == 'json') $output = json_encode($user);
-      if ($format == 'html') $output = view("user_view.php", array('user' => $user));
+      if ($format == 'json') $output['content'] = json_encode($user);
+      if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
 
     return $output;

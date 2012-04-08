@@ -14,7 +14,9 @@
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="user-scalable=no, width=device-width" />
-    <link rel="stylesheet" type="text/css" href="<?php print $GLOBALS['path']; ?>Views/theme/android.css" media="only screen and (min-width: 480px)" />
+    <!-- Thanks to Baptiste Gaultier for the emoncms dial icon http://bit.ly/zXgScz -->
+    <link rel="shortcut icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/favicon.png" />
+   
     <link rel="stylesheet" type="text/css" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/style.css" />
 
     <!------------------------------------------------------------------
@@ -35,7 +37,8 @@
       HEADER
       ------------------------------------------------------->
       <div class="header">
-        <div style="color:#fff; margin:12px; float:left; font-size:18px;" >Emoncms v3</div>
+        <img id="applogo" style="margin:12px; margin-right:8px; float:left;" src="<?php print $GLOBALS['path']; ?>Views/theme/dark/emoncms logo.png" />
+        <div style="color:#fff; margin-top:10px; float:left; font-size:21px; font-family: Arial,sans-serif;" ><span style="color: #0099ff;">emon</span><span style="color: #b3b3b3;">cms</span></div>
 	<div><?php echo $user; ?></div>
         <div style='clear:both;'></div>
       </div>
@@ -50,6 +53,9 @@
         <div style='clear:both;'></div>
       </div>
 
+      <?php if ($message) { ?>
+      <div id="message"><?php print $message; ?></div>
+      <?php } ?>
       <!------------------------------------------------------
       CONTENT
       ------------------------------------------------------->

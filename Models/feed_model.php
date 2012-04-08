@@ -14,7 +14,7 @@
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   function create_feed($userid,$name,$processid)
   {
-  	// PTA comment: Don't these need to handle the userid??
+    // *    TODO: Don't these need to handle the userid??
     $result = db_query("INSERT INTO feeds (name,status) VALUES ('$name','0')");				// Create the feed entry
     $ido = db_insert_id();
     $result = db_query("SELECT id FROM feeds WHERE name='$name'");				// Select the same feed to find the auto assigned id
@@ -25,21 +25,21 @@
 
       // create feed table
       $feedname = "feed_".$feedid;
-      if ($processid != 13) {
-	      $result = db_query(
-	      "CREATE TABLE $feedname
-	      (
-	        time DATETIME,
-	        data float
-	      )");
-      } else {				// Histogram tables require an extra data field
-	      $result = db_query(
+      if ($processid == 16) { 	// Histogram tables require an extra data field
+      	  $result = db_query(
 	      "CREATE TABLE $feedname
 	      (
 	        time DATETIME,
 	        data float,
 	        data2 float
 	        )");
+      } else {			
+	      $result = db_query(
+	      "CREATE TABLE $feedname
+	      (
+	        time DATETIME,
+	        data float
+	      )");
       } 
 
       return $feedid;												// Return created feed id
@@ -79,7 +79,8 @@ function compare($x, $y)
     $feed_result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
     $feed_row = db_fetch_array($feed_result);
     if ($feed_row['status'] != 1) { // if feed is not deleted
-      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],$feed_row['time'],$feed_row['value']);
+      $size = get_feedtable_size($feed_row['id']);
+      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$feed_row['value'],$size);
     }
     return $feed;
   }
@@ -93,9 +94,9 @@ function compare($x, $y)
     while ($row = db_fetch_array($result))
     {
       $feedid = $row['feedid'];
-      $result = db_query("SELECT name FROM feeds WHERE id='$feedid'");
-      $row_name = db_fetch_array($result);
-      if ($key == $row_name['name']) return $feedid;
+      $result2 = db_query("SELECT name FROM feeds WHERE id='$feedid' AND status = 0");
+      $row_name = db_fetch_array($result2);
+      if ($name == $row_name['name']) return $feedid;
     }
     return 0;
   }
@@ -180,7 +181,11 @@ function compare($x, $y)
     $start = date("Y-n-j H:i:s", ($start/1000));		//Time format conversion
     $end = date("Y-n-j H:i:s", ($end/1000));  			//Time format conversion
 
-    if ($feedid != 4)  // Histogram data PTA: need to get feed type instead!
+    // Check to see type of feed table.
+/*	$result = db_query("SELECT * FROM $feedname LIMIT 1");
+	$row = db_fetch_array($result);
+	if(!isset($row['data2'])) */
+    if (true)
     {
 	    //This mysql query selects data from the table at specified resolution
 	    if ($resolution>1){
@@ -299,6 +304,28 @@ function compare($x, $y)
 
     if ($row) return 1;
     return 0;
+  }
+
+  function get_feedtable_size($feedid)
+  {
+    $feedname = "feed_".$feedid;
+    $result = db_query("SHOW TABLE STATUS LIKE '$feedname'");
+    $row = db_fetch_array($result);
+    $tablesize = $row['Data_length']+$row['Index_length'];
+    return $tablesize;
+  }
+
+  function get_user_feeds_size($userid)
+  {
+    $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
+    $total = 0;
+    if ($result) {
+      while ($row = db_fetch_array($result)) {
+        $total += get_feedtable_size($row['feedid']);
+      }
+    }
+
+    return $total;
   }
 
 

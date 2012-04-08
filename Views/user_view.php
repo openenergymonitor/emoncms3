@@ -38,7 +38,26 @@
   ?>
 
   <p><b>API url: </b><?php echo $GLOBALS['path']; ?>api/post</p>
-  <p><b>Example: Copy this to your web browser or send from a nanode: </b><br/><?php echo $testjson; ?></p>
+  <p><b>Example: Copy this to your web browser or send from a nanode: </b><br/><?php echo $testjson; ?> <a href="<?php echo $testjson; ?>">try me</a></p>
+
+<h3>Change password</h3>
+<form action="changepass" method="get">
+<p><b>Old password:</b><br/>
+<input class="inp01" type="password" name="oldpass" style="width:250px"/></p>
+<p><b>New password:</b><br/>
+<input class="inp01" type="password" name="newpass" style="width:250px"/></p>
+<input type="submit" class="button04" value="Change" /> 
+</form>
+
+<br/>
+<h3>Account Statistics</h3>
+
+<table>
+  <tr><td>Disk space use:</td><td><?php echo number_format($stats['memory']/1024.0,1); ?> KiB</td></tr>
+  <tr><td>Up hits:</td><td><?php echo $stats['uphits']; ?></td></tr>
+  <tr><td>Down hits:</td><td><?php echo $stats['dnhits']; ?></td></tr>
+</table>
+
 </div>
 
 

@@ -14,6 +14,7 @@
 <script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
 <script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.flot.js"></script>
 <script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/dial.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/led.js"></script>
 
 <!------------------------------------------------------------------------------------------
   Dashboard HTML
@@ -113,6 +114,7 @@ $(function() {
               var value = parseFloat(data[z][4]);
               if (value<100) value = value.toFixed(1); else value = value.toFixed(0);
               console.log(newstr);
+		 
               $("."+newstr).html(value);
               assoc[newstr] = value*1;
               feedids[newstr] = data[z][0];
@@ -133,6 +135,7 @@ $(function() {
   function fast_update()
   {
     draw_dials();
+    draw_leds();
   }
 
   function slow_update()
@@ -170,6 +173,29 @@ $(function() {
               }
             });
   }
+
+function draw_leds()
+  {
+           $('.led').each(function(index) {
+              var feed = $(this).attr("feed");
+              var val = assoc[feed];
+	         var id = "canled-"+feed+"-"+index;
+                if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
+                  $(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
+                  firstdraw = 1;
+                }
+
+       //   if ( firstdraw == 1){ //Only update graphs when there is a change to update
+
+                var canvas = document.getElementById(id);
+                var circle = canvas.getContext("2d");
+                draw_led(circle,val); 
+			firstdraw = 0;
+       //       }
+            });
+  }
+
+
 
   function draw_graphs()
   {

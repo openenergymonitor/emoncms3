@@ -18,7 +18,7 @@
     $action = preg_replace('/[^.\/a-z]/','',$_POST['action']); 		// filter out all except a-z / . 
     $action = db_real_escape_string($action);
 
-    $content = view("confirm_view.php", array('message'=>$message,'id'=>$id, 'action'=>$action));
+    $content['content'] = view("confirm_view.php", array('message'=>$message,'id'=>$id, 'action'=>$action));
 
     return $content;
   }

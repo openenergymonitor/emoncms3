@@ -31,10 +31,14 @@
     $list[8] = array( "kWhinc to kWh/d",	2,		"kwhinc_to_kwhd"	);
     $list[9] = array( "kWh to kWh/d",		2,		"kwh_to_kwhd"		);
     $list[10] = array( "update feed @time",	2,		"update_feed_data"	);
-    $list[11] = array( "+ input",			1,		"add_input"		);
-    $list[12] = array( "/ input" ,			0,		"divide"		);
-    $list[13] = array( "Histogram" ,		2,		"histogram"		);
-    
+    $list[11] = array( "+ input",		1,		"add_input"		);
+    $list[12] = array( "/ input" ,		0,		"divide"		);
+    $list[13] = array( "phaseshift" ,		0,		"phaseshift"		);
+    $list[14] = array( "accumulator" ,		2,		"accumulator"		);
+    $list[15] = array( "rate of change" ,	2,		"ratechange"		);
+    $list[16] = array( "histogram" ,		2,		"histogram"		);
+    // $list[14] = array( "save_to_input" ,	4,		"save_to_input"		);
+    // $list[15] = array( "+ feed",		3,		"add_feed"		);
     return $list;
   }
 
@@ -73,6 +77,14 @@
   function add_input($id,$time,$value)
   {
     $result = db_query("SELECT value FROM input WHERE id = '$id'");
+    $row = db_fetch_array($result);
+    $value = $value + $row['value'];
+    return $value;
+  }
+
+  function add_feed($id,$time,$value)
+  {
+    $result = db_query("SELECT value FROM feeds WHERE id = '$id'");
     $row = db_fetch_array($result);
     $value = $value + $row['value'];
     return $value;
@@ -237,12 +249,12 @@
 
     $kwh_today = 0;
 
-    $result = db_query("SELECT * FROM tmpkwhd WHERE feedid = '$feedid'");
+    $result = db_query("SELECT * FROM kwhdproc WHERE feedid = '$feedid'");
     $row = db_fetch_array($result);
 
 
     $start_day_kwh_value = $row['kwh'];
-    if (!$row) db_query("INSERT INTO tmpkwhd (feedid,kwh) VALUES ('$feedid','0.0')");
+    if (!$row) db_query("INSERT INTO kwhdproc (feedid,kwh) VALUES ('$feedid','0.0')");
 
     $feedname = "feed_".trim($feedid)."";
 
@@ -254,7 +266,7 @@
     if (!$entry)
     {
       //Log start of day kwh
-      db_query("UPDATE tmpkwhd SET kwh = '$kwh' WHERE feedid='$feedid'");
+      db_query("UPDATE kwhdproc SET kwh = '$kwh' WHERE feedid='$feedid'");
       $result = db_query("INSERT INTO $feedname (time,data) VALUES ('$time','0.0')");
 
       $updatetime = date("Y-n-j H:i:s", $time_now);
@@ -275,7 +287,76 @@
     return $value;
   }
  
-  //---------------------------------------------------------------------------------
+  function phaseshift($feedid,$time,$value)
+  {
+    $rad = acos($value);
+    $rad = $rad + (($arg/360.0) * (2.0*3.14159265));
+    return cos($rad);
+  }
+
+  //--------------------------------------------------------------------------------
+  // Display the rate of change for the current and last entry
+  //--------------------------------------------------------------------------------
+  function ratechange($feedid,$time_now,$value)
+  {
+	// Get the feed
+	$feedname = "feed_".trim($feedid)."";
+	$time = date("Y-n-j H:i:s", $time_now);
+
+	// Get the current input id 
+	$result = db_query("Select * from input where processList like '%:$feedid%';");
+	$rowfound = db_fetch_array($result);
+	if ($rowfound)
+	{
+		$inputid = trim($rowfound['id']);
+		$processlist = $rowfound['processList'];
+		// Now get the feed for the log to feed command for the input 
+		$logfeed = preg_match('/1:(\d+)/',$processlist,$matches);
+		$logfeedid = trim($matches[1]);
+		// Now need to get the last but one value in the main log to feed table
+		$oldfeedname = "feed_".trim($logfeedid)."";
+		$lastentry = db_query("Select * from $oldfeedname order by time desc LIMIT 2;");  
+		$lastentryrow = db_fetch_array($lastentry); 
+		// Calling again so can get the 2nd row
+		$lastentryrow = db_fetch_array($lastentry);
+		$prevValue = trim($lastentryrow['data']);
+		$ratechange = $value - $prevValue;
+		// now put this rate change into the correct feed table
+		db_query("INSERT INTO $feedname (time,data) VALUES ('$time','$ratechange');");
+		db_query("UPDATE feeds SET time='$time', value='$ratechange' WHERE id='$feedid';");
+	}
+	
+  }
+
+function save_to_input($arg,$time,$value)
+{
+  $name = $arg;
+  $userid = $_SESSION['userid'];
+
+    $id = get_input_id($userid,$name);				// If input does not exist this return's a zero
+    if ($id==0) {
+      create_input_timevalue($userid,$name,$time,$value);	// Create input if it does not exist
+    } else {			
+      set_input_timevalue($id,$time,$value);			// Set time and value if it does
+    }
+
+  return $value;
+}
+
+function accumulator($arg,$time,$value)
+{
+   $feedid = $arg;
+
+   $last_value = get_feed_value($feedid);
+
+   $value = $last_value+$value;
+
+   insert_feed_data($feedid,$time,$value);
+
+   return $value;
+}
+  
+//---------------------------------------------------------------------------------
   // This method converts power to energy vs power (Histogram)
   //---------------------------------------------------------------------------------
   function histogram($feedid,$time_now,$value)

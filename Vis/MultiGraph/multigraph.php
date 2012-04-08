@@ -1,7 +1,7 @@
 <html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-   All Emoncms code is released under the GNU General Public License v3.
+   All Emoncms code is released under the GNU Affero General Public License.
    See COPYRIGHT.txt and LICENSE.txt.
 
     ---------------------------------------------------------------------
@@ -13,9 +13,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>flot/jquery.flot.selection.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.selection.js"></script>
 </head>
 <body style="font-family:arial;">
   
@@ -120,8 +120,8 @@
      var feedIn = [];
 
      $.ajax({                                    
-            url: path+'api/getfeed',                         
-            data: "&apikey="+apikey+"&feedid="+feedID+"&start="+start+"&end="+end+"&resolution="+resolution,  
+            url: path+'feed/data.json',                         
+            data: "&apikey="+apikey+"&id="+feedID+"&start="+start+"&end="+end+"&res="+resolution,  
        dataType: 'json',                           
        async: false,
        success: function(datain) { feedIn = datain;}
