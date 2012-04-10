@@ -56,7 +56,8 @@
       if ($process[1] == 2)
       {
         $id = get_feed_id($_SESSION['userid'],$arg);
-        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg,$processid);
+        if ($id==0 && $processid!=16)  $id = create_feed($_SESSION['userid'],$arg);
+        if ($id==0 && $processid==16)  $id = create_histogram_feed($_SESSION['userid'],$arg);
         $arg = $id;
       }
       if ($process[1] == 3) $arg = get_feed_id($session['userid'],$arg);
