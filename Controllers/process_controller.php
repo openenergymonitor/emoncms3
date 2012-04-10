@@ -55,8 +55,8 @@
       if ($process[1] == 1) $arg = get_input_id($session['userid'],$arg);
       if ($process[1] == 2)
       {
-        $id = get_feed_id($session['userid'],$arg);
-        if ($id==0)  $id = create_feed($session['userid'],$arg);
+        $id = get_feed_id($_SESSION['userid'],$arg);
+        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg,$processid);
         $arg = $id;
       }
       if ($process[1] == 3) $arg = get_feed_id($session['userid'],$arg);
@@ -64,6 +64,14 @@
 
       if ($format == 'html') header("Location: list?inputid=".$inputid);
     }
+
+    if ($action == "test" && $_SESSION['write']) // write access required
+    {
+		set_time_limit(360);  // Increase PHP limit
+		// Create Histogram data - (to feed, from feed, from date, to date).
+    	///$rows = histogram_history(4,1,"2008-01-01","2012-05-01");
+    }
+
     return $output;
   }
 ?>

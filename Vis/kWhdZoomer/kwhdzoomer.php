@@ -16,6 +16,7 @@
 
   $power = $_GET['power'];
   $kwhd = $_GET['kwhd'];
+  if (isset($_GET['whw'])) {$whw = $_GET['whw'];} else {$whw = 0;}	// Histogram feed
   $apikey = $_GET['apikey'];
   ?>
 
@@ -41,14 +42,18 @@
 
       <div id="loading" style="position:absolute; top:40px; left:60px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
 
-      <div style="position:absolute; top:10px; left:65px; font-size:18px;"><b><span id="out2"></span></b>: Hover on bar for info, press to zoom in</div>
+      <div style="position:absolute; top:0px; left:65px; font-size:18px;"><b><span id="out2"></span>
+      </b><span style="font-size:12px;"> (Hover for info, press to zoom in. Histogram: 
+      <input id="enableHistogram" type="checkbox">)
+      </span></div>
       <h2 style="position:absolute; top:40px; left:80px;"><span id="out"></span></h2>
+     
       <p id="bot_out" style="position:absolute; bottom:-10px; left:65px; font-size:18px; font-weight:bold;"></p>
 
       <b><p style="position:absolute; top: 200px; left:0px;"><span id="axislabely"></span></p>
-     <p style="position:absolute; bottom: 40px; left:450px;">Date / Time</p></b>
-
-   <div id="return_ctr" style="position:absolute; top:0px; right:10px;">
+     <p style="position:absolute; bottom: 40px; left:450px;"><span id="axislabelx">Date / Time</span></p></b>
+  
+    <div id="return_ctr" style="position:absolute; top:0px; right:10px;">
         <input id="return" type="button" value="Back" style="font-size:18px; height:40px;"/>
    </div>
 
@@ -67,6 +72,7 @@
 
     <script id="source" language="javascript" type="text/javascript">  
       var kwhd = <?php echo $kwhd; ?>;   
+      var whw = <?php echo $whw; ?>;    
       var power = <?php echo $power; ?>;    
       var path = "<?php echo $path; ?>";  
       var apikey = "<?php echo $apikey; ?>";  
@@ -82,6 +88,7 @@
       var years = [];
 
       var view = 0;
+      var last_view = -1;
 
       // Global instantaneous graph variables
       var start, end;
@@ -91,7 +98,6 @@
       var price =0.14;
 
       var bot_kwhd_text = "";
-
       //--------------------------------------------------------------
       // 1) GET ALL KWHD DATA
       //--------------------------------------------------------------
@@ -130,21 +136,45 @@
         {
           if (item!=null)
           {
-            if (view==2) set_inst_view(item.datapoint[0]);
-
-            if (view==1)
-            {
-              var d = new Date(); d.setTime(item.datapoint[0]);
-              days = get_days_month(data,d.getMonth(),d.getFullYear());
-              set_daily_view();
-            }
-
-            if (view==0)
-            {
-              var d = new Date(); d.setTime(item.datapoint[0]);
-              months = get_months_year(data,d.getFullYear());
-              set_monthly_view();
-            }
+       		if (($("#enableHistogram:checked").length < 1) || (whw == 0)) {
+	            if (view==2) set_inst_view(item.datapoint[0]);
+	
+	            if (view==1)
+	            {
+	              var d = new Date(); d.setTime(item.datapoint[0]);
+	              days = get_days_month(data,d.getMonth(),d.getFullYear());
+	              set_daily_view();
+	            }
+	
+	            if (view==0)
+	            {
+	              var d = new Date(); d.setTime(item.datapoint[0]);
+	              months = get_months_year(data,d.getFullYear());
+	              set_monthly_view();
+	            }
+			} else {  
+				// Histogram view can be of any date range.
+	            if (view==2)
+	            {
+	              	start = item.datapoint[0];
+              		end = item.datapoint[0] + 3600000 * 24;
+	            }
+	
+	            if (view==1)
+	            {
+	              var d = new Date(); d.setTime(item.datapoint[0]);
+	              start = Date.UTC(d.getFullYear(),d.getMonth(),0);
+	              end = Date.UTC(d.getFullYear(),d.getMonth()+1,0);
+	            }
+	
+	            if (view==0)
+	            {
+	              var d = new Date(); d.setTime(item.datapoint[0]);
+	              start = Date.UTC(d.getFullYear(),0,1);
+	              end = Date.UTC(d.getFullYear()+1,0,1);
+	            }
+	            set_histogram_view(start,end);
+			}
           }
         });
 
@@ -152,9 +182,11 @@
         // Return button click
         //--------------------------------------------------------------
         $("#return").click(function (){
+          if (last_view != -1) {view = last_view+1; last_view = -1;}
           if (view==1) set_annual_view();
           if (view==2) set_monthly_view();
           if (view==3) set_daily_view();
+          if (view==4) set_daily_view();
         });
     
         //--------------------------------------------------------------
@@ -172,6 +204,7 @@
             if (view==1) $("#out").html(item.datapoint[1].toFixed(0)+" kWh | "+mdate.format("mmm yyyy")+" | "+(item.datapoint[1]/months.days[item.dataIndex]).toFixed(1)+" kWh/d ");
             if (view==2) $("#out").html(item.datapoint[1].toFixed(1)+" kWh | £"+(item.datapoint[1]*price).toFixed(2)+" | £"+(item.datapoint[1]*price*365).toFixed(0)+"/y | "+mdate.format("dS mmm yyyy"));
             if (view==3) $("#out").html(item.datapoint[1].toFixed(0)+" W");
+            if (view==5) $("#out").html(item.datapoint[1].toFixed(0)+" Wh | £"+(item.datapoint[1]/1000*price).toFixed(2)+" | "+item.datapoint[0]+" W");
           }
         });
 
@@ -199,6 +232,15 @@
      $('#left').click(function () {inst_panleft();});
      $('.time').click(function () {inst_timewindow($(this).attr("time"));});
 
+	 $("#enableHistogram").click(function() 
+	 {
+		if (whw == 0)
+		{
+			alert("The whw parameter must be set in the dashboard to a histogram feed id.");
+            $('#enableHistogram').removeAttr('checked'); 
+		}
+	 });
+	 
      function on_inst_graph_load()
      {
        $('#loading').hide();
