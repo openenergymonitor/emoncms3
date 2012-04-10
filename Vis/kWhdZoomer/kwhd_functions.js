@@ -9,10 +9,11 @@
   */
         function get_range(data,start,end)
         {
-          var gdata = [];
+        	var gdata = [];
+        	var last = 0;
           for (var z in data)                     //for all variables
           {
-            if (data[z][0] > start && data[z][0] < end) gdata[z] = data[z];
+            if (data[z][0] >= start && data[z][0] < end) gdata[z] = data[z]; 
           } 
           return gdata;
         }
