@@ -16,11 +16,8 @@
   {
     // *    TODO: Don't these need to handle the userid??
     $result = db_query("INSERT INTO feeds (name,status) VALUES ('$name','0')");				// Create the feed entry
-    $ido = db_insert_id();
-    $result = db_query("SELECT id FROM feeds WHERE name='$name'");				// Select the same feed to find the auto assigned id
-    if ($result) {
-      $array = db_fetch_array($result);
-      $feedid = $ido;											// Feed id
+    $feedid = db_insert_id();
+    if ($feedid>0) {
       db_query("INSERT INTO feed_relation (userid,feedid) VALUES ('$userid','$feedid')");	// Create a user->feed relation
 
       // create feed table
