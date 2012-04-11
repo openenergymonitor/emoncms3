@@ -51,19 +51,35 @@
       $arg = db_real_escape_string($arg);
 
       $process = get_process($processid);
+
+      // If arg type value
       if ($process[1] == 0) $arg = floatval($arg);
+
+      // If arg type input
       if ($process[1] == 1) $arg = get_input_id($session['userid'],$arg);
-      if ($process[1] == 2)
-      {
-        $id = get_feed_id($session['userid'],$arg);
-        if ($id==0)  $id = create_feed($session['userid'],$arg);
+
+      // If arg type feed
+      if ($process[1] == 2) {
+        // First check if feed exists of given feed name and user.
+        $id = get_feed_id($_SESSION['userid'],$arg);
+        // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
+        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg, $process[3]);
         $arg = $id;
       }
+
       if ($process[1] == 3) $arg = get_feed_id($session['userid'],$arg);
       add_input_process($session['userid'],$inputid,$processid,$arg);
 
       if ($format == 'html') header("Location: list?inputid=".$inputid);
     }
+
+    if ($action == "test" && $_SESSION['write']) // write access required
+    {
+      set_time_limit(360);  // Increase PHP limit
+      // Create Histogram data - (to feed, from feed, from date, to date).
+      // $rows = histogram_history(4,1,"2008-01-01","2012-05-01");
+    }
+
     return $output;
   }
 ?>

@@ -132,7 +132,7 @@
     if ($action == 'data' && $session['read'])
     {
       $feedid = intval($_GET['id']);
-
+      
       // Check if feed belongs to user
       if (feed_belongs_user($feedid,$session['userid']))
       {

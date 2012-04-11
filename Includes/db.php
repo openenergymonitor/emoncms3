@@ -42,12 +42,16 @@
 
   function db_query($query)
   {
-    return $GLOBALS['mysqli']->query($query);
+    $ret = $GLOBALS['mysqli']->query($query);
+    if ($ret == false) {echo $GLOBALS['mysqli']->error;}
+    return $ret;
   }
 
   function db_fetch_array($result)
   {
-    return $result->fetch_array();
+  	$ret = $result->fetch_array();
+    if ($ret == false) {echo $GLOBALS['mysqli']->error;}
+    return $ret;
   }
 
   function db_num_rows($result)
