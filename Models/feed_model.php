@@ -12,51 +12,31 @@
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   // Creates a feed entry and relates the feed to the user
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  function create_feed($userid,$name)
+  function create_feed($userid,$name,$NoOfDataFields)
   {
     $result = db_query("INSERT INTO feeds (name,status) VALUES ('$name','0')");				// Create the feed entry
     $feedid = db_insert_id();
     if ($feedid>0) {
       db_query("INSERT INTO feed_relation (userid,feedid) VALUES ('$userid','$feedid')");	        // Create a user->feed relation
 
-      // create feed table
-      $feedname = "feed_".$feedid;
-    			
-      $result = db_query(
-      "CREATE TABLE $feedname
-      (
-        time DATETIME,
-        data float
-      )");
+      $feedname = "feed_".$feedid;									// Feed name
+
+      if ($NoOfDataFields==1) {										// Create a table with one data field
+        $result = db_query(										// Used for most feeds
+        "CREATE TABLE $feedname (
+	  time DATETIME, data float
+        )");
+      }
+
+      if ($NoOfDataFields==2) {										// Create a table with two data fields
+        $result = db_query(										// User for histogram feed
+        "CREATE TABLE $feedname (
+	  time DATETIME, data float, data2 float
+        )");
+      }
 
       return $feedid;											// Return created feed id
     } else return 0;
-  }
-
-  //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  // Create a histogram feed type
-  //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  function create_histogram_feed($userid,$name)
-  {
-    $result = db_query("INSERT INTO feeds (name,status) VALUES ('$name','0')");				// Create the feed entry
-    $feedid = db_insert_id();
-    if ($feedid>0) {
-      db_query("INSERT INTO feed_relation (userid,feedid) VALUES ('$userid','$feedid')");	        // Create a user->feed relation
-
-      // create feed table
-      $feedname = "feed_".$feedid;
-     
-      $result = db_query(
-      "CREATE TABLE $feedname
-      (
-	 time DATETIME,
-	 data float,
-	 data2 float
-      )");
-
-      return $feedid;											// Return created feed id
-    } else return 0;
-
   }
 
     function get_user_feeds($userid)
