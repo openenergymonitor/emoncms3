@@ -33,7 +33,7 @@
   require "Models/statistics_model.php";
   $e = db_connect();
 
-  $q = preg_replace('/[^.\/a-z]/','',$_GET['q']); // filter out all except a-z / . 
+  $q = preg_replace('/[^.\/A-z]/','',$_GET['q']); // filter out all except a-z / . 
   $q = db_real_escape_string($q);		  // second layer
   $args = preg_split( '/[\/.]/',$q);		  // split string at / .
 
