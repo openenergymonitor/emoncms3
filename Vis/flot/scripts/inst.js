@@ -10,6 +10,8 @@
 
      function vis_feed_data(apikey,feedid,start,end,res)
      {
+       var type = 0;
+       if(typeof(whw) !== 'undefined') type = 1
 
        $('#loading').show();
        $.ajax({                                       //Using JQuery and AJAX
@@ -47,8 +49,9 @@
            graph_data = [];   
            graph_data = data;
       
-           if (feedid == whw) {plotHistogram(start, end);}
-           else {plotGraph(start, end);}
+           if (type == 0) plotGraph(start, end);
+           if (type == 1) plotHistogram(start, end);
+
            //on_inst_graph_load();
            $("#loading").hide();
          } 

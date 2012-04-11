@@ -12,7 +12,7 @@
   -->
   <?php 
 
-  $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis/kWhdZoomer', '', $_SERVER['SCRIPT_NAME']))."/";
+  $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis/kwhd_histogram', '', $_SERVER['SCRIPT_NAME']))."/";
 
   $power = $_GET['power'];
   $kwhd = $_GET['kwhd'];

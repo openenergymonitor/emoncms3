@@ -180,16 +180,12 @@
 	      $result = db_query(
 	      "SELECT * FROM 
 	      (SELECT @row := @row +1 AS rownum, time,data FROM ( SELECT @row :=0) r, $feedname) 
-	      ranked WHERE (rownum % $resolution = 1) AND (time>'$start' AND time<'$end')
-	      where data is  not null 
-	      order by time Desc");
+	      ranked WHERE (rownum % $resolution = 1) AND (time>'$start' AND time<'$end') order by time Desc");
 	    }
 	    else
 	    {
 	      //When resolution is 1 the above query doesnt work so we use this one:
-	      $result = db_query("select * from $feedname WHERE time>'$start' AND time<'$end'
-	      AND data is  not null 
-	      order by time Desc"); 
+	      $result = db_query("select * from $feedname WHERE time>'$start' AND time<'$end' order by time Desc"); 
 	    }
 	
 	    $data = array();                                     //create an array for them
