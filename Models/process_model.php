@@ -20,24 +20,23 @@
     // 1 - input id
     // 2 - feed id
 
-    //		      Process description	Arg type	Function Name
-    $list[1] = array( "Log to feed",		2,		"insert_feed_data"	);
-    $list[2] = array( "x" ,			0,		"scale"			);
-    $list[3] = array( "+" ,			0,		"offset"		);
-    $list[4] = array( "Power to kWh" ,		2,		"power_to_kwh"		);
-    $list[5] = array( "Power to kWh/d", 	2,		"power_to_kwhd"		);
-    $list[6] = array( "x input",		1,		"times_input"		);
-    $list[7] = array( "input on-time",		2,		"input_ontime"		);
-    $list[8] = array( "kWhinc to kWh/d",	2,		"kwhinc_to_kwhd"	);
-    $list[9] = array( "kWh to kWh/d",		2,		"kwh_to_kwhd"		);
-    $list[10] = array( "update feed @time",	2,		"update_feed_data"	);
-    $list[11] = array( "+ input",		1,		"add_input"		);
-    $list[12] = array( "/ input" ,		0,		"divide"		);
-    $list[13] = array( "phaseshift" ,		0,		"phaseshift"		);
-    $list[14] = array( "accumulator" ,		2,		"accumulator"		);
-    $list[15] = array( "rate of change" ,	2,		"ratechange"		);
-    // $list[14] = array( "save_to_input" ,	4,		"save_to_input"		);
-    // $list[15] = array( "+ feed",		3,		"add_feed"		);
+    //		      Process description	Arg type	Function Name		// No. of datafields if creating feed
+    $list[1] = array( "Log to feed",		2,		"insert_feed_data",	1	);
+    $list[2] = array( "x" ,			0,		"scale",		0	);
+    $list[3] = array( "+" ,			0,		"offset",		0	);
+    $list[4] = array( "Power to kWh" ,		2,		"power_to_kwh",		1	);
+    $list[5] = array( "Power to kWh/d", 	2,		"power_to_kwhd",	1	);
+    $list[6] = array( "x input",		1,		"times_input",		0	);
+    $list[7] = array( "input on-time",		2,		"input_ontime",		1	);
+    $list[8] = array( "kWhinc to kWh/d",	2,		"kwhinc_to_kwhd",	1	);
+    $list[9] = array( "kWh to kWh/d",		2,		"kwh_to_kwhd",		1	);
+    $list[10] = array( "update feed @time",	2,		"update_feed_data",	1	);
+    $list[11] = array( "+ input",		1,		"add_input",		0	);
+    $list[12] = array( "/ input" ,		0,		"divide",		0	);
+    $list[13] = array( "phaseshift" ,		0,		"phaseshift",		0	);
+    $list[14] = array( "accumulator" ,		2,		"accumulator",		1	);
+    $list[15] = array( "rate of change" ,	2,		"ratechange",		1	);
+    $list[16] = array( "histogram" ,		2,		"histogram",		2	);
 
     return $list;
   }
@@ -286,7 +285,7 @@
 
     return $value;
   }
-  //---------------------------------------------------------------------------------
+ 
   function phaseshift($feedid,$time,$value)
   {
     $rad = acos($value);
@@ -355,6 +354,123 @@ function accumulator($arg,$time,$value)
 
    return $value;
 }
+  
+//---------------------------------------------------------------------------------
+  // This method converts power to energy vs power (Histogram)
+  //---------------------------------------------------------------------------------
+  function histogram($feedid,$time_now,$value)
+  {
+    ///return $value;
+  	
+    $feedname = "feed_".trim($feedid)."";
+    $new_kwh = 0;
+    // Allocate power values into pots of varying sizes 
+    if ($value < 500) 	 	{$pot = 50;}
+    elseif ($value < 2000) 	{$pot = 100;}
+    else 					{$pot = 500;}
+    $new_value = round($value/$pot,0,PHP_ROUND_HALF_UP)*$pot;
+    
+    $time = date('y/m/d', mktime(0, 0, 0, date("m") , date("d") , date("Y")));
 
+    // Get the last time
+    $result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
+    $last_row = db_fetch_array($result);
+
+    if ($last_row)
+    {
+    	$last_time = strtotime($last_row['time']);
+      	// kWh calculation
+      	$time_elapsed = ($time_now - $last_time);
+      	$kwh_inc = ($time_elapsed * $value) / 3600000;
+    }
+
+    // Get last value
+    $result = db_query("SELECT * FROM $feedname WHERE time = '$time' AND data2 = '$new_value'");
+    $last_row = db_fetch_array($result);
+
+    if (!$last_row)
+    {
+      $result = db_query("INSERT INTO $feedname (time,data,data2) VALUES ('$time','0.0','$new_value')");
+
+	  $updatetime = date("Y-n-j H:i:s", $time_now);
+	  db_query("UPDATE feeds SET value = $new_value, time = '$updatetime' WHERE id='$feedid'");
+      $new_kwh = $kwh_inc;
+    }
+    else
+    {
+      $last_kwh = $last_row['data'];
+      $new_kwh = $last_kwh + $kwh_inc;
+    }
+
+    // update kwhd feed
+    db_query("UPDATE $feedname SET data = '$new_kwh' WHERE time = '$time' AND data2 = '$new_value'");
+
+    $updatetime = date("Y-n-j H:i:s",     $time_now);
+    db_query("UPDATE feeds SET value = '$new_value', time = '$updatetime' WHERE id='$feedid'");
+
+    return $value;
+  }
+
+  function histogram_history($feedid,$inputfeedid, $start, $end)
+  {
+    ///return $value;
+  	
+    $feedname = "feed_".trim($feedid)."";
+    $feedinput = "feed_".trim($inputfeedid)."";
+	$last_dt = 0;
+    
+    ///$start = "2011-09-01";
+    ///$end = "2011-10-01";
+
+    // Get the input feed data
+   	$result = db_query("SELECT time, data, date(time) as dt FROM $feedinput WHERE time BETWEEN '$start' AND '$end' ORDER BY time ASC");
+	while($row = db_fetch_array($result))             // for all the new lines
+	{
+		$value = $row['data'] ;                        //get the datavalue
+	    $time = (strtotime($row['time']))*1000;            //and the time value - converted to unix time * 1000
+	    $dt = $row['dt'] ;
+
+	    // Allocate power values into pots of varying sizes 
+	    if ($value < 500) 	 	{$pot = 50;}
+	    elseif ($value < 2000) 	{$pot = 100;}
+	    else 					{$pot = 500;}
+	    $watts = round($value/$pot,0,PHP_ROUND_HALF_UP)*$pot;
+	    
+      	// kWh calculation
+      	$time_elapsed = ($time - $last_time);
+      	$kwh_inc = ($time_elapsed * $value) / 3600000;
+	    
+		// Clear original data for each new date.
+		if ($dt != $last_dt)
+		{
+			$result3 = db_query("DELETE FROM $feedname WHERE time = '$dt'");
+		}
+		
+      	// Don't process the first row or too long since the last reading
+      	if (($last_dt != 0) && $time_elapsed < 20*60*60*1000)
+      	{ 
+	      	// Find if that pot already exists
+		    $result2 = db_query("SELECT * FROM $feedname WHERE time = '$last_dt' AND data2 = '$last_watts'");
+		    $last_row = db_fetch_array($result2);
+		
+		    if (!$last_row)
+		    {
+		      	$result3 = db_query("INSERT INTO $feedname (time,data,data2) VALUES ('$last_dt','$kwh_inc','$last_watts')");
+		      	$rows++;
+		    }
+		    else
+		    {
+			    $result3 = db_query("UPDATE $feedname SET data = data + $kwh_inc WHERE time = '$last_dt' AND data2 = '$last_watts'");
+		    }
+      	}
+	    $last_time 	= $time;
+	    $last_dt 	= $dt;
+	    $last_value = $value;
+	    $last_watts = $watts;
+	}
+
+	return $rows;
+  }
+  
 ?>
 
