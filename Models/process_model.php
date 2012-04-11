@@ -20,25 +20,24 @@
     // 1 - input id
     // 2 - feed id
 
-    //		      Process description	Arg type	Function Name
-    $list[1] = array( "Log to feed",		2,		"insert_feed_data"	);
-    $list[2] = array( "x" ,					0,		"scale"			);
-    $list[3] = array( "+" ,					0,		"offset"		);
-    $list[4] = array( "Power to kWh" ,		2,		"power_to_kwh"		);
-    $list[5] = array( "Power to kWh/d", 	2,		"power_to_kwhd"		);
-    $list[6] = array( "x input",			1,		"times_input"		);
-    $list[7] = array( "input on-time",		2,		"input_ontime"		);
-    $list[8] = array( "kWhinc to kWh/d",	2,		"kwhinc_to_kwhd"	);
-    $list[9] = array( "kWh to kWh/d",		2,		"kwh_to_kwhd"		);
-    $list[10] = array( "update feed @time",	2,		"update_feed_data"	);
-    $list[11] = array( "+ input",		1,		"add_input"		);
-    $list[12] = array( "/ input" ,		0,		"divide"		);
-    $list[13] = array( "phaseshift" ,		0,		"phaseshift"		);
-    $list[14] = array( "accumulator" ,		2,		"accumulator"		);
-    $list[15] = array( "rate of change" ,	2,		"ratechange"		);
-    $list[16] = array( "histogram" ,		2,		"histogram"		);
-    // $list[14] = array( "save_to_input" ,	4,		"save_to_input"		);
-    // $list[15] = array( "+ feed",		3,		"add_feed"		);
+    //		      Process description	Arg type	Function Name		// No. of datafields if creating feed
+    $list[1] = array( "Log to feed",		2,		"insert_feed_data",	1	);
+    $list[2] = array( "x" ,			0,		"scale",		0	);
+    $list[3] = array( "+" ,			0,		"offset",		0	);
+    $list[4] = array( "Power to kWh" ,		2,		"power_to_kwh",		1	);
+    $list[5] = array( "Power to kWh/d", 	2,		"power_to_kwhd",	1	);
+    $list[6] = array( "x input",		1,		"times_input",		0	);
+    $list[7] = array( "input on-time",		2,		"input_ontime",		1	);
+    $list[8] = array( "kWhinc to kWh/d",	2,		"kwhinc_to_kwhd",	1	);
+    $list[9] = array( "kWh to kWh/d",		2,		"kwh_to_kwhd",		1	);
+    $list[10] = array( "update feed @time",	2,		"update_feed_data",	1	);
+    $list[11] = array( "+ input",		1,		"add_input",		0	);
+    $list[12] = array( "/ input" ,		0,		"divide",		0	);
+    $list[13] = array( "phaseshift" ,		0,		"phaseshift",		0	);
+    $list[14] = array( "accumulator" ,		2,		"accumulator",		1	);
+    $list[15] = array( "rate of change" ,	2,		"ratechange",		1	);
+    $list[16] = array( "histogram" ,		2,		"histogram",		2	);
+
     return $list;
   }
 
