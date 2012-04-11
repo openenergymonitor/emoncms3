@@ -11,7 +11,7 @@
      function vis_feed_data(apikey,feedid,start,end,res)
      {
        var type = 0;
-       if(typeof(whw) !== 'undefined') type = 1
+       if(typeof(whw) !== 'undefined' && feedid == whw) type = 1
 
        $('#loading').show();
        $.ajax({                                       //Using JQuery and AJAX
