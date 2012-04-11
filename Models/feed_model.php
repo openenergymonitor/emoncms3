@@ -39,33 +39,29 @@
     } else return 0;
   }
 
-    function get_user_feeds($userid)
-    {
-        $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
-        $feeds = array();
-        if ($result)
-        {
-          while ($row = db_fetch_array($result)) {
-            $feed = get_feed($row['feedid']);
-            if ($feed) $feeds[] = $feed;
-          }
-        }
-
-        //array_multisort($feeds[2],SORT_ASC);
-        usort($feeds, 'compare');		// Sort feeds by tag's
-
-        return $feeds;
+  function get_user_feeds($userid)
+  {
+    $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
+    $feeds = array();
+    if ($result) {
+      while ($row = db_fetch_array($result)) {
+        $feed = get_feed($row['feedid']);
+        if ($feed) $feeds[] = $feed;
+      }
     }
+    usort($feeds, 'compare');		// Sort feeds by tag's
+    return $feeds;
+  }
 
-function compare($x, $y)
-{
- if ( $x[2] == $y[2] )
-  return 0;
- else if ( $x[2] < $y[2] )
-  return -1;
- else
-  return 1;
-}
+  function compare($x, $y)
+  {
+    if ( $x[2] == $y[2] )
+     return 0;
+    else if ( $x[2] < $y[2] )
+     return -1;
+    else
+     return 1;
+  }
 
   function get_feed($feedid)
   {

@@ -75,9 +75,9 @@
 
     if ($action == "test" && $_SESSION['write']) // write access required
     {
-		set_time_limit(360);  // Increase PHP limit
-		// Create Histogram data - (to feed, from feed, from date, to date).
-    	///$rows = histogram_history(4,1,"2008-01-01","2012-05-01");
+      set_time_limit(360);  // Increase PHP limit
+      // Create Histogram data - (to feed, from feed, from date, to date).
+      // $rows = histogram_history(4,1,"2008-01-01","2012-05-01");
     }
 
     return $output;
