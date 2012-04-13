@@ -14,7 +14,7 @@
   */
 
   //=====================================================
-  $runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
 
   require "Includes/db.php";
