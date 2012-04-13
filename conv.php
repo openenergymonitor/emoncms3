@@ -50,6 +50,7 @@
       $result = db_query("DROP TABLE `feed_tmp`");
 
       // 5) Update feed type status
+      $feedid = $feed['id'];
       $result = db_query("UPDATE feeds SET type = 1 WHERE id='$feedid'");
 
     } else { echo "feed: ".$feed['id']." already converted<br/>";}
