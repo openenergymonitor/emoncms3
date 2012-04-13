@@ -14,7 +14,7 @@
   */
 
   //=====================================================
-  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  $runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
 
   require "Includes/db.php";
@@ -57,7 +57,8 @@
     'yesterday'=> array('type'=>'FLOAT'),
     'week'=> array('type'=>'FLOAT'),
     'month'=> array('type'=>'FLOAT'),
-    'year'=> array('type'=>'FLOAT')
+    'year'=> array('type'=>'FLOAT'),
+    'type'=> array('type'=>'int NOT NULL')
   );
 
   $schema['feed_relation'] = array(
@@ -87,6 +88,7 @@
 
   $schema['kwhdproc'] = array(
     'feedid'=> array('type'=>'int'),
+    'time'=> array('type'=>'INT UNSIGNED'),
     'kwh'=> array('type'=>'FLOAT')
   );
 

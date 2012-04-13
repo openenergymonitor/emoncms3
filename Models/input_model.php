@@ -15,6 +15,7 @@
 
   function create_input_timevalue($user,$name,$time,$value)
   {
+    $time = date("Y-n-j H:i:s", $time);  
     db_query("INSERT INTO input (userid,name,time,value,status) VALUES ('$user','$name','$time','$value','0')");
   }
 
