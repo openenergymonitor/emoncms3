@@ -277,7 +277,7 @@ function accumulator($arg,$time,$value)
 
    $value = $last_value+$value;
 
-   insert_feed_data($feedid,$time,$value);
+   insert_feed_data($feedid,$time,$time,$value);
 
    return $value;
 }
