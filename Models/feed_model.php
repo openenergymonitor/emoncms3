@@ -53,6 +53,18 @@
     return $feeds;
   }
 
+  function get_user_feed_ids($userid)
+  {
+    $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
+    $feeds = array();
+    if ($result) {
+      while ($row = db_fetch_array($result)) {
+        $feeds[]['id'] = $row['feedid'];
+      }
+    }
+    return $feeds;
+  }
+
   function compare($x, $y)
   {
     if ( $x[2] == $y[2] )
