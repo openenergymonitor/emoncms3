@@ -15,7 +15,7 @@
 <script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.flot.js"></script>
 <script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/dial.js"></script>
 <script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/led.js"></script>
-
+<script type="text/javascript" src="<?php print $path; ?>Includes/editors/ckeditor/ckeditor.js"></script>
 <!------------------------------------------------------------------------------------------
   Dashboard HTML
 ------------------------------------------------------------------------------------------->
@@ -25,7 +25,10 @@
 
 
 <div style="background-color:#ccc; width:99.0%; padding:5px; border-radius: 3px;">
-<textarea rows="20"  id="editarea" style="width:99.4%; border-radius: 2px;"></textarea>
+
+<textarea id="editarea"></textarea>
+<script type="text/javascript">CKEDITOR.replace('editarea');</script>
+
 <button type="button" id="editsave" class="button05" >Save</button>
 <button type="button" id="editclose" class="button05" >Close</button>
 <button type="button" id="edit" class="button05" >Edit Dashboard</button>
