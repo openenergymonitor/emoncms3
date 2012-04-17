@@ -1,242 +1,241 @@
 <!--
-   All Emoncms code is released under the GNU Affero General Public License.
-   See COPYRIGHT.txt and LICENSE.txt.
+All Emoncms code is released under the GNU Affero General Public License.
+See COPYRIGHT.txt and LICENSE.txt.
 
-    ---------------------------------------------------------------------
-    Emoncms - open source energy visualisation
-    Part of the OpenEnergyMonitor project:
-    http://openenergymonitor.org
+---------------------------------------------------------------------
+Emoncms - open source energy visualisation
+Part of the OpenEnergyMonitor project:
+http://openenergymonitor.org
 -->
-<?php global $path; ?>
+<?php
+global $path;
+?>
 <!------------------------------------------------------------------------------------------
-  Dashboard related javascripts
+Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
-<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.flot.js"></script>
-<script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/dial.js"></script>
-<script type="text/javascript" src="<?php print $path; ?>Vis/Dashboard/widgets/led.js"></script>
-<script type="text/javascript" src="<?php print $path; ?>Includes/editors/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php print $path;?>Vis/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php print $path;?>Vis/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="<?php print $path;?>Vis/Dashboard/widgets/dial.js"></script>
+<script type="text/javascript" src="<?php print $path;?>Vis/Dashboard/widgets/led.js"></script>
+<script type="text/javascript" src="<?php print $path;?>Includes/editors/ckeditor/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php print $path;?>Includes/editors/ckeditor/ckeditor/adapters/jquery.js"></script>
 <!------------------------------------------------------------------------------------------
-  Dashboard HTML
+Dashboard HTML
 ------------------------------------------------------------------------------------------->
-
-        <div style="text-align:center; width:100%;">
-          <div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:20px;">
-
-
-<div style="background-color:#ccc; width:99.0%; padding:5px; border-radius: 3px;">
-
-<textarea id="editarea"></textarea>
-<script type="text/javascript">CKEDITOR.replace('editarea');</script>
-
-<button type="button" id="editsave" class="button05" >Save</button>
-<button type="button" id="editclose" class="button05" >Close</button>
-<button type="button" id="edit" class="button05" >Edit Dashboard</button>
+<div style="text-align:center; width:100%;">
+	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:20px;">
+		<textarea id="dashboardeditor"></textarea>
+		<br/>
+		<div id="page">
+			<?php echo $page;?>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
 </div>
-<br/>
+<script type="text/javascript">
+var editor;
 
-<div id="page">
-<?php echo $page; ?>
-</div>
-          <div style="clear:both;"></div> 
-          </div>
-        </div>
+	// Fired on editor instance ready
+	CKEDITOR.on( 'instanceReady', function( ev )
+	{
+		// Set editor var with editor instance
+		editor = ev.editor;
+		
+		// Place page html in edit area ready for editing
+		editor.insertHtml( $("#page").html() );
+	});
+	
+	
+	$(document).ready(function() {
+		CKEDITOR.config.extraPlugins = 'ajaxsave';
+		CKEDITOR.replace('dashboardeditor');
+		
+		CKEDITOR.plugins.add('ajaxsave', {
+			init : function(editor) {
+				var pluginName = 'ajaxsave';
+				editor.addCommand(pluginName, {
+							//------------------------------------------------------
+		// Save changes made to edit area
+		//------------------------------------------------------
 
+					exec : function(editor) {
+										
+		// Upload changes to server
+		$.ajax({
+		type: "POST",
+		url: "<?php echo $path;?>"+"dashboard/set",
+		data: "&content="+encodeURIComponent(editor.getSnapshot()),
+		dataType: 'json',
+		success: function() { }
+		});
+		
+		$("#page").html(editor.getSnapshot());			// Update page html
+		update();							// Run javascript
+		//}	
+							
+									},
+					canUndo : true
+				});
+				editor.ui.addButton('Ajaxsave', {
+					label : 'Save Ajax',
+					command : pluginName,
+					className : 'cke_button_save'
+				});
+			}
+		});
+
+
+
+	});
+
+</script>
 <script type="application/javascript">
+	$(function() {
+		var path = "<?php echo $path;?>";
+		var apikey_read = "<?php echo $apikey_read;?>";
+		var apikey_write = "<?php echo $apikey_write;?>";
 
-$(function() {
-  var path = "<?php echo $path; ?>";
-  var apikey_read = "<?php echo $apikey_read; ?>";
-  var apikey_write = "<?php echo $apikey_write; ?>";
+		var feedids = [];		// Array that holds ID's of feeds of associative key
+		var assoc = [];		// Array for exact values
+		var assoc_curve = [];		// Array for smooth change values - creation of smooth dial widget
 
-  $("#editarea").hide();
-  $("#editclose").hide();
-  $("#editsave").hide();
+		var firstdraw = 1;
 
-  $("#editarea").val($("#page").html());			// Place page html in edit area ready for editing
+		update();
+		setInterval(update,30000);
+		setInterval(fast_update,30);
+		setInterval(slow_update,60000);
+		slow_update();
 
-  //------------------------------------------------------
-  // Save changes made to edit area
-  //------------------------------------------------------
-  $("#editsave").click(function(){
-    $("#page").html($("#editarea").val());			// Update page html
-    update();							// Run javascript
+		function update()
+		{
+		$.ajax({
+		url: path+"feed/list.json",
+		dataType: 'json',
+		success: function(data)
+		{
 
-    // Upload changes to server
-    $.ajax({                                      
-      type: "POST",
-      url: path+"dashboard/set",     
-      data: "&content="+encodeURIComponent($("#editarea").val()),
-      dataType: 'json',   
-      success: function() { }
-    });
-  });
+		for (z in data)
+		{
+		var newstr = data[z][1].replace(/\s/g, '-');
 
-  //------------------------------------------------------
-  // Handle Edit and close buttons
-  //------------------------------------------------------
-  $("#editclose").click(function(){
-      $("#editarea").hide();
-      $("#editclose").hide();
-      $("#edit").show();
-      $("#editsave").hide();
-  });
+		var value = parseFloat(data[z][4]);
+		if (value<100) value = value.toFixed(1); else value = value.toFixed(0);
+		console.log(newstr);
 
-  $("#edit").click(function(){
-      $("#editarea").show();
-      $("#editclose").show();
-      $("#edit").hide();
-      $("#editsave").show();
-  });
+		$("."+newstr).html(value);
+		assoc[newstr] = value*1;
+		feedids[newstr] = data[z][0];
+		}
 
+		draw_graphs();
 
-  var feedids = [];		// Array that holds ID's of feeds of associative key
-  var assoc = [];		// Array for exact values
-  var assoc_curve = [];		// Array for smooth change values - creation of smooth dial widget
+		// Calls specific page javascript update function for any in page javascript
+		if(typeof page_js_update == 'function') { page_js_update(assoc); }
+		//--------------------------------------------------------------------------
 
-  var firstdraw = 1;
+		}  // End of data return function
+		});  // End of AJAX function
 
-  update();
-  setInterval(update,30000);
-  setInterval(fast_update,30);
-  setInterval(slow_update,60000);
-  slow_update();
+		} // End of update function
 
-  function update()
-  {
-        $.ajax({                                      
-          url: path+"feed/list.json",                
-          dataType: 'json',
-          success: function(data) 
-          { 
+		function fast_update()
+		{
+		draw_dials();
+		draw_leds();
+		}
 
-            for (z in data)
-            {
-              var newstr = data[z][1].replace(/\s/g, '-');
+		function slow_update()
+		{
+		}
 
-              var value = parseFloat(data[z][4]);
-              if (value<100) value = value.toFixed(1); else value = value.toFixed(0);
-              console.log(newstr);
-		 
-              $("."+newstr).html(value);
-              assoc[newstr] = value*1;
-              feedids[newstr] = data[z][0];
-            }
+		function curveValue(start,end,rate)
+		{
+		if (!start) start = 0;
+		return start + ((end-start)*rate);
+		}
 
-            draw_graphs();
-  
-            // Calls specific page javascript update function for any in page javascript
-            if(typeof page_js_update == 'function') { page_js_update(assoc); }
-            //--------------------------------------------------------------------------
+		function draw_dials()
+		{
+		$('.dial').each(function(index) {
+		var feed = $(this).attr("feed");
+		var maxval = $(this).attr("max");
+		var units = $(this).attr("units");
+		var scale = $(this).attr("scale");
 
-          }  // End of data return function
-        });  // End of AJAX function
+		assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]),0.02);
+		var val = assoc_curve[feed]*1;
 
-  } // End of update function
+		var id = "can-"+feed+"-"+index;
 
+		if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
+		$(this).html('<canvas id="'+id+'" width="200px" height="160px"></canvas>');
+		firstdraw = 1;
+		}
 
-  function fast_update()
-  {
-    draw_dials();
-    draw_leds();
-  }
+		if ((val*1).toFixed(1)!=(assoc[feed]*1).toFixed(1) || firstdraw == 1){ //Only update graphs when there is a change to update
+		var canvas = document.getElementById(id);
+		var ctx = canvas.getContext("2d");
+		draw_gauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
+		}
+		});
+		}
 
-  function slow_update()
-  {
-  }
+		function draw_leds()
+		{
+		$('.led').each(function(index) {
+		var feed = $(this).attr("feed");
+		var val = assoc[feed];
+		var id = "canled-"+feed+"-"+index;
+		if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
+		$(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
+		firstdraw = 1;
+		}
 
-  function curveValue(start,end,rate)
-  {
-    if (!start) start = 0;
-    return start + ((end-start)*rate);
-  }
+		//   if ( firstdraw == 1){ //Only update graphs when there is a change to update
 
-  function draw_dials()
-  {
-           $('.dial').each(function(index) {
-              var feed = $(this).attr("feed");
-              var maxval = $(this).attr("max");
-              var units = $(this).attr("units");
-              var scale = $(this).attr("scale");
+		var canvas = document.getElementById(id);
+		var circle = canvas.getContext("2d");
+		draw_led(circle,val);
+		firstdraw = 0;
+		//       }
+		});
+		}
 
-              assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]),0.02);
-              var val = assoc_curve[feed]*1;
+		function draw_graphs()
+		{
+		$('.graph').each(function(index) {
+		var feed = $(this).attr("feed");
+		var id = "#"+$(this).attr('id');
+		var feedid = feedids[feed];
+		$(id).width(200);
+		$(id).height(200);
 
-                var id = "can-"+feed+"-"+index;
+		var data = [];
 
-                if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
-                  $(this).html('<canvas id="'+id+'" width="200px" height="160px"></canvas>');
-                  firstdraw = 1;
-                }
+		var timeWindow = (3600000*12);
+		var start = ((new Date()).getTime())-timeWindow;		//Get start time
 
-              if ((val*1).toFixed(1)!=(assoc[feed]*1).toFixed(1) || firstdraw == 1){ //Only update graphs when there is a change to update
-                var canvas = document.getElementById(id);
-                var ctx = canvas.getContext("2d");
-                draw_gauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
-              }
-            });
-  }
+		var ndp_target = 200;
+		var postrate = 5000; //ms
+		var ndp_in_window = timeWindow / postrate;
+		var res = ndp_in_window / ndp_target;
+		if (res<1) res = 1;
+		$.ajax({
+		url: path+"feed/data.json",
+		data: "&apikey="+apikey_read+"&id="+feedid+"&start="+start+"&end="+0+"&res="+res,
+		dataType: 'json',
+		success: function(data)
+		{
+		$.plot($(id),
+		[{data: data, lines: { fill: true }}],
+		{xaxis: { mode: "time", localTimezone: true },
+		grid: { show: true }
+		});
+		}
+		});
+		});
+		}
 
-function draw_leds()
-  {
-           $('.led').each(function(index) {
-              var feed = $(this).attr("feed");
-              var val = assoc[feed];
-	         var id = "canled-"+feed+"-"+index;
-                if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
-                  $(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
-                  firstdraw = 1;
-                }
-
-       //   if ( firstdraw == 1){ //Only update graphs when there is a change to update
-
-                var canvas = document.getElementById(id);
-                var circle = canvas.getContext("2d");
-                draw_led(circle,val); 
-			firstdraw = 0;
-       //       }
-            });
-  }
-
-
-
-  function draw_graphs()
-  {
-    $('.graph').each(function(index) {
-      var feed = $(this).attr("feed");
-      var id = "#"+$(this).attr('id');
-      var feedid = feedids[feed];
-      $(id).width(200);
-      $(id).height(200);
-
-      var data = [];
-
-      var timeWindow = (3600000*12);
-      var start = ((new Date()).getTime())-timeWindow;		//Get start time
-
-      var ndp_target = 200;
-      var postrate = 5000; //ms
-      var ndp_in_window = timeWindow / postrate;
-      var res = ndp_in_window / ndp_target;
-      if (res<1) res = 1;
-      $.ajax({                                      
-          url: path+"feed/data.json",                         
-          data: "&apikey="+apikey_read+"&id="+feedid+"&start="+start+"&end="+0+"&res="+res,
-          dataType: 'json',                           
-          success: function(data) 
-          { 
-             $.plot($(id),
-              [{data: data, lines: { fill: true }}],
-              {xaxis: { mode: "time", localTimezone: true },
-              grid: { show: true }
-             });
-          } 
-      });
-    });
-  }
-
-
-
-}); 
-
+		});
 </script>
