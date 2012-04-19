@@ -13,12 +13,12 @@ global $path;
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php print $path;?>Vis/flot/jquery.js"></script>
-<script type="text/javascript" src="<?php print $path;?>Vis/flot/jquery.flot.js"></script>
-<script type="text/javascript" src="<?php print $path;?>Vis/Dashboard/widgets/dial.js"></script>
-<script type="text/javascript" src="<?php print $path;?>Vis/Dashboard/widgets/led.js"></script>
-<script type="text/javascript" src="<?php print $path;?>Includes/editors/ckeditor/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="<?php print $path;?>Includes/editors/ckeditor/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/dial.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/adapters/jquery.js"></script>
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
@@ -33,63 +33,42 @@ Dashboard HTML
 	</div>
 </div>
 <script type="text/javascript">
-var editor;
-
+		
 	// Fired on editor instance ready
 	CKEDITOR.on( 'instanceReady', function( ev )
 	{
-		// Set editor var with editor instance
-		editor = ev.editor;
-		
 		// Place page html in edit area ready for editing
-		editor.insertHtml( $("#page").html() );
+		ev.editor.insertHtml( $("#page").html() );
 	});
 	
-	
-	$(document).ready(function() {
-		CKEDITOR.config.extraPlugins = 'ajaxsave';
-		CKEDITOR.replace('dashboardeditor');
-		
-		CKEDITOR.plugins.add('ajaxsave', {
-			init : function(editor) {
-				var pluginName = 'ajaxsave';
-				editor.addCommand(pluginName, {
-							//------------------------------------------------------
-		// Save changes made to edit area
-		//------------------------------------------------------
-
-					exec : function(editor) {
-										
+	CKEDITOR.on( 'savePressed', function( ev )
+	{				
 		// Upload changes to server
 		$.ajax({
-		type: "POST",
-		url: "<?php echo $path;?>"+"dashboard/set",
-		data: "&content="+encodeURIComponent(editor.getSnapshot()),
-		dataType: 'json',
-		success: function() { }
-		});
-		
-		$("#page").html(editor.getSnapshot());			// Update page html
-		update();							// Run javascript
-		//}	
-							
-									},
-					canUndo : true
-				});
-				editor.ui.addButton('Ajaxsave', {
-					label : 'Save Ajax',
-					command : pluginName,
-					className : 'cke_button_save'
-				});
+			type : "POST",
+			url :  "<?php echo $path;?>" + "dashboard/set",
+			data : "&content=" + encodeURIComponent(ev.data.getData()),
+			dataType : 'json',
+			success : function() {
 			}
 		});
 
-
-
+		// Update page html
+		$("#page").html(ev.data.getSnapshot());
+					
+		// Run javascript
+		update();
 	});
-
-</script>
-<script type="application/javascript">
+	
+	$(document).ready(function() 
+	{
+		// Load the dasboard editor settings from file
+		CKEDITOR.replace( 'dashboardeditor',
+	    {
+	        customConfig : '<?php echo $path;?>Includes/editors/ckeditor_settings.js'
+	    });
+	});
+	
 	$(function() {
 		var path = "<?php echo $path;?>";
 		var apikey_read = "<?php echo $apikey_read;?>";

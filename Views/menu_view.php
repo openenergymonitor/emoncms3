@@ -11,4 +11,3 @@
 <li><a href='<?php echo $GLOBALS['path']; ?>feed/list'>Feeds</a></li>
 <li><a href='<?php echo $GLOBALS['path']; ?>user/view'>Account</a></li>
 <li><a href='<?php echo $GLOBALS['path']; ?>dashboard/view'>Dashboard</a></li>
-
