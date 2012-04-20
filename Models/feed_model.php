@@ -155,7 +155,7 @@
     $row = db_fetch_array($result);
 
     if ($row) db_query("UPDATE $feedname SET data = '$value', time = '$feedtime' WHERE time = '$feedtime'");
-    if (!$row) db_query("INSERT INTO $feedname (`time`,`data`) VALUES ('$feedtime','0')");
+    if (!$row) {$value = 0; db_query("INSERT INTO $feedname (`time`,`data`) VALUES ('$feedtime','$value')"); }
 
     // b. Update feeds table
     $updatetime = date("Y-n-j H:i:s", $updatetime); 
