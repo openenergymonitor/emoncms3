@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function(config) {
 	config.toolbar = 'Emoncms3_Toolbar';
 
 	config.toolbar_Emoncms3_Toolbar = [
-	{ name: 'document', items : [ 'Source','-','NewPage','AjaxSave','DocProps','Preview','Print','-','Templates' ] },
+	{ name: 'document', items : [ 'Source','-','NewPage','AjaxSave','DocProps','Emoncms3Preview','Print','-','Templates' ] },
 	{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
 	{ name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
 	{ name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
@@ -26,7 +26,7 @@ CKEDITOR.editorConfig = function(config) {
 	];
 		
 
-	config.extraPlugins = 'AjaxSave';
+	config.extraPlugins = 'AjaxSave,Emoncms3Preview';
 
 	// Save button
 	CKEDITOR.plugins.add('AjaxSave', {
@@ -46,6 +46,28 @@ CKEDITOR.editorConfig = function(config) {
 				label : 'Save',
 				command : pluginName,
 				className : 'cke_button_save'
+			});
+		}
+	});
+	
+	// Preview button
+	CKEDITOR.plugins.add('Emoncms3Preview', {
+		init : function(editor) {
+			var pluginName = 'Emoncms3Preview';
+			
+			editor.addCommand(pluginName, {
+				// Save button pressed
+				exec : function(editor) {
+					// Fire an event
+					CKEDITOR.fire('previewPressed', editor);
+				},
+				canUndo : true
+			});
+
+			editor.ui.addButton('Emoncms3Preview', {
+				label : 'Preview',
+				command : pluginName,
+				className : 'cke_button_preview'
 			});
 		}
 	});

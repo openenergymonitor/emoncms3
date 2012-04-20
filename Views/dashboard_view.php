@@ -32,7 +32,7 @@ Dashboard HTML
 		<div style="clear:both;"></div>
 	</div>
 </div>
-<script type="text/javascript">
+<script type="application/javascript">
 		
 	// Fired on editor instance ready
 	CKEDITOR.on( 'instanceReady', function( ev )
@@ -41,6 +41,13 @@ Dashboard HTML
 		ev.editor.insertHtml( $("#page").html() );
 	});
 	
+	// Fired on editor preview pressed
+	CKEDITOR.on( 'previewPressed', function( ev )
+	{
+		window.open( "<?php echo $path;?>/Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
+				640 + ',height=' + 420 + ',left=' + 80 );		
+	});
+		
 	CKEDITOR.on( 'savePressed', function( ev )
 	{				
 		// Upload changes to server
@@ -75,8 +82,8 @@ Dashboard HTML
 		var apikey_write = "<?php echo $apikey_write;?>";
 
 		var feedids = [];		// Array that holds ID's of feeds of associative key
-		var assoc = [];		// Array for exact values
-		var assoc_curve = [];		// Array for smooth change values - creation of smooth dial widget
+		var assoc = [];			// Array for exact values
+		var assoc_curve = [];	// Array for smooth change values - creation of smooth dial widget
 
 		var firstdraw = 1;
 
@@ -88,40 +95,40 @@ Dashboard HTML
 
 		function update()
 		{
-		$.ajax({
-		url: path+"feed/list.json",
-		dataType: 'json',
-		success: function(data)
-		{
+			$.ajax({
+				url: path+"feed/list.json",
+				dataType: 'json',
+				success: function(data)
+				{
+					for (z in data)	{
+						var newstr = data[z][1].replace(/\s/g, '-');
+						var value = parseFloat(data[z][4]);
+						
+						if (value<100) 
+							value = value.toFixed(1); 
+						else 
+							value = value.toFixed(0);
+		
+						$("."+newstr).html(value);
+						assoc[newstr] = value*1;
+						feedids[newstr] = data[z][0];
+					}
 
-		for (z in data)
-		{
-		var newstr = data[z][1].replace(/\s/g, '-');
+					draw_graphs();
 
-		var value = parseFloat(data[z][4]);
-		if (value<100) value = value.toFixed(1); else value = value.toFixed(0);
-		console.log(newstr);
+					// Calls specific page javascript update function for any in page javascript
+					if(typeof page_js_update == 'function') {
+						page_js_update(assoc); }
+					//--------------------------------------------------------------------------
 
-		$("."+newstr).html(value);
-		assoc[newstr] = value*1;
-		feedids[newstr] = data[z][0];
-		}
-
-		draw_graphs();
-
-		// Calls specific page javascript update function for any in page javascript
-		if(typeof page_js_update == 'function') { page_js_update(assoc); }
-		//--------------------------------------------------------------------------
-
-		}  // End of data return function
-		});  // End of AJAX function
-
+				}  // End of data return function
+			});  // End of AJAX function
 		} // End of update function
 
 		function fast_update()
 		{
-		draw_dials();
-		draw_leds();
+			draw_dials();
+			draw_leds();
 		}
 
 		function slow_update()
@@ -130,46 +137,47 @@ Dashboard HTML
 
 		function curveValue(start,end,rate)
 		{
-		if (!start) start = 0;
-		return start + ((end-start)*rate);
+			if (!start) start = 0;
+			return start + ((end-start)*rate);
 		}
 
 		function draw_dials()
 		{
-		$('.dial').each(function(index) {
-		var feed = $(this).attr("feed");
-		var maxval = $(this).attr("max");
-		var units = $(this).attr("units");
-		var scale = $(this).attr("scale");
+			$('.dial').each(function(index) {
+				var feed = $(this).attr("feed");
+				var maxval = $(this).attr("max");
+				var units = $(this).attr("units");
+				var scale = $(this).attr("scale");
 
-		assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]),0.02);
-		var val = assoc_curve[feed]*1;
+				assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]),0.02);
+				var val = assoc_curve[feed]*1;
 
-		var id = "can-"+feed+"-"+index;
+				var id = "can-"+feed+"-"+index;
 
-		if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
-		$(this).html('<canvas id="'+id+'" width="200px" height="160px"></canvas>');
-		firstdraw = 1;
-		}
-
-		if ((val*1).toFixed(1)!=(assoc[feed]*1).toFixed(1) || firstdraw == 1){ //Only update graphs when there is a change to update
-		var canvas = document.getElementById(id);
-		var ctx = canvas.getContext("2d");
-		draw_gauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
-		}
-		});
-		}
+				//if (!$(this).html()) {	// seems it doesnt work!!?? i have to comment it. Only calling this when its empty saved a lot of memory! over 100Mb
+					$(this).html('<canvas id="'+id+'" width="200px" height="160px"></canvas>');
+					firstdraw = 1;
+				//}
+				
+				if ((val*1).toFixed(1)!=(assoc[feed]*1).toFixed(1) || firstdraw == 1){ //Only update graphs when there is a change to update			
+					var canvas = document.getElementById(id);
+					var ctx = canvas.getContext("2d");
+					draw_gauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
+				}
+			});
+		} // end draw_dials
 
 		function draw_leds()
 		{
-		$('.led').each(function(index) {
-		var feed = $(this).attr("feed");
-		var val = assoc[feed];
-		var id = "canled-"+feed+"-"+index;
-		if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
-		$(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
-		firstdraw = 1;
-		}
+			$('.led').each(function(index) {
+				var feed = $(this).attr("feed");
+				var val = assoc[feed];
+				var id = "canled-"+feed+"-"+index;
+				
+				if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
+					$(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
+					firstdraw = 1;
+				}
 
 		//   if ( firstdraw == 1){ //Only update graphs when there is a change to update
 
