@@ -45,7 +45,7 @@ Dashboard HTML
 	// Fired on editor preview pressed
 	CKEDITOR.on( 'previewPressed', function( ev )
 	{
-		window.open( "<?php echo $path;?>/Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
+		window.open( "<?php echo $path;?>Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
 				640 + ',height=' + 420 + ',left=' + 80 );		
 	});
 		
@@ -102,6 +102,7 @@ Dashboard HTML
 				success: function(data)
 				{
 					for (z in data)	{
+						
 						var newstr = data[z][1].replace(/\s/g, '-');
 						var value = parseFloat(data[z][4]);
 						
@@ -109,13 +110,13 @@ Dashboard HTML
 							value = value.toFixed(1); 
 						else 
 							value = value.toFixed(0);
-		
+
 						$("."+newstr).html(value);
 						assoc[newstr] = value*1;
 						feedids[newstr] = data[z][0];
 					}
 
-					draw_graphs();
+					draw_graphs(feedids,path,apikey_read);
 
 					// Calls specific page javascript update function for any in page javascript
 					if(typeof page_js_update == 'function') {
@@ -128,66 +129,10 @@ Dashboard HTML
 
 function fast_update()
 {
-	draw_dials(assoc_curve, assoc);
-	draw_leds();
+	draw_dials(assoc_curve, assoc, firstdraw);
+	draw_leds(assoc, firstdraw);
 }
+		
 
-		function draw_leds()
-		{
-			$('.led').each(function(index) {
-				var feed = $(this).attr("feed");
-				var val = assoc[feed];
-				var id = "canled-"+feed+"-"+index;
-				
-				if (!$(this).html()) {	// Only calling this when its empty saved a lot of memory! over 100Mb
-					$(this).html('<canvas id="'+id+'" width="50px" height="50px"></canvas>');
-					firstdraw = 1;
-				}
-
-		//   if ( firstdraw == 1){ //Only update graphs when there is a change to update
-
-		var canvas = document.getElementById(id);
-		var circle = canvas.getContext("2d");
-		draw_led(circle,val);
-		firstdraw = 0;
-		//       }
-		});
-		}
-
-		function draw_graphs()
-		{
-		$('.graph').each(function(index) {
-		var feed = $(this).attr("feed");
-		var id = "#"+$(this).attr('id');
-		var feedid = feedids[feed];
-		$(id).width(200);
-		$(id).height(200);
-
-		var data = [];
-
-		var timeWindow = (3600000*12);
-		var start = ((new Date()).getTime())-timeWindow;		//Get start time
-
-		var ndp_target = 200;
-		var postrate = 5000; //ms
-		var ndp_in_window = timeWindow / postrate;
-		var res = ndp_in_window / ndp_target;
-		if (res<1) res = 1;
-		$.ajax({
-		url: path+"feed/data.json",
-		data: "&apikey="+apikey_read+"&id="+feedid+"&start="+start+"&end="+0+"&res="+res,
-		dataType: 'json',
-		success: function(data)
-		{
-		$.plot($(id),
-		[{data: data, lines: { fill: true }}],
-		{xaxis: { mode: "time", localTimezone: true },
-		grid: { show: true }
-		});
-		}
-		});
-		});
-		}
-
-		});
+});
 </script>
