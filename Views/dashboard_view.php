@@ -15,6 +15,7 @@ Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
+<script type="application/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/dial.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
@@ -125,47 +126,11 @@ Dashboard HTML
 			});  // End of AJAX function
 		} // End of update function
 
-		function fast_update()
-		{
-			draw_dials();
-			draw_leds();
-		}
-
-		function slow_update()
-		{
-		}
-
-		function curveValue(start,end,rate)
-		{
-			if (!start) start = 0;
-			return start + ((end-start)*rate);
-		}
-
-		function draw_dials()
-		{
-			$('.dial').each(function(index) {
-				var feed = $(this).attr("feed");
-				var maxval = $(this).attr("max");
-				var units = $(this).attr("units");
-				var scale = $(this).attr("scale");
-
-				assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]),0.02);
-				var val = assoc_curve[feed]*1;
-
-				var id = "can-"+feed+"-"+index;
-
-				//if (!$(this).html()) {	// seems it doesnt work!!?? i have to comment it. Only calling this when its empty saved a lot of memory! over 100Mb
-					$(this).html('<canvas id="'+id+'" width="200px" height="160px"></canvas>');
-					firstdraw = 1;
-				//}
-				
-				if ((val*1).toFixed(1)!=(assoc[feed]*1).toFixed(1) || firstdraw == 1){ //Only update graphs when there is a change to update			
-					var canvas = document.getElementById(id);
-					var ctx = canvas.getContext("2d");
-					draw_gauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
-				}
-			});
-		} // end draw_dials
+function fast_update()
+{
+	draw_dials(assoc_curve, assoc);
+	draw_leds();
+}
 
 		function draw_leds()
 		{
