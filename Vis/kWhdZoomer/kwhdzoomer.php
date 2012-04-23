@@ -1,4 +1,3 @@
-
 <html>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <!--
@@ -17,6 +16,8 @@
   $power = $_GET['power'];
   $kwhd = $_GET['kwhd'];
   $apikey = $_GET['apikey'];
+  $currency = $_GET['currency']?$_GET['currency']:'&pound;';
+  $pricekwh = $_GET['pricekwh']?$_GET['pricekwh']:0.14;
   ?>
 
   <head>
@@ -88,7 +89,8 @@
       var feedid = power;
       var paverage = 0, kwhWindow = 0;
 
-      var price =0.14;
+      var price = <?php echo $pricekwh ?>;
+      var currency = "<?php echo $currency ?>";
 
       var bot_kwhd_text = "";
 
@@ -110,7 +112,7 @@
             ndays++;
           }
 
-          bot_kwhd_text = "Total: "+(tkwh).toFixed(0)+" kWh : £"+(tkwh*price).toFixed(0) + " | Average: "+(tkwh/ndays).toFixed(1)+ " kWh : £"+((tkwh/ndays)*price).toFixed(2)+" | £"+((tkwh/ndays)*price*7).toFixed(0)+" a week, £"+((tkwh/ndays)*price*365).toFixed(0)+" a year | Unit price: £"+price;
+          bot_kwhd_text = "Total: "+(tkwh).toFixed(0)+" kWh : "+currency+(tkwh*price).toFixed(0) + " | Average: "+(tkwh/ndays).toFixed(1)+ " kWh : "+currency+((tkwh/ndays)*price).toFixed(2)+" | "+currency+((tkwh/ndays)*price*7).toFixed(0)+" a week, "+currency+((tkwh/ndays)*price*365).toFixed(0)+" a year | Unit price: "+currency+price;
 
           years = get_years(data);
           //set_annual_view();
@@ -170,7 +172,7 @@
 
             if (view==0) $("#out").html(item.datapoint[1].toFixed(0)+" kWh | "+mdate.format("yyyy")+" | "+(item.datapoint[1]/years.days[item.dataIndex]).toFixed(1)+" kWh/d");
             if (view==1) $("#out").html(item.datapoint[1].toFixed(0)+" kWh | "+mdate.format("mmm yyyy")+" | "+(item.datapoint[1]/months.days[item.dataIndex]).toFixed(1)+" kWh/d ");
-            if (view==2) $("#out").html(item.datapoint[1].toFixed(1)+" kWh | £"+(item.datapoint[1]*price).toFixed(2)+" | £"+(item.datapoint[1]*price*365).toFixed(0)+"/y | "+mdate.format("dS mmm yyyy"));
+            if (view==2) $("#out").html(item.datapoint[1].toFixed(1)+" kWh | "+currency+(item.datapoint[1]*price).toFixed(2)+" | "+currency+(item.datapoint[1]*price*365).toFixed(0)+"/y | "+mdate.format("dS mmm yyyy"));
             if (view==3) $("#out").html(item.datapoint[1].toFixed(0)+" W");
           }
         });
@@ -207,7 +209,7 @@
        var datetext = "";
        if ((end-start)<3600000*25) {var mdate = new Date(start); datetext = " | "+mdate.format("dS mmm yyyy")}
             
-       $("#bot_out").html(kwhWindow+"kWh | £"+(kwhWindow*price).toFixed(2)+datetext)
+       $("#bot_out").html(kwhWindow+"kWh | "+currency+(kwhWindow*price).toFixed(2)+datetext)
      }
 
 
