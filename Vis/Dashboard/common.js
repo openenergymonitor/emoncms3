@@ -8,6 +8,58 @@
  http://openenergymonitor.org
  */
 
+// Global page vars definition
+var feedids = [];		// Array that holds ID's of feeds of associative key
+var assoc = [];			// Array for exact values
+var assoc_curve = [];	// Array for smooth change values - creation of smooth dial widget
+
+var firstdraw = 1;
+
+function show_dashboard() {
+	update();
+	setInterval(update,30000);
+	setInterval(fast_update,30);
+	setInterval(slow_update,60000);
+	slow_update();
+}	
+		
+// update function	
+function update() {
+	$.ajax({
+		url: path+"feed/list.json",
+		dataType: 'json',
+		success: function(data)	{
+			for (z in data)	{
+				var newstr = data[z][1].replace(/\s/g, '-');
+				var value = parseFloat(data[z][4]);
+						
+				if (value<100) 
+					value = value.toFixed(1); 
+				else 
+					value = value.toFixed(0);
+
+				$("."+newstr).html(value);
+				assoc[newstr] = value*1;
+				feedids[newstr] = data[z][0];
+			}
+
+			draw_graphs();
+
+			// Calls specific page javascript update function for any in page javascript
+			if(typeof page_js_update == 'function') {
+				page_js_update(assoc); }
+			//--------------------------------------------------------------------------
+
+		}  // End of data return function
+	});  // End of AJAX function
+}
+
+function fast_update()
+{
+	draw_dials();
+	draw_leds();
+}
+				
 function slow_update() {
 }
 
@@ -17,7 +69,7 @@ function curveValue(start, end, rate) {
 	return start + ((end - start) * rate);
 }
 
-function draw_dials(assoc_curve, assoc, firstdraw) {
+function draw_dials() {
 	$('.dial').each(function(index) {
 		var feed = $(this).attr("feed");
 		var maxval = $(this).attr("max");
@@ -43,7 +95,7 @@ function draw_dials(assoc_curve, assoc, firstdraw) {
 	});
 }
 
-function draw_leds(assoc, firstdraw) {
+function draw_leds() {
 	$('.led').each(function(index) {
 		var feed = $(this).attr("feed");
 		var val = assoc[feed];
@@ -62,7 +114,7 @@ function draw_leds(assoc, firstdraw) {
 	});
 }
 
-function draw_graphs(feedids,path,apikey_read)
+function draw_graphs()
 		{
 		$('.graph').each(function(index) {
 		var feed = $(this).attr("feed");

@@ -34,7 +34,14 @@ Dashboard HTML
 	</div>
 </div>
 <script type="application/javascript">
-		
+
+// Global page vars definition
+	var path = "<?php echo $path;?>";
+	var apikey_read = "<?php echo $apikey_read;?>";
+	var apikey_write = "<?php echo $apikey_write;?>";
+	
+// CKEditor Events
+
 	// Fired on editor instance ready
 	CKEDITOR.on( 'instanceReady', function( ev )
 	{
@@ -76,63 +83,9 @@ Dashboard HTML
 	        customConfig : '<?php echo $path;?>Includes/editors/ckeditor_settings.js'
 	    });
 	});
-	
+
+// Main funtion
 	$(function() {
-		var path = "<?php echo $path;?>";
-		var apikey_read = "<?php echo $apikey_read;?>";
-		var apikey_write = "<?php echo $apikey_write;?>";
-
-		var feedids = [];		// Array that holds ID's of feeds of associative key
-		var assoc = [];			// Array for exact values
-		var assoc_curve = [];	// Array for smooth change values - creation of smooth dial widget
-
-		var firstdraw = 1;
-
-		update();
-		setInterval(update,30000);
-		setInterval(fast_update,30);
-		setInterval(slow_update,60000);
-		slow_update();
-
-		function update()
-		{
-			$.ajax({
-				url: path+"feed/list.json",
-				dataType: 'json',
-				success: function(data)
-				{
-					for (z in data)	{
-						
-						var newstr = data[z][1].replace(/\s/g, '-');
-						var value = parseFloat(data[z][4]);
-						
-						if (value<100) 
-							value = value.toFixed(1); 
-						else 
-							value = value.toFixed(0);
-
-						$("."+newstr).html(value);
-						assoc[newstr] = value*1;
-						feedids[newstr] = data[z][0];
-					}
-
-					draw_graphs(feedids,path,apikey_read);
-
-					// Calls specific page javascript update function for any in page javascript
-					if(typeof page_js_update == 'function') {
-						page_js_update(assoc); }
-					//--------------------------------------------------------------------------
-
-				}  // End of data return function
-			});  // End of AJAX function
-		} // End of update function
-
-function fast_update()
-{
-	draw_dials(assoc_curve, assoc, firstdraw);
-	draw_leds(assoc, firstdraw);
-}
-		
-
-});
+		show_dashboard();	
+	});
 </script>
