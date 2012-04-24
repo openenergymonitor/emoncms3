@@ -69,7 +69,7 @@ Dashboard HTML
 		});
 
 		// Update page html
-		$("#page").html(ev.data.getSnapshot());
+		$("#page").html(ev.data.getData());
 					
 		// Run javascript
 		update();
