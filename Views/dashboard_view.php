@@ -28,7 +28,7 @@ Dashboard HTML
 		<textarea id="dashboardeditor"></textarea>
 		<br/>
 		<div id="page">
-			<?php echo $page;?>
+			<?php echo $page; ?>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -64,7 +64,12 @@ Dashboard HTML
 		});		
 		
 		// Place page html in edit area ready for editing
-		ev.editor.insertHtml( $("#page").html() );
+		//ev.editor.insertHtml( $("#page").html() );
+		ev.editor.setData( $("#page").html() );
+		
+		
+		// On instance ready we show the botton preview 
+		show_dashboard();
 	});
 	
 	// Fired on editor preview pressed
@@ -102,8 +107,4 @@ Dashboard HTML
 	    });
 	});
 
-// Main funtion
-	$(function() {
-		show_dashboard();	
-	});
 </script>
