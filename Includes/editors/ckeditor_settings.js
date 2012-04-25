@@ -27,7 +27,8 @@ CKEDITOR.editorConfig = function(config) {
 		
 
 	config.extraPlugins = 'AjaxSave,Emoncms3Preview';
-
+	config.fillEmptyBlocks = false;
+	
 	// Save button
 	CKEDITOR.plugins.add('AjaxSave', {
 		init : function(editor) {

@@ -80,7 +80,7 @@ function draw_dials() {
 		var val = assoc_curve[feed] * 1;
 
 		var id = "can-" + feed + "-" + index;
-
+		
 		if(!$(this).html()) {// Only calling this when its empty saved a lot of memory! over 100Mb
 			$(this).html('<canvas id="' + id + '" width="200px" height="160px"></canvas>');
 			// firstdraw = 1;

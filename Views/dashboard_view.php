@@ -40,11 +40,29 @@ Dashboard HTML
 	var apikey_read = "<?php echo $apikey_read;?>";
 	var apikey_write = "<?php echo $apikey_write;?>";
 	
-// CKEditor Events
+// CKEditor Events and initialization
 
 	// Fired on editor instance ready
 	CKEDITOR.on( 'instanceReady', function( ev )
 	{
+		// Set rules for div tag
+		ev.editor.dataProcessor.writer.setRules( 'div',{
+			        // Indicates that this tag causes indentation on line breaks inside of it.
+     	   indent : true,
+ 
+        	// Inserts a line break before the <div> opening tag.
+        	breakBeforeOpen : true,
+ 
+        	// No inserts a line break after the <div> opening tag.
+        	breakAfterOpen : false,
+ 
+        	// No inserts a line break before the </div> closing tag.
+        	breakBeforeClose : false,
+ 
+        	// Inserts a line break after the </div> closing tag.
+        	breakAfterClose : true	
+		});		
+		
 		// Place page html in edit area ready for editing
 		ev.editor.insertHtml( $("#page").html() );
 	});
