@@ -83,7 +83,7 @@ function draw_dials() {
 		
 		if(!$(this).html()) {// Only calling this when its empty saved a lot of memory! over 100Mb
 			$(this).html('<canvas id="' + id + '" width="200px" height="160px"></canvas>');
-			// firstdraw = 1;
+			firstdraw = 1;
 		}
 
 		if((val * 1).toFixed(1) != (assoc[feed] * 1).toFixed(1) || firstdraw == 1) {//Only update graphs when there is a change to update

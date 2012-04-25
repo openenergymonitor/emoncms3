@@ -25,9 +25,9 @@ CKEDITOR.editorConfig = function(config) {
 	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
 	];
 		
-
 	config.extraPlugins = 'AjaxSave,Emoncms3Preview';
 	config.fillEmptyBlocks = false;
+	config.contentsCss = path+'Views/theme/dark/style.css';
 	
 	// Save button
 	CKEDITOR.plugins.add('AjaxSave', {
