@@ -29,7 +29,7 @@
       if (!$content) $content = $_GET['content'];
 
       // IMPORTANT: if you get problems with characters being removed check this line:
-      $content = preg_replace('/[^\w\s-.<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
+      $content = preg_replace('/[^\w\s-.#<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
 
       $content = db_real_escape_string($content);
 
