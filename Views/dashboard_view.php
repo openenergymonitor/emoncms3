@@ -67,7 +67,6 @@ Dashboard HTML
 		//ev.editor.insertHtml( $("#page").html() );
 		ev.editor.setData( $("#page").html() );
 		
-		
 		// On instance ready we show the botton preview 
 		show_dashboard();
 	});

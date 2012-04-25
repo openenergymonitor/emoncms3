@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function(config) {
 	config.toolbar = 'Emoncms3_Toolbar';
 
 	config.toolbar_Emoncms3_Toolbar = [
-	{ name: 'document', items : [ 'Source','-','NewPage','AjaxSave','DocProps','Emoncms3Preview','Print','-','Templates' ] },
+	{ name: 'document', items : [ 'Source','-','NewPage','e3Save','DocProps','e3Preview','Print','-','Templates' ] },
 	{ name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
 	{ name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
 	{ name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 
@@ -22,17 +22,18 @@ CKEDITOR.editorConfig = function(config) {
 	'/',
 	{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
-	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] }
+	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },
+	{ name: 'e3widgets', items : [ 'e3dial' ] }
 	];
 		
-	config.extraPlugins = 'AjaxSave,Emoncms3Preview';
+	config.extraPlugins = 'e3Save,e3Preview,e3dial';
 	config.fillEmptyBlocks = false;
 	config.contentsCss = path+'Views/theme/dark/style.css';
 	
 	// Save button
-	CKEDITOR.plugins.add('AjaxSave', {
+	CKEDITOR.plugins.add('e3Save', {
 		init : function(editor) {
-			var pluginName = 'AjaxSave';
+			var pluginName = 'e3Save';
 			
 			editor.addCommand(pluginName, {
 				// Save button pressed
@@ -43,7 +44,7 @@ CKEDITOR.editorConfig = function(config) {
 				canUndo : true
 			});
 
-			editor.ui.addButton('AjaxSave', {
+			editor.ui.addButton('e3Save', {
 				label : 'Save',
 				command : pluginName,
 				className : 'cke_button_save'
@@ -52,9 +53,9 @@ CKEDITOR.editorConfig = function(config) {
 	});
 	
 	// Preview button
-	CKEDITOR.plugins.add('Emoncms3Preview', {
+	CKEDITOR.plugins.add('e3Preview', {
 		init : function(editor) {
-			var pluginName = 'Emoncms3Preview';
+			var pluginName = 'e3Preview';
 			
 			editor.addCommand(pluginName, {
 				// Save button pressed
@@ -65,11 +66,33 @@ CKEDITOR.editorConfig = function(config) {
 				canUndo : true
 			});
 
-			editor.ui.addButton('Emoncms3Preview', {
+			editor.ui.addButton('e3Preview', {
 				label : 'Preview',
 				command : pluginName,
 				className : 'cke_button_preview'
 			});
 		}
 	});
+	
+	// insert dial
+	CKEDITOR.plugins.add('e3dial', {
+		init : function(editor) {
+			var pluginName = 'e3dial';
+			
+			editor.addCommand(pluginName, {
+				// insert dial button pressed
+				exec : function(editor) {
+					editor.insertHtml("<div class='dial' feed='power' max='500' scale='1' units='V'></div>");
+				},
+				canUndo : true
+			});
+
+			editor.ui.addButton('e3dial', {
+				label : 'Dial',
+				command : pluginName,
+				className : 'cke_button_preview'
+			});
+		}
+	});	
+	
 };
