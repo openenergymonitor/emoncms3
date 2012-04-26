@@ -8,7 +8,7 @@
     http://openenergymonitor.org
 -->
 <form action="../user/logout" method="post">
-  <div style="margin:5px; float:right;">
+  <div style="float:right;">
   <span style="margin:10px;"><?php echo $name; ?></span><input type="submit" value="Logout" class="button04" />
   </div>
 </form>
