@@ -63,8 +63,11 @@ Dashboard HTML
         	breakAfterClose : true	
 		});		
 		
+		// Set here the css style so each dashboard can have it own
+		// theme and visual design styles for the editor
+		ev.editor.config.contentsCss = [path+'Views/theme/dark/style.css',path+'Views/theme/common/visualdesign_style.css'];
+	
 		// Place page html in edit area ready for editing
-		//ev.editor.insertHtml( $("#page").html() );
 		ev.editor.setData( $("#page").html() );
 		
 		// On instance ready we show the botton preview 

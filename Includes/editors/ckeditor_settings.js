@@ -28,8 +28,7 @@ CKEDITOR.editorConfig = function(config) {
 		
 	config.extraPlugins = 'e3Save,e3Preview,e3dial';
 	config.fillEmptyBlocks = false;
-	config.contentsCss = path+'Views/theme/dark/style.css';
-	
+
 	// Save button
 	CKEDITOR.plugins.add('e3Save', {
 		init : function(editor) {
@@ -88,9 +87,10 @@ CKEDITOR.editorConfig = function(config) {
 			});
 
 			editor.ui.addButton('e3dial', {
-				label : 'Dial',
+				label : 'Insert dial',
 				command : pluginName,
-				className : 'cke_button_preview'
+				className : 'cke_button_preview',
+				icon: path+'Includes/editors/e3dial.png'
 			});
 		}
 	});	
