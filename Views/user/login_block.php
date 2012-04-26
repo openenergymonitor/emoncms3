@@ -22,19 +22,18 @@ Open source energy visualisation
 
 
 <div style="max-width:392px; margin-right:20px; padding-top:45px; padding-bottom:15px; color: #888;">
-<div style="font-size:48px; font-weight:bold;">Emoncms <span style="color: #888;">v3</span></div>
-<div style="font-size:16px;">open source energy visualisation</div>
+<img style="margin:12px;" src="<?php print $GLOBALS['path']; ?>Views/user/emoncms_logo.png" />
 </div>
 
-<div class="widget-container" style="max-width:350px; margin-right:20px;" >
+<div class="login-container">
 
 <div style="text-align:left">
 
 <form action="" method="get">
 
-<p><b>Email:</b><br/>
+<p>Email:<br/>
 <input class="inp01" type="text" name="name" style="width:94%"/></p>
-<p><b>Password:</b><br/>
+<p>Password:<br/>
 <input class="inp01" type="password" name="pass" style="width:94%"/></p>
 
 <input type="submit" class="button04" value="Login" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/login';" /> <br/><br/>

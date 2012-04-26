@@ -70,7 +70,7 @@
       $menu = view("menu_view.php", array());
     }
     if (!$session['read']) $content = view("user/login_block.php", array());
-    print view("theme/dark/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
+    print view("theme/wp/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
   }
 
   if ($controller == "api" && $action == "post") inc_uphits_statistics($session['userid']); else inc_dnhits_statistics($session['userid']);
