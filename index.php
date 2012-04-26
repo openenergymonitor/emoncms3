@@ -16,7 +16,7 @@
 
   session_start();
 
-  //error_reporting(E_ALL);
+  error_reporting(E_ALL);
   ini_set('display_errors','on');
   error_reporting(E_ALL ^ E_NOTICE);
 
@@ -33,6 +33,10 @@
   require "Models/statistics_model.php";
   $e = db_connect();
 
+  if ($e == 2) {echo "no settings.php"; die;}
+  if ($e == 3) {echo "db settings error"; die;}
+  if ($e == 4) header("Location: setup.php");
+
   $q = preg_replace('/[^.\/a-z]/','',$_GET['q']); // filter out all except a-z / . 
   $q = db_real_escape_string($q);		  // second layer
   $args = preg_split( '/[\/.]/',$q);		  // split string at / .
@@ -40,11 +44,6 @@
   $controller	= $args[0];
   $action	= $args[1];
   if ($args[2]) $format	= $args[2]; else $format = "html";
-
-
-  if ($e == 2) {echo "no settings.php"; die;}
-  if ($e == 3) {echo "db settings error"; die;}
-  if ($e == 4) header("Location: setup.php");
 
   $session['read'] = $_SESSION['read'];
   $session['write'] = $_SESSION['write'];
