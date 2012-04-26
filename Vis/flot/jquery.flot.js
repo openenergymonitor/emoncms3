@@ -1242,7 +1242,9 @@
 
                 formatter = function (v, axis) {
                     var d = new Date(v);
-
+				    if (opts.localTimezone===true) {
+				    	d = new Date(v - d.getTimezoneOffset() * 60 * 1000);
+				    }
                     // first check global format
                     if (opts.timeformat != null)
                         return $.plot.formatDate(d, opts.timeformat, opts.monthNames);
