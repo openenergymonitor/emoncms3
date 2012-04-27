@@ -99,13 +99,10 @@ CKEDITOR.editorConfig = function(config) {
 		init : function(editor) {
 			var pluginName = 'e3dial';
 			
-			editor.addCommand(pluginName, {
-				// insert dial button pressed
-				exec : function(editor) {
-					editor.insertHtml("<div class='dial' feed='power' max='500' scale='1' units='V'></div>");
-				},
-				canUndo : true
-			});
+			// dial dialog
+			CKEDITOR.dialog.add(pluginName, path + 'Includes/editors/dialogs/e3dial.js');
+				
+			editor.addCommand(pluginName, new CKEDITOR.dialogCommand(pluginName ) );
 
 			editor.ui.addButton('e3dial', {
 				label : 'Insert dial',
@@ -114,8 +111,5 @@ CKEDITOR.editorConfig = function(config) {
 			});
 		}
 	});	
-	
-	// dial dialog
-	//CKEDITOR.dialog.add('e3dial', path + 'Includes/editors/dialogs/e3dial.js');
-	
+		
 };
