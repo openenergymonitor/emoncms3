@@ -23,10 +23,10 @@ CKEDITOR.editorConfig = function(config) {
 	{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },
-	{ name: 'e3widgets', items : [ 'e3dial' ] }
+	{ name: 'e3widgets', items : [ 'e3wc','e3dial' ] }
 	];
 		
-	config.extraPlugins = 'e3Save,e3Preview,e3dial';
+	config.extraPlugins = 'e3Save,e3Preview,e3wc,e3dial';
 	config.fillEmptyBlocks = false;
 
 	// Save button
@@ -73,26 +73,43 @@ CKEDITOR.editorConfig = function(config) {
 		}
 	});
 	
+	// insert widget container
+	CKEDITOR.plugins.add('e3wc', {
+		init : function(editor) {
+			var pluginName = 'e3wc';
+			
+			editor.addCommand(pluginName, {
+				// insert dial button pressed
+				exec : function(editor) {
+					editor.insertHtml("<div class='widget-container-v'></div>");
+				},
+				canUndo : true
+			});
+
+			editor.ui.addButton('e3wc', {
+				label : 'Insert widget container',
+				command : pluginName,
+				icon: path+'Includes/editors/images/e3wc.png'
+			});
+		}
+	});	
+	
 	// insert dial
 	CKEDITOR.plugins.add('e3dial', {
 		init : function(editor) {
 			var pluginName = 'e3dial';
 			
-			editor.addCommand(pluginName, {
-				// insert dial button pressed
-				exec : function(editor) {
-					editor.insertHtml("<div class='dial' feed='power' max='500' scale='1' units='V'></div>");
-				},
-				canUndo : true
-			});
+			// dial dialog
+			CKEDITOR.dialog.add(pluginName, path + 'Includes/editors/dialogs/e3dial.js');
+				
+			editor.addCommand(pluginName, new CKEDITOR.dialogCommand(pluginName ) );
 
 			editor.ui.addButton('e3dial', {
 				label : 'Insert dial',
 				command : pluginName,
-				className : 'cke_button_preview',
-				icon: path+'Includes/editors/e3dial.png'
+				icon: path+'Includes/editors/images/e3dial.png'
 			});
 		}
 	});	
-	
+		
 };
