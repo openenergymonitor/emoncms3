@@ -138,8 +138,9 @@
       {
         $start = floatval($_GET['start']);
         $end = floatval($_GET['end']);
-        $resolution = intval($_GET['res']);
-        $data = get_feed_data($feedid,$start,$end,$resolution);
+        $oldres = intval($_GET['res']); 				// For legacy support
+        $dp = intval($_GET['dp']);					// This is the new resolution setting where you ask for a specific number of datapoints
+        $data = get_feed_data($feedid,$start,$end,$oldres,$dp);
         $output['content'] = json_encode($data);
       }
     }

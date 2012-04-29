@@ -184,17 +184,19 @@
     return $data;
   }
 
-  function get_feed_data($feedid,$start,$end,$resolution)
+  function get_feed_data($feedid,$start,$end,$oldres,$dp)
   {
     $type = get_feed_type($feedid);
     if ($type == 0) $data = get_feed_data_no_index($feedid,$start,$end,$resolution);
-    if ($type == 1) $data = get_feed_data_indexed($feedid,$start,$end,$resolution);
+    if ($type == 1) $data = get_feed_data_indexed($feedid,$start,$end,$oldres,$dp);
 
     return $data;
   }
 
-  function get_feed_data_indexed($feedid,$start,$end,$resolution)
+  function get_feed_data_indexed($feedid,$start,$end,$resolution,$dp)
   {
+    if ($dp<2) $dp = 500;
+
     if ($end == 0) $end = time()*1000;
 
     $feedname = "feed_".trim($feedid)."";
@@ -207,21 +209,24 @@
 
     //----------------------------------------------------------------------------
     $data = array();
-    if (($end - $start) > (60*60*24) && $resolution>1)
+    if (($end - $start) > (5000) && $resolution>1) //why 5000?
     {
       $range = $end - $start;
-      $td = $range / 800;
+      $td = $range / $dp;
 
-      for ($i=0; $i<800; $i++)
+      for ($i=0; $i<$dp; $i++)
       {
         $t = $start + $i*$td;
-        $result = db_query("SELECT * FROM $feedname WHERE `time` >$t LIMIT 1");
+        $tb = $start + ($i+1)*$td;
+        $result = db_query("SELECT * FROM $feedname WHERE `time` >$t AND `time` <$tb LIMIT 1");
 
         if($result){
           $row = db_fetch_array($result);
           $dataValue = $row['data'];               
-          $time = $row['time'] * 1000;     
-          $data[] = array($time , $dataValue);      
+          if ($dataValue!=NULL) { // Remove this to show white space gaps in graph      
+            $time = $row['time'] * 1000;     
+            $data[] = array($time , $dataValue); 
+          } 
         }         
       }
     } else {
