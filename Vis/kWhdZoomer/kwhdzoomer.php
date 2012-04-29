@@ -117,7 +117,7 @@
           years = get_years(data);
           //set_annual_view();
 
-          months = get_months_year(data,2011);
+          months = get_months_year(data,2012);
           //set_monthly_view();
 
           days = get_last_30days(data);

@@ -121,7 +121,7 @@
           years = get_years(data);
           //set_annual_view();
 
-          months = get_months_year(data,2011);
+          months = get_months_year(data,2012);
           //set_monthly_view();
 
           days = get_last_30days(data);
@@ -204,7 +204,7 @@
             if (view==1) $("#out").html(item.datapoint[1].toFixed(0)+" kWh | "+mdate.format("mmm yyyy")+" | "+(item.datapoint[1]/months.days[item.dataIndex]).toFixed(1)+" kWh/d ");
             if (view==2) $("#out").html(item.datapoint[1].toFixed(1)+" kWh | £"+(item.datapoint[1]*price).toFixed(2)+" | £"+(item.datapoint[1]*price*365).toFixed(0)+"/y | "+mdate.format("dS mmm yyyy"));
             if (view==3) $("#out").html(item.datapoint[1].toFixed(0)+" W");
-            if (view==5) $("#out").html(item.datapoint[1].toFixed(0)+" Wh | £"+(item.datapoint[1]/1000*price).toFixed(2)+" | "+item.datapoint[0]+" W");
+            if (view==5) $("#out").html(item.datapoint[1].toFixed(1)+" kWh | £"+(item.datapoint[1]*price).toFixed(2)+" | "+item.datapoint[0]+" W");
           }
         });
 

@@ -86,7 +86,7 @@
         function set_histogram_view(start, end)
         {
         	$('#loading').show();
-              $("#out").html("Loading...");
+              //$("#out").html("Loading...");
 
               //start = day;
               //end = day + 3600000 * 24;
@@ -102,7 +102,7 @@
               $("#out2").html("Histogram "+ret);
               //$("#return").val("View: back");
               $("#return").val("View: "+ret);
-              $('#axislabely').html("Energy<br/>(Watt<br/>hours)");
+              $('#axislabely').html("Energy<br/>(kWh)");
               $('#axislabelx').html("Watts");
               $('#inst-buttons').hide();
               $("#return_ctr").show();

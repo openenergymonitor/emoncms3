@@ -172,7 +172,7 @@
     $type = get_feed_type($feedid);
 
     $data = array();   
-    $result = db_query("select * from $feedname ORDER BY time");
+    $result = db_query("select * from $feedname order by time Desc");
     while($array = db_fetch_array($result))
     {
       if ($type == 0) $time = strtotime($array['time'])*1000;
@@ -225,7 +225,7 @@
         }         
       }
     } else {
-      $result = db_query("select * from $feedname WHERE time>$start AND time<$end");
+      $result = db_query("select * from $feedname WHERE time>$start AND time<$end order by time Desc");
       while($row = db_fetch_array($result)) {
         $dataValue = $row['data'];
         $time = $row['time'] * 1000;  
