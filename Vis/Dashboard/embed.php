@@ -52,6 +52,7 @@
       type: "GET",
       url: path+"dashboard/view.json?apikey="+apikey_read,           
       dataType: 'json',   
+      async: 'true',
       success: function(data) 
       {
         $("#page").html(data);
@@ -59,7 +60,7 @@
     });
     //-------------------------------------------------
 
-	show_dashboard();
+    show_dashboard();
 });
 
 </script>

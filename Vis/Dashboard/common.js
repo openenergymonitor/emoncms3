@@ -25,8 +25,9 @@ function show_dashboard() {
 		
 // update function	
 function update() {
+    
 	$.ajax({
-		url: path+"feed/list.json",
+		url: path+"feed/list.json?apikey="+apikey_read,
 		dataType: 'json',
 		success: function(data)	{
 			for (z in data)	{
