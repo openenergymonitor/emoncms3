@@ -14,14 +14,10 @@ global $path;
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
 <script type="application/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
-
 <link rel="stylesheet" type="text/css" href="<?php echo $path;?>Views/theme/common/style.css" />
-
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/css/smoothness/jquery-ui-1.8.19.custom.css" />  
+<script type="application/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
   
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
@@ -38,20 +34,41 @@ Dashboard HTML
 // CKEditor Events and initialization
 	$(document).ready(function() 
 	{
-	$("button").button();	
+	$(".new-dashboard-button").button();
+	$(".delete-dashboard-button").button();	
+	
+	$(".new-dashboard-button").click(function(){
+   	$.ajax({
+			type : "POST",
+			url :  "<?php echo $path;?>" + "dashboards/set",
+			data : "&content=" + encodeURIComponent('ev.data.getData()'),
+			dataType : 'json',
+			success : function() { }
+		});
+	});
+			
+	$(".delete-dashboard-button").click(function(){
+   	$.ajax({
+			type : "POST",
+			url :  "<?php echo $path;?>" + "dashboards/set",
+			data : "&content=" + encodeURIComponent('ev.data.getData()'),
+			dataType : 'json',
+			success : function() { }
+		});
+	}); 
+	
 	});
 
 </script>
 
-<br><button>New dashboard</button>
-<br>
+<div class="new-dashboard-button">New dashboard</div>
 
 <?php
 	
 	while ($row = $dashboards->fetch_array(MYSQLI_NUM)) {
 		//printf ("%s (%s)\n", $row[0], $row[1]);
 		
-	echo '<table><tr><td><div class="dashboard-preview"></div></td></tr><tr><td><button>-</button><button>clone</button><button>rename</button><button>preview</button></td></tr><table>';
+	echo '<table><tr><td><div class="dashboard-preview"></div></td></tr><tr><td><div class="delete-dashboard-button">-</div><button>clone</button><button>rename</button><button>preview</button></td></tr><table>';
 
 	}
 			

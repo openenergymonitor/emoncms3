@@ -22,6 +22,7 @@
     {
       db_query("INSERT INTO dashboard (`userid`,`content`) VALUES ('$userid','$content')");
     }*/
+    db_query("INSERT INTO dashboard (`userid`,`content`) VALUES ('1','hola')");
   }
 
   function get_dashboards($userid)
@@ -33,4 +34,9 @@
    // $dashboard = $result['content'];
 
     return $result;
+  }
+
+  function delete_dashboards($userid)
+  {
+
   }

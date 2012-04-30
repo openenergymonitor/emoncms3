@@ -11,7 +11,8 @@
     DASHBOARD ACTIONS		ACCESS
     set				write
     view			read
-
+	delete			write
+   
   */
 
   function dashboards_controller()
@@ -34,9 +35,15 @@
       $content = db_real_escape_string($content);
 
       set_dashboard($session['userid'],$content);
-      $output['message'] = "dashboard set";
+      $output['message'] = "dashboards set";
     }
 
+    if ($action == 'delete' && $session['write']) // write access required
+    {
+      delete_dashboard($session['userid']);
+      $output['message'] = "dashboards delete";
+    }
+	
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
