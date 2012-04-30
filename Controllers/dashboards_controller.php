@@ -9,7 +9,7 @@
     http://openenergymonitor.org
 
     DASHBOARD ACTIONS		ACCESS
-    set				write
+    new				write
     view			read
 	delete			write
    
@@ -24,25 +24,17 @@
     $output['message'] = "";
 
     // /dashboard/set?content=<h2>HelloWorld</h2>
-    if ($action == 'set' && $session['write']) // write access required
+    if ($action == 'new' && $session['write']) // write access required
     {
-      $content = $_POST['content'];
-      if (!$content) $content = $_GET['content'];
-
-      // IMPORTANT: if you get problems with characters being removed check this line:
-      $content = preg_replace('/[^\w\s-.#<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
-
-      $content = db_real_escape_string($content);
-
-      set_dashboard($session['userid'],$content);
-      $output['message'] = "dashboards set";
-    }
+      new_dashboards($session['userid']);
+      $output['message'] = "dashboards new";
+	}
 
     if ($action == 'delete' && $session['write']) // write access required
     {
-      delete_dashboard($session['userid']);
-      $output['message'] = "dashboards delete";
-    }
+      $output['message'] = delete_dashboards(intval($_POST["content"]));
+      //$output['message'] = "dashboards delete";
+	}
 	
     // /dashboard/view
     if ($action == 'view' && $session['read'])

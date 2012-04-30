@@ -9,34 +9,19 @@
     http://openenergymonitor.org
   */
 
-  function set_dashboards($userid,$content)
+  function new_dashboards($userid)
   {
-   /* $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid'");
-    $row = db_fetch_array($result);
-
-    if ($row)
-    {
-      db_query("UPDATE dashboard SET content = '$content' WHERE userid='$userid'");
-    }
-    else
-    {
-      db_query("INSERT INTO dashboard (`userid`,`content`) VALUES ('$userid','$content')");
-    }*/
-    db_query("INSERT INTO dashboard (`userid`,`content`) VALUES ('1','hola')");
+    db_query("INSERT INTO dashboard (`userid`) VALUES ('$userid')");
   }
 
   function get_dashboards($userid)
   {
-  	$nids = array();
     $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
-
-   // $result = db_fetch_array($result);
-   // $dashboard = $result['content'];
-
     return $result;
   }
 
-  function delete_dashboards($userid)
+  function delete_dashboards($id)
   {
-
+	db_query("DELETE FROM dashboard WHERE id = '$id'");
+	return "DELETE FROM dashboard WHERE id = '$id'";
   }

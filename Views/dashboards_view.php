@@ -40,18 +40,19 @@ Dashboard HTML
 	$(".new-dashboard-button").click(function(){
    	$.ajax({
 			type : "POST",
-			url :  "<?php echo $path;?>" + "dashboards/set",
-			data : "&content=" + encodeURIComponent('ev.data.getData()'),
+			url :  "<?php echo $path;?>" + "dashboards/new",
+			data : "",
 			dataType : 'json',
 			success : function() { }
 		});
+		
 	});
 			
 	$(".delete-dashboard-button").click(function(){
    	$.ajax({
 			type : "POST",
-			url :  "<?php echo $path;?>" + "dashboards/set",
-			data : "&content=" + encodeURIComponent('ev.data.getData()'),
+			url :  "<?php echo $path;?>" + "dashboards/delete",
+			data : "&content=9",
 			dataType : 'json',
 			success : function() { }
 		});
