@@ -16,20 +16,17 @@ Dashboard related javascripts
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
 <script type="application/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/dial.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Views/theme/common/style.css" />
+
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
 <div style="text-align:center; width:100%;">
-	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:20px;">
-		<textarea id="dashboardeditor"></textarea>
-		<br/>
-		<div id="page">
-			<?php echo $page; ?>
-		</div>
-		<div style="clear:both;"></div>
-	</div>
 </div>
 <script type="application/javascript">
 
@@ -41,7 +38,21 @@ Dashboard HTML
 // CKEditor Events and initialization
 	$(document).ready(function() 
 	{
-		// Load the dasboard editor settings from file
+	$("button").button();	
 	});
 
 </script>
+
+<br><button>New dashboard</button>
+<br>
+
+<?php
+	
+	while ($row = $dashboards->fetch_array(MYSQLI_NUM)) {
+		//printf ("%s (%s)\n", $row[0], $row[1]);
+		
+	echo '<table><tr><td><div class="dashboard-preview"></div></td></tr><tr><td><button>-</button><button>clone</button><button>rename</button><button>preview</button></td></tr><table>';
+
+	}
+			
+?>

@@ -11,7 +11,7 @@
 
   function set_dashboards($userid,$content)
   {
-    $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid'");
+   /* $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid'");
     $row = db_fetch_array($result);
 
     if ($row)
@@ -21,14 +21,16 @@
     else
     {
       db_query("INSERT INTO dashboard (`userid`,`content`) VALUES ('$userid','$content')");
-    }
+    }*/
   }
 
   function get_dashboards($userid)
   {
-    $result = db_query("SELECT content FROM dashboard WHERE userid='$userid'");
-    $result = db_fetch_array($result);
-    $dashboard = $result['content'];
+  	$nids = array();
+    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
 
-    return $dashboard;
+   // $result = db_fetch_array($result);
+   // $dashboard = $result['content'];
+
+    return $result;
   }

@@ -16,7 +16,7 @@
 
   function dashboards_controller()
   {
-    require "Models/dashboard_model.php";
+    require "Models/dashboards_model.php";
     global $session, $action, $format;
 
     $output['content'] = "";
@@ -40,10 +40,10 @@
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
-      $dashboard = get_dashboard($session['userid']);
-
-      if ($format == 'json') $output['content'] = json_encode($dashboard);
-      if ($format == 'html') $output['content'] = view("dashboard_view.php", array('page'=>$dashboard));
+      $dashboards = get_dashboards($session['userid']); 
+	  
+      //if ($format == 'json') $output['content'] = json_encode($dashboard);
+      if ($format == 'html') $output['content'] = view("dashboards_view.php", array('dashboards'=>$dashboards));
     }
 
     return $output;

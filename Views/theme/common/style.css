@@ -1,0 +1,9 @@
+
+  .dashboard-preview {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.7);   
+    width:100px; float:left; margin-top:10px; margin-left:10px; padding:5px; height:100px;
+    background-image: url("./ds.png");
+	background-repeat: no-repeat
+  }
