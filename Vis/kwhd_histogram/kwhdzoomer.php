@@ -1,4 +1,4 @@
-
+﻿
 <html>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <!--
@@ -23,6 +23,7 @@
   <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.selection.js"></script>

@@ -144,11 +144,7 @@
 		max: ((end))
               },
        selection: { mode: "xy" },
-        legend: {
-         position: "nw",
-       }
-       
-
+        legend: { position: "nw"}       
      });
      return plot;
    }
