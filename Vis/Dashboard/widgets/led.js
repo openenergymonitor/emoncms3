@@ -45,3 +45,28 @@ if (status==0) {                   // red
 
 }
 
+function draw_led_ie8(circle,status)
+{
+
+
+	if (status==0) {			// red
+	  circle.fillStyle = "#C11B17"; 
+	} else if (status==1) {			// green
+	  circle.fillStyle = "#019F62";   
+	} else if (status==2) {			// grey  
+	  circle.fillStyle = "#4A4344";  
+	} else if (status==3) {			//Blue
+	  circle.fillStyle = "#00B5E2";  
+	} else if (status ==4) {		// Purple
+	  circle.fillStyle = "#FF0188";   
+	} else if (status==5)  {		// yellow
+	  circle.fillStyle = "#E4C700";     
+	} else {				// Black
+	  circle.fillStyle = "#000000";  
+	}
+
+	circle.beginPath();
+	circle.arc(25,25,20, 0,Math.PI * 2,false);
+	circle.closePath();
+	circle.fill()
+}
