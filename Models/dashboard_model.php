@@ -32,3 +32,12 @@
 
     return $dashboard;
   }
+  
+  function get_dashboard_id($userid,$id)
+  {
+    $result = db_query("SELECT content FROM dashboard WHERE userid='$userid' and id='$id'");
+    $result = db_fetch_array($result);
+    $dashboard = $result['content'];
+
+    return $dashboard;
+  }  

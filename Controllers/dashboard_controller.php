@@ -40,7 +40,10 @@
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
-      $dashboard = get_dashboard($session['userid']);
+   		if ($_GET['content']) 
+   			$dashboard = get_dashboard_id($session['userid'],$_GET['content']);
+		else
+      		$dashboard = get_dashboard($session['userid']);
 
       if ($format == 'json') $output['content'] = json_encode($dashboard);
       if ($format == 'html') $output['content'] = view("dashboard_view.php", array('page'=>$dashboard));

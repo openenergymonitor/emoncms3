@@ -37,6 +37,7 @@ Dashboard HTML
 	$(".new-dashboard-button").button();
 	$(".delete-dashboard-button").button();	
 	$(".preview-dashboard-button").button();
+	$(".edit-dashboard-button").button();	
 	
 	$(".new-dashboard-button").click(function(){
    	$.ajax({
@@ -53,7 +54,7 @@ Dashboard HTML
 	$(".delete-dashboard-button").click(function(){	
    	$.ajax({
 			type : "POST",
-			url :  "<?php echo $path;?>" + "dashboards/delete",
+			url :  "<?php echo $path;?>dashboards/delete",
 			data : "&content="+this.id,
 			dataType : 'json',
 			success : function() { }
@@ -64,27 +65,37 @@ Dashboard HTML
 	$(".preview-dashboard-button").click(function(){		
    	$.ajax({
 			type : "POST",
-			url :  "<?php echo $path;?>" + "dashboards/delete",
+			url :  "<?php echo $path;?>dashboards/delete",
 			data : "&content="+this.id,
 			dataType : 'json',
-			success : function() { }
+			success : function(data) { }
 		});
 		location.reload();
 	});
+
+	$(".edit-dashboard-button").click(function(){		
+   		$(window.location).attr('href', '<?php echo $path;?>dashboard/view&content='+this.id);
+	});	
 	
 	});
 
 </script>
 
-<br><div class="new-dashboard-button">New dashboard</div>
+<br><div class="new-dashboard-button">New dashboard</div><br>
 
 <?php
 	
 	while ($row = $dashboards->fetch_array(MYSQLI_ASSOC)) {
-		echo $row['name'];
-		echo '<table><tr><td><div class="dashboard-preview"></div></td></tr><tr><td>';
-		echo '<div class="delete-dashboard-button" id="'.$row['id'].'">';
-		echo '-</div><div class="preview-dashboard-button" id="'.$row['id'].'">preview</div></td></tr></table>';
+		
+		echo '<div class="dashboard-preview">';
+	//	echo $row['name'];
+	//	echo '<br>';
+		echo '<img src="'.$path.'Views/theme/common/ds.png"/><br>';
+	//	echo $row['description'];	
+		echo '<br>';
+		echo '<span><br><div class="delete-dashboard-button" id="'.$row['id'].'">-</div>';
+		echo '<div class="preview-dashboard-button" id="'.$row['id'].'">preview</div>';
+		echo '<div class="edit-dashboard-button" id="'.$row['id'].'">edit</div></div></span>';		
 	}
 			
 ?>
