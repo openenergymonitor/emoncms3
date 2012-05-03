@@ -15,6 +15,18 @@ var assoc_curve = [];	// Array for smooth change values - creation of smooth dia
 
 var firstdraw = 1;
 
+var dialrate = 0.02;
+var browserVersion = 999;
+
+var Browser = {
+  Version: function() {
+    var version = 999;
+    if (navigator.appVersion.indexOf("MSIE") != -1)
+      version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+    return version;
+  }
+}
+
 function show_dashboard() {
 	update();
 	setInterval(update,30000);
@@ -25,6 +37,10 @@ function show_dashboard() {
 		
 // update function	
 function update() {
+
+
+	browserVersion=Browser.Version();
+	if (browserVersion < 9) dialrate=0.2;
     
 	$.ajax({
 		url: path+"feed/list.json?apikey="+apikey_read,
@@ -77,7 +93,7 @@ function draw_dials() {
 		var units = $(this).attr("units");
 		var scale = $(this).attr("scale");
 
-		assoc_curve[feed] = curveValue(assoc_curve[feed], parseFloat(assoc[feed]), 0.02);
+		assoc_curve[feed] = curveValue(assoc_curve[feed], parseFloat(assoc[feed]), dialrate);
 		var val = assoc_curve[feed] * 1;
 
 		var id = "can-" + feed + "-" + index;
@@ -89,6 +105,12 @@ function draw_dials() {
 
 		if((val * 1).toFixed(1) != (assoc[feed] * 1).toFixed(1) || firstdraw == 1) {//Only update graphs when there is a change to update
 			var canvas = document.getElementById(id);
+ 			if (browserVersion != 999) {
+	
+		  		canvas.setAttribute('width', '200'); 
+		  		canvas.setAttribute('height', '160');
+                  		if(typeof G_vmlCanvasManager != "undefined")   G_vmlCanvasManager.initElement(canvas);
+			}
 			var ctx = canvas.getContext("2d");
 			draw_gauge(ctx, 200 / 2, 100, 80, val * scale, maxval, units);
 			firstdraw = 0;
@@ -100,7 +122,7 @@ function draw_dials() {
               var units = $(this).attr("units");
               var scale = $(this).attr("scale");
 
-              assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]), 0.02);
+              assoc_curve[feed] = curveValue(assoc_curve[feed],parseFloat(assoc[feed]), dialrate);
               var val = assoc_curve[feed]*1;
 
                 var id = "can-"+feed+"-"+index;
@@ -112,6 +134,11 @@ function draw_dials() {
 
               if ((val*1).toFixed(1)!=(assoc[feed]*1).toFixed(1) || firstdraw == 1){ //Only update graphs when there is a change to update
                 var canvas = document.getElementById(id);
+   	        if (browserVersion != 999) { 
+		   canvas.setAttribute('width', '200'); 
+                   canvas.setAttribute('height', '160');
+                   if(typeof G_vmlCanvasManager != "undefined")  G_vmlCanvasManager.initElement(canvas);
+		}
                 var ctx = canvas.getContext("2d");
                 draw_centregauge(ctx,200/2,100,80,val*scale,maxval,units); firstdraw = 0;
               }
@@ -130,8 +157,13 @@ function draw_leds() {
 
 		//  if ( firstdraw == 1){ //Only update graphs when there is a change to update
 		var canvas = document.getElementById(id);
+   	        if (browserVersion != 999) { 
+		   canvas.setAttribute('width', '200'); 
+                   canvas.setAttribute('height', '160');
+                   if(typeof G_vmlCanvasManager != "undefined")  G_vmlCanvasManager.initElement(canvas);
+		}
 		var circle = canvas.getContext("2d");
-		draw_led(circle, val);
+		if (browserVersion <9) draw_led_ie8(circle,val); else draw_led(circle,val); 		
 		firstdraw = 0;
 		//  }
 	});

@@ -16,7 +16,7 @@
 </div>
 
 
-<script type="application/javascript">
+<script type="text/javascript">
 
   var path = "<?php echo $path; ?>";
   var inputs = <?php echo json_encode($inputs); ?>;

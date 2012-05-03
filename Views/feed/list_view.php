@@ -19,7 +19,7 @@
 
 </div>
 
-<script type="application/javascript">
+<script type="text/javascript">
 
   var path = "<?php echo $path; ?>";
   var feeds = <?php echo json_encode($feeds); ?>;
