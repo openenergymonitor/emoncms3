@@ -50,7 +50,7 @@
 	// Get dashboard from server
     $.ajax({                                      
       type: "GET",
-      url: path+"dashboard/view.json?apikey="+apikey_read,           
+      url: path+"dashboard/view.json?apikey="+apikey_read+"&id=<?php echo $_GET['id'];?>",           
       dataType: 'json',   
       async: 'true',
       success: function(data) 

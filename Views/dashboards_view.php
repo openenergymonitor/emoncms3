@@ -45,10 +45,8 @@ Dashboard HTML
 			url :  "<?php echo $path;?>" + "dashboards/new",
 			data : "",
 			dataType : 'json',
-			success : function() {  }
-		});
-		location.reload();
-		
+			success : location.reload() 
+		});		
 	});
 			
 	$(".delete-dashboard-button").click(function(){	
@@ -57,24 +55,17 @@ Dashboard HTML
 			url :  "<?php echo $path;?>dashboards/delete",
 			data : "&content="+this.id,
 			dataType : 'json',
-			success : function() { }
+			success : location.reload()
 		});
-		location.reload();
 	}); 
 	
 	$(".preview-dashboard-button").click(function(){		
-   	$.ajax({
-			type : "POST",
-			url :  "<?php echo $path;?>dashboards/delete",
-			data : "&content="+this.id,
-			dataType : 'json',
-			success : function(data) { }
-		});
-		location.reload();
-	});
-
+		window.open( "<?php echo $path;?>Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>&id="+this.id, null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
+				640 + ',height=' + 420 + ',left=' + 80 );	
+    });
+    	
 	$(".edit-dashboard-button").click(function(){		
-   		$(window.location).attr('href', '<?php echo $path;?>dashboard/view&content='+this.id);
+   		$(window.location).attr('href', '<?php echo $path;?>dashboard/view&id='+this.id);
 	});	
 	
 	});

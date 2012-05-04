@@ -28,20 +28,23 @@
       $content = $_POST['content'];
       if (!$content) $content = $_GET['content'];
 
+      $id = $_POST['id'];
+      if (!$id) $id = $_GET['id'];
+
       // IMPORTANT: if you get problems with characters being removed check this line:
       $content = preg_replace('/[^\w\s-.#<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
 
       $content = db_real_escape_string($content);
 
-      set_dashboard($session['userid'],$content);
+      set_dashboard($session['userid'],$content,$id);
       $output['message'] = "dashboard set";
     }
 
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
-   		if ($_GET['content']) 
-   			$dashboard = get_dashboard_id($session['userid'],$_GET['content']);
+   		if ($_GET['id']) 
+   			$dashboard = get_dashboard_id($session['userid'],$_GET['id']);
 		else
       		$dashboard = get_dashboard($session['userid']);
 
