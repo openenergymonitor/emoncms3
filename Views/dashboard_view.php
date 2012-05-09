@@ -41,6 +41,11 @@ Dashboard HTML
 	var apikey_read = "<?php echo $apikey_read;?>";
 	var apikey_write = "<?php echo $apikey_write;?>";
 	
+	$.urlParam = function(name){
+		var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		return results[1] || 0;
+	}
+	
 // CKEditor Events and initialization
 
 	// Fired on editor instance ready
@@ -78,7 +83,7 @@ Dashboard HTML
 	// Fired on editor preview pressed
 	CKEDITOR.on( 'previewPressed', function( ev )
 	{
-		window.open( "<?php echo $path;?>Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
+		window.open( "<?php echo $path;?>Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>&id="+$.urlParam('id'), null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
 				640 + ',height=' + 420 + ',left=' + 80 );		
 	});
 		
@@ -88,7 +93,7 @@ Dashboard HTML
 		$.ajax({
 			type : "POST",
 			url :  "<?php echo $path;?>" + "dashboard/set",
-			data : "&content=" + encodeURIComponent(ev.data.getData()),
+			data : "&content=" + encodeURIComponent(ev.data.getData())+"&id="+$.urlParam('id'),
 			dataType : 'json',
 			success : function() {
 			}
