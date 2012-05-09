@@ -13,9 +13,10 @@ global $path;
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
+<!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/excanvas.min.js"></script><![endif]-->
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
-<script type="application/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/dial.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
@@ -33,7 +34,7 @@ Dashboard HTML
 		<div style="clear:both;"></div>
 	</div>
 </div>
-<script type="application/javascript">
+<script type="text/javascript">
 
 // Global page vars definition
 	var path = "<?php echo $path;?>";
