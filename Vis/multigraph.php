@@ -20,6 +20,8 @@
 
   $apikey = $_GET["apikey"];
 
+  // Determines plot line type 0 for fill, 1 for no fill.
+  $plot_style = $_GET["style"];
  ?>
 
 <head>
@@ -55,6 +57,8 @@
   $(function () {
    var path = "<?php echo $path; ?>";
    var apikey = "<?php echo $apikey; ?>";
+   var plot_style = "<?php echo $plot_style; ?>";
+   if (!plot_style) plot_style = 1;
 
     $('#placeholder').width($('#graph_bound').width());
     $('#placeholder').height($('#graph_bound').height());
@@ -84,7 +88,7 @@
     var feedlist = [];
 
     for (z in feedin) {
-      feedlist[z] = {id: feedin[z][0], key: feedin[z][1], data: 0, LOD: 1, selected: 0, loaded: 0, style: 1};
+      feedlist[z] = {id: feedin[z][0], key: feedin[z][1], data: 0, LOD: 1, selected: 0, loaded: 0, style: plot_style};
     }
 
     //-----------------------------------------------------------------
