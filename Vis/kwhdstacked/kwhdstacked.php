@@ -67,7 +67,7 @@
 
         monthsA = get_months(dataA);
         monthsB = get_months(dataB);
-        bargraph(monthsA,monthsB,3600*24*20);
+        bargraph(monthsA,monthsB,3600*24*20,"month");
 
         $("#placeholder").bind("plotclick", function (event, pos, item)
         {
@@ -83,7 +83,7 @@
               d.setTime(item.datapoint[0]);
               daysA = get_days_month(dataA,d.getMonth(),d.getFullYear());
               daysB = get_days_month(dataB,d.getMonth(),d.getFullYear());
-              bargraph(daysA,daysB,3600*22);
+              bargraph(daysA,daysB,3600*22,"day");
               view = 1;
               $("#out").html("");
             }
@@ -91,8 +91,8 @@
           else
           {
             
-            if (view==1) { $("#out").html(""); view = 0; bargraph(monthsA,monthsB,3600*24*20); }     
-            if (view==2) { $("#out").html(""); view = 1; bargraph(daysA,daysB,3600*22); }      
+            if (view==1) { $("#out").html(""); view = 0; bargraph(monthsA,monthsB,3600*24*20,"month"); }     
+            if (view==2) { $("#out").html(""); view = 1; bargraph(daysA,daysB,3600*22,"day"); }      
           }
         });
 
@@ -108,7 +108,7 @@
           }
         });
 
-        function bargraph(dataA,dataB,barwidth)
+        function bargraph(dataA,dataB,barwidth, mode)
         {
           $.plot($("#placeholder"), [ {color: "#0096ff", data:dataA}, {color: "#7cc9ff", data:dataB}], 
           {
@@ -117,7 +117,8 @@
             bars: { show: true,align: "center",barWidth: (barwidth*1000),fill: true }
             },
   	    grid: { show: true, hoverable: true, clickable: true },
-            xaxis: { mode: "time"}
+            xaxis: { mode: "time", minTickSize: [1, mode],
+                 tickLength: 1 }
           });
         }
      });

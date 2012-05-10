@@ -11,7 +11,7 @@
         function set_daily_view()
         {
           $('#inst-buttons').hide();
-          bargraph(days,3600*22);
+          bargraph(days,3600*22,"day");
           $("#out").html(""); view = 2;
           $("#return").val("View: monthly view");
           $("#out2").html("Daily view");
@@ -21,7 +21,7 @@
 
         function set_monthly_view()
         {
-          bargraph(months.data,3600*24*20); 
+          bargraph(months.data,3600*24*20, "month"); 
           $("#out").html(""); view = 1;
           $("#return").val("View: annual view");               
           $("#out2").html("Monthly view");
@@ -31,7 +31,7 @@
 
         function set_annual_view()
         {
-          bargraph(years.data,3600*24*330);     
+          bargraph(years.data,3600*24*330, "year");     
           $("#out").html(""); view = 0; 
           $("#out2").html("Annual view");
           $('#axislabely').html("Energy<br/ >(kWh)");
@@ -41,7 +41,7 @@
 
         function set_last30days_view()
         {
-          bargraph(days,3600*22);
+          bargraph(days,3600*22, "day");
           $("#out").html(""); view = 2;
           $("#return").val("View: monthly view");
           $("#out2").html("Last 30 days");

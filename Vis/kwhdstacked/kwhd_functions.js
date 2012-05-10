@@ -28,26 +28,27 @@
           var gdata = [];
 
           var sum=0, s=0, i=0;
-          var lmonth=0,month=0,year;
+          var lmonth=0,month=0,lyear=0,year;
           var tmp = []
           var d = new Date();
 
           for (var z in data)
           {
             lmonth = month;
-
+			lyear = year;
    
             d.setTime(data[z][0]);
             month = d.getMonth();
             year = d.getFullYear();
+			if (lyear==0) lyear=year;
             sum += parseFloat(data[z][1]);
             s++;
             
             if (month!=lmonth && z!=0)
             { 
               var tmp = [];
-              tmp[0] = Date.UTC(year,month-1,1);
-              tmp[1] = sum/daysInMonth(month, year);
+              tmp[0] = Date.UTC(lyear,lmonth,1);
+              tmp[1] = sum/daysInMonth(lmonth, lyear);
 
               gdata[i] = tmp; i++;
               sum = 0; s = 0;
