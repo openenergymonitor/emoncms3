@@ -124,20 +124,18 @@ Dashboard HTML
 			$( "button" ).click(
 				function() { 
 					element = document.getElementById('dashboardeditor'); 
-					
-					$("#button").button().toggle(function() {
-   $(this).button('option', 'label', 'Stop');
-}, function() {
-   $(this).button('option', 'label', 'Start');
-});
-
-
-				
-					if (element.style.display != 'none') 
-						element.style.display = 'none'
+									
+					if (element.style.display != 'none')
+					{ 
+						element.style.display = 'none';
+						$(this).button('option', 'label', 'Show editor');
+					}
 					else
-						element.style.display = 'block'				 
-					});
+					{
+						element.style.display = 'block';
+						$(this).button('option', 'label', 'Hide editor');
+					}				 
+				});
 			});
 	
 		// Load the dasboard editor settings from file
