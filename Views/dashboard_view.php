@@ -21,13 +21,19 @@ Dashboard related javascripts
 <script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/adapters/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/css/smoothness/jquery-ui-1.8.19.custom.css" />  
+<script type="application/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
+
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
 <div style="text-align:center; width:100%;">
 	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:20px;">
-		<textarea id="dashboardeditor"></textarea>
-		<br/>
+		<button>Hide editor</button>
+
+	<div id="dashboardeditor">
+	</div>
+						
 		<div id="page">
 			<?php echo $page; ?>
 		</div>
@@ -37,6 +43,7 @@ Dashboard HTML
 <script type="text/javascript">
 
 // Global page vars definition
+	var editor = null;
 	var path = "<?php echo $path;?>";
 	var apikey_read = "<?php echo $apikey_read;?>";
 	var apikey_write = "<?php echo $apikey_write;?>";
@@ -50,7 +57,7 @@ Dashboard HTML
 
 	// Fired on editor instance ready
 	CKEDITOR.on( 'instanceReady', function( ev )
-	{
+	{	
 		// Set rules for div tag
 		ev.editor.dataProcessor.writer.setRules( 'div',{
 			        // Indicates that this tag causes indentation on line breaks inside of it.
@@ -108,8 +115,33 @@ Dashboard HTML
 	
 	$(document).ready(function() 
 	{
+		// Hide/show feature
+		$(function() {
+			// Create button style
+			$( "button").button();
+		
+			// toggle editor style
+			$( "button" ).click(
+				function() { 
+					element = document.getElementById('dashboardeditor'); 
+					
+					$("#button").button().toggle(function() {
+   $(this).button('option', 'label', 'Stop');
+}, function() {
+   $(this).button('option', 'label', 'Start');
+});
+
+
+				
+					if (element.style.display != 'none') 
+						element.style.display = 'none'
+					else
+						element.style.display = 'block'				 
+					});
+			});
+	
 		// Load the dasboard editor settings from file
-		CKEDITOR.replace( 'dashboardeditor',
+		editor = CKEDITOR.appendTo( 'dashboardeditor',	
 	    {
 	        customConfig : '<?php echo $path;?>Includes/editors/ckeditor_settings.js'
 	    });
