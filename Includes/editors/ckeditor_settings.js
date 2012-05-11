@@ -22,7 +22,7 @@ CKEDITOR.editorConfig = function(config) {
 	'/',
 	{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
-	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },
+	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },'/',
 	{ name: 'e3widgets', items : [ 'e3wc','e3dial' ] }
 	];
 		
