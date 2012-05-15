@@ -67,8 +67,11 @@
   );
 
   $schema['dashboard'] = array(
+    'id'=> array('type'=>'int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id,userid)'),
     'userid'=> array('type'=>'int'),
-    'content'=> array('type'=>'text')
+    'content'=> array('type'=>'text'),
+    'name'=> array('type'=>"VARCHAR(30) DEFAULT 'no name'"),
+    'description'=> array('type'=>"VARCHAR(255) DEFAULT 'no description'")
   );
 
   $schema['notify'] = array(
