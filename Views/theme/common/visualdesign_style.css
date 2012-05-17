@@ -1,7 +1,14 @@
 
 .dial {
 	width:200px;
-	height:180px;
+	height:160px;
 	background-image: url("./dial.png");
+	background-repeat: no-repeat
+  }
+  
+.graph {
+	width:200px;
+	height:190px;
+	background-image: url("./graph.png");
 	background-repeat: no-repeat
   }
