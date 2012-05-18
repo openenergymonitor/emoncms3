@@ -67,7 +67,7 @@
   );
 
   $schema['dashboard'] = array(
-    'id'=> array('type'=>'int NOT NULL AUTO_INCREMENT, ADD PRIMARY KEY(id,userid)'),
+    'id'=> array('type'=>'int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id,userid)'),
     'userid'=> array('type'=>'int'),
     'content'=> array('type'=>'text'),
     'name'=> array('type'=>"VARCHAR(30) DEFAULT 'no name'"),

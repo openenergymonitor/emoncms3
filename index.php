@@ -14,6 +14,8 @@
     http://openenergymonitor.org/emon/forum
   */
 
+  define('EMONCMS_EXEC', 1);
+
   session_start();
 
   error_reporting(E_ALL);
@@ -44,6 +46,7 @@
   $controller	= $args[0];
   $action	= $args[1];
   if ($args[2]) $format	= $args[2]; else $format = "html";
+  $lang = "en";					  // not currently used
 
   $session['read'] = $_SESSION['read'];
   $session['write'] = $_SESSION['write'];
