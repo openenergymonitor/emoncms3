@@ -37,9 +37,9 @@
              var timeWindow = (timeB-timeA);
              var timeWidth = timeWindow / npoints;
 
-             kwhWindow = ((timeWidth * paverage)/3600000).toFixed(1);
+             kwhWindow = ((timeWidth * paverage)/3600000);
 
-           paverage = paverage / npoints;
+             paverage = paverage / npoints;
            
            }
            else
@@ -73,6 +73,8 @@
         grid: { show: true, hoverable: true, clickable: true },
         selection: { mode: "xy" }
      } ); 
+
+       $("#stats").html("Average: "+paverage.toFixed(0)+"W | "+kwhWindow.toFixed(2)+" kWh");
      }
 
      function plotHistogram(start, end)
