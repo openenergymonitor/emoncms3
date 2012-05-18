@@ -425,6 +425,11 @@
     return $feed['type'];
   }
 
+  function set_feed_type($feedid,$type)
+  {
+    db_query("UPDATE feeds SET type = '$type' WHERE id='$feedid'");
+  }
+
   function get_all_feeds()
   {
     $result = db_query("SELECT id FROM feeds");
@@ -435,6 +440,8 @@
     }
     return $feeds;
   }
+
+
 
 
 ?>
