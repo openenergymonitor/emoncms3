@@ -37,6 +37,8 @@
     <div id="graph_bound" style="height:100%; width:100%; position:relative; ">
       <div id="graph"></div>
       <div style="position:absolute; top:20px; right:20px;">
+
+
         <input class="time" type="button" value="D" time="1"/>
         <input class="time" type="button" value="W" time="7"/>
         <input class="time" type="button" value="M" time="30"/>
@@ -46,9 +48,13 @@
         <input id="zoomout" type="button" value="-"/>
         <input id="left" type="button" value="<"/>
         <input id="right" type="button" value=">"/>
+
       </div>
+
+
+
         <div id="loading" style="position:absolute; top:0px; left:0px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
-        <h3 style="position:absolute; top:00px; left:60px;"><span id="stat"></span></h3>
+        <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
     </div>
 
    <script id="source" language="javascript" type="text/javascript">
