@@ -16,9 +16,10 @@
 
   define('EMONCMS_EXEC', 1);
 
-  session_start();
+  require "Includes/core.inc.php";
+  emon_session_start();
 
-  error_reporting(E_ALL);
+  //error_reporting(E_ALL);
   ini_set('display_errors','on');
   error_reporting(E_ALL ^ E_NOTICE);
 
@@ -29,7 +30,6 @@
   if ($ssl == "on") $proto = "https";
   $path = dirname("$proto://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'])."/";
 
-  require "Includes/core.inc.php";
   require "Includes/db.php";
   require "Models/user_model.php";
   require "Models/statistics_model.php";
@@ -39,14 +39,15 @@
   if ($e == 3) {echo "db settings error"; die;}
   if ($e == 4) header("Location: setup.php");
 
-  $q = preg_replace('/[^.\/a-z]/','',$_GET['q']); // filter out all except a-z / . 
+  $q = preg_replace('/[^.\/a-z0-9]/','',$_GET['q']); // filter out all except a-z / . 
   $q = db_real_escape_string($q);		  // second layer
   $args = preg_split( '/[\/.]/',$q);		  // split string at / .
 
   $controller	= $args[0];
   $action	= $args[1];
   if ($args[2]) $format	= $args[2]; else $format = "html";
-  $lang = "en";					  // not currently used
+
+  $lang = "en"; //$lang = $_GET["lang"]; 
 
   $session['read'] = $_SESSION['read'];
   $session['write'] = $_SESSION['write'];

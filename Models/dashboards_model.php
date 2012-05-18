@@ -9,6 +9,9 @@
     http://openenergymonitor.org
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function new_dashboards($userid)
   {
     db_query("INSERT INTO dashboard (`userid`) VALUES ('$userid')");

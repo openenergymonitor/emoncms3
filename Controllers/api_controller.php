@@ -8,6 +8,10 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
   */
+
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
 function api_controller()
 {
   global $session,$action;

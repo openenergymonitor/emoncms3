@@ -9,6 +9,9 @@
     http://openenergymonitor.org
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function confirm_controller()
   {
     $message = preg_replace('/[^\w\s-.<>?:]/','',$_POST['message']);	// filter out all except for alphanumeric white space and dash

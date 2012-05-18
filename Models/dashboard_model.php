@@ -9,6 +9,9 @@
     http://openenergymonitor.org
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function set_dashboard($userid,$content,$id)
   {
     $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid' and id='$id'");

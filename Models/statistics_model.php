@@ -9,6 +9,9 @@
     http://openenergymonitor.org
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function create_user_statistics($userid)
   {
     db_query("INSERT INTO statistics (`userid`,`uphits`,`dnhits`,`memory`) VALUES ('$userid','0','0','0')");

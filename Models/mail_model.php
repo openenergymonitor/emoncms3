@@ -1,5 +1,8 @@
 <?php
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
 function send_mail($to,$subject,$body)
 {
   require_once "Mail.php";

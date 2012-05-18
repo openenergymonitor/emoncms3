@@ -15,6 +15,9 @@
 
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function admin_controller()
   {
     require "Models/feed_model.php";

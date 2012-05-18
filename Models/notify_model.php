@@ -9,6 +9,9 @@
     http://openenergymonitor.org
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function run_notify($userid)
   {
     $notification_number = 0;									// Will be used to display number of notifications in an email

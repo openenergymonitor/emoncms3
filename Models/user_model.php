@@ -8,6 +8,8 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
   */
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
 
   function user_apikey_session_control($apikey_in)
   {
@@ -121,6 +123,7 @@
     {
       $_SESSION['read'] = 0;
       $_SESSION['write'] = 0;
+      $_SESSION['admin'] = 0;
       $success = 0;
     }
     else
@@ -178,6 +181,8 @@
       return 0; // failed
     }
   }
+
+
 
   function get_user_list()
   {

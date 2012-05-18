@@ -19,6 +19,10 @@
     data?id=1&start=000&end=000&res=1	read
     
   */
+
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function feed_controller()
   {
     require "Models/feed_model.php";

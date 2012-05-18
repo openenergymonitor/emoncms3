@@ -14,6 +14,9 @@
 
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function dashboard_controller()
   {
     require "Models/dashboard_model.php";

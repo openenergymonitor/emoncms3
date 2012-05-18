@@ -9,6 +9,8 @@
     http://openenergymonitor.org
   */
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
 
   function get_process_list()
   {

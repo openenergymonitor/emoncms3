@@ -8,6 +8,10 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
   */
+
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function create_input($user,$name)
   {
     db_query("INSERT INTO input (userid,name) VALUES ('$user','$name')");

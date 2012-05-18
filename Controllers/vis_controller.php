@@ -20,6 +20,9 @@
   // The html content on this page could be seperated out into a view
   //---------------------------------------------------------------------
 
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function vis_controller()
   {
     require "Models/feed_model.php";

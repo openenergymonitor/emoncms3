@@ -14,6 +14,10 @@
     delete?id=1				write
 
   */
+
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
 function input_controller()
 {
   require "Models/input_model.php";

@@ -14,6 +14,10 @@
     add?inputid=1&type=1&arg=power	write
 
   */
+
+  // no direct access
+  defined('EMONCMS_EXEC') or die('Restricted access');
+
   function process_controller()
   {
     require "Models/process_model.php";
