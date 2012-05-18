@@ -38,7 +38,6 @@ function show_dashboard() {
 // update function	
 function update() {
 
-
 	browserVersion=Browser.Version();
 	if (browserVersion < 9) dialrate=0.2;
     
