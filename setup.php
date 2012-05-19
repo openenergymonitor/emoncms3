@@ -14,7 +14,7 @@
   */
 
   //=====================================================
-  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  $runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
   define('EMONCMS_EXEC', 1);
   require "Includes/db.php";
@@ -33,7 +33,8 @@
     'apikey_write'=> array('type'=>'varchar(64)'),
     'apikey_read'=> array('type'=>'varchar(64)'),
     'lastlogin'=> array('type'=>'DATETIME'),
-    'admin'=> array('type'=>'INT NOT NULL')
+    'admin'=> array('type'=>'INT NOT NULL'),
+    'lang'=> array('type'=>'varchar(2)')
   );
 
   $schema['input'] = array(
