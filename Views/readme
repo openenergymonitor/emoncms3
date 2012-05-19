@@ -1,0 +1,29 @@
+Adding a language to emoncms
+
+1) Make a copy of the folder Views/en and call it the language your creating a translation for, i.e cy for welsh.
+Or use a language that has already been translated from this repo, i.e cy...
+
+2) If your creating a new translation, translate each view script inside your language folder.
+
+3) Add your language to the options in index.php:
+
+Change the line:
+
+  $lang =  $_GET['lang']; if ($lang=='en') $_SESSION['lang'] = $lang; else $lang = null;
+
+to (with your chosen language code)
+
+  $lang =  $_GET['lang']; if ($lang=='en' || $lang=='cy') $_SESSION['lang'] = $lang; else $lang = null;
+
+2) Add your language to the user_view language selector. 
+Until a better implementation is created, this needs to be done for each language.
+In Views/en/user_view.php
+
+add (or your chosen language)
+
+    <option value="cy">Welsh</option>
+
+below: <option selected value="en">English</option>
+
+Repeat this for the user_view that belongs to the language your adding and set the selected attribute to the added language.
+
