@@ -36,6 +36,11 @@ Select graph type:</h3>
           <input type="submit" class="button06" value="Bar graph"></input>
  </form>
 
+ <form action="../vis/histgraph" method="get">
+        <input type="hidden" name="feedid" value="<?php echo $id; ?>">
+          <input type="submit" class="button06" value="Histogram"></input>
+ </form>
+
 <h2>Tag feed</h2>
 <form action="tag" method="get">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
