@@ -19,6 +19,7 @@
     getapiread				read
     getapiwrite 			write
     view				write
+    setlang				write
 
   */
 
@@ -149,6 +150,15 @@
 
       if ($format == 'json') $output['content'] = json_encode($user);
       if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
+    }
+
+    //---------------------------------------------------------------------------------------------------------
+    // SET USERS DEFAULT LANGUAGE
+    // http://yoursite/emoncms/user/setlang
+    //---------------------------------------------------------------------------------------------------------
+    if ($action == 'setlang' && $session['write']) {
+      set_user_lang($session['userid'],$session['lang']);
+      if ($format == 'html') header("Location: view");
     }
 
     return $output;
