@@ -25,7 +25,8 @@
       $session['userid'] = $userid;
       $session['read'] = 1;
       $session['write'] = 0;
-      $session['admin'] = 0;    
+      $session['admin'] = 0; 
+      $session['lang'] = "en";   
     }
 
     $userid = get_apikey_write_user($apikey_in);
@@ -35,7 +36,8 @@
       $session['userid'] = $userid;
       $session['read'] = 1;
       $session['write'] = 1;
-      $session['admin'] = 0;  
+      $session['admin'] = 0;
+      $session['lang'] = "en";
   
     }
     //----------------------------------------------------

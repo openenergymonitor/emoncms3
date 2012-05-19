@@ -47,12 +47,19 @@
   $action	= $args[1];
   if ($args[2]) $format	= $args[2]; else $format = "html";
 
-  $lang = "en"; //$lang = $_GET["lang"]; 
+  $lang = preg_replace('/[a-z]/','',$_GET['lang']);
+
+  // Multilanguage support
+  // Set language from url attribute lang and save it to the session variable
+  // The view function in core.inc.php then selects the view depending on the lang session variable
+  $lang =  $_GET['lang']; if ($lang=='en' || $lang=='cy') $_SESSION['lang'] = $lang; else $lang = null;
+  if (!$_SESSION['lang']) $_SESSION['lang'] = "en";	// Set default language
 
   $session['read'] = $_SESSION['read'];
   $session['write'] = $_SESSION['write'];
   $session['userid'] = $_SESSION['userid'];
   $session['admin'] = $_SESSION['admin'];
+  $session['lang'] = $_SESSION['lang'];
 
   if ($_GET['apikey']) $session = user_apikey_session_control($_GET['apikey']);
 
@@ -73,7 +80,7 @@
       $menu = view("menu_view.php", array());
     }
     if (!$session['read']) $content = view("user/login_block.php", array());
-    print view("theme/wp/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
+    print theme("theme/wp/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
   }
 
   if ($controller == "api" && $action == "post") inc_uphits_statistics($session['userid']); else inc_dnhits_statistics($session['userid']);

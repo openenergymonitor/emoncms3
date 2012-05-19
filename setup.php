@@ -16,7 +16,7 @@
   //=====================================================
   //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
-
+  define('EMONCMS_EXEC', 1);
   require "Includes/db.php";
   $e = db_connect();
   if ($e == 4) $runnable = TRUE;
