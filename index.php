@@ -52,7 +52,7 @@
   // Multilanguage support
   // Set language from url attribute lang and save it to the session variable
   // The view function in core.inc.php then selects the view depending on the lang session variable
-  $lang =  $_GET['lang']; if ($lang=='en' || $lang=='cy') $_SESSION['lang'] = $lang; else $lang = null;
+  $lang =  $_GET['lang']; if ($lang=='en') $_SESSION['lang'] = $lang; else $lang = null;
   if (!$_SESSION['lang']) $_SESSION['lang'] = "en";	// Set default language
 
   $session['read'] = $_SESSION['read'];

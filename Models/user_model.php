@@ -117,7 +117,7 @@
 
   function user_logon($username,$password)  
   {
-    $result = db_query("SELECT id,password,admin, salt FROM users WHERE username = '$username'");
+    $result = db_query("SELECT id,password,admin,salt,lang FROM users WHERE username = '$username'");
     $userData = db_fetch_array($result);
     $hash = hash('sha256', $userData['salt'] . hash('sha256', $password) );
     
@@ -136,6 +136,7 @@
       $_SESSION['read'] = 1;
       $_SESSION['write'] = 1;
       $_SESSION['admin'] = $userData['admin'];
+      $_SESSION['lang'] = $userData['lang'];
       $success = 1;
     }
     return $success;
@@ -196,6 +197,11 @@
     }
 
     return $userlist;
+  }
+
+  function set_user_lang($userid,$lang)
+  {
+    db_query("UPDATE users SET lang = '$lang' WHERE id='$userid'");
   }
 
 
