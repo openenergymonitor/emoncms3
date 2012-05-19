@@ -27,9 +27,12 @@ Dashboard related javascripts
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
+
+<div style="width:100%; background-color:#eee; text-align:right; padding:2px;"><button style="margin-right:4px;">Edit</button></div>
+
 <div style="text-align:center; width:100%;">
-	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:20px;">
-		<button>Hide editor</button>
+	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
+		
 
 	<div id="dashboardeditor">
 	</div>
@@ -112,13 +115,19 @@ Dashboard HTML
 		// Run javascript
 		update();
 	});
+
+        
 	
 	$(document).ready(function() 
 	{
+                // Hide the editor on load
+                element = document.getElementById('dashboardeditor');
+                element.style.display = 'none';
+
 		// Hide/show feature
 		$(function() {
 			// Create button style
-			$( "button").button();
+			//$( "button").button();
 		
 			// toggle editor style
 			$( "button" ).click(
@@ -128,12 +137,12 @@ Dashboard HTML
 					if (element.style.display != 'none')
 					{ 
 						element.style.display = 'none';
-						$(this).button('option', 'label', 'Show editor');
+						$(this).html('Edit');
 					}
 					else
 					{
 						element.style.display = 'block';
-						$(this).button('option', 'label', 'Hide editor');
+						$(this).html('Hide editor');
 					}				 
 				});
 			});

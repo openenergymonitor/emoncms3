@@ -8,7 +8,7 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 -->
 <?php
-global $path;
+  global $path;
 ?>
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
