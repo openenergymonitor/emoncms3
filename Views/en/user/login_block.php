@@ -20,7 +20,7 @@ global $path, $session;
 <div style="margin-left:20px;">
 
 <div style="max-width:392px; margin-right:20px; padding-top:45px; padding-bottom:15px; color: #888;">
-<img style="margin:12px;" src="<?php print $GLOBALS['path']; ?>Views/user/emoncms_logo.png" />
+<img style="margin:12px;" src="<?php print $GLOBALS['path']; ?>Views/theme/common/emoncms_logo.png" />
 </div>
 
 <div class="login-container">
