@@ -190,7 +190,7 @@
   function get_feed_data($feedid,$start,$end,$oldres,$dp)
   {
     $type = get_feed_type($feedid);
-    if ($type == 0) $data = get_feed_data_no_index($feedid,$start,$end,$resolution);
+    if ($type == 0) $data = get_feed_data_no_index($feedid,$start,$end,$oldres);
     if ($type == 1) $data = get_feed_data_indexed($feedid,$start,$end,$oldres,$dp);
 
     return $data;

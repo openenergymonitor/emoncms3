@@ -13,7 +13,7 @@
  // 8th of March upgrade
  // db_query("ALTER TABLE  `users` ADD  `lastlogin` DATETIME");
  // db_query("ALTER TABLE  `users` ADD  `admin` INT NOT NULL");
-  
+  define('EMONCMS_EXEC', 1);
     require "./db.php";
   	db_connect();
 	
