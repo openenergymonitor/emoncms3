@@ -22,20 +22,39 @@ Dashboard related javascripts
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/adapters/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/css/smoothness/jquery-ui-1.8.19.custom.css" />  
-<script type="application/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
 
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
 
-<div style="width:100%; background-color:#eee; text-align:right; padding:2px;"><button style="margin-right:4px;">Edit</button></div>
+<!--<div style="width:100%; background-color:#eee; text-align:right; padding:2px;"><button style="margin-right:4px;">Edit</button></div>-->
 
-<div style="text-align:center; width:100%;">
-	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
-		
 
-	<div id="dashboardeditor">
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Edit dashboard</a></li>
+		<li><a href="#tabs-2">Configuration</a></li>
+		<li><a href="#tabs-3">Preview</a></li>		
+	</ul>
+	<div id="tabs-1">
+		<div id="dashboardeditor"></div>	
 	</div>
+	<div id="tabs-2">
+		<form id="confform" action="comment.php" method="post"> 
+    		Dashboard name: <input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
+    		Description: <textarea name="comment"><?php echo $ds_description; ?></textarea><br>
+    		Theme: 
+    		<select>
+  				<option value="" selected>dark</option>
+  				<option value="">wp</option>
+			</select>
+    		<input type="submit" value="Submit Comment" /> 
+		</form>
+	</div>
+	<div id="tabs-3">
+		<div style="text-align:center; width:100%;">
+	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
 						
 		<div id="page">
 			<?php echo $page; ?>
@@ -43,6 +62,9 @@ Dashboard HTML
 		<div style="clear:both;"></div>
 	</div>
 </div>
+	</div>
+</div>
+
 <script type="text/javascript">
 
 // Global page vars definition
@@ -115,20 +137,23 @@ Dashboard HTML
 		// Run javascript
 		update();
 	});
-
-        
-	
+      	
 	$(document).ready(function() 
 	{
                 // Hide the editor on load
-                element = document.getElementById('dashboardeditor');
-                element.style.display = 'none';
+      //          element = document.getElementById('dashboardeditor');
+       //         element.style.display = 'none';
 
 		// Hide/show feature
 		$(function() {
 			// Create button style
 			//$( "button").button();
-		
+			$( "#tabs" ).tabs();
+	
+			$('#confform').ajaxForm(function() { 
+                alert("Thank you for your comment!"); 
+            }); 
+                         
 			// toggle editor style
 			$( "button" ).click(
 				function() { 
@@ -146,6 +171,7 @@ Dashboard HTML
 					}				 
 				});
 			});
+	
 	
 		// Load the dasboard editor settings from file
 		editor = CKEDITOR.appendTo( 'dashboardeditor',	

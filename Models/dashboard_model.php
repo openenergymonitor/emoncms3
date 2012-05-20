@@ -29,7 +29,7 @@
 
   function get_dashboard($userid)
   {
-    $result = db_query("SELECT content FROM dashboard WHERE userid='$userid'");
+    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
     $result = db_fetch_array($result);
     $dashboard = $result['content'];
 
@@ -40,7 +40,11 @@
   {
     $result = db_query("SELECT content FROM dashboard WHERE userid='$userid' and id='$id'");
     $result = db_fetch_array($result);
-    $dashboard = $result['content'];
+    //$dashboard = $result['content'];
 
-    return $dashboard;
+	return array('ds_content'=>$result['content'],
+	'ds_name'=>$result['name'],
+	'ds_description'=>$result['description']);
+	
+    //return $dashboard;
   }  
