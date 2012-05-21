@@ -10,7 +10,7 @@
   */
 
   //=====================================================
-  $runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
   if(!$runnable) {echo "to run script uncomment runnable"; die;}
   define('EMONCMS_EXEC', 1);
@@ -25,7 +25,7 @@
 
   require "Models/feed_model.php";
   //$feeds = get_all_feeds();
-  $feeds = get_user_feed_ids(1);
+  //$feeds = get_user_feed_ids(1);
 
   foreach ($feeds as $feed ){
 
