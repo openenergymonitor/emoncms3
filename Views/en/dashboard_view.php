@@ -41,27 +41,23 @@ Dashboard HTML
 		<div id="dashboardeditor"></div>	
 	</div>
 	<div id="tabs-2">
-		<form id="confform" action="comment.php" method="post"> 
+		<form id="confform" action=""> 
     		Dashboard name: <input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
-    		Description: <textarea name="comment"><?php echo $ds_description; ?></textarea><br>
-    		Theme: 
+    		Description: <textarea name="description"><?php echo $ds_description; ?></textarea><br>
+    		<!--Theme: 
     		<select>
   				<option value="" selected>dark</option>
   				<option value="">wp</option>
-			</select>
-    		<input type="submit" value="Submit Comment" /> 
+			</select>-->
+    		<input type="submit" name="submit" class="button" id="submit_btn" value="Save configuration" />  
 		</form>
 	</div>
 	<div id="tabs-3">
-		<div style="text-align:center; width:100%;">
-	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
-						
+								
 		<div id="page">
 			<?php echo $page; ?>
 		</div>
-		<div style="clear:both;"></div>
-	</div>
-</div>
+			
 	</div>
 </div>
 
@@ -108,8 +104,8 @@ Dashboard HTML
 		// Place page html in edit area ready for editing
 		ev.editor.setData( $("#page").html() );
 		
-		// On instance ready we show the botton preview 
-		show_dashboard();
+		// On instance ready we show the preview 
+		//show_dashboard();
 	});
 	
 	// Fired on editor preview pressed
@@ -119,6 +115,7 @@ Dashboard HTML
 				640 + ',height=' + 420 + ',left=' + 80 );		
 	});
 		
+	// Fired on editor save pressed		
 	CKEDITOR.on( 'savePressed', function( ev )
 	{				
 		// Upload changes to server
@@ -148,18 +145,34 @@ Dashboard HTML
 		$(function() {
 			// Create button style
 			//$( "button").button();
-			$( "#tabs" ).tabs();
-	
-			$('#confform').ajaxForm(function() { 
-                alert("Thank you for your comment!"); 
-            }); 
-                         
+			
+			$( "#tabs" ).tabs({
+			   select: function(event, ui) { 
+			   		if (ui.index == 2) { show_dashboard(); }; 
+			    }
+			});
+						
+			// Save dashboard configuration        
+            $(".button").click(function() {  
+     			//alert($('#confform').serialize());
+     			$.ajax({
+					type : "POST",
+					url :  "<?php echo $path;?>" + "dashboard/setconf",
+					data : $('#confform').serialize()+"&id="+$.urlParam('id'),
+					dataType : 'json',
+					success : function() {
+					}
+				});
+		
+  				return false;
+  			});  
+               
 			// toggle editor style
-			$( "button" ).click(
+			/*$( "button" ).click(
 				function() { 
 					element = document.getElementById('dashboardeditor'); 
 									
-					if (element.style.display != 'none')
+					/*if (element.style.display != 'none')
 					{ 
 						element.style.display = 'none';
 						$(this).html('Edit');
@@ -169,7 +182,7 @@ Dashboard HTML
 						element.style.display = 'block';
 						$(this).html('Hide editor');
 					}				 
-				});
+				});*/
 			});
 	
 	

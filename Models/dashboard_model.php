@@ -27,6 +27,18 @@
     }
   }
 
+  function set_dashboard_conf($userid,$id,$name,$description)
+  {
+    $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid' and id='$id'");
+    $row = db_fetch_array($result);
+
+    if ($row)
+    {
+      db_query("UPDATE dashboard SET name = '$name', description = '$description' WHERE userid='$userid' and id='$id'");
+    }
+    
+  }
+  
   function get_dashboard($userid)
   {
     $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
@@ -38,13 +50,14 @@
   
   function get_dashboard_id($userid,$id)
   {
-    $result = db_query("SELECT content FROM dashboard WHERE userid='$userid' and id='$id'");
+    $result = db_query("SELECT content,name,description FROM dashboard WHERE userid='$userid' and id='$id'");
     $result = db_fetch_array($result);
     //$dashboard = $result['content'];
 
-	return array('ds_content'=>$result['content'],
-	'ds_name'=>$result['name'],
-	'ds_description'=>$result['description']);
+	return array(
+		'ds_content'=>$result['content'],
+		'ds_name'=>$result['name'],
+		'ds_description'=>$result['description']);
 	
     //return $dashboard;
   }  

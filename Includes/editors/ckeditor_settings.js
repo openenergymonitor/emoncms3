@@ -28,6 +28,8 @@ CKEDITOR.editorConfig = function(config) {
 		
 	config.extraPlugins = 'e3Save,e3Preview,e3wc,e3dial,e3graph';
 	config.fillEmptyBlocks = false;
+	config.width = '100%';
+	config.height = '420px';
 
 	// Save button
 	CKEDITOR.plugins.add('e3Save', {

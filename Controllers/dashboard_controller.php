@@ -10,6 +10,7 @@
 
     DASHBOARD ACTIONS		ACCESS
     set				write
+   	setconf			write
     view			read
 
   */
@@ -43,6 +44,13 @@
       $output['message'] = "dashboard set";
     }
 
+    if ($action == 'setconf' && $session['write']) // write access required
+    {
+     // $output['message'] = "dashboard setconf";
+     set_dashboard_conf($session['userid'],$_POST['id'],$_POST['name'],$_POST['description']);
+	 $output['message'] = "dashboard set configuration";
+    }
+	
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
@@ -59,8 +67,7 @@
       		'ds_name'=>$dashboard_arr['ds_name'],
       		'ds_description'=>$dashboard_arr['ds_description'])
 		);
-      //if ($format == 'html') $output['content'] = $dashboard_arr['ds_name'];
-	       
+      	       
     }
 
     return $output;
