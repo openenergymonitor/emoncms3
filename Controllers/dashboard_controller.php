@@ -59,7 +59,7 @@
 		else
       		$dashboard = get_dashboard($session['userid']);
 
-      if ($format == 'json') $output['content'] = json_encode($dashboard);
+      if ($format == 'json') $output['content'] = json_encode($dashboard_arr['ds_content']);
 	  
       if ($format == 'html') $output['content'] = view("dashboard_view.php",
       	array(

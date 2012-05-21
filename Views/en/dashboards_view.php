@@ -16,9 +16,9 @@ Dashboard related javascripts
 <script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
 <script type="application/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $path;?>Views/theme/common/style.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/css/smoothness/jquery-ui-1.8.19.custom.css" />  
-<script type="application/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
-  
+<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.20.custom/css/smoothness/jquery-ui-1.8.20.custom.css" />  
+<script type="text/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js"></script>
+ 
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->

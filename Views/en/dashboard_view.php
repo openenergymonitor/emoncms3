@@ -21,8 +21,8 @@ Dashboard related javascripts
 <script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/adapters/jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/css/smoothness/jquery-ui-1.8.19.custom.css" />  
-<script type="text/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.20.custom/css/smoothness/jquery-ui-1.8.20.custom.css" />  
+<script type="text/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js"></script>
 
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
@@ -53,12 +53,10 @@ Dashboard HTML
 		</form>
 	</div>
 	<div id="tabs-3">
-								
-		<div id="page">
-			<?php echo $page; ?>
-		</div>
-			
-	</div>
+		<div id="page"><?php echo $page; ?></div>
+		<div style="clear:both;"></div>
+	</div>	
+	
 </div>
 
 <script type="text/javascript">
