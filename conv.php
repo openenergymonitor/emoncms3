@@ -13,6 +13,7 @@
   //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
   if(!$runnable) {echo "to run script uncomment runnable"; die;}
+  define('EMONCMS_EXEC', 1);
 
   set_time_limit ( 1000 );
   error_reporting(E_ALL);
@@ -28,11 +29,11 @@
 
   foreach ($feeds as $feed ){
 
+    $feedname = "feed_".trim($feed['id'])."";
+
     if (get_feed_type($feed['id'])==0)
     {
       echo "converted feed: ".$feed['id']."<br/>";
-
-      $feedname = "feed_".trim($feed['id'])."";
 
       // 1) rename feed to be converted as temporary
       $result = db_query("RENAME TABLE `$feedname` TO `feed_tmp`");
@@ -73,5 +74,15 @@
       $result = db_query("UPDATE feeds SET type = 1 WHERE id='$feedid'");
 
     } else { echo "feed: ".$feed['id']." already converted<br/>";}
+
+    $result = db_query("SHOW INDEX FROM `$feedname`");
+    $row = db_fetch_array($result);
+    if (!$row) 
+    {
+      echo "Missing index added to: ".$feedname."<br>";
+      db_query("ALTER TABLE `$feedname` ADD INDEX (time)");
+    }
+    
+
   }
 ?>

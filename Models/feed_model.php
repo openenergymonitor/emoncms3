@@ -27,15 +27,15 @@
       if ($NoOfDataFields==1) {										// Create a table with one data field
         $result = db_query(										// Used for most feeds
         "CREATE TABLE $feedname (
-	  time INT UNSIGNED, data float
-        )");
+	  time INT UNSIGNED, data float,
+        INDEX ( `time` ))");
       }
 
       if ($NoOfDataFields==2) {										// Create a table with two data fields
         $result = db_query(										// User for histogram feed
         "CREATE TABLE $feedname (
-	  time INT UNSIGNED, data float, data2 float
-        )");
+	  time INT UNSIGNED, data float, data2 float,
+        INDEX ( `time` ))");
       }
 
       return $feedid;											// Return created feed id
