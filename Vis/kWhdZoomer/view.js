@@ -59,7 +59,8 @@
 
               start = day;
               end = day + 3600000 * 24;
-              vis_feed_data(apikey,power,start,end,1);
+              var res = getResolution(start,end);
+              vis_feed_data(apikey,power,start,end,res);
 
               view = 3;
               $("#out2").html("Power view");
