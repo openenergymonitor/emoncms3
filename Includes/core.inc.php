@@ -60,7 +60,7 @@
 
   function emon_session_start() {
     session_set_cookie_params(
-            0, //lifetime, value zero -> the session expires when the browser is closed
+            3600 * 24 * 30, //lifetime, 30 days
             "/", //path
             "", //domain
             false, //secure
