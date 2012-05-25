@@ -66,7 +66,7 @@ global $path, $session;
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
-<tr><form action="../Vis/kWhdZoomer/kwhdzoomer" method="get">
+<tr><form action="../Vis/kwhdstacked/kwhdstacked" method="get">
   <td>kWh/d Stacked</td>
   <td style="text-align:right">Vis/kwhdstacked/kwhdstacked?kwhdA= <input name="kwhdA" type='text' style='width:50px' /> &kwhdB= <input name="kwhdB" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>

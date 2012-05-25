@@ -12,6 +12,9 @@
 -->
   <?php  
     $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis/kwhdstacked', '', $_SERVER['SCRIPT_NAME']))."/";
+
+  $kwhdA = $_GET['kwhdA'];
+  $kwhdB = $_GET['kwhdB'];
   ?>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,16 +24,6 @@
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.stack.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/date.format.js"></script>
     <script language="javascript" type="text/javascript" src="kwhd_functions.js"></script>
-
-    <?php
-      require "../../Includes/db.php";
-      $e = db_connect();
-
-      require "../../Models/feed_model.php";
-      $dataA = get_all_feed_data($_GET["kwhdA"]);
-      $dataB = get_all_feed_data($_GET["kwhdB"]);
-      //$power = $_GET["power"];
-    ?>
 
   </head>
   <body style="margin: 0px; padding:10px; font-family: arial; background-color:rgb(245,245,235);">
@@ -43,14 +36,34 @@
     </div>
 
     <script id="source" language="javascript" type="text/javascript">
-      var dataA = <?php echo json_encode($dataA); ?>;    
-      var dataB = <?php echo json_encode($dataB); ?>;
+      var kwhdA = <?php echo $kwhdA; ?>;   
+      var kwhdB = <?php echo $kwhdB; ?>; 
 
       //var power = <?php echo $power; ?>;    
       var path = "<?php echo $path; ?>";  
 
       // API key
       var apikey = "<?php echo $apikey?>";
+
+      var dataA, dataB; 
+
+      $.ajax({                                      
+        url: path+"feed/data.json",                         
+        data: "&apikey="+apikey+"&id="+kwhdA+"&start=0&end=0&res=1",
+        dataType: 'json',
+        async: false,                      
+        success: function(data_in) { dataA = data_in; } 
+      });
+
+      $.ajax({                                      
+        url: path+"feed/data.json",                         
+        data: "&apikey="+apikey+"&id="+kwhdB+"&start=0&end=0&res=1",
+        dataType: 'json',
+        async: false,                      
+        success: function(data_in) { dataB = data_in; } 
+      });
+
+
 
       $(function () 
       {
