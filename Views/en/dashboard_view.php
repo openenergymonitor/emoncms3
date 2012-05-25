@@ -44,6 +44,10 @@ Dashboard HTML
 		<form id="confform" action=""> 
     		Dashboard name: <input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
     		Description: <textarea name="description"><?php echo $ds_description; ?></textarea><br>
+    		Main dashboard: <input type="checkbox" name="main" value="main" <?php if ($ds_main==true) echo "checked"; ?> /><br>
+    		
+
+</form>
     		<!--Theme: 
     		<select>
   				<option value="" selected>dark</option>

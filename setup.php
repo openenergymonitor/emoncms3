@@ -72,7 +72,8 @@
     'userid'=> array('type'=>'int'),
     'content'=> array('type'=>'text'),
     'name'=> array('type'=>"VARCHAR(30) DEFAULT 'no name'"),
-    'description'=> array('type'=>"VARCHAR(255) DEFAULT 'no description'")
+    'description'=> array('type'=>"VARCHAR(255) DEFAULT 'no description'"),
+    'main'=>array('type'=>'bool default false')
   );
 
   $schema['notify'] = array(

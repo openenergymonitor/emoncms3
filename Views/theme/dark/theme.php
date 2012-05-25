@@ -37,7 +37,19 @@
       HEADER
       ------------------------------------------------------->
       <div class="header">
-        <img id="applogo" style="margin:12px; margin-right:8px; float:left;" src="<?php print $GLOBALS['path']; ?>Views/theme/dark/emoncms logo.png" />
+		  	      	<?php 
+		  	      	if ($_SESSION['editmode'] == true) {
+							
+						    	
+      		$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo off.png";
+			}
+		else {
+			$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo.png";
+		}
+ 
+      	?>
+        <!--<img id="applogo" style="margin:12px; margin-right:8px; float:left;" src="<?php print $GLOBALS['path']; ?>Views/theme/dark/emoncms logo.png" />-->
+		<img id="applogo" style="margin:12px; margin-right:8px; float:left;" src="<?php echo $logo; ?>" />        
         <div style="color:#fff; margin-top:10px; float:left; font-size:21px; font-family: Arial,sans-serif;" ><span style="color: #0099ff;">emon</span><span style="color: #b3b3b3;">cms</span></div>
 	<div><?php echo $user; ?></div>
         <div style='clear:both;'></div>
