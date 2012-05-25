@@ -253,7 +253,7 @@
 		// now put this rate change into the correct feed table
                 insert_feed_data($feedid,$time_now,$time_now,$ratechange);
 	}
-	
+	return $ratechange;	
   }
 
 function save_to_input($arg,$time,$value)
