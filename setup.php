@@ -59,7 +59,8 @@
     'week'=> array('type'=>'FLOAT'),
     'month'=> array('type'=>'FLOAT'),
     'year'=> array('type'=>'FLOAT'),
-    'type'=> array('type'=>'int NOT NULL')
+    'type'=> array('type'=>'int NOT NULL'),
+    'datatype'=> array('type'=>'int NOT NULL')
   );
 
   $schema['feed_relation'] = array(

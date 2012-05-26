@@ -8,7 +8,7 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 -->
 <?php
-global $path;
+global $path, $session;
 ?>
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
@@ -27,10 +27,8 @@ Dashboard related javascripts
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
-
-<!--<div style="width:100%; background-color:#eee; text-align:right; padding:2px;"><button style="margin-right:4px;">Edit</button></div>-->
-
-
+<div style="width:100%;">
+		
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Edit dashboard</a></li>
@@ -45,9 +43,7 @@ Dashboard HTML
     		Dashboard name: <input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
     		Description: <textarea name="description"><?php echo $ds_description; ?></textarea><br>
     		Main dashboard: <input type="checkbox" name="main" value="main" <?php if ($ds_main==true) echo "checked"; ?> /><br>
-    		
-
-</form>
+		</form>
     		<!--Theme: 
     		<select>
   				<option value="" selected>dark</option>

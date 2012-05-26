@@ -67,7 +67,7 @@
         // First check if feed exists of given feed name and user.
         $id = get_feed_id($_SESSION['userid'],$arg);
         // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
-        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg, $process[3]);
+        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
         $arg = $id;
       }
 

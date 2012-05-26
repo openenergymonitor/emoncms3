@@ -14,6 +14,8 @@
   $name = $feed[1];
   $tag = $feed[2];
 
+  $type = $feed[7];
+
 ?>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
@@ -21,6 +23,7 @@
 <h3>
 Select graph type:</h3>
 
+ <?php if ($type==1 || $type==0) { ?>
  <form action="../vis/realtime" method="get">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
         <input type="submit" class="button06" value="Real-time"></input>
@@ -30,17 +33,36 @@ Select graph type:</h3>
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
         <input type="submit" class="button06" value="Raw data"></input>
  </form>
+ <?php } ?>
 
+ <?php if ($type==2 || $type==0) { ?>
  <form action="../vis/bargraph" method="get">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
           <input type="submit" class="button06" value="Bar graph"></input>
  </form>
+ <?php } ?>
 
+ <?php if ($type==3 || $type==0) { ?>
  <form action="../vis/histgraph" method="get">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
           <input type="submit" class="button06" value="Histogram"></input>
  </form>
+ <?php } ?>
 
+<h2>Feed type</h2>
+<form action="type" method="get">
+
+<select name="type">
+<option value="0" <?php if ($type==0) echo "selected"; ?> >Undefined</option>
+<option value="1" <?php if ($type==1) echo "selected"; ?> >Real-time data</option>
+<option value="2" <?php if ($type==2) echo "selected"; ?> >Daily data</option>
+<option value="3" <?php if ($type==3) echo "selected"; ?> >Histogram data</option>
+</select>
+
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+
+<input type="submit" value="Save" class="button05"/>
+</form>
 <h2>Tag feed</h2>
 <form action="tag" method="get">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
