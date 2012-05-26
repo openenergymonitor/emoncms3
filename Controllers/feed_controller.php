@@ -35,6 +35,24 @@
     // Set feed tag
     // http://yoursite/emoncms/feed/tag?id=1&tag=tag
     //---------------------------------------------------------------------------------------------------------
+    if ($action == "type" && $session['write'])
+    { 
+      $feedid = intval($_GET["id"]);
+      $type = intval($_GET["type"]);
+
+      if (feed_belongs_user($feedid, $session['userid'])) {
+        set_feed_datatype($feedid,$type);
+        $output['message'] = "feed type changed";
+      } else $output['message'] = "feed does not exist";
+
+      if ($format == 'html') header("Location: view?id=$feedid");	// Return to feed list page
+    }
+
+
+    //---------------------------------------------------------------------------------------------------------
+    // Set feed tag
+    // http://yoursite/emoncms/feed/tag?id=1&tag=tag
+    //---------------------------------------------------------------------------------------------------------
     if ($action == "tag" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);

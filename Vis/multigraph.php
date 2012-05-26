@@ -21,7 +21,7 @@
   $apikey = $_GET["apikey"];
 
   // Determines plot line type 0 for fill, 1 for no fill.
-  $plot_style = $_GET["style"];
+  // $plot_style = $_GET["style"];
  ?>
 
 <head>
@@ -58,7 +58,7 @@
   $(function () {
    var path = "<?php echo $path; ?>";
    var apikey = "<?php echo $apikey; ?>";
-   var plot_style = "<?php echo $plot_style; ?>";
+   //var plot_style = "<?php echo $plot_style; ?>";
    if (!plot_style) plot_style = 1;
 
     $('#placeholder').width($('#graph_bound').width());
@@ -89,7 +89,13 @@
     var feedlist = [];
 
     for (z in feedin) {
-      feedlist[z] = {id: feedin[z][0], key: feedin[z][1], data: 0, LOD: 1, selected: 0, loaded: 0, style: plot_style};
+      var plot_style = 2;
+      if (feedin[z][7]==0) plot_style = 2;
+      if (feedin[z][7]==1) plot_style = 2; 
+      if (feedin[z][7]==2) plot_style = 3;
+      if (feedin[z][7]!=3) {
+        feedlist[z] = {id: feedin[z][0], key: feedin[z][1], data: 0, LOD: 1, selected: 0, loaded: 0, style: plot_style};
+      }
     }
 
     //-----------------------------------------------------------------
@@ -121,17 +127,24 @@
         if (feedlist[i].selected!=0 && feedlist[i].loaded==0) 
         { 
        
-          if (feedlist[i].LOD==0) {resolution = 1;} else { resolution = getResolution(start, end); }
+          if (feedlist[i].LOD==0) resolution = 1; else resolution = getResolution(start, end);
+
           feedlist[i].data = {label: feedlist[i].key, data: getDataLOD(feedlist[i].id,start,end,resolution), yaxis: feedlist[i].selected};
           if (feedlist[i].style==3) feedlist[i].data.bars = { show: true, align: "left", barWidth: 3600*24*1000, fill: true};
           if (feedlist[i].style==2) feedlist[i].data.lines = { show: true, fill: false };
           if (feedlist[i].style==1) feedlist[i].data.lines = { show: true, fill: true };
+
+          if (feedlist[i].selected==1 && feedlist[i].style==2) feedlist[i].data.lines = { show: true, fill: true };
+          if (feedlist[i].selected==2 && feedlist[i].style==2) feedlist[i].data.lines = { show: true, fill: false };
           
           feedlist[i].loaded = 1;    
         }
 
         // 3) If feed is selected and loaded then plot the feed
         if (feedlist[i].selected!=0 && feedlist[i].loaded==1) { 
+
+          if (feedlist[i].selected==1 && feedlist[i].style==2) feedlist[i].data.lines = { show: true, fill: true };
+          if (feedlist[i].selected==2 && feedlist[i].style==2) feedlist[i].data.lines = { show: true, fill: false };
           plotdata.push(feedlist[i].data);
         }
       }
@@ -327,6 +340,7 @@
       }
       out += "</table>";
       out += "<p style='font-size:12px'><i>Loading a feed can take time.. </i></p>";
+      out += "<p style='font-size:12px'><i>Load feed on the left for fill and right for line only</i></p>";
       choiceContainer.append(out);
       $('#placeholder').height($('#graph_bound').height() - (choiceContainer.height()+45));
 
