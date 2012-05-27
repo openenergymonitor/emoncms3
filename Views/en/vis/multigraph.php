@@ -66,12 +66,13 @@
 
   var feedlist = get_multigraph(apikey); 
 
+  if (feedlist) {
   end = feedlist[0].end;
   if (end==0) end = (new Date()).getTime();
   if (feedlist[0].timeWindow) start = end - feedlist[0].timeWindow;
 
-  if (!feedlist)
-  {
+  } else {
+
   var feedin = get_feed_list(apikey);
   var i =0 ;
   for (z in feedin) {
