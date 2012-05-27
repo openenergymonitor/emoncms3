@@ -46,26 +46,30 @@
     
   }
   
+  // Return the main dashboard from $userid
   function get_dashboard($userid)
   {
-    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
+    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid' and main=TRUE");
     $result = db_fetch_array($result);
-    $dashboard = $result['content'];
-
-    return $dashboard;
-  }
-  
-  function get_dashboard_id($userid,$id)
-  {
-    $result = db_query("SELECT content,name,description,main FROM dashboard WHERE userid='$userid' and id='$id'");
-    $result = db_fetch_array($result);
-    //$dashboard = $result['content'];
-
+    
+	if ($result == FALSE) return FALSE;
+	else
 	return array(
 		'ds_content'=>$result['content'],
 		'ds_name'=>$result['name'],
 		'ds_description'=>$result['description'],
 		'ds_main'=>$result['main']);
-	
-    //return $dashboard;
+  }
+  
+  // Returns the $id dashboard from $userid
+  function get_dashboard_id($userid,$id)
+  {
+    $result = db_query("SELECT content,name,description,main FROM dashboard WHERE userid='$userid' and id='$id'");
+    $result = db_fetch_array($result);
+    
+	return array(
+		'ds_content'=>$result['content'],
+		'ds_name'=>$result['name'],
+		'ds_description'=>$result['description'],
+		'ds_main'=>$result['main']);
   }  

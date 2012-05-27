@@ -23,10 +23,11 @@ CKEDITOR.editorConfig = function(config) {
 	{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },'/',
+	{ name: 'e3ui', items : [ 'e3menu' ] },
 	{ name: 'e3widgets', items : [ 'e3wc','e3dial','e3graph' ] }
 	];
 		
-	config.extraPlugins = 'e3Save,e3Preview,e3wc,e3dial,e3graph';
+	config.extraPlugins = 'e3Save,e3Preview,e3wc,e3dial,e3graph,e3menu';
 	config.fillEmptyBlocks = false;
 	config.width = '100%';
 	config.height = '420px';
@@ -131,5 +132,23 @@ CKEDITOR.editorConfig = function(config) {
 			});
 		}
 	});	
+	
+			// insert graph
+	CKEDITOR.plugins.add('e3menu', {
+		init : function(editor) {
+			var pluginName = 'e3menu';
+			
+			// dial dialog
+			CKEDITOR.dialog.add(pluginName, path + 'Includes/editors/dialogs/e3menu.js');
 				
+			editor.addCommand(pluginName, new CKEDITOR.dialogCommand(pluginName ) );
+
+			editor.ui.addButton('e3menu', {
+				label : 'Insert dashboards menu',
+				command : pluginName,
+				icon: path+'Includes/editors/images/e3menu.png'
+			});
+		}
+	});	
+	
 };

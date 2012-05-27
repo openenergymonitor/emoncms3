@@ -12,3 +12,14 @@
 	background-image: url("./graph.png");
 	background-repeat: no-repeat
   }
+
+.e3menu {
+	width:200px;
+	height:190px;
+	//background-image: url("./graph.png");
+	//background-repeat: no-repeat
+	    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.7);
+    margin:0px; padding:20px;
+}

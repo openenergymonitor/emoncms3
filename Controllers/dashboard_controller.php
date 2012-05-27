@@ -72,24 +72,28 @@
       	       
     }
 
-    // /dashboard/view
+    // /dashboard/run
     if ($action == 'run' && $session['read'])
     {
-   		if ($_GET['id']) 
+		if ($_GET['id']) 
    			$dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
 		else
-      		$dashboard = get_dashboard($session['userid']);
+      		$dashboard_arr = get_dashboard($session['userid']);
 
-      if ($format == 'json') $output['content'] = json_encode($dashboard_arr['ds_content']);
+		if ($dashboard_arr == true) {
+      		if ($format == 'json') $output['content'] = json_encode($dashboard_arr['ds_content']);
 	  
-      if ($format == 'html') $output['content'] = view("dashboard_run.php",
-      	array(
-      		'page'=>$dashboard_arr['ds_content'],
-      		'ds_name'=>$dashboard_arr['ds_name'],
-      		'ds_description'=>$dashboard_arr['ds_description'],
-			'ds_main'=>$dashboard_arr['ds_main'])
-		);
-      	       
+      		if ($format == 'html') $output['content'] = view("dashboard_run.php",
+      			array(
+      				'page'=>$dashboard_arr['ds_content'],
+		      		'ds_name'=>$dashboard_arr['ds_name'],
+      				'ds_description'=>$dashboard_arr['ds_description'],
+					'ds_main'=>$dashboard_arr['ds_main'])
+				);
+		}
+		else {
+			$output['content'] = "No main dashboard defined. Please, check main dashboard in a dashboard configuration.";
+		}       
     }
 
     return $output;

@@ -28,6 +28,7 @@ var Browser = {
 }
 
 function show_dashboard() {
+	initialize_dashboard();
 	update();
 	setInterval(update,30000);
 	setInterval(fast_update,30);
@@ -35,6 +36,9 @@ function show_dashboard() {
 	slow_update();
 }	
 		
+function initialize_dashboard() {
+}
+
 // update function	
 function update() {
 
