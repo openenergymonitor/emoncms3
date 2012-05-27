@@ -84,7 +84,7 @@
     $feed_row = db_fetch_array($feed_result);
     if ($feed_row['status'] != 1) { // if feed is not deleted
       $size = get_feedtable_size($feed_row['id']);
-      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$fteed_row['value'],$size, $feed_row['type'], $feed_row['datatype']);
+      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$feed_row['value'],$size, $feed_row['type'], $feed_row['datatype']);
     }
     return $feed;
   }
