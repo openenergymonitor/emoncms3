@@ -104,6 +104,11 @@
     'memory'=> array('type'=>'int')
   );
 
+  $schema['multigraph'] = array(
+    'userid'=> array('type'=>'int'),
+    'feedlist'=> array('type'=>'text')
+  );
+
   $out = "<table style='font-size:12px'><tr><th width='220'></th><th></th></tr>";
 
     while($table = key($schema)) 

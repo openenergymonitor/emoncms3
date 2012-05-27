@@ -30,13 +30,10 @@
 
     if ($session['read']) $apikey = get_apikey_read($session['userid']);
 
-
-
     if ($action == 'list' && $session['write'])
     {
       $output['content'] = view("vis_view.php", array());
     }
-
 
     // emoncms/vis/realtime?feedid=16&feedname=power
     if ($action == "realtime" && $session['read'])
@@ -106,21 +103,13 @@
       $output['content'] = $content;
     }
 
-    if ($action == "multigraph" && $session['read'])
+    if ($action == 'multigraph' && $session['read'])
     {
-      $content = '<div style="margin-right:3%; margin-left:3%;">';
-      $content .= '<div class="lightbox" style="margin-bottom:20px; margin-top:20px;"><h2>Multigraph</h2><iframe style="width:100%; height:600px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'.$GLOBALS['path'].'Vis/multigraph.php?apikey='.$apikey.'"></iframe></div>';
-
-      $content .= "<div class='lightbox'>";
-      $content .= "<h3>Embed this graph</h3>";
-      $content .= htmlspecialchars('<iframe style="width:100%; height:600px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'.$GLOBALS['path'].'Vis/multigraph.php?apikey='.$apikey.'"></iframe>');
-      $content .= "</div>";
-      $content .=" </div>";
-      $output['content'] = $content;
+      if ($session['write']) $write_apikey = get_apikey_write($session['userid']);
+      $output['content'] = view("vis/multigraph.php", array('write_apikey'=>$write_apikey));
     }
+
  
-
-
     return $output;
   }
 
