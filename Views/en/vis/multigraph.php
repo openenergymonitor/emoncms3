@@ -10,6 +10,7 @@
 
 <?php
   global $session;
+  $clear = $_GET["clear"];
   $apikey = $_GET["apikey"];
   $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis', '', $_SERVER['SCRIPT_NAME']))."/";
 ?>
@@ -53,6 +54,7 @@
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
 
+  var clear = "<?php echo $clear; ?>";
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
   var write_apikey = "<?php echo $write_apikey; ?>";
@@ -66,25 +68,14 @@
 
   // Load list of feeds from server
 
-
   var feedlist = get_multigraph(apikey); 
 
-  if (feedlist[0]) {
+  if (feedlist[0] && !clear) {
     end = feedlist[0].end;
     if (end==0) end = (new Date()).getTime();
     if (feedlist[0].timeWindow) start = end - feedlist[0].timeWindow;
   } else {
-    var feedin = get_feed_list(apikey);
-    var i =0 ;
-    for (z in feedin) {
-      if (feedin[z][7]!=3) {
-        feedlist[i] = {id: feedin[z][0], selected: 0, plot: {data: null, label: feedin[z][1]} };
-
-        if (feedin[z][7]==1 || feedin[z][7]==0) feedlist[i].plot.lines = { show: true, fill: false };
-        if (feedin[z][7]==2) feedlist[i].plot.bars = { show: true, align: "left", barWidth: 3600*24*1000, fill: false};
-        i++;
-      }
-    }
+    feedlist = load_feedlist(apikey);
   }
 
   // Draw feed selector
@@ -140,6 +131,24 @@
   });
 
   vis_feed_data();
+
+
+  function load_feedlist(apikey)
+  {
+    var feedlist = [];
+    var feedin = get_feed_list(apikey);
+    var i =0 ;
+    for (z in feedin) {
+      if (feedin[z][7]!=3) {
+        feedlist[i] = {id: feedin[z][0], selected: 0, plot: {data: null, label: feedin[z][1]} };
+
+        if (feedin[z][7]==1 || feedin[z][7]==0) feedlist[i].plot.lines = { show: true, fill: false };
+        if (feedin[z][7]==2) feedlist[i].plot.bars = { show: true, align: "left", barWidth: 3600*24*1000, fill: false};
+        i++;
+      }
+    }
+    return feedlist;
+  }
 
   /*
 
