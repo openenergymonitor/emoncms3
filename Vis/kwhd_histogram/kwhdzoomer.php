@@ -45,7 +45,7 @@
 
       <div style="position:absolute; top:0px; left:65px; font-size:18px;"><b><span id="out2"></span>
       </b><span style="font-size:12px;"> (Hover for info, press to zoom in. Histogram: 
-      <input id="enableHistogram" type="checkbox">)
+      <input id="enableHistogram" type="checkbox" checked>)
       </span></div>
       <h2 style="position:absolute; top:40px; left:80px;"><span id="out"></span></h2>
      
@@ -145,6 +145,7 @@
 	              var d = new Date(); d.setTime(item.datapoint[0]);
 	              days = get_days_month(data,d.getMonth(),d.getFullYear());
 	              set_daily_view();
+              //        $('#enableHistogram').attr('checked'); 
 	            }
 	
 	            if (view==0)

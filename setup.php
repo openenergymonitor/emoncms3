@@ -59,7 +59,8 @@
     'week'=> array('type'=>'FLOAT'),
     'month'=> array('type'=>'FLOAT'),
     'year'=> array('type'=>'FLOAT'),
-    'type'=> array('type'=>'int NOT NULL')
+    'type'=> array('type'=>'int NOT NULL'),
+    'datatype'=> array('type'=>'int NOT NULL')
   );
 
   $schema['feed_relation'] = array(
@@ -101,6 +102,11 @@
     'uphits'=> array('type'=>'int'),
     'dnhits'=> array('type'=>'int'),
     'memory'=> array('type'=>'int')
+  );
+
+  $schema['multigraph'] = array(
+    'userid'=> array('type'=>'int'),
+    'feedlist'=> array('type'=>'text')
   );
 
   $out = "<table style='font-size:12px'><tr><th width='220'></th><th></th></tr>";

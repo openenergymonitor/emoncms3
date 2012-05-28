@@ -107,5 +107,5 @@
               $('#inst-buttons').hide();
               $("#return_ctr").show();
               $("#enableHistogram").hide();
-              $('#enableHistogram').removeAttr('checked');
+             // $('#enableHistogram').removeAttr('checked');
         }

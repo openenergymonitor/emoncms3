@@ -15,9 +15,9 @@
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   // Creates a feed entry and relates the feed to the user
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-  function create_feed($userid,$name,$NoOfDataFields)
+  function create_feed($userid,$name,$NoOfDataFields,$datatype)
   {
-    $result = db_query("INSERT INTO feeds (name,status,type) VALUES ('$name','0','1')");				// Create the feed entry
+    $result = db_query("INSERT INTO feeds (name,status,type,datatype) VALUES ('$name','0','1','$datatype')");				// Create the feed entry
     $feedid = db_insert_id();
     if ($feedid>0) {
       db_query("INSERT INTO feed_relation (userid,feedid) VALUES ('$userid','$feedid')");	        // Create a user->feed relation
@@ -84,7 +84,7 @@
     $feed_row = db_fetch_array($feed_result);
     if ($feed_row['status'] != 1) { // if feed is not deleted
       $size = get_feedtable_size($feed_row['id']);
-      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$feed_row['value'],$size, $feed_row['type']);
+      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$feed_row['value'],$size, $feed_row['type'], $feed_row['datatype']);
     }
     return $feed;
   }
@@ -431,6 +431,18 @@
   function set_feed_type($feedid,$type)
   {
     db_query("UPDATE feeds SET type = '$type' WHERE id='$feedid'");
+  }
+
+  function get_feed_datatype($feedid)
+  {
+    $result = db_query("SELECT datatype FROM feeds WHERE id='$feedid'");
+    $feed = db_fetch_array($result);
+    return $feed['type'];
+  }
+
+  function set_feed_datatype($feedid,$type)
+  {
+    db_query("UPDATE feeds SET datatype = '$type' WHERE id='$feedid'");
   }
 
   function get_all_feeds()
