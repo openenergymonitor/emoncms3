@@ -13,12 +13,13 @@
 
 <?php
 	$apikey_read = $_GET['apikey'];
+	
+	require $path.'Includes/dashboard_processor.php';
+	
 	$path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis/Dashboard', '', $_SERVER['SCRIPT_NAME']))."/";
 
 	// Edit mode off, now is time to runtime
 	$_SESSION['editmode'] = FALSE;
-	
-	require $path.'Includes/dashboard_processor.php';
 ?>
 
 <html>
