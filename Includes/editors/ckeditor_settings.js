@@ -31,6 +31,7 @@ CKEDITOR.editorConfig = function(config) {
 	config.fillEmptyBlocks = false;
 	config.width = '100%';
 	config.height = '420px';
+	config.filebrowserBrowseUrl = path + 'Includes/editors/simogeo-Filemanager/index.html'; 
 
 	// Save button
 	CKEDITOR.plugins.add('e3Save', {
