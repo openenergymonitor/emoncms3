@@ -9,6 +9,7 @@
 -->
 
 <?php
+  global $session;
   $apikey = $_GET["apikey"];
   $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis', '', $_SERVER['SCRIPT_NAME']))."/";
 ?>
@@ -41,8 +42,10 @@
       </div>
     </div>
   <br/><div id="choices"></div>
-  <p style='font-size:12px'><i>Loading a feed can take time.. </i></p>
-  <p style='font-size:12px'><i>Load feed on the left for fill and right for line only</i></p>
+  <?php if ($session['write']) { ?>
+  <p><input id="save" type="button" class="button05" value="Save current configuration"/></p>
+  <?php } ?>
+
 </div>
 
 <script id="source" language="javascript" type="text/javascript">
@@ -67,26 +70,22 @@
   var feedlist = get_multigraph(apikey); 
 
   if (feedlist[0]) {
-  end = feedlist[0].end;
-  if (end==0) end = (new Date()).getTime();
-  if (feedlist[0].timeWindow) start = end - feedlist[0].timeWindow;
-
+    end = feedlist[0].end;
+    if (end==0) end = (new Date()).getTime();
+    if (feedlist[0].timeWindow) start = end - feedlist[0].timeWindow;
   } else {
+    var feedin = get_feed_list(apikey);
+    var i =0 ;
+    for (z in feedin) {
+      if (feedin[z][7]!=3) {
+        feedlist[i] = {id: feedin[z][0], selected: 0, plot: {data: null, label: feedin[z][1]} };
 
-  var feedin = get_feed_list(apikey);
-  var i =0 ;
-  for (z in feedin) {
-    if (feedin[z][7]!=3) {
-      feedlist[i] = {id: feedin[z][0], selected: 0, plot: {data: null, label: feedin[z][1]} };
-
-      if (feedin[z][7]==1 || feedin[z][7]==0) feedlist[i].plot.lines = { show: true, fill: false };
-      if (feedin[z][7]==2) feedlist[i].plot.bars = { show: true, align: "left", barWidth: 3600*24*1000, fill: false};
-      i++;
+        if (feedin[z][7]==1 || feedin[z][7]==0) feedlist[i].plot.lines = { show: true, fill: false };
+        if (feedin[z][7]==2) feedlist[i].plot.bars = { show: true, align: "left", barWidth: 3600*24*1000, fill: false};
+        i++;
+      }
     }
   }
-  }
-
-
 
   // Draw feed selector
   var out = "<table class='catlist' style='width:500px'>";
@@ -172,12 +171,14 @@
     });
 
     timeWindowChanged=0;
+  }
 
+  $("#save").click(function (){
     feedlist[0].timeWindow = end - start;
     if (movingtime) feedlist[0].end = 0; else feedlist[0].end = end;
     movingtime = 0;
     save_multigraph(write_apikey,feedlist);
-  }
+  });
 
   //--------------------------------------------------------------------------------------
   // Graph zooming
