@@ -6,8 +6,8 @@ CKEDITOR.dialog.add( 'e3menu', function( editor ) {
 		minHeight : 200,
 		onOk : function() {
 			menuid = this.getContentElement('tab1','menuid').getValue();
-						
-			editor.insertHtml("<div class='e3menu' menuid='"+menuid+"'></div>");    
+							
+			editor.insertHtml("<div class='e3menu'><div class='e3header'><ul id='e3top-menu'><li><a href=''>Dashboards menu</a></li></ul></div></div>");    
 		},
 		contents : [
 			{

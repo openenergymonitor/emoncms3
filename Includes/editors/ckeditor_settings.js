@@ -27,12 +27,17 @@ CKEDITOR.editorConfig = function(config) {
 	{ name: 'e3widgets', items : [ 'e3wc','e3dial','e3graph' ] }
 	];
 		
-	config.extraPlugins = 'e3Save,e3Preview,e3wc,e3dial,e3graph,e3menu';
+	config.extraPlugins = 'stylesheetparser,e3Save,e3Preview,e3wc,e3dial,e3graph,e3menu';
 	config.fillEmptyBlocks = false;
+	
+	config.contentsCss = path+'Views/theme/common/visualdesign_style.css';
+	config.stylesSet = [];
+				
 	config.width = '100%';
 	config.height = '420px';
 	config.filebrowserBrowseUrl = path + 'Includes/editors/simogeo-Filemanager/index.html'; 
-
+	config.templates_files = [ path+'Includes/editors/templates/e3templates.js' ];
+	
 	// Save button
 	CKEDITOR.plugins.add('e3Save', {
 		init : function(editor) {
