@@ -12,6 +12,7 @@
     set				write
    	setconf			write
     view			read
+	run				read
 
   */
 
@@ -47,7 +48,7 @@
     if ($action == 'setconf' && $session['write']) // write access required
     {
      // $output['message'] = "dashboard setconf";
-     set_dashboard_conf($session['userid'],$_POST['id'],$_POST['name'],$_POST['description']);
+     set_dashboard_conf($session['userid'],$_POST['id'],$_POST['name'],$_POST['description'],$_POST['main']);
 	 $output['message'] = "dashboard set configuration";
     }
 	
@@ -65,9 +66,34 @@
       	array(
       		'page'=>$dashboard_arr['ds_content'],
       		'ds_name'=>$dashboard_arr['ds_name'],
-      		'ds_description'=>$dashboard_arr['ds_description'])
+      		'ds_description'=>$dashboard_arr['ds_description'],
+			'ds_main'=>$dashboard_arr['ds_main'])
 		);
       	       
+    }
+
+    // /dashboard/run
+    if ($action == 'run' && $session['read'])
+    {
+		if ($_GET['id']) 
+   			$dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
+		else
+      		$dashboard_arr = get_dashboard($session['userid']);
+
+		if ($dashboard_arr == true) {
+      		if ($format == 'json') $output['content'] = json_encode($dashboard_arr['ds_content']);
+	  
+      		if ($format == 'html') $output['content'] = view("dashboard_run.php",
+      			array(
+      				'page'=>$dashboard_arr['ds_content'],
+		      		'ds_name'=>$dashboard_arr['ds_name'],
+      				'ds_description'=>$dashboard_arr['ds_description'],
+					'ds_main'=>$dashboard_arr['ds_main'])
+				);
+		}
+		else {
+			$output['content'] = "No main dashboard defined. Please, check main dashboard in a dashboard configuration.";
+		}       
     }
 
     return $output;

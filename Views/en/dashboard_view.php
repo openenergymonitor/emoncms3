@@ -33,7 +33,6 @@ Dashboard HTML
 <?php } ?>
 <div style="text-align:center; width:100%;">
 	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
-		
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-1">Edit dashboard</a></li>
@@ -47,6 +46,8 @@ Dashboard HTML
 		<form id="confform" action=""> 
     		Dashboard name: <input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
     		Description: <textarea name="description"><?php echo $ds_description; ?></textarea><br>
+    		Main dashboard: <input type="checkbox" name="main" value="main" <?php if ($ds_main==true) echo "checked"; ?> /><br>
+		</form>
     		<!--Theme: 
     		<select>
   				<option value="" selected>dark</option>
@@ -100,8 +101,9 @@ Dashboard HTML
 		
 		// Set here the css style so each dashboard can have it own
 		// theme and visual design styles for the editor
-		ev.editor.config.contentsCss = [path+'Views/theme/dark/style.css',path+'Views/theme/common/visualdesign_style.css'];
-	
+		//ev.editor.config.contentsCss = [path+'Views/theme/dark/style.css',path+'Views/theme/common/visualdesign_style.css'];
+		//CKEDITOR.config.contentsCss = path+'Views/theme/common/visualdesign_style.css';		
+
 		// Place page html in edit area ready for editing
 		ev.editor.setData( $("#page").html() );
 		

@@ -181,6 +181,8 @@ background-image: linear-gradient(#fdfdfd,#eee);
 background-image: -webkit-linear-gradient(#eee,#ddd);
 }
 
+
+
 input.nobox {
   width:100px; 
   text-align: right; 
@@ -224,6 +226,11 @@ input.nobox {
   line-height: 22px;
   padding: 0 8px;
   cursor:pointer
+}
+
+
+.button05:active {
+  background-color: #45abdb;
 }
 
 .button06 {
@@ -295,7 +302,7 @@ table.catlist th:last-of-type {
 }
 
 #message {
-  border: 1px solid #22a4d9;
+  border: 1px solid #22a4d9bu;
   color: white;
   text-shadow: 0 1px rgba(0, 0, 0, 0.1);
   background-color: #33a4d9;

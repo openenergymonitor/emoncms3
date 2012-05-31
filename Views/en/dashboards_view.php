@@ -9,6 +9,7 @@ http://openenergymonitor.org
 -->
 <?php
   global $path;
+  $_SESSION['editmode'] = TRUE;
 ?>
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
