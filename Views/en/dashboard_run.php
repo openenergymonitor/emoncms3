@@ -43,7 +43,7 @@
   
 <body>
 
-<div id="page"><?php echo render_dashboard($page); ?></div>  
+<div id="page"><?php echo render_dashboard($userid); ?></div>  
   
 <script>
 

@@ -85,6 +85,7 @@
 	  
       		if ($format == 'html') $output['content'] = view("dashboard_run.php",
       			array(
+      				'userid'=>$session['userid'],
       				'page'=>$dashboard_arr['ds_content'],
 		      		'ds_name'=>$dashboard_arr['ds_name'],
       				'ds_description'=>$dashboard_arr['ds_description'],
@@ -92,7 +93,7 @@
 				);
 		}
 		else {
-			$output['content'] = "No main dashboard defined. Please, check main dashboard in a dashboard configuration.";
+			$output['content'] = view("dashboard_run_errornomain.php",array());			
 		}       
     }
 
