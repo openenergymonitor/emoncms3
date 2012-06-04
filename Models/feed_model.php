@@ -308,6 +308,18 @@
     return $data;
   }
 
+ function get_kwhd_atpower($feedid, $min, $max)
+ {
+   $feedname = "feed_".trim($feedid)."";
+   
+   $result = db_query("SELECT time, sum(data) as kWh FROM `$feedname` WHERE `data2`>='$min' AND `data2`<='$max' group by time");
+
+   $data = array();
+   while($row = db_fetch_array($result)) $data[] = array($row['time']* 1000 , $row['kWh']); 
+
+   return $data;
+ }
+
  function get_feed_timevalue($feedid)
  {
     $result = db_query("SELECT time,value FROM feeds WHERE id='$feedid'");
