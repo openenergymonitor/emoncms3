@@ -45,6 +45,8 @@ if (status==0) {                   // red
 
 }
 
+
+
 function draw_led_ie8(circle,status)
 {
 
@@ -63,6 +65,44 @@ function draw_led_ie8(circle,status)
 	  circle.fillStyle = "#E4C700";     
 	} else {				// Black
 	  circle.fillStyle = "#000000";  
+	}
+
+	circle.beginPath();
+	circle.arc(25,25,20, 0,Math.PI * 2,false);
+	circle.closePath();
+	circle.fill()
+}
+
+  function draw_binary_led(circle,status)
+  {
+    circle.clearRect(0,0,50,50);
+
+  var radgrad = circle.createRadialGradient(30,30,0,30,30,20);  
+
+if (status==0) {                   // red
+  radgrad.addColorStop(0, '#F75D59');  
+  radgrad.addColorStop(0.9, '#C11B17');  
+} else {            			// green
+  radgrad.addColorStop(0, '#A7D30C');  
+  radgrad.addColorStop(0.9, '#019F62');  
+}
+
+  radgrad.addColorStop(1, 'rgba(1,159,98,0)');
+  // draw shapes  
+ circle.fillStyle = radgrad;  
+ circle.fillRect(0,0,60,60);  
+
+
+}
+
+function draw_binary_led_ie8(circle,status)
+{
+
+
+	if (status==0) {			// red
+	  circle.fillStyle = "#C11B17"; 
+	} else {			// green
+	  circle.fillStyle = "#019F62";   
 	}
 
 	circle.beginPath();
