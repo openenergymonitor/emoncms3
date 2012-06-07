@@ -167,6 +167,26 @@
       }
     }
 
+    //---------------------------------------------------------------------------------------------------------
+    // get kwh per day at given power range
+    // http://yoursite/emoncms/feed/kwhatpower?id=3&min=1000&max=10000
+    //---------------------------------------------------------------------------------------------------------
+    if ($action == 'kwhatpower' && $session['read'])
+    {
+      $feedid = intval($_GET['id']);
+      // Check if feed belongs to user
+      if (feed_belongs_user($feedid,$session['userid']))
+      {
+        $min = floatval($_GET['min']);
+        $max = floatval($_GET['max']);
+			
+        $data = get_kwhd_atpower($feedid,$min,$max);
+        $output['content'] = json_encode($data);
+
+      } else { $output['message'] = "This is not your feed..."; }
+    }
+
+
     return $output;
   }
 ?>
