@@ -35,13 +35,18 @@
     if ($row)
     {   	
       db_query("UPDATE dashboard SET name = '$name', description = '$description' WHERE userid='$userid' and id='$id'");
-	  
-	  // set main to false all user dashboards
-	  db_query("update dashboard SET main = FALSE WHERE userid='$userid'");
-	  
+	  	  
 	  // set user main dashboard
-	  if ($main=='main') 
-	  	db_query("update dashboard SET main = TRUE WHERE userid='$userid' and id='$id'");
+		if ($main=='main') {
+	  		db_query("update dashboard SET main = FALSE WHERE userid='$userid' and id<>'$id'");
+	  	
+	  		// set main to the main dashboard
+	  		db_query("update dashboard SET main = TRUE WHERE userid='$userid' and id='$id'");
+	  	}
+		else {
+		// set main to false all other user dashboards
+	  		db_query("update dashboard SET main = FALSE WHERE userid='$userid' and id='$id'"); 	
+		}
     }
     
   }
