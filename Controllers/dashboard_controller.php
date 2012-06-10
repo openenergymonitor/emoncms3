@@ -46,13 +46,14 @@
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
-   		if ($_GET['id']) 
-   			$dashboard = get_dashboard_id($session['userid'],$_GET['id']);
-		else
-      		$dashboard = get_dashboard($session['userid']);
+      $apikey = get_apikey_read($session['userid']);
+      if ($_GET['id']) 
+        $dashboard = get_dashboard_id($session['userid'],$_GET['id']);
+      else
+      	$dashboard = get_dashboard($session['userid']);
 
       if ($format == 'json') $output['content'] = json_encode($dashboard);
-      if ($format == 'html') $output['content'] = view("dashboard_view.php", array('page'=>$dashboard));
+      if ($format == 'html') $output['content'] = view_lang("dashboard_view.php", array('apikey'=>$apikey,'page'=>$dashboard));
     }
 
     return $output;

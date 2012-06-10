@@ -35,7 +35,7 @@ function input_controller()
     $inputs = get_user_inputs($session['userid']);
 
     if ($format == 'json') $output['content'] = json_encode($inputs);
-    if ($format == 'html') $output['content'] = view("input/list_view.php", array('inputs' => $inputs));
+    if ($format == 'html') $output['content'] = view_lang("input/list_view.php", array('inputs' => $inputs));
   }
 
   //---------------------------------------------------------------------------------------------------------

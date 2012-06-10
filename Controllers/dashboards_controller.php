@@ -42,10 +42,11 @@
     // /dashboard/view
     if ($action == 'view' && $session['read'])
     {
+      if ($session['read']) $apikey = get_apikey_read($session['userid']);
       $dashboards = get_dashboards($session['userid']); 
 	  
       //if ($format == 'json') $output['content'] = json_encode($dashboard);
-      if ($format == 'html') $output['content'] = view("dashboards_view.php", array('dashboards'=>$dashboards));
+      if ($format == 'html') $output['content'] = view_lang("dashboards_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards));
     }
 
     return $output;

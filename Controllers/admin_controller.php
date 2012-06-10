@@ -44,7 +44,7 @@
 
       usort($userlist, 'user_sort');	// sort by highest memory user first
 
-      $output['content'] = view("admin/admin_view.php", array('userlist'=>$userlist,'total_memuse'=>$total_memuse));
+      $output['content'] = view_lang("admin/admin_view.php", array('userlist'=>$userlist,'total_memuse'=>$total_memuse));
     }
 
     return $output;

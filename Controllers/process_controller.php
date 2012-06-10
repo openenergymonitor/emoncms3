@@ -39,7 +39,7 @@
       $input_processlist = get_input_processlist_desc($session['userid'],$inputid);
 
       if ($format == 'json') $output['content'] = json_encode($input_processlist);
-      if ($format == 'html') $output['content'] = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
+      if ($format == 'html') $output['content'] = view_lang("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
     }
 
     //---------------------------------------------------------------------------------------------------------

@@ -13,8 +13,8 @@ http://openenergymonitor.org
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
-<script type="application/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.js"></script>
+<script type="application/javascript" src="<?php echo $path;?>Views/Dashboard/common.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $path;?>Views/theme/common/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/css/smoothness/jquery-ui-1.8.19.custom.css" />  
 <script type="application/javascript" src="<?php echo $path;?>Includes/lib/jquery-ui-1.8.19.custom/js/jquery-ui-1.8.19.custom.min.js"></script>
@@ -60,7 +60,7 @@ Dashboard HTML
 	}); 
 	
 	$(".preview-dashboard-button").click(function(){		
-		window.open( "<?php echo $path;?>Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>&id="+this.id, null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
+		window.open( "<?php echo $path;?>dashboard/view?apikey=<?php echo $apikey; ?>&id="+this.id+"&embed=1", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
 				640 + ',height=' + 420 + ',left=' + 80 );	
     });
     	

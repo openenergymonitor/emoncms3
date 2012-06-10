@@ -166,53 +166,15 @@
     return $value;
   }
 
-  //---------------------------------------------------------------------------
-  // Get all feed data (it might be best not to call this on a really large dataset use function below to select data @ resolution)
-  //---------------------------------------------------------------------------
-  function get_all_feed_data($feedid)
+  function get_feed_data($feedid,$start,$end,$dp)
   {
-    $feedname = "feed_".trim($feedid)."";
-    $type = get_feed_type($feedid);
-
-    $data = array();   
-    $result = db_query("select * from $feedname order by time Desc");
-    while($array = db_fetch_array($result))
-    {
-      if ($type == 0) $time = strtotime($array['time'])*1000;
-      if ($type == 1) $time = $array['time']*1000;
-      
-      $kwhd = $array['data'];    
-      $data[] = array($time , $kwhd);
-    }
-    return $data;
-  }
-
-  function get_feed_data($feedid,$start,$end,$oldres,$dp)
-  {
-    $type = get_feed_type($feedid);
-    if ($type == 0) $data = get_feed_data_no_index($feedid,$start,$end,$oldres);
-    if ($type == 1) $data = get_feed_data_indexed($feedid,$start,$end,$oldres,$dp);
-
-    return $data;
-  }
-
-  function get_feed_data_indexed($feedid,$start,$end,$resolution,$dp)
-  {
-    if ($dp<2) $dp = 500;
-
     if ($end == 0) $end = time()*1000;
 
     $feedname = "feed_".trim($feedid)."";
     $start = $start/1000; $end = $end/1000;
 
-    $result = db_query("SELECT * FROM $feedname LIMIT 1");
-    $row = db_fetch_array($result);
-    if(!isset($row['data2']))
-    {
-
-    //----------------------------------------------------------------------------
     $data = array();
-    if (($end - $start) > (5000) && $resolution>1) //why 5000?
+    if (($end - $start) > (5000) && $dp>0) //why 5000?
     {
       $range = $end - $start;
       $td = $range / $dp;
@@ -240,78 +202,33 @@
         $data[] = array($time , $dataValue); 
       }
     }
-    //----------------------------------------------------------------------------
-    } else {
-      // Histogram has an extra dimension so a sum and group by needs to be used.
-      $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
-	
-	    $data = array();                                      // create an array for them
-	    while($row = db_fetch_array($result))                 // for all the new lines
-	    {
-	      $dataValue = $row['kWh'];                           // get the datavalue
-	      $data2 = $row['data2'];            		  // and the instant watts
-	      $data[] = array($data2 , $dataValue);               // add time and data to the array
-	    }
-    }
 
     return $data;
   }
 
-  //---------------------------------------------------------------------------
-  // Get feed data - within date range and @ specified resolution
-  //---------------------------------------------------------------------------
-  function get_feed_data_no_index($feedid,$start,$end,$resolution)
-  {
-    if ($end == 0) $end = time()*1000;
+ function get_histogram_data($feedid,$start,$end)
+ {
+   if ($end == 0) $end = time()*1000;
+   $feedname = "feed_".trim($feedid)."";
+   $start = $start/1000; $end = $end/1000;
+   $data = array();
 
-    $feedname = "feed_".trim($feedid)."";
-    $start = date("Y-n-j H:i:s", ($start/1000));		//Time format conversion
-    $end = date("Y-n-j H:i:s", ($end/1000));  			//Time format conversion
-
-    // Check to see type of feed table.
-    $result = db_query("SELECT * FROM $feedname LIMIT 1");
-    $row = db_fetch_array($result);
-    if(!isset($row['data2']))
-    {
-	    //This mysql query selects data from the table at specified resolution
-	    if ($resolution>1){
-	      $result = db_query(
-	      "SELECT * FROM 
-	      (SELECT @row := @row +1 AS rownum, time,data FROM ( SELECT @row :=0) r, $feedname) 
-	      ranked WHERE (rownum % $resolution = 1) AND (time>'$start' AND time<'$end') order by time Desc");
-	    }
-	    else
-	    {
-	      //When resolution is 1 the above query doesnt work so we use this one:
-	      $result = db_query("select * from $feedname WHERE time>'$start' AND time<'$end' order by time Desc"); 
-	    }
+   // Histogram has an extra dimension so a sum and group by needs to be used.
+   $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
 	
-	    $data = array();                                     //create an array for them
-	    while($row = db_fetch_array($result))             // for all the new lines
-	    {
-	      $dataValue = $row['data'] ;                        //get the datavalue
-	      $time = (strtotime($row['time']))*1000;            //and the time value - converted to unix time * 1000
-	      $data[] = array($time , $dataValue);               //add time and data to the array
-	    }
-    } else {
-      // Histogram has an extra dimension so a sum and group by needs to be used.
-      $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
-	
-	    $data = array();                                      // create an array for them
-	    while($row = db_fetch_array($result))                 // for all the new lines
-	    {
-	      $dataValue = $row['kWh'];                           // get the datavalue
-	      $data2 = $row['data2'];            		  // and the instant watts
-	      $data[] = array($data2 , $dataValue);               // add time and data to the array
-	    }
-    }
-    return $data;
-  }
+   $data = array();                                      // create an array for them
+   while($row = db_fetch_array($result))                 // for all the new lines
+   {
+     $dataValue = $row['kWh'];                           // get the datavalue
+     $data2 = $row['data2'];            		 // and the instant watts
+     $data[] = array($data2 , $dataValue);               // add time and data to the array
+   }
+   return $data;
+ }
 
  function get_kwhd_atpower($feedid, $min, $max)
  {
    $feedname = "feed_".trim($feedid)."";
-   
    $result = db_query("SELECT time, sum(data) as kWh FROM `$feedname` WHERE `data2`>='$min' AND `data2`<='$max' group by time");
 
    $data = array();
