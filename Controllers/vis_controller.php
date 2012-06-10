@@ -32,7 +32,7 @@
 
     if ($action == 'list' && $session['write'])
     {
-      $output['content'] = view_lang("vis_view.php", array('apikey'=>$apikey);
+      $output['content'] = view_lang("vis_view.php", array('apikey'=>$apikey));
     }
 
     // vis/realtime?feedid=1
@@ -53,7 +53,7 @@
     if ($action == "bargraph" && $session['read'])
     {
       $feedid = intval($_GET['feedid']);
-      $output['content'] = view("vis/bargraph.php", array('feedid'=>$feedid,'feedname'=>get_feed_name($feedid)));
+      $output['content'] = view("vis/bargraph.php", array('feedid'=>$feedidtrystan,'feedname'=>get_feed_name($feedid)));
     }
 
     if ($action == 'smoothie' && $session['read'])
