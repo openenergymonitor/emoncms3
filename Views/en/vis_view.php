@@ -72,6 +72,12 @@ global $path, $session;
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
+<tr><form action="../Vis/powerlevels/" method="get">
+  <td>kWh/d threshold at power</td>
+  <td style="text-align:right">Vis/powerlevels/?feedid= <input name="feedid" type='text' style='width:50px' /> &threshold= <input name="threshold" type='text' style='width:50px' /></td>
+  <td><input type="submit" value=">" class="button05"/></td>
+</form></tr>
+
 <tr><form action="multigraph" method="get">
   <td>Multigraph</td>
   <td style="text-align:right">vis/multigraph</td>
