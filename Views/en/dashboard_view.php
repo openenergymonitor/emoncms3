@@ -29,24 +29,24 @@ Dashboard HTML
 ------------------------------------------------------------------------------------------->
 
 <?php if ($session['write']) { ?>
-<div style="width:100%; background-color:#eee; text-align:right; padding:2px;"><button style="margin-right:4px;">Edit</button></div>
+<div style="width:100%; background-color:#eee; text-align:right; padding:2px;"><button style="margin-right:4px;"><?php echo _("Edit");?></button></div>
 <?php } ?>
 <div style="text-align:center; width:100%;">
 	<div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
 <div id="tabs">
 	<ul>
-		<li><a href="#tabs-1">Edit dashboard</a></li>
-		<li><a href="#tabs-2">Configuration</a></li>
-		<li><a href="#tabs-3">Preview</a></li>		
+		<li><a href="#tabs-1"><?php echo _("Edit dashboard");?></a></li>
+		<li><a href="#tabs-2"><?php echo _("Configuration");?></a></li>
+		<li><a href="#tabs-3"><?php echo _("Preview");?></a></li>		
 	</ul>
 	<div id="tabs-1">
 		<div id="dashboardeditor"></div>	
 	</div>
 	<div id="tabs-2">
 		<form id="confform" action=""> 
-    		Dashboard name: <input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
-    		Description: <textarea name="description"><?php echo $ds_description; ?></textarea><br>
-    		Main dashboard: <input type="checkbox" name="main" value="main" <?php if ($ds_main==true) echo "checked"; ?> /><br>
+    		<?php echo _("Dashboard name: ");?><input type="text" name="name" value='<?php echo $ds_name; ?>' /><br>
+    		<?php echo _("Description: ");?><textarea name="description"><?php echo $ds_description; ?></textarea><br>
+    		<?php echo _("Main dashboard: ");?><input type="checkbox" name="main" value="main" <?php if ($ds_main==true) echo "checked"; ?> /><br>
 		</form>
     		<!--Theme: 
     		<select>

@@ -1,3 +1,6 @@
+// OLD
+// Translation made by the gettext php method
+
 Adding a language to emoncms
 
 1) Make a copy of the folder Views/en and call it the language your creating a translation for, i.e cy for welsh.

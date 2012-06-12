@@ -26,12 +26,12 @@ if ($_GET['key'] == "xTC7005d")		// IMPORTANT SET THIS TO A UNIQUE PASSWORD OF Y
   require "Models/statistics_model.php";
 
   $userlist = get_user_list();
-  $i=0; $total_memuse = 0;
-  foreach ($userlist as $user) {
-    $userlist[$i]['memuse'] = get_user_feeds_size($user['userid']);
-    $total_memuse += $userlist[$i]['memuse'];
-    set_memory_statistics($user['userid'],$userlist[$i]['memuse']);
-    $i++;
+  $total_memuse = 0;
+  foreach ($userlist as $user)
+  { // Changed $userlist[i] to $user (equals in foreach loop)
+    $user['memuse'] = get_user_feeds_size($user['userid']);
+    $total_memuse += $user['memuse'];
+    set_memory_statistics($user['userid'],$user['memuse']);
   }
 }
 ?>

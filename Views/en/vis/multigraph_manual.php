@@ -22,7 +22,7 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/en/vis/inst.js"></script>
  
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-<h2>Multigraph</h2>
+<h2><?php echo _("Multigraph");?></h2>
 
     <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
       <div id="graph"></div>

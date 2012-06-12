@@ -24,7 +24,7 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/en/vis/inst.js"></script>
  
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-<h2>Multigraph</h2>
+<h2><?php echo _("Multigraph");?></h2>
 
     <div id="graph_bound" style="height:380px; width:100%; position:relative; ">
       <div id="graph"></div>
@@ -44,7 +44,7 @@
     </div>
   <br/><div id="choices"></div>
   <?php if ($session['write']) { ?>
-  <p><input id="save" type="button" class="button05" value="Save current configuration"/></p>
+  <p><input id="save" type="button" class="button05" value=<?php echo _("Save current configuration");?>/></p>
   <?php } ?>
 
 </div>
@@ -80,7 +80,7 @@
 
   // Draw feed selector
   var out = "<table class='catlist' style='width:500px'>";
-  out += "<tr><th>Select Feeds</th><th width=60px>Left</th><th width=60px>Right</th><th width=60px>Fill</th></tr>";
+  out += "<tr><th>"+<?php echo _("Select Feeds");?>+"</th><th width=60px>"+<?php echo _("Left");?>+"</th><th width=60px>"+<?php echo _("Right");?>+"</th><th width=60px>"+<?php echo _("Fill");?>+"</th></tr>";
 
   for(var i in feedlist) {
     var checkedA = '',checkedB = '',checkedC = '';

@@ -41,12 +41,12 @@
     <div id="graph_bound" style="height:100%; width:100%; position:relative; ">
       <div id="graph"></div>
       <div style="position:absolute; top:20px; right:20px;">
-   <button class="viewWindow" time="24">1 day</button>
-   <button class="viewWindow" time="12">12 hour</button>
-   <button class="viewWindow" time="1.0">1 hour</button>
+   <button class="viewWindow" time="24"><?php echo _("1 day");?></button>
+   <button class="viewWindow" time="12"><?php echo _("12 hours");?></button>
+   <button class="viewWindow" time="1.0"><?php echo _("1 hour");?></button>
    <button class="viewWindow" time="0.50">30 mins</button>
    <button class="viewWindow" time="0.25">15 mins</button>
-   <button class="viewWindow" time="0.01">1 mins</button>
+   <button class="viewWindow" time="0.01">1 min</button>
       </div>
     </div>
 

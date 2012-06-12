@@ -8,12 +8,12 @@
     http://openenergymonitor.org
 -->
 <?php if ($_SESSION['editmode'] == TRUE) { ?>
-	<li><a href='<?php echo $GLOBALS['path']; ?>input/list'>Inputs</a></li>
-	<li><a href='<?php echo $GLOBALS['path']; ?>feed/list'>Feeds</a></li>
-	<li><a href='<?php echo $GLOBALS['path']; ?>vis/list'>Vis</a></li>
-	<li><a href='<?php echo $GLOBALS['path']; ?>user/view'>Account</a></li>
-	<!--<li><a href='<?php echo $GLOBALS['path']; ?>dashboard/view'>Dashboard</a></li>-->
-	<li><a href='<?php echo $GLOBALS['path']; ?>dashboards/view'>Dashboards</a></li>
+	<li><a href='<?php echo $GLOBALS['path']; ?>input/list'><?php echo _("Inputs");?></a></li>
+	<li><a href='<?php echo $GLOBALS['path']; ?>feed/list'><?php echo _("Feeds");?></a></li>
+	<li><a href='<?php echo $GLOBALS['path']; ?>vis/list'><?php echo _("Vis");?></a></li>
+	<li><a href='<?php echo $GLOBALS['path']; ?>user/view'><?php echo _("Account");?></a></li>
+	<!--<li><a href='<?php echo $GLOBALS['path']; ?>dashboard/view'><?php echo _("Dashboard");?></a></li>-->
+	<li><a href='<?php echo $GLOBALS['path']; ?>dashboards/view'><?php echo _("Dashboards");?></a></li>
 <?php } ?>
 
 

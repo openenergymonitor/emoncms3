@@ -12,7 +12,7 @@
 <?php echo $message; ?>
 <form action="<?php echo $action; ?>" method="get">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
-<input type="submit" value="Yes please" class="button05"/>
+<input type="submit" value="<?php echo _("Yes please");?>" class="button05"/>
 </form>
 
 </div>

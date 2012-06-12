@@ -44,7 +44,7 @@
       <div id="loading" style="position:absolute; top:40px; left:60px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
 
       <div style="position:absolute; top:0px; left:65px; font-size:18px;"><b><span id="out2"></span>
-      </b><span style="font-size:12px;"> (Hover for info, press to zoom in. Histogram: 
+      </b><span style="font-size:12px;"><?php echo _("(Hover for info, press to zoom in. Histogram: ");?>
       <input id="enableHistogram" type="checkbox" checked>)
       </span></div>
       <h2 style="position:absolute; top:40px; left:80px;"><span id="out"></span></h2>
@@ -117,7 +117,7 @@
             ndays++;
           }
 
-          bot_kwhd_text = "Total: "+(tkwh).toFixed(0)+" kWh : £"+(tkwh*price).toFixed(0) + " | Average: "+(tkwh/ndays).toFixed(1)+ " kWh : £"+((tkwh/ndays)*price).toFixed(2)+" | £"+((tkwh/ndays)*price*7).toFixed(0)+" a week, £"+((tkwh/ndays)*price*365).toFixed(0)+" a year | Unit price: £"+price;
+          bot_kwhd_text = <?php echo _("Total: ");?>+(tkwh).toFixed(0)+<?php echo _(" kWh : pounds");?>+(tkwh*price).toFixed(0) + <?php echo _(" | Average: ");?>+(tkwh/ndays).toFixed(1)+ <?php echo _(" kWh : pounds");?>+((tkwh/ndays)*price).toFixed(2)+" | £"+((tkwh/ndays)*price*7).toFixed(0)+<?php echo _(" a week, pounds");?>+((tkwh/ndays)*price*365).toFixed(0)+<?php echo _(" a year | Unit price: pounds");?>+price;
 
           years = get_years(data);
           //set_annual_view();
@@ -238,7 +238,7 @@
 	 {
 		if (whw == 0)
 		{
-			alert("The whw parameter must be set in the dashboard to a histogram feed id.");
+			alert(<?php echo _("The whw parameter must be set in the dashboard to a histogram feed id.");?>);
             $('#enableHistogram').removeAttr('checked'); 
 		}
 	 });
