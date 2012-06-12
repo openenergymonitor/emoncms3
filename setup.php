@@ -1,6 +1,6 @@
   
 <h3>Emoncms Database Setup Script</h3>
-<p><a href="index.php" >Continue to emoncms</a></p>
+<p><a href="index.php" ><?php echo _("Continue to emoncms") ?></a></p>
 <?php
 
   /*
@@ -19,9 +19,16 @@
   define('EMONCMS_EXEC', 1);
   require "Includes/db.php";
   $e = db_connect();
-  if ($e == 4) $runnable = TRUE;
+  if ($e == 4)
+  {
+  	$runnable = TRUE;
+  }
 
-  if(!$runnable) {echo "to run script uncomment runnable"; die;}
+  if(!$runnable)
+  {
+  	echo _("to run script uncomment runnable");
+	die;
+  }
 
   $shema = array();
 
@@ -146,7 +153,10 @@
         {
           $query .= $field." ".$schema[$table][$field]['type'];
           next($schema[$table]);
-          if (key($schema[$table])) $query .= ", ";
+          if (key($schema[$table]))
+          {
+          	$query .= ", ";
+		  }
         }
         $query .= ")";
         $out .= "<tr><td>TABLE ".$table."</td><td>created</td></tr>";

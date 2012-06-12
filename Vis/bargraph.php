@@ -116,7 +116,7 @@ grid: { show: true, hoverable: true },
      function vis_feed_data(apikey,feedid,start,end,res)
      {
        $('#loading').show();
-       $("#stat").html("Loading...  please wait about 5s");
+       $("#stat").html(<?php echo _("Loading...  please wait about 5s");?>);
        $.ajax({                                       //Using JQuery and AJAX
          url: path+'feed/data.json',                         
          data: "&apikey="+apikey+"&id="+feedid+"&start="+start+"&end="+end+"&res="+res,

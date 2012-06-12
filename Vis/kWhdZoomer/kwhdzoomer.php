@@ -43,12 +43,12 @@
 
       <div id="loading" style="position:absolute; top:40px; left:60px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
 
-      <div style="position:absolute; top:10px; left:65px; font-size:18px;"><b><span id="out2"></span></b>: Hover on bar for info, press to zoom in</div>
+      <div style="position:absolute; top:10px; left:65px; font-size:18px;"><b><span id="out2"></span></b><?php echo _(": Hover on bar for info, press to zoom in");?></div>
       <h2 style="position:absolute; top:40px; left:80px;"><span id="out"></span></h2>
       <p id="bot_out" style="position:absolute; bottom:-10px; left:65px; font-size:18px; font-weight:bold;"></p>
 
       <b><p style="position:absolute; top: 200px; left:0px;"><span id="axislabely"></span></p>
-     <p style="position:absolute; bottom: 40px; left:450px;">Date / Time</p></b>
+     <p style="position:absolute; bottom: 40px; left:450px;"><?php echo _("Date / Time");?></p></b>
 
    <div id="return_ctr" style="position:absolute; top:0px; right:10px;">
         <input id="return" type="button" value="Back" style="font-size:18px; height:40px;"/>
@@ -117,7 +117,7 @@
 
           years = get_years(data);
           //set_annual_view();
-
+          
           months = get_months_year(data,2012);
           //set_monthly_view();
 

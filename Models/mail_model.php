@@ -27,7 +27,7 @@ function send_mail($to,$subject,$body)
   if (PEAR::isError($mail)) {
     $output = ("<p>" . $mail->getMessage() . "</p>");
   } else {
-    $output = ("<p>Message successfully sent!</p>");
+    $output = "<p>"._("Message successfully sent!")."</p>";
   }
 
 return $output;

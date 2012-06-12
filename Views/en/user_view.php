@@ -19,21 +19,22 @@ global $path, $session;
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 
-  <h2>User: <?php echo $user['username']; ?></h2>
+  <h2><?php echo _("User: ");?><?php echo $user['username']; ?></h2>
    <div class="widget-container-nc" style="width:600px;">
 
   <table><tr>
-  <td width="130"><h3>Language</h3></td>
-  <td><p>Select preferred language:</p></td>
+  <td width="130"><h3><?php echo _("Language");?></h3></td>
+  <td><p><?php echo _("Select preferred language:");?></p></td>
   <td>
   <form action="setlang" method="get">
 
   <select name="lang">
-    <option selected value="en">English</option>
+    <option selected value="en"><?php echo _("English");?></option>
+    <option value="es"><?php echo _("Spanish");?></option>
   </select>
 
         
-  <input type="submit" value="Set" class="button05">
+  <input type="submit" value="<?php echo _("Set");?>" class="button05">
   </form>
   </td>
   </tr>
@@ -43,22 +44,22 @@ global $path, $session;
   <div style="clear:both;"></div><br/>
   <div class="widget-container-nc" style="width:600px;">
 
-  <h3>API keys</h3>
+  <h3><?php echo _("API keys");?></h3>
   <table>
     <tr>
-      <td><b>Read only access: </b><?php echo $user['apikey_read']; ?></td>
+      <td><b><?php echo _("Read only access: ");?></b><?php echo $user['apikey_read']; ?></td>
       <td>
         <form action="newapiread" method="post">
-          <input type="submit" value="new" class="button05">
+          <input type="submit" value="<?php echo _("new");?>" class="button05">
         </form>
       </td>
     </tr>
 
     <tr>
-      <td><b>Write only access: </b><?php echo $user['apikey_write']; ?></td>
+      <td><b><?php echo _("Write only access: ");?></b><?php echo $user['apikey_write']; ?></td>
       <td>
         <form action="newapiwrite" method="post">
-          <input type="submit" value="new" class="button05">
+          <input type="submit" value="<?php echo _("new");?>" class="button05">
         </form>
       </td>
     </tr>
@@ -72,29 +73,29 @@ global $path, $session;
   ?>
   <div class="widget-container-nc"  style="width:600px;">
   <p><b>API url: </b><?php echo $GLOBALS['path']; ?>api/post</p>
-  <p><b>Example: Copy this to your web browser or send from a nanode: </b><br/><?php echo $testjson; ?> <a href="<?php echo $testjson; ?>">try me</a></p>
+  <p><b><?php echo _("Example: Copy this to your web browser or send from a nanode: ");?></b><br/><?php echo $testjson; ?> <a href="<?php echo $testjson; ?>"><?php echo _("try me");?></a></p>
   </div>
   <div style="clear:both;"></div><br/>
 
 <div class="widget-container-nc"  style="width:600px;">
-<h3>Change password</h3>
+<h3><?php echo _("Change password");?></h3>
 <form action="changepass" method="post">
-<p><b>Old password:</b><br/>
+<p><b><?php echo _("Old password:");?></b><br/>
 <input class="inp01" type="password" name="oldpass" style="width:250px"/></p>
-<p><b>New password:</b><br/>
+<p><b><?php echo _("New password:");?></b><br/>
 <input class="inp01" type="password" name="newpass" style="width:250px"/></p>
-<input type="submit" class="button04" value="Change" /> 
+<input type="submit" class="button04" value="<?php echo _("Change");?>" /> 
 </form>
 </div>
   <div style="clear:both;"></div><br/>
 
 <div class="widget-container-nc"  style="width:600px;">
-<h3>Account Statistics</h3>
+<h3><?php echo _("Account Statistics");?></h3>
 
 <table>
-  <tr><td>Disk space use:</td><td><?php echo number_format($stats['memory']/1024.0,1); ?> KiB</td></tr>
-  <tr><td>Up hits:</td><td><?php echo $stats['uphits']; ?></td></tr>
-  <tr><td>Down hits:</td><td><?php echo $stats['dnhits']; ?></td></tr>
+  <tr><td><?php echo _("Disk space use:");?></td><td><?php echo number_format($stats['memory']/1024.0,1); ?> KiB</td></tr>
+  <tr><td><?php echo _("Up hits:");?></td><td><?php echo $stats['uphits']; ?></td></tr>
+  <tr><td><?php echo _("Down hits:");?></td><td><?php echo $stats['dnhits']; ?></td></tr>
 </table>
 </div>
 </div>

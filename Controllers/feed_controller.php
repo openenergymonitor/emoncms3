@@ -40,12 +40,20 @@
       $feedid = intval($_GET["id"]);
       $type = intval($_GET["type"]);
 
-      if (feed_belongs_user($feedid, $session['userid'])) {
+      if (feed_belongs_user($feedid, $session['userid']))
+      {
         set_feed_datatype($feedid,$type);
-        $output['message'] = "feed type changed";
-      } else $output['message'] = "feed does not exist";
+        $output['message'] = _("Feed type changed");
+      }
+      else
+	  {
+	  	$output['message'] = _("Feed does not exist");
+	  }
 
-      if ($format == 'html') header("Location: view?id=$feedid");	// Return to feed list page
+      if ($format == 'html')
+	  {
+	  	header("Location: view?id=$feedid");	// Return to feed list page
+	  }
     }
 
 
@@ -53,54 +61,70 @@
     // Set feed tag
     // http://yoursite/emoncms/feed/tag?id=1&tag=tag
     //---------------------------------------------------------------------------------------------------------
-    if ($action == "tag" && $session['write'])
+	elseif ($action == "tag" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid, $session['userid'])) {
-
+      if (feed_belongs_user($feedid, $session['userid']))
+      {
         $newfeedtag = preg_replace('/[^\w\s-.]/','',$_GET["tag"]);	// filter out all except for alphanumeric white space and dash and full stop
         $newfeedtag = db_real_escape_string($newfeedtag);
 
         set_feed_tag($feedid,$newfeedtag);
-        $output['message'] = "feed tag changed";
-      } else $output['message'] = "feed does not exist";
+        $output['message'] = _("Feed tag changed");
+      }
+      else
+      {
+      	$output['message'] = _("Feed does not exist");
+      }
 
-      if ($format == 'html') header("Location: list");	// Return to feed list page
+      if ($format == 'html')
+	  {
+	  	header("Location: list");	// Return to feed list page
+	  }
     }
 
     //---------------------------------------------------------------------------------------------------------
     // Rename a feed
     // http://yoursite/emoncms/feed/rename?id=1&name=newname
     //---------------------------------------------------------------------------------------------------------
-    if ($action == "rename" && $session['write'])
+	elseif ($action == "rename" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid, $session['userid'])) {
-
+      if (feed_belongs_user($feedid, $session['userid']))
+      {
         $newfeedname = preg_replace('/[^\w\s-.]/','',$_GET["name"]);	// filter out all except for alphanumeric white space and dash
         $newfeedname = db_real_escape_string($newfeedname);
 
         set_feed_name($feedid,$newfeedname);
-        $output['message'] = "Feed renamed";
-      } else $output['message'] = "Feed does not exist";
+        $output['message'] = _("Feed renamed");
+      }
+      else
+      {
+      	$output['message'] = _("Feed does not exist");
+	  }
 
-      if ($format == 'html') header("Location: list");	// Return to feed list page
+      if ($format == 'html')
+	  {
+	  	header("Location: list");	// Return to feed list page
+	  }
     }
 
     //---------------------------------------------------------------------------------------------------------
     // Delete a feed
     // http://yoursite/emoncms/feed/delete?id=1
     //--------------------------------------------------------------------------------------------------------- 
-    if ($action == "delete" && $session['write'])
+	elseif ($action == "delete" && $session['write'])
     { 
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid, $session['userid'])) {
+      if (feed_belongs_user($feedid, $session['userid']))
+      {
         delete_feed($userid,$feedid);
-        $output['message'] = "feed ".get_feed_name($feedid)." deleted";
-      } else $output['message'] = "Feed does not exist";
-
+        $output['message'] = _("Feed ").get_feed_name($feedid)._(" deleted");
+      }
+      else{
+      	$output['message'] = _("Feed does not exist");
+	  }
     }
-
 
     //---------------------------------------------------------------------------------------------------------
     // List
@@ -111,8 +135,12 @@
     {
       $feeds = get_user_feeds($session['userid']);
     
-      if ($format == 'json') $output['content'] = json_encode($feeds);
-      if ($format == 'html') $output['content'] = view("feed/list_view.php", array('feeds' => $feeds));
+      if ($format == 'json'){
+      	$output['content'] = json_encode($feeds);
+	  }
+	  elseif ($format == 'html'){
+	  	$output['content'] = view("feed/list_view.php", array('feeds' => $feeds));
+	  }
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -120,7 +148,7 @@
     // http://yoursite/emoncms/feed/view.html?id=1
     // http://yoursite/emoncms/feed/view.json?id=1
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'view' && $session['read'])
+	elseif ($action == 'view' && $session['read'])
     {
       $feedid = intval($_GET["id"]);
       if (feed_belongs_user($feedid,$session['userid']))
@@ -132,26 +160,35 @@
       {
         $output['content'] = json_encode($feed);
         // Allow for AJAX from remote source
-        if ($_GET["callback"]) $output['content'] = $_GET["callback"]."(".json_encode($feed).");";
+        if ($_GET["callback"])
+        {
+        	$output['content'] = $_GET["callback"]."(".json_encode($feed).");";
+		}
       }
-      if ($format == 'html') $output['content'] = view("feed/feed_view.php", array('feed' => $feed));
+	  elseif ($format == 'html')
+	  {
+	  	$output['content'] = view("feed/feed_view.php", array('feed' => $feed));
+	  }
     }
 
     //---------------------------------------------------------------------------------------------------------
     // current feed value
     // http://yoursite/emoncms/feed/value?id=1
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'value' && $session['read'])
+	elseif ($action == 'value' && $session['read'])
     {
       $feedid = intval($_GET["id"]);
-      if (feed_belongs_user($feedid,$session['userid'])) $output['content'] = get_feed_value($feedid);
+      if (feed_belongs_user($feedid,$session['userid']))
+      {
+      	$output['content'] = get_feed_value($feedid);
+	  }
     }
 
     //---------------------------------------------------------------------------------------------------------
     // get feed data
     // http://yoursite/emoncms/feed/data?id=1&start=000&end=000&res=1
     //---------------------------------------------------------------------------------------------------------
-    if ($action == 'data' && $session['read'])
+	elseif ($action == 'data' && $session['read'])
     {
       $feedid = intval($_GET['id']);
       

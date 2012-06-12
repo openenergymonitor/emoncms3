@@ -92,7 +92,7 @@
      function vis_feed_data(apikey,feedid)
      {
        $('#loading').show();
-       $("#stat").html("Loading...");
+       $("#stat").html(<?php echo _("Loading...");?>);
        $.ajax({                                       //Using JQuery and AJAX
          url: path+'feed/data.json',                         
          data: "&apikey="+apikey+"&id="+feedid+"&start=0&end=0&res=1",

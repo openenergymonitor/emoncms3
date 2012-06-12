@@ -21,12 +21,12 @@
   
 <div style="text-align:right;">
 <span id="date"></span>
- | Last: 
-<button class="timewindow" time="1440" >2 Months</button>
-<button class="timewindow" time="720" >Month</button>
-<button class="timewindow" time="168" >Week</button>
-<button class="timewindow" time="24" >Day</button>
-<button class="timewindow" time="1" >Hour</button>
+ | <?php echo _("Last:");?> 
+<button class="timewindow" time="1440" ><?php echo _("2 Months");?></button>
+<button class="timewindow" time="720" ><?php echo _("Month");?></button>
+<button class="timewindow" time="168" ><?php echo _("Week");?></button>
+<button class="timewindow" time="24" ><?php echo _("Day");?></button>
+<button class="timewindow" time="1" ><?php echo _("Hour");?></button>
 <button class="zoomin" >+</button>
 <button class="zoomout" >-</button>
 <button class="left" ><</button>
@@ -283,7 +283,7 @@
    function feed_selector()
    {
       var choiceContainer = $("#choices");
-      var out = "<table border='0'><tr><th>Select Feeds</th><th width=60px>Left vs</th><th>Right</th></tr>";
+      var out = "<table border='0'><tr><th>"+<?php echo _("Select Feeds");?>+"</th><th width=60px>"+<?php echo _("Left vs");?>+"</th><th>"+<?php echo _("Right");?>+"</th></tr>";
 
       for(var i in feedlist) {
 
@@ -297,7 +297,7 @@
         out += '<td><input type="checkbox" id="' + feedlist[i].id + '"' + checkedB + 'axis="2" ></td>';
       }
       out += "</table>";
-      out += "<p style='font-size:12px'><i>Loading a feed can take time.. </i></p>";
+      out += "<p style='font-size:12px'><i>"+<?php echo _("Loading a feed can take time.. ");?>+"</i></p>";
       choiceContainer.append(out);
 
       choiceContainer.find("input[type='checkbox']").click(function() {
