@@ -13,8 +13,8 @@
   $id = $feed[0];
   $name = $feed[1];
   $tag = $feed[2];
-
-  $type = $feed[7];
+  $type = $feed[6];
+  $status = $feed[7];
 
 ?>
 
@@ -49,6 +49,15 @@ Select graph type:</h3>
  </form>
  <?php } ?>
 
+ <?php if ($type!=3) { ?>
+ <form action="../vis/edit" method="get">
+        <input type="hidden" name="feedid" value="<?php echo $id; ?>">
+          <input type="submit" class="button06" value="Datapoint Editor"></input>
+ </form>
+ <?php } ?>
+
+<?php if ($status==0) { ?>
+
 <h2>Feed type</h2>
 <form action="type" method="get">
 
@@ -60,6 +69,8 @@ Select graph type:</h3>
 </select>
 
 <input type="hidden" name="id" value="<?php echo $id; ?>">
+
+
 
 <input type="submit" value="Save" class="button05"/>
 </form>
@@ -75,6 +86,7 @@ Select graph type:</h3>
 <input type="text" name="name" style="width:100px;" value="<?php echo $name; ?>" />
 <input type="submit" value="Save" class="button05"/>
 </form>
+
 
 <h2>Delete feed?</h2>
 <?php $message = "<h2>Are you sure you want to delete feed: ".$name."?</h2>"; ?>
@@ -93,3 +105,12 @@ Select graph type:</h3>
 
 </div>
 
+<?php } else { ?>
+
+<h3>Restore feed:
+<form action="restore" method="get">
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="submit" value="restore" class="button05"/>
+</form>
+</h3>
+<?php } ?>

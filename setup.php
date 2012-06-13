@@ -43,8 +43,7 @@
     'name'=> array('type'=>'text'),
     'processList'=> array('type'=>'text'),
     'time'=> array('type'=>'DATETIME'),
-    'value'=> array('type'=>'FLOAT'),
-    'status'=> array('type'=>'int')
+    'value'=> array('type'=>'FLOAT')
   );
 
   $schema['feeds'] = array(
@@ -59,7 +58,6 @@
     'week'=> array('type'=>'FLOAT'),
     'month'=> array('type'=>'FLOAT'),
     'year'=> array('type'=>'FLOAT'),
-    'type'=> array('type'=>'int NOT NULL'),
     'datatype'=> array('type'=>'int NOT NULL')
   );
 

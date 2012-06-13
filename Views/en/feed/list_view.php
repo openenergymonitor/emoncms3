@@ -12,17 +12,20 @@
 <script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
-  <h2>Feeds</h2>
+  <h2><?php if ($del) echo "Deleted "; ?>Feeds</h2>
 
 <div id="feedlist">
 </div>
 
+<?php if (!$del) { ?><br><a href="?del=1">Deleted feeds</a><?php } ?>
+<?php if ($del && $feeds) { ?><br><a href="permanentlydelete">Delete feeds permanently</a> (no confirmation)<?php } ?>
 </div>
 
 <script type="text/javascript">
 
   var path = "<?php echo $path; ?>";
   var feeds = <?php echo json_encode($feeds); ?>;
+  var del = <?php echo $del; ?>;
 
   update_list();
   setInterval(update_list,2000);
@@ -30,7 +33,7 @@
   function update_list()
   {
     $.ajax({                                      
-      url: path+"feed/list.json",                
+      url: path+"feed/list.json?del="+del,                
       dataType: 'json',
       success: function(data) { feeds = data; 
 

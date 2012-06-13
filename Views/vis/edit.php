@@ -9,7 +9,6 @@
 -->
 
 <?php
-  $feedid = $_GET["feedid"]; 
   $apikey = $_GET["apikey"];
   global $path, $embed;
 ?>
@@ -18,18 +17,18 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.selection.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/date.format.js"></script>
 
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
- 
+
 <?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-<h2>Raw data: <?php echo $feedname; ?></h2>
+<h2>Datapoint editor: <?php echo $feedname; ?></h2>
+<p>Click on a datapoint to select, then in the edit box below the graph enter in the new value. You can also add another datapoint by changing the time to a point in time that does not yet have a datapoint.</p>
 <?php } ?>
 
-    <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
+    <div id="graph_bound" style="height:350px; width:100%; position:relative; ">
       <div id="graph"></div>
       <div style="position:absolute; top:20px; right:20px;">
 
@@ -47,6 +46,12 @@
 
         <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
     </div>
+
+    <div style="width:100% height:50px; background-color:#ddd; padding:10px; margin:10px;">
+    Edit feed_<?php echo $feedid; ?> @ time: <input type="text" id="time" style="width:150px;" value="" /> new value: 
+    <input type="text" id="newvalue" style="width:150px;" value="" />
+    <input id="okb" type="submit" value="ok" class="button05"/>
+    </div>
 <?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
@@ -56,6 +61,7 @@
 
   var feedid = "<?php echo $feedid; ?>";
   var feedname = "<?php echo $feedname; ?>";
+  var type = "<?php echo $type; ?>";
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
 
@@ -67,25 +73,32 @@
 
   function vis_feed_data()
   {
-    var graph_data = get_feed_data(feedid,start,end,500);
-
-    var plot = $.plot($("#graph"), [{data: graph_data, bars: { show: true, align: "center", barWidth: 3600*18*1000, fill: true}}], {
-      grid: { show: true, hoverable: true, clickable: true },
+    var graph_data = get_feed_data(feedid,start,end,1000);
+    var stats = power_stats(graph_data);
+    //$("#stats").html("Average: "+stats['average'].toFixed(0)+"W | "+stats['kwh'].toFixed(2)+" kWh");
+    
+    var plotdata = {data: graph_data, lines: { show: true, fill: true }};
+    if (type == 2) plotdata = {data: graph_data, bars: { show: true, align: "center", barWidth: 3600*18*1000, fill: true}};
+    
+    var plot = $.plot($("#graph"), [plotdata], {
+      grid: { show: true, clickable: true},
       xaxis: { mode: "time", min: start, max: end },
       yaxis: {min: 0},
-      selection: { mode: "x" }
+      selection: { mode: "xy" }
     });
+
   }
+
+  $("#graph").bind("plotclick", function (event, pos, item) { 
+    $("#time").val(item.datapoint[0]/1000);
+    $("#newvalue").val(item.datapoint[1]);
+    //$("#stats").html("Value: "+item.datapoint[1]);
+  });
 
   //--------------------------------------------------------------------------------------
   // Graph zooming
   //--------------------------------------------------------------------------------------
   $("#graph").bind("plotselected", function (event, ranges) { start = ranges.xaxis.from; end = ranges.xaxis.to; vis_feed_data(); });
-
-  $("#graph").bind("plothover", function (event, pos, item) { 
-    var mdate = new Date(item.datapoint[0]);
-    $("#stats").html((item.datapoint[1]).toFixed(1)+"kWh | "+mdate.format("ddd, mmm dS, yyyy")+" | "+item.datapoint[0]);
-  });
   //----------------------------------------------------------------------------------------------
   // Operate buttons
   //----------------------------------------------------------------------------------------------
@@ -95,5 +108,19 @@
   $('#left').click(function () {inst_panleft(); vis_feed_data();});
   $('.time').click(function () {inst_timewindow($(this).attr("time")); vis_feed_data();});
   //-----------------------------------------------------------------------------------------------
+
+  $('#okb').click(function () {
+    var time = $("#time").val();
+    var newvalue = $("#newvalue").val();
+    
+    $.ajax({                                      
+      url: path+'feed/edit.json',                         
+      data: "&apikey="+apikey+"&id="+feedid+"&time="+time+"&newvalue="+newvalue,
+      dataType: 'json',
+      async: false,                      
+      success: function() {} 
+    });
+    vis_feed_data();
+  });
 </script>
 

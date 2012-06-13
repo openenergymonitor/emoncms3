@@ -110,6 +110,13 @@
       if ($session['write']) $write_apikey = get_apikey_write($session['userid']);
       $output['content'] = view("vis/multigraph.php", array('write_apikey'=>$write_apikey));
     }
+
+    // vis/rawdata?feedid=1
+    if ($action == "edit" && $session['write'])
+    {
+      $feedid = intval($_GET['feedid']);
+      $output['content'] = view("vis/edit.php", array('feedid'=>$feedid,'feedname'=>get_feed_name($feedid), 'type'=>get_feed_datatype($feedid)));
+    }
  
     return $output;
   }
