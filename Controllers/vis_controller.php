@@ -21,19 +21,23 @@
   //---------------------------------------------------------------------
 
   // no direct access
-  defined('EMONCMS_EXEC') or die('Restricted access');
+  defined('EMONCMS_EXEC') or die(_('Restricted access'));
 
   function vis_controller()
   {
     require "Models/feed_model.php";
     global $session, $action, $format;
 
-    if ($session['read']) $apikey = get_apikey_read($session['userid']);
+    if ($session['read'])
+    {
+    	$apikey = get_apikey_read($session['userid']);
+    }
 
     if ($action == 'list' && $session['write'])
     {
       $output['content'] = view_lang("vis_view.php", array('apikey'=>$apikey));
     }
+
 
     // vis/realtime?feedid=1
     if ($action == "realtime" && $session['read'])
@@ -105,9 +109,12 @@
       $output['content'] = view("vis/orderthreshold.php", array());
     }
 
-    if ($action == 'multigraph' && $session['read'])
+	elseif ($action == 'multigraph' && $session['read'])
     {
-      if ($session['write']) $write_apikey = get_apikey_write($session['userid']);
+      if ($session['write'])
+      {
+      	$write_apikey = get_apikey_write($session['userid']);
+      }
       $output['content'] = view("vis/multigraph.php", array('write_apikey'=>$write_apikey));
     }
 

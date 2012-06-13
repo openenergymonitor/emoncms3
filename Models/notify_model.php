@@ -36,14 +36,14 @@
 
       if (!$row['onvalue_sent'] && $row['onvalue'] && $feed[4] == $row['onvalue']) 		// NOTIFY On value event
       {
-        $notification_message .= "<p>Feed ".$feed[1]." is == ".$row['onvalue']."</p>";
+        $notification_message .= "<p>"._("Feed ").$feed[1]._(" is")." == ".$row['onvalue']."</p>";
         $notification_number++;
         db_query("UPDATE notify SET onvalue_sent = 1 WHERE feedid='$feedid'");
       }
 
       if (!$row['oninactive_sent'] && $row['oninactive'] && !$active) 				// NOTIFY On inactive
       {
-        $notification_message .= "<p>Feed ".$feed[1]." is inactive</p>";
+        $notification_message .= "<p>"._("Feed ").$feed[1]._(" is inactive")."</p>";
         $notification_number++; 
         db_query("UPDATE notify SET oninactive_sent = 1 WHERE feedid='$feedid'");
       }

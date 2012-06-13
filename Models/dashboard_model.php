@@ -27,20 +27,54 @@
     }
   }
 
-  function get_dashboard($userid)
+  function set_dashboard_conf($userid,$id,$name,$description,$main)
   {
-    $result = db_query("SELECT content FROM dashboard WHERE userid='$userid'");
-    $result = db_fetch_array($result);
-    $dashboard = $result['content'];
+    $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid' and id='$id'");
+    $row = db_fetch_array($result);
 
-    return $dashboard;
+    if ($row)
+    {   	
+      db_query("UPDATE dashboard SET name = '$name', description = '$description' WHERE userid='$userid' and id='$id'");
+	  	  
+	  // set user main dashboard
+		if ($main=='main') {
+	  		db_query("update dashboard SET main = FALSE WHERE userid='$userid' and id<>'$id'");
+	  	
+	  		// set main to the main dashboard
+	  		db_query("update dashboard SET main = TRUE WHERE userid='$userid' and id='$id'");
+	  	}
+		else {
+		// set main to false all other user dashboards
+	  		db_query("update dashboard SET main = FALSE WHERE userid='$userid' and id='$id'"); 	
+		}
+    }
+    
   }
   
+  // Return the main dashboard from $userid
+  function get_dashboard($userid)
+  {
+    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid' and main=TRUE");
+    $result = db_fetch_array($result);
+    
+	if ($result == FALSE) return FALSE;
+	else
+	return array(
+		'ds_content'=>$result['content'],
+		'ds_name'=>$result['name'],
+		'ds_description'=>$result['description'],
+		'ds_main'=>$result['main']);
+  }
+  
+  // Returns the $id dashboard from $userid
   function get_dashboard_id($userid,$id)
   {
-    $result = db_query("SELECT content FROM dashboard WHERE userid='$userid' and id='$id'");
+    $result = db_query("SELECT content,name,description,main FROM dashboard WHERE userid='$userid' and id='$id'");
     $result = db_fetch_array($result);
-    $dashboard = $result['content'];
-
-    return $dashboard;
+    
+	return array(
+		'ds_content'=>$result['content'],
+		'ds_name'=>$result['name'],
+		'ds_description'=>$result['description'],
+		'ds_main'=>$result['main']);
   }  

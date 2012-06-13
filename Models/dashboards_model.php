@@ -28,3 +28,25 @@
 	db_query("DELETE FROM dashboard WHERE id = '$id'");
 	return "DELETE FROM dashboard WHERE id = '$id'";
   }
+
+  // Returns the dashboards from $userid
+  function get_dashboards_info($userid)
+  {
+    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
+    //$result = db_fetch_array($result);
+    
+    $dsb = array();
+	
+	while($row = db_fetch_array($result))							
+    {
+    	$dsb[] = $row;	
+	}
+    	
+	return $dsb;
+	
+	/*array(
+		'ds_content'=>$row['content'],
+		'ds_name'=>$row['name'],
+		'ds_description'=>$row['description'],
+		'ds_main'=>$row['main']);*/
+  }  

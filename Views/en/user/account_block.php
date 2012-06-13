@@ -20,6 +20,6 @@ global $path, $session;
 <form action="<?php echo $path; ?>user/logout" method="post">
   <div style="float:right;">
   <input type="hidden" name="CSRF_token" value="<?php echo $_SESSION['CSRF_token'];?>" />
-  <span style="margin:10px;"><?php echo $name; ?></span><input type="submit" value="Logout" class="button04" />
+  <span style="margin:10px;"><?php echo $name; ?></span><input type="submit" value="<?php echo _("Logout");?>" class="button04" />
   </div>
 </form>

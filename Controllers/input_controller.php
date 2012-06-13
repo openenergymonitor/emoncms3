@@ -42,18 +42,21 @@ function input_controller()
   // Delete an input
   // http://yoursite/emoncms/input/delete?id=1
   //---------------------------------------------------------------------------------------------------------
-  if ($action == "delete" && $session['write'])
+  elseif ($action == "delete" && $session['write'])
   { 
     delete_input($session['userid'] ,intval($_GET["id"]));
-    $output['message'] = "Input deleted";
+    $output['message'] = _("Input deleted");
   }
 
-  if ($action == "resetprocess" && $session['write'])
+  elseif ($action == "resetprocess" && $session['write'])
   { 
     $inputid = intval($_GET["inputid"]);
     reset_input_process($session['userid'], $inputid );
-    $output['message'] = "Process list has been reset";
-    if ($format == 'html') header("Location: ../process/list?inputid=".$inputid);	// Return to feed list page
+    $output['message'] = _("Process list has been reset");
+    if ($format == 'html')
+    {
+    	header("Location: ../process/list?inputid=".$inputid);	// Return to feed list page
+	}
   }
 
   return $output;
