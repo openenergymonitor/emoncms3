@@ -57,7 +57,8 @@ function api_controller()
     if ($id==0) {
       $id = create_input_timevalue($userid,$name,$time,$value);	// Create input if it does not exist
 
-      // AUTOMATIC SETUP
+      // AUTOMATIC SETUP - uncomment to enable
+      /*
       if ($name == "power")
       {
         // 1) log to feed
@@ -77,6 +78,7 @@ function api_controller()
         $feedid = create_feed($userid,$name,1,1);
         add_input_process($userid,$id,1,$feedid);
       }
+      */
 
     } else {			
       $inputs[] = array($id,$time,$value);	
