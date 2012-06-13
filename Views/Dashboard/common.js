@@ -170,6 +170,27 @@ function draw_leds() {
 		firstdraw = 0;
 		//  }
 	});
+		$('.binaryled').each(function(index) {
+		var feed = $(this).attr("feed");
+		var val = assoc[feed];
+		var id = "canled-" + feed + "-" + index;
+		if(!$(this).html()) {// Only calling this when its empty saved a lot of memory! over 100Mb
+			$(this).html('<canvas id="' + id + '" width="50px" height="50px"></canvas>');
+			firstdraw = 1;
+		}
+
+		//  if ( firstdraw == 1){ //Only update graphs when there is a change to update
+		var canvas = document.getElementById(id);
+   	        if (browserVersion != 999) { 
+		   canvas.setAttribute('width', '200'); 
+                   canvas.setAttribute('height', '160');
+                   if(typeof G_vmlCanvasManager != "undefined")  G_vmlCanvasManager.initElement(canvas);
+		}
+		var circle = canvas.getContext("2d");
+		if (browserVersion <9) draw_binary_led_ie8(circle,val); else draw_binary_led(circle,val); 		
+		firstdraw = 0;
+		//  }
+	});
 }
 
 function draw_graphs()
