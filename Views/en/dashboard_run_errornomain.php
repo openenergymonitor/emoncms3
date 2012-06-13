@@ -8,4 +8,4 @@
     http://openenergymonitor.org
   -->
   
-<?php echo_("No main dashboard defined. Please, check main dashboard in a dashboard configuration.");?>
+<?php echo _("No main dashboard defined. Please, check main dashboard in a dashboard configuration.");?>
