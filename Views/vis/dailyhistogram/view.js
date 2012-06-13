@@ -16,20 +16,17 @@
           $("#return").val("View: monthly view");
           $("#out2").html("Daily view");
           $('#axislabely').html("Energy<br/ >(kWh)");
-          $('#axislabelx').html("Date");
           $("#bot_out").html(bot_kwhd_text);
-          $("#return_ctr").show();
           $("#enableHistogram").show();
         }
 
         function set_monthly_view()
         {
-          bargraph(months.data,3600*24*20,"month"); 
+          bargraph(months.data,3600*24*20, "month"); 
           $("#out").html(""); view = 1;
           $("#return").val("View: annual view");               
           $("#out2").html("Monthly view");
           $('#axislabely').html("Energy<br/ >(kWh)");
-          $('#axislabelx').html("Date");
           $("#return_ctr").show();
           $("#enableHistogram").show();
         }
@@ -40,7 +37,6 @@
           $("#out").html(""); view = 0; 
           $("#out2").html("Annual view");
           $('#axislabely').html("Energy<br/ >(kWh)");
-          $('#axislabelx').html("Date");
           $("#return_ctr").hide();
           $("#enableHistogram").show();
         }
@@ -52,9 +48,7 @@
           $("#return").val("View: monthly view");
           $("#out2").html("Last 30 days");
           $('#axislabely').html("Energy<br/ >(kWh)");
-          $('#axislabelx').html("Date");
           $("#bot_out").html(bot_kwhd_text);
-          $("#return_ctr").show();
           $("#enableHistogram").show();
         }
 
@@ -63,20 +57,14 @@
         //--------------------------------------------------------------------------
         function set_inst_view(day)
         {
-        	$('#loading').show();
-              $("#out").html("Loading...  please wait about 5s");
+              start = day; end = day + 3600000 * 24;
 
-              start = day;
-              end = day + 3600000 * 24;
-              vis_feed_data(apikey,power,start,end,1);
-
+              vis_feed_data();
               view = 3;
               $("#out2").html("Power view");
               $("#return").val("View: daily view");
               $('#axislabely').html("Power<br />(Watts)");
-              $('#axislabelx').html("Date / Time");
               $('#inst-buttons').show();
-              $("#return_ctr").show();
               $("#enableHistogram").show();
         }
 
@@ -85,12 +73,12 @@
         //--------------------------------------------------------------------------
         function set_histogram_view(start, end)
         {
-        	$('#loading').show();
+              $('#loading').show();
               //$("#out").html("Loading...");
 
               //start = day;
               //end = day + 3600000 * 24;
-              vis_feed_data(apikey,whw,start,end,1);
+             // vis_feed_data(apikey,whw,start,end,1);
 
               last_view = view;
               view = 5;
@@ -107,5 +95,5 @@
               $('#inst-buttons').hide();
               $("#return_ctr").show();
               $("#enableHistogram").hide();
-             // $('#enableHistogram').removeAttr('checked');
+              //$('#enableHistogram').removeAttr('checked');
         }

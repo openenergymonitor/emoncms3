@@ -21,6 +21,33 @@
           });
         }
 
+        function instgraph(data)
+        {
+          $.plot($("#placeholder"), [{color: "#0096ff", data: data}], 
+          {
+            lines: { show: true, fill: true },
+            grid: { show: true, hoverable: true },
+            xaxis: { mode: "time" , min: start, max: end },
+            selection: { mode: "x"}
+          });
+        }
+
+     function plotHistogram(data, start, end)
+     {
+    	  barwidth = 50;
+          $.plot(placeholder,[                    
+          {
+            color: "#0096ff",
+            data: data ,				//data
+            //lines: { show: true, fill: true }		//style
+            bars: { show: true,align: "center",barWidth: barwidth,fill: true }
+          }], {
+        xaxis: { mode: null },
+        grid: { show: true, hoverable: true, clickable: true },
+        selection: { mode: "xy" }
+     } ); 
+     }
+
 
 
      

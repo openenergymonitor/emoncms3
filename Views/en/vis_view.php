@@ -72,9 +72,21 @@ global $path, $session;
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
-<tr><form action="../Vis/powerlevels/" method="get">
+<tr><form action="threshold" method="get">
   <td>kWh/d threshold at power</td>
-  <td style="text-align:right">Vis/powerlevels/?feedid= <input name="feedid" type='text' style='width:50px' /> &threshold= <input name="threshold" type='text' style='width:50px' /></td>
+  <td style="text-align:right">vis/theshold/?feedid= <input name="feedid" type='text' style='width:50px' /> &thresholdA= <input name="thresholdA" type='text' style='width:50px' /> &thresholdB= <input name="thresholdB" type='text' style='width:50px' /></td>
+  <td><input type="submit" value=">" class="button05"/></td>
+</form></tr>
+
+<tr><form action="orderbars" method="get">
+  <td>Bar graph (ordered by height)</td>
+  <td style="text-align:right">vis/orderbars?feedid= <input name="feedid" type='text' style='width:50px' /></td>
+  <td><input type="submit" value=">" class="button05"/></td>
+</form></tr>
+
+<tr><form action="orderthreshold" method="get">
+  <td>Threshold ordered by height</td>
+  <td style="text-align:right">vis/orderthreshold?feedid= <input name="feedid" type='text' style='width:50px' /> &power= <input name="power" type='text' style='width:50px' /> &thresholdA= <input name="thresholdA" type='text' style='width:50px' /> &thresholdB= <input name="thresholdB" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
@@ -86,7 +98,17 @@ global $path, $session;
 
 </table>
 
+<h3>Other options:</h3>
 
+<p><b>Hide menu</b><br>
+Hide the top menu and footer by adding the attribute <i>&embed=1</i> to the URL.</p>
+
+<p><b>Share</b><br>
+To share a visualisation use your read apikey: add the attribute <i>&apikey=<?php echo $apikey; ?></i> to the URL.</p>
+
+<p><b>Embed</b><br>
+<?php echo htmlspecialchars('<iframe style="width:650px; height:400px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'.$path.'vis/rawdata?feedid=1&apikey='.$apikey.'&embed=1">
+  </iframe>'); ?></p>
 
 </div>
 

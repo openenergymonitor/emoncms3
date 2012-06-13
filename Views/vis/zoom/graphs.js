@@ -21,15 +21,17 @@
           });
         }
 
-        function histogram(data,barwidth)
+        function instgraph(data)
         {
           $.plot($("#placeholder"), [{color: "#0096ff", data: data}], 
           {
-            bars: { show: true,align: "center",barWidth: (barwidth*1000),fill: true },
-            grid: { show: true, hoverable: true, clickable: true },
-            xaxis: { mode: null}
+            lines: { show: true, fill: true },
+            grid: { show: true, hoverable: true },
+            xaxis: { mode: "time" , min: start, max: end },
+            selection: { mode: "x"}
           });
         }
+
 
 
      

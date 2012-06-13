@@ -42,10 +42,8 @@
       $feedid = intval($_GET['id']);
       $notify = get_notify($userid, $feedid);
       //if ($format == 'json') $output = json_encode($feeds);
-      if ($format == 'html')
-	  {
-	  	$output['content'] = view("notify_view.php", array('feedid'=>$feedid,'notify'=>$notify));
-	  }
+
+      if ($format == 'html') $output['content'] = view_lang("notify_view.php", array('feedid'=>$feedid,'notify'=>$notify));
     }
 
 	elseif ($action == 'setrecipients' && $session['write'])
@@ -54,19 +52,15 @@
       set_notify_recipients($userid,$recipients);
 
       $recipients = get_notify_recipients($userid);
-      if ($format == 'html')
-	  {
-	  	$output['content'] = view("notify_settings_view.php", array('recipients'=>$recipients));
-	  }
+
+      if ($format == 'html') $output['content'] = view_lang("notify_settings_view.php", array('recipients'=>$recipients));
     }
 
 	elseif ($action == 'settings' && $session['write'])
     {
       $recipients = get_notify_recipients($userid);
-      if ($format == 'html')
-      {
-      	$output['content'] = view("notify_settings_view.php", array('recipients'=>$recipients));
-	  }
+
+      if ($format == 'html') $output['content'] = view_lang("notify_settings_view.php", array('recipients'=>$recipients));
     }
 
     return $output;

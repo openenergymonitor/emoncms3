@@ -2,31 +2,28 @@
 Thanks to Shervin for contributing this visualisation, see forum thread here:
 http://openenergymonitor.org/emon/node/600
 ----------------------------------------------------------------------------------------------------->
+
 <html>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-    <?php
-	$feedid2 = $_GET["feedid2"];
-	error_reporting(E_ALL);
-	ini_set('display_errors','On');
-
-	$feedid = $_GET["feedid"];
-	$ufac = $_GET["ufac"];
-	$path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace(
-	    'Vis/smoothie', '', $_SERVER['SCRIPT_NAME']))."/";
-
-	$apikey = $_GET["apikey"];
-
-    ?>
 
     <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><?php echo _("Graph");?></title>
-	<meta name="viewport" content="width=device-width; 
-	    initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta names="apple-mobile-web-app-status-bar-style" 
-	    content="black-translucent" />
+
+<?php
+
+  global $path, $embed;
+  $feedid2 = $_GET["feedid2"];
+  $feedid = $_GET["feedid"];
+  $ufac = $_GET["ufac"];
+  $apikey = $_GET["apikey"];
+?>
+
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
 	
 	<style type="text/css">
 	    html, body { margin: 0; padding: 0; height: 100%; 
@@ -34,13 +31,18 @@ http://openenergymonitor.org/emon/node/600
 	    bar { height: 32px; background: red; }
 	</style>
 
-	<script language="javascript" type="text/javascript" 
-	    src="<?php echo $path;?>Vis/flot/jquery.js"></script>
-	<script type="text/javascript" src="smoothie.js"></script>
-    </head>
-    <body>
+<script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Views/vis/smoothie/smoothie.js"></script>
+
+<?php if (!$embed) { ?>
+<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
+<h2>Smoothie</h2>
+<?php } ?>
+
 	<canvas id="mycanvas" style="position: absolute; width: 100%; 
 	    height: 100%; overflow: hidden"></canvas>
+
+<?php if (!$embed) echo "</div>"; ?>
 
 	<script id="source" language="javascript" type="text/javascript">
 	    var feedid = <?php echo $feedid; ?>;
@@ -50,9 +52,7 @@ http://openenergymonitor.org/emon/node/600
 	    var feedid2 = "<?php echo $feedid2; ?>"; 
 
 	    var smoothie = new SmoothieChart();
-	    smoothie.streamTo(document.getElementById("mycanvas"), ufac);
-
-   
+	    smoothie.streamTo(document.getElementById("mycanvas"), ufac);   
    
 	    var start = ((new Date()).getTime()) - 10000;
 	    var end = (new Date()).getTime();
@@ -67,7 +67,7 @@ http://openenergymonitor.org/emon/node/600
 	    var old1	= 0;
 
 	    var canvas = document.getElementById('mycanvas'),
-			   context = canvas.getContext('2d');
+	    context = canvas.getContext('2d');
 	    window.addEventListener('resize', resizeCanvas, false);
 
 	    function resizeCanvas() {
@@ -76,7 +76,6 @@ http://openenergymonitor.org/emon/node/600
 	    }
 	    resizeCanvas();
 
-	    $(function () {
 
 		doSome();
 		setInterval ( doSome, 2000 );
@@ -85,21 +84,17 @@ http://openenergymonitor.org/emon/node/600
 		{	
 		    start = ((new Date()).getTime()) - 10000;   
 		    end = (new Date()).getTime();
-		    var res = Math.round( ((end-start)/10000000) );
-		    if (res<1) 
-			res = 1;
 
-		    vis_feed_data(apikey,feedid,start,end,res,line1,0);
+		    vis_feed_data(apikey,feedid,start,end,line1,0);
 		    if (feedid2 != "")
-			vis_feed_data(apikey,feedid2,start,end,res,line2,1);
+			vis_feed_data(apikey,feedid2,start,end,line2,1);
 		}
 
-		function vis_feed_data(apikey,feedid,start,end,res,line,oldref)
+		function vis_feed_data(apikey,feedid,start,end,line,oldref)
 		{
 		    $.ajax({                                      
 			url: path+'feed/data.json',                         
-			    data: "&apikey="+apikey+"&id="+feedid+"&start="
-			    +start+"&end="+end+"&res="+res,
+			data: "&apikey="+apikey+"&id="+feedid+"&start="+start+"&end="+end+"&dp=0",
 			dataType: 'json',                           
 			success: function(data) 
 			{
@@ -132,8 +127,4 @@ http://openenergymonitor.org/emon/node/600
 		    fillStyle:'rgba(255, 0, 0, 0.4)', lineWidth:3 });
 		}
 
-	    });
 	</script>
-    
-    </body>
-</html>  

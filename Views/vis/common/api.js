@@ -18,15 +18,47 @@
   //-------------------------------------------------------------------------------
   // Get feed data
   //-------------------------------------------------------------------------------
-  function get_feed_data(feedID,start,end,resolution)
+  function get_feed_data(feedID,start,end,dp)
   {
     var feedIn = [];
     $.ajax({                                    
       url: path+'feed/data.json',                         
-      data: "&apikey="+apikey+"&id="+feedID+"&start="+start+"&end="+end+"&res="+resolution,  
+      data: "&apikey="+apikey+"&id="+feedID+"&start="+start+"&end="+end+"&dp="+dp,  
       dataType: 'json',                           
       async: false,
       success: function(datain) { feedIn = datain; }
+    });
+    return feedIn;
+  }
+
+  //-------------------------------------------------------------------------------
+  // Get histogram data
+  //-------------------------------------------------------------------------------
+  function get_histogram_data(feedID,start,end)
+  {
+    var feedIn = [];
+    $.ajax({                                    
+      url: path+'feed/histogram.json',                         
+      data: "&apikey="+apikey+"&id="+feedID+"&start="+start+"&end="+end,  
+      dataType: 'json',                           
+      async: false,
+      success: function(datain) { feedIn = datain; }
+    });
+    return feedIn;
+  }
+
+  //-------------------------------------------------------------------------------
+  // Get kwh per day at power range
+  //-------------------------------------------------------------------------------
+  function get_kwhatpower(feedid,rmin,rmax)
+  {
+    var feedIn = [];
+    $.ajax({                                      
+      url: path+'feed/kwhatpower.json',                         
+      data: "&apikey="+apikey+"&id="+feedid+"&min="+rmin+"&max="+rmax,
+      dataType: 'json',
+      async: false,                      
+      success: function(data_in) { feedIn = data_in; } 
     });
     return feedIn;
   }

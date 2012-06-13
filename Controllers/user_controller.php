@@ -196,13 +196,8 @@
       $user = get_user($session['userid']);
       $stats = get_statistics($session['userid']);
 
-      if ($format == 'json')
-      {
-      	$output['content'] = json_encode($user);
-	  }
-	  elseif ($format == 'html'){
-	  	$output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
-	  }
+      if ($format == 'json') $output['content'] = json_encode($user);
+      if ($format == 'html') $output['content'] = view_lang("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
 
     //---------------------------------------------------------------------------------------------------------

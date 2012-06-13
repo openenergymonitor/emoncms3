@@ -55,7 +55,6 @@
               tmp[0] = Date.UTC(year,month+1,1);
               tmp[1] = sum; ///daysInMonth(month-1, year);
 
-
               gdata.data[i] = tmp;
               gdata.days[i] = s;
               i++;
@@ -66,6 +65,7 @@
             s++;
             
            } 
+
           var tmp = [];
           tmp[0] = Date.UTC(year,month,1);
           tmp[1] = sum; ///daysInMonth(month, year);

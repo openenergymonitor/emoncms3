@@ -11,7 +11,7 @@
   -->
   <?php 
 
-  $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis/kWhdZoomer', '', $_SERVER['SCRIPT_NAME']))."/";
+  global $path, $embed;
 
   $power = $_GET['power'];
   $kwhd = $_GET['kwhd'];
@@ -20,28 +20,28 @@
   $pricekwh = $_GET['pricekwh']?$_GET['pricekwh']:0.14;
   ?>
 
-  <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.selection.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/date.format.js"></script>
-    <script language="javascript" type="text/javascript" src="kwhd_functions.js"></script>
-    <script language="javascript" type="text/javascript" src="view.js"></script>
-    <script language="javascript" type="text/javascript" src="graphs.js"></script>
-    <script language="javascript" type="text/javascript" src="info.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/scripts/inst.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.flot.selection.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/date.format.js"></script>
 
-  </head>
-  <body style="margin: 0px; padding:0px; font-family: arial;">
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/daysmonthsyears.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/zoom/view.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/zoom/graphs.js"></script>
 
-    
-    <div id="test" style="height:100%; width:100%; position:relative; ">
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
+
+<?php if (!$embed) { ?>
+<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
+<h2>kWh/d Zoomer</h2>
+<?php } ?>
+
+    <div id="test" style="height:500px; width:100%; position:relative; ">
       <div id="placeholder" style="font-family: arial; position:absolute; top: 40px; left:60px;"></div>
-
-      <div id="loading" style="position:absolute; top:40px; left:60px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
 
       <div style="position:absolute; top:10px; left:65px; font-size:18px;"><b><span id="out2"></span></b><?php echo _(": Hover on bar for info, press to zoom in");?></div>
       <h2 style="position:absolute; top:40px; left:80px;"><span id="out"></span></h2>
@@ -66,6 +66,7 @@
       </div>
 
     </div>
+<?php if (!$embed) echo "</div>"; ?>
 
     <script id="source" language="javascript" type="text/javascript">  
       var kwhd = <?php echo $kwhd; ?>;   
@@ -75,7 +76,6 @@
 
       $('#placeholder').width($('#test').width()-60);
       $('#placeholder').height($('#test').height()-120);
-      $('#loading').hide();
       $('#inst-buttons').hide();
 
       var data = [];
@@ -88,43 +88,43 @@
       // Global instantaneous graph variables
       var start, end;
       var feedid = power;
-      var paverage = 0, kwhWindow = 0;
 
       var price = <?php echo $pricekwh ?>;
       var currency = "<?php echo $currency ?>";
 
       var bot_kwhd_text = "";
 
-      //--------------------------------------------------------------
-      // 1) GET ALL KWHD DATA
-      //--------------------------------------------------------------
-      $.ajax({                                      
-        url: path+"feed/data.json",                         
-        data: "&apikey="+apikey+"&id="+kwhd+"&start=0&end=0&res=1",
-        dataType: 'json',                           
-        success: function(data_in) 
-        {
-          data = data_in;
-          tkwh = 0;
-          ndays=0;
-          for (z in data)
-          {
-            tkwh += parseFloat(data[z][1]);
-            ndays++;
-          }
+      var kwh_data = get_feed_data(kwhd,0,0,0);
+      
+      var total = 0, ndays=0;
+      for (z in kwh_data) {
+        total += parseFloat(kwh_data[z][1]); ndays++;
+      }
 
-          bot_kwhd_text = "Total: "+(tkwh).toFixed(0)+" kWh : "+currency+(tkwh*price).toFixed(0) + " | Average: "+(tkwh/ndays).toFixed(1)+ " kWh : "+currency+((tkwh/ndays)*price).toFixed(2)+" | "+currency+((tkwh/ndays)*price*7).toFixed(0)+" a week, "+currency+((tkwh/ndays)*price*365).toFixed(0)+" a year | Unit price: "+currency+price;
+      bot_kwhd_text = "Total: "+(total).toFixed(0)+" kWh : "+currency+(total*price).toFixed(0) + " | Average: "+(total/ndays).toFixed(1)+ " kWh : "+currency+((total/ndays)*price).toFixed(2)+" | "+currency+((total/ndays)*price*7).toFixed(0)+" a week, "+currency+((total/ndays)*price*365).toFixed(0)+" a year | Unit price: "+currency+price;
 
-          years = get_years(data);
-          //set_annual_view();
-          
-          months = get_months_year(data,2012);
-          //set_monthly_view();
+      years = get_years(kwh_data);
+      //set_annual_view();
 
-          days = get_last_30days(data);
-          set_last30days_view();
-        }
-      });
+      months = get_months_year(kwh_data,2012);
+      //set_monthly_view();
+
+      days = get_last_30days(kwh_data);
+      set_last30days_view();
+
+  function vis_feed_data()
+  {
+    var power_data = get_feed_data(feedid,start,end,500);
+    var stats = power_stats(power_data);
+    instgraph(power_data);
+
+    $("#out").html("");
+
+    var datetext = "";
+    if ((end-start)<3600000*25) {var mdate = new Date(start); datetext = mdate.format("dS mmm yyyy")}
+            
+    $("#bot_out").html(datetext+": Average: "+stats['average'].toFixed(0)+"W | "+stats['kwh'].toFixed(2)+" kWh | "+currency+(stats['kwh']*price).toFixed(2))
+  }
 
         //--------------------------------------------------------------
         // Zoom in on bar click
@@ -138,14 +138,14 @@
             if (view==1)
             {
               var d = new Date(); d.setTime(item.datapoint[0]);
-              days = get_days_month(data,d.getMonth(),d.getFullYear());
+              days = get_days_month(kwh_data,d.getMonth(),d.getFullYear());
               set_daily_view();
             }
 
             if (view==0)
             {
               var d = new Date(); d.setTime(item.datapoint[0]);
-              months = get_months_year(data,d.getFullYear());
+              months = get_months_year(kwh_data,d.getFullYear());
               set_monthly_view();
             }
           }
@@ -179,43 +179,22 @@
         });
 
 
-     //--------------------------------------------------------------------------------------
-     // Graph zooming
-     //--------------------------------------------------------------------------------------
-     $("#placeholder").bind("plotselected", function (event, ranges) 
-     {
-       // clamp the zooming to prevent eternal zoom
-       if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) ranges.xaxis.to = ranges.xaxis.from + 0.00001;
-       if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) ranges.yaxis.to = ranges.yaxis.from + 0.00001;
-       start = ranges.xaxis.from;					//covert into usable time values
-       end = ranges.xaxis.to;						//covert into usable time values
-       var res = getResolution(start, end);
-       vis_feed_data(apikey,power,start,end,res);			//Get new data and plot graph
-     });
+  //--------------------------------------------------------------------------------------
+  // Graph zooming
+  //--------------------------------------------------------------------------------------
+  $("#placeholder").bind("plotselected", function (event, ranges) 
+  {
+     start = ranges.xaxis.from; end = ranges.xaxis.to; vis_feed_data();
+  });
 
-     //----------------------------------------------------------------------------------------------
-     // Operate buttons
-     //----------------------------------------------------------------------------------------------
-     $("#zoomout").click(function () {inst_zoomout();});
-     $("#zoomin").click(function () {inst_zoomin();});
-     $('#right').click(function () {inst_panright();});
-     $('#left').click(function () {inst_panleft();});
-     $('.time').click(function () {inst_timewindow($(this).attr("time"));});
+  //----------------------------------------------------------------------------------------------
+  // Operate buttons
+  //----------------------------------------------------------------------------------------------
+  $("#zoomout").click(function () {inst_zoomout(); vis_feed_data();});
+  $("#zoomin").click(function () {inst_zoomin(); vis_feed_data();});
+  $('#right').click(function () {inst_panright(); vis_feed_data();});
+  $('#left').click(function () {inst_panleft(); vis_feed_data();});
+  $('.time').click(function () {inst_timewindow($(this).attr("time")); vis_feed_data();});
+  //-----------------------------------------------------------------------------------------------
 
-     function on_inst_graph_load()
-     {
-       $('#loading').hide();
-       $("#out").html("");
-
-       var datetext = "";
-       if ((end-start)<3600000*25) {var mdate = new Date(start); datetext = " | "+mdate.format("dS mmm yyyy")}
-            
-       $("#bot_out").html(kwhWindow+"kWh | "+currency+(kwhWindow*price).toFixed(2)+datetext)
-     }
-
-
-
-    </script>
-  </body>
-</html>
-
+</script>

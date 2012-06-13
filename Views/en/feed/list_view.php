@@ -9,7 +9,7 @@
 -->
 <?php global $path; ?>
 
-<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
   <h2><?php echo _("Feeds");?></h2>

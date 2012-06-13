@@ -10,6 +10,10 @@
     http://openenergymonitor.org
   -->
 
+<?php
+  global $embed,$session; 
+?>
+
 <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -36,8 +40,10 @@
       <!------------------------------------------------------
       HEADER
       ------------------------------------------------------->
+      <?php if (!$embed) { ?>
       <div class="header">
 		  <ul id="top-menu">
+
 		<?php 
 			if ($_SESSION['editmode'] == TRUE) {
 				$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo off.png";
@@ -49,11 +55,14 @@
 		}
       	?>
 			  <li><a style="padding:0" href='<?php echo $GLOBALS['path'].$viewl;?>'><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
+
 			  <?php print $menu; ?>
 		  </ul>
 		  <div><?php echo $user; ?></div>
       </div>
       <div style='clear:both; height:28px;'></div>
+      <?php } ?>
+
       <?php if ($message) { ?>
       <div id="message"><?php print $message; ?></div>
       <?php } ?>
@@ -70,8 +79,10 @@
     <!------------------------------------------------------
     FOOTER
     ------------------------------------------------------->
+    <?php if (!$embed) { ?>
     <div class="footer">
       Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a>
     </div>
+    <?php } ?>
 </body>
 </html>

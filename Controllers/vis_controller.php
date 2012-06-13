@@ -35,64 +35,78 @@
 
     if ($action == 'list' && $session['write'])
     {
-      $output['content'] = view("vis_view.php", array());
+      $output['content'] = view_lang("vis_view.php", array('apikey'=>$apikey));
     }
 
-    // TODO: Include in .css stylesheet and remove the styling-code of class 'lightbox'
-    
-    // Removed repeated code and stored in $widgetCode
-	$widgetCode = '<div class="lightbox" style="margin-bottom:20px; "><iframe style="width:100%; height:400px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'.$GLOBALS['path'].'Vis/'.$action.'php?apikey='.$apikey.'&feedid='.$feedid.'"></iframe></div>';
-    $widgetCode .= "<div class='lightbox'>";
-    $widgetCode .= "<h3>"._("Embed this graph")."</h3>";
-    $widgetCode .= htmlspecialchars('<iframe style="width:100%; height:400px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="'.$GLOBALS['path'].'Vis/'.$action.'php?apikey='.$apikey.'&feedid='.$feedid.'"></iframe>');
-    $widgetCode .= "</div>";
-    $widgetCode .=" </div>";
-    
-    // emoncms/vis/realtime?feedid=16&feedname=power
+
+    // vis/realtime?feedid=1
     if ($action == "realtime" && $session['read'])
     {
       $feedid = intval($_GET['feedid']);
-      $feedname = get_feed_name($feedid);
-
-      $content = '<div style="margin-right:3%; margin-left:3%;">';
-      $content .= "<h2>"._("Realtime: ").$feedname."</h2>";
-	  $content .= $widgetCode;
-      $output['content'] = $content;
+      $output['content'] = view("vis/realtime.php", array('feedid'=>$feedid,'feedname'=>get_feed_name($feedid)));
     }
 
-    // emoncms/vis/rawdata?feedid=16&feedname=power
-	elseif ($action == "rawdata" && $session['read'])
-    {
-      $feedid = intval($_GET['feedid']); $feedname = get_feed_name($feedid);
-
-      $content = '<div style="margin-right:3%; margin-left:3%;">';
-      $content .= "<h2>"._("Raw data: ").$feedname."</h2><p>"._("With Level-of-detail zooming")."</p>";
-	  $content .= $widgetCode;
-      $output['content'] = $content;
-    }
-
-    // emoncms/vis/bargraph?feedid=16&feedname=power
-	elseif ($action == "bargraph" && $session['read'])
-    {
-      $feedid = intval($_GET['feedid']); $feedname = get_feed_name($feedid);
-
-      $content = '<div style="margin-right:3%; margin-left:3%;">';
-      $content .= "<h2>"._("Bar graph view: ").$feedname."</h2>";
-	  $content .= $widgetCode;
-      $output['content'] = $content;
-    }
-
-    // emoncms/vis/bargraph?feedid=16&feedname=power
-	elseif ($action == "histgraph" && $session['read'])
+    // vis/rawdata?feedid=1
+    if ($action == "rawdata" && $session['read'])
     {
       $feedid = intval($_GET['feedid']);
-      $feedname = get_feed_name($feedid);
+      $output['content'] = view("vis/rawdata.php", array('feedid'=>$feedid,'feedname'=>get_feed_name($feedid)));
+    }
 
+    // vis/bargraph?feedid=2
+    if ($action == "bargraph" && $session['read'])
+    {
+      $feedid = intval($_GET['feedid']);
+      $output['content'] = view("vis/bargraph.php", array('feedid'=>$feedidtrystan,'feedname'=>get_feed_name($feedid)));
+    }
 
-      $content = '<div style="margin-right:3%; margin-left:3%;">';
-      $content .= "<h2>"._("All-time histogram graph view: ").$feedname."</h2>";
-	  $content .= $widgetCode;
-      $output['content'] = $content;
+    if ($action == 'smoothie' && $session['read'])
+    {
+      $output['content'] = view("vis/smoothie/smoothie.php", array());
+    }
+
+    // vis/histgraph?feedid=3
+    if ($action == "histgraph" && $session['read'])
+    {
+      $feedid = intval($_GET['feedid']);
+      $output['content'] = view("vis/histgraph.php", array('feedid'=>$feedid,'feedname'=>get_feed_name($feedid)));
+    }
+
+    // vis/dailyhistogram?power=  &kwhd=  &whw= 
+    if ($action == 'dailyhistogram' && $session['read'])
+    {
+      $output['content'] = view("vis/dailyhistogram/dailyhistogram.php", array());
+    }
+
+    if ($action == 'zoom' && $session['read'])
+    {
+      $output['content'] = view("vis/zoom/zoom.php", array());
+    }
+
+    if ($action == 'stacked' && $session['read'])
+    {
+      $output['content'] = view("vis/stacked.php", array());
+    }
+
+    if ($action == 'threshold' && $session['read'])
+    {
+      $output['content'] = view("vis/threshold.php", array());
+    }
+
+    if ($action == 'simplezoom' && $session['read'])
+    {
+      $output['content'] = view("vis/simplezoom.php", array());
+    }
+
+    if ($action == "orderbars" && $session['read'])
+    {
+      $feedid = intval($_GET['feedid']);
+      $output['content'] = view("vis/orderbars.php", array('feedid'=>$feedid,'feedname'=>get_feed_name($feedid)));
+    }
+
+    if ($action == 'orderthreshold' && $session['read'])
+    {
+      $output['content'] = view("vis/orderthreshold.php", array());
     }
 
 	elseif ($action == 'multigraph' && $session['read'])
@@ -103,7 +117,6 @@
       }
       $output['content'] = view("vis/multigraph.php", array('write_apikey'=>$write_apikey));
     }
-
  
     return $output;
   }

@@ -135,12 +135,8 @@
     {
       $feeds = get_user_feeds($session['userid']);
     
-      if ($format == 'json'){
-      	$output['content'] = json_encode($feeds);
-	  }
-	  elseif ($format == 'html'){
-	  	$output['content'] = view("feed/list_view.php", array('feeds' => $feeds));
-	  }
+      if ($format == 'json') $output['content'] = json_encode($feeds);
+      if ($format == 'html') $output['content'] = view_lang("feed/list_view.php", array('feeds' => $feeds));
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -165,10 +161,8 @@
         	$output['content'] = $_GET["callback"]."(".json_encode($feed).");";
 		}
       }
-	  elseif ($format == 'html')
-	  {
-	  	$output['content'] = view("feed/feed_view.php", array('feed' => $feed));
-	  }
+
+      if ($format == 'html') $output['content'] = view_lang("feed/feed_view.php", array('feed' => $feed));
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -197,11 +191,28 @@
       {
         $start = floatval($_GET['start']);
         $end = floatval($_GET['end']);
-        $oldres = intval($_GET['res']); 				// For legacy support
-        $dp = intval($_GET['dp']);					// This is the new resolution setting where you ask for a specific number of datapoints
-        $data = get_feed_data($feedid,$start,$end,$oldres,$dp);
+        $dp = intval($_GET['dp']); // New resolution setting: number of datapoints
+        $data = get_feed_data($feedid,$start,$end,$dp);
         $output['content'] = json_encode($data);
-      }
+      } else { $output['message'] = "This is not your feed..."; }
+    }
+
+    //---------------------------------------------------------------------------------------------------------
+    // get feed data
+    // http://yoursite/emoncms/feed/data?id=1&start=000&end=000&res=1
+    //---------------------------------------------------------------------------------------------------------
+    if ($action == 'histogram' && $session['read'])
+    {
+      $feedid = intval($_GET['id']);
+      
+      // Check if feed belongs to user
+      if (feed_belongs_user($feedid,$session['userid']))
+      {
+        $start = floatval($_GET['start']);
+        $end = floatval($_GET['end']);
+        $data = get_histogram_data($feedid,$start,$end);
+        $output['content'] = json_encode($data);
+      } else { $output['message'] = "This is not your feed..."; }
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -222,7 +233,6 @@
 
       } else { $output['message'] = "This is not your feed..."; }
     }
-
 
     return $output;
   }

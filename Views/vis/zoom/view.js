@@ -54,14 +54,9 @@
         //--------------------------------------------------------------------------
         function set_inst_view(day)
         {
-              $('#loading').show();
-              $("#out").html("Loading...  please wait about 5s");
+              start = day; end = day + 3600000 * 24;
 
-              start = day;
-              end = day + 3600000 * 24;
-              var res = getResolution(start,end);
-              vis_feed_data(apikey,power,start,end,res);
-
+              vis_feed_data();
               view = 3;
               $("#out2").html("Power view");
               $("#return").val("View: daily view");

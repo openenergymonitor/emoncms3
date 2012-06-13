@@ -8,17 +8,17 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 -->
 <?php
-global $path, $session;
+global $path, $session, $embed;
 ?>
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/excanvas.min.js"></script><![endif]-->
-<script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/flot/jquery.flot.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/common.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/dial.js"></script>
-<script type="text/javascript" src="<?php echo $path;?>Vis/Dashboard/widgets/led.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Views/Dashboard/common.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Views/Dashboard/widgets/dial.js"></script>
+<script type="text/javascript" src="<?php echo $path;?>Views/Dashboard/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Includes/editors/ckeditor/adapters/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $path;?>Includes/lib/jquery-ui-1.8.20.custom/css/smoothness/jquery-ui-1.8.20.custom.css" />  
@@ -114,7 +114,8 @@ Dashboard HTML
 	// Fired on editor preview pressed
 	CKEDITOR.on( 'previewPressed', function( ev )
 	{
-		window.open( "<?php echo $path;?>Vis/Dashboard/embed.php?apikey=<?php echo $apikey_read;?>&id="+$.urlParam('id'), null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
+
+window.open( "<?php echo $path;?>dashboard/view?apikey=<?php echo $apikey; ?>&id="+$.urlParam('id')+"&embed=1", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
 				640 + ',height=' + 420 + ',left=' + 80 );		
 	});
 		

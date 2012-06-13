@@ -10,19 +10,23 @@
 
 <?php
   $apikey = $_GET["apikey"];
-  $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis', '', $_SERVER['SCRIPT_NAME']))."/";
+  global $path, $embed;
 ?>
 
-<!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.selection.js"></script>
+<!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.selection.js"></script>
 
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/en/vis/api.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/en/vis/inst.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
  
+<?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
+
 <h2><?php echo _("Multigraph");?></h2>
+
+<?php } ?>
 
     <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
       <div id="graph"></div>
@@ -40,7 +44,7 @@
 
       </div>
     </div>
-</div>
+<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
 

@@ -67,25 +67,16 @@
   }
 
   $lang = preg_replace('/[a-z]/','',$_GET['lang']);
-
   // Multilanguage support
   // Set language from url attribute lang and save it to the session variable
   // The view function in core.inc.php then selects the view depending on the lang session variable
-  $lang =  $_GET['lang'];
-  if ($lang=='en')
-  {
-  	$_SESSION['lang'] = $lang;
-  }
-  else
-  {
-  	$lang = null;
-  }
-  
-  if (!$_SESSION['lang'])
-  {
-  	$_SESSION['lang'] = "en";	// Set default language
-  }
-  
+
+    $lang =  $_GET['lang']; if ($lang=='en') $_SESSION['lang'] = $lang; else $lang = null;
+  if (!$_SESSION['lang']) $_SESSION['lang'] = "en";	// Set default language
+
+
+  if ($_GET['embed']) $embed = 1; else $embed = 0;
+
   $session['read'] = $_SESSION['read'];
   $session['write'] = $_SESSION['write'];
   $session['userid'] = $_SESSION['userid'];
@@ -112,16 +103,13 @@
 
   if ($format == 'html')
   {
-    if ($session['write'])
-    {
-      $user = view("user/account_block.php", array());
-      $menu = view("menu_view.php", array());
+
+    if ($session['write']){
+      $user = view_lang("user/account_block.php", array());
+      $menu = view_lang("menu_view.php", array());
     }
-    if (!$session['read'])
-	{
-		$content = view("user/login_block.php", array());
-	}
-    print theme("theme/wp/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
+    if (!$session['read']) $content = view_lang("user/login_block.php", array());
+    print view("theme/wp/theme.php", array('menu' => $menu, 'user' => $user, 'content' => $content,'message' => $message));
   }
 
   if ($controller == "api" && $action == "post")
@@ -132,5 +120,5 @@
   {
   	inc_dnhits_statistics($session['userid']);
   }
-  //----------------------------------------------------
+
 ?>

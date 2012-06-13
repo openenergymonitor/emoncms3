@@ -37,7 +37,6 @@
    // Time window buttons
    ---------------------------------------------------------------------------------------------------->
 
-
     <div id="graph_bound" style="height:100%; width:100%; position:relative; ">
       <div id="graph"></div>
       <div style="position:absolute; top:20px; right:20px;">

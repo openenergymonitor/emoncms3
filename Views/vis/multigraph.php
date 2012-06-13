@@ -9,22 +9,24 @@
 -->
 
 <?php
-  global $session;
+  global $session, $path, $embed;
   $clear = $_GET["clear"];
   $apikey = $_GET["apikey"];
-  $path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis', '', $_SERVER['SCRIPT_NAME']))."/";
 ?>
 
-<!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.selection.js"></script>
+<!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.selection.js"></script>
 
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/en/vis/api.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/en/vis/inst.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
  
+<?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2><?php echo _("Multigraph");?></h2>
+
+<?php } ?>
 
     <div id="graph_bound" style="height:380px; width:100%; position:relative; ">
       <div id="graph"></div>
@@ -47,7 +49,7 @@
   <p><input id="save" type="button" class="button05" value=<?php echo _("Save current configuration");?>/></p>
   <?php } ?>
 
-</div>
+<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
 
@@ -167,7 +169,7 @@
     for(var i in feedlist) {
       if (timeWindowChanged) feedlist[i].plot.data = null;
       if (feedlist[i].selected) {        
-        if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,2);
+        if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,1000);
         if ( feedlist[i].plot.data) plotdata.push(feedlist[i].plot);
       }
     }
