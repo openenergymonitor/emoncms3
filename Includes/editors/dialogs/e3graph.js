@@ -1,7 +1,7 @@
 CKEDITOR.dialog.add( 'e3graph', function( editor ) {
 
 	return {
-		title : 'Insert dial dialog',
+		title : 'Insert graph dialog',
 		minWidth : 400,
 		minHeight : 200,
 		onOk : function() {

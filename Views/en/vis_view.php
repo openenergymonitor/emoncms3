@@ -19,62 +19,56 @@ global $path, $session;
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 
-<h2>Visualisation API</h2>
+<h2><?php echo _("Visualisation API");?></h2>
 
 <table class='catlist'>
-<tr><th>Name</th><th style="text-align:right">URL</th><th>View</th></tr>
+<tr><th><?php echo _("Name");?></th><th style="text-align:right"><?php echo _("URL");?></th><th><?php echo _("View");?></th></tr>
 
 <tr><form action="realtime" method="get">
-  <td>Real-time graph</td>
+  <td><?php echo _("Real-time graph");?></td>
   <td style="text-align:right">vis/realtime?feedid= <input name="feedid" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
 <tr><form action="rawdata" method="get">
-  <td>Raw data graph</td>
+  <td><?php echo _("Raw data graph");?></td>
   <td style="text-align:right">vis/rawdata?feedid= <input name="feedid" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
 <tr><form action="bargraph" method="get">
-  <td>Bar graph</td>
+  <td><?php echo _("Bar graph");?></td>
   <td style="text-align:right">vis/bargraph?feedid= <input name="feedid" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
-<tr><form action="smoothie" method="get">
-  <td>Smoothie</td>
-  <td style="text-align:right">vis/smoothie?feedid= <input name="feedid" type='text' style='width:50px' /></td>
+<tr><form action="../Vis/smoothie/smoothie" method="get">
+  <td><?php echo _("Smoothie");?></td>
+  <td style="text-align:right">Vis/smoothie/smoothie?feedid= <input name="feedid" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
 <tr><form action="histgraph" method="get">
-  <td>All time histogram</td>
+  <td><?php echo _("All time histogram");?></td>
   <td style="text-align:right">vis/histgraph?feedid= <input name="feedid" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
-<tr><form action="dailyhistogram" method="get">
-  <td>Daily histogram</td>
-  <td style="text-align:right">vis/dailyhistogram?power= <input name="power" type='text' style='width:50px' /> &kwhd= <input name="kwhd" type='text' style='width:50px' /> &whw= <input name="whw" type='text' style='width:50px' /></td>
+<tr><form action="../Vis/kwhd_histogram/kwhdzoomer" method="get">
+  <td><?php echo _("Daily histogram");?></td>
+  <td style="text-align:right">Vis/kwhd_histogram/kwhdzoomer?power= <input name="power" type='text' style='width:50px' /> &kwhd= <input name="kwhd" type='text' style='width:50px' /> &whw= <input name="whw" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
-<tr><form action="zoom" method="get">
-  <td>kWh/d Zoomer</td>
-  <td style="text-align:right">vis/zoom?power= <input name="power" type='text' style='width:50px' /> &kwhd= <input name="kwhd" type='text' style='width:50px' /></td>
+<tr><form action="../Vis/kWhdZoomer/kwhdzoomer" method="get">
+  <td><?php echo _("kWh/d Zoomer");?></td>
+  <td style="text-align:right">Vis/kWhdZoomer/kwhdzoomer?power= <input name="power" type='text' style='width:50px' /> &kwhd= <input name="kwhd" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
-<tr><form action="simplezoom" method="get">
-  <td>Simpler zoom</td>
-  <td style="text-align:right">vis/simplezoom?power= <input name="power" type='text' style='width:50px' /> &kwhd= <input name="kwhd" type='text' style='width:50px' /></td>
-  <td><input type="submit" value=">" class="button05"/></td>
-</form></tr>
-
-<tr><form action="stacked" method="get">
-  <td>kWh/d Stacked</td>
-  <td style="text-align:right">vis/stacked?kwhdA= <input name="kwhdA" type='text' style='width:50px' /> &kwhdB= <input name="kwhdB" type='text' style='width:50px' /></td>
+<tr><form action="../Vis/kwhdstacked/kwhdstacked" method="get">
+  <td><?php echo _("kWh/d Stacked");?></td>
+  <td style="text-align:right">Vis/kwhdstacked/kwhdstacked?kwhdA= <input name="kwhdA" type='text' style='width:50px' /> &kwhdB= <input name="kwhdB" type='text' style='width:50px' /></td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
@@ -97,7 +91,7 @@ global $path, $session;
 </form></tr>
 
 <tr><form action="multigraph" method="get">
-  <td>Multigraph</td>
+  <td><?php echo _("Multigraph");?></td>
   <td style="text-align:right">vis/multigraph</td>
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>

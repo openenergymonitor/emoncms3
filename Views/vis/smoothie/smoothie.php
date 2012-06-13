@@ -3,6 +3,14 @@ Thanks to Shervin for contributing this visualisation, see forum thread here:
 http://openenergymonitor.org/emon/node/600
 ----------------------------------------------------------------------------------------------------->
 
+<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title><?php echo _("Graph");?></title>
+
 <?php
 
   global $path, $embed;
@@ -15,6 +23,7 @@ http://openenergymonitor.org/emon/node/600
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
 	
 	<style type="text/css">
 	    html, body { margin: 0; padding: 0; height: 100%; 

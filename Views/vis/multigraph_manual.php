@@ -23,7 +23,9 @@
  
 <?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-<h2>Multigraph</h2>
+
+<h2><?php echo _("Multigraph");?></h2>
+
 <?php } ?>
 
     <div id="graph_bound" style="height:400px; width:100%; position:relative; ">

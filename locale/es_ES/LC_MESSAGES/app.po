@@ -1,0 +1,798 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: emoncms3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-11 22:00+0100\n"
+"PO-Revision-Date: 2012-06-12 12:04+0100\n"
+"Last-Translator: JSidrach <juan.sidrach@estudiante.uam.es>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: C:\\Users\\usuario\\My Documents\\Aptana Studio 3 Workspace\\emoncms3\\.\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: conv.php:17
+#: setup.php:29
+msgid "to run script uncomment runnable"
+msgstr "para ejecutar el código descomenta 'runnable'"
+
+#: conv.php:41
+msgid "converted feed: "
+msgstr "fuente convertida:"
+
+#: conv.php:85
+msgid "feed: "
+msgstr "fuente:"
+
+#: conv.php:85
+msgid " already converted"
+msgstr " ya convertido"
+
+#: conv.php:93
+msgid "Missing index added to: "
+msgstr ""
+
+#: index.php:109
+msgid "Sorry, you need a valid apikey or be logged in to see this page"
+msgstr "Lo siento, necesitas una clave válida o estar loggeado para ver esta página"
+
+#: setup.php:3
+msgid "Continue to emoncms"
+msgstr "Continuar a emoncms"
+
+#: Controllers/dashboards_controller.php:33
+msgid "dashboards new"
+msgstr ""
+
+#: Controllers/dashboard_controller.php:47
+msgid "dashboard set"
+msgstr "establecer panel"
+
+#: Controllers/dashboard_controller.php:54
+msgid "dashboard set configuration"
+msgstr "establecer configuración del panel"
+
+#: Controllers/feed_controller.php:46
+msgid "Feed type changed"
+msgstr "Tipo de fuente cambiada"
+
+#: Controllers/feed_controller.php:50
+#: Controllers/feed_controller.php:77
+#: Controllers/feed_controller.php:103
+#: Controllers/feed_controller.php:125
+msgid "Feed does not exist"
+msgstr "La fuente no existe"
+
+#: Controllers/feed_controller.php:73
+msgid "Feed tag changed"
+msgstr "Etiqueta de la fuente cambiada"
+
+#: Controllers/feed_controller.php:99
+msgid "Feed renamed"
+msgstr "Fuente renombrada"
+
+#: Controllers/feed_controller.php:122
+msgid "Feed "
+msgstr "Fuente"
+
+#: Controllers/feed_controller.php:122
+msgid " deleted"
+msgstr " borrado"
+
+#: Controllers/input_controller.php:54
+msgid "Input deleted"
+msgstr "Entrada borrada"
+
+#: Controllers/input_controller.php:61
+msgid "Process list has been reset"
+msgstr "La lista de procesos ha sido reseteada"
+
+#: Controllers/user_controller.php:50
+msgid "Invalid username or password"
+msgstr "Usuario o contraseña inválidos"
+
+#: Controllers/user_controller.php:54
+msgid "Welcome, you are now logged in"
+msgstr "Bienvenido, ya estás conectado"
+
+#: Controllers/user_controller.php:75
+msgid "Sorry username already exists"
+msgstr "El usuario ya existe"
+
+#: Controllers/user_controller.php:79
+msgid "Please enter a username that is 4 to 30 characters long"
+msgstr "Por favor introduzca un nombre de usuario de 4 a 40 caracteres"
+
+#: Controllers/user_controller.php:83
+msgid "Please enter a password that is 4 to 30 characters long"
+msgstr "Por favor introduzca una contraseña de 4 a 30 caracteres"
+
+#: Controllers/user_controller.php:90
+msgid "Your new account has been created"
+msgstr "Tu nueva cuenta ha sido creada"
+
+#: Controllers/user_controller.php:108
+msgid "Your password has been changed"
+msgstr "Tu contraseña ha sido cambiada"
+
+#: Controllers/user_controller.php:112
+msgid "Invalid old password"
+msgstr "Contraseña antigua errónea"
+
+#: Controllers/user_controller.php:124
+msgid "New read apikey: "
+msgstr "Nueva clave de lectura (API):"
+
+#: Controllers/user_controller.php:140
+msgid "New write apikey: "
+msgstr "Nueva clave de escritura (API):"
+
+#: Controllers/user_controller.php:157
+msgid "You are logged out"
+msgstr "Te has desconectado"
+
+#: Controllers/user_controller.php:162
+msgid "Invalid token"
+msgstr ""
+
+#: Controllers/vis_controller.php:24
+msgid "Restricted access"
+msgstr "Acceso restringido"
+
+#: Controllers/vis_controller.php:46
+msgid "Embed this graph"
+msgstr "Incrustar este gráfico"
+
+#: Controllers/vis_controller.php:58
+msgid "Realtime: "
+msgstr "Tiempo real:"
+
+#: Controllers/vis_controller.php:69
+msgid "Raw data: "
+msgstr "Datos brutos:"
+
+#: Controllers/vis_controller.php:69
+msgid "With Level-of-detail zooming"
+msgstr ""
+
+#: Controllers/vis_controller.php:80
+msgid "Bar graph view: "
+msgstr "Vista de gráfico de barras:"
+
+#: Controllers/vis_controller.php:93
+msgid "All-time histogram graph view: "
+msgstr ""
+
+#: Models/mail_model.php:30
+msgid "Message successfully sent!"
+msgstr "¡Mensaje enviado correctamente!"
+
+#: Models/notify_model.php:39
+msgid " is"
+msgstr "está"
+
+#: Models/notify_model.php:46
+msgid " is inactive"
+msgstr "está inactivo"
+
+#: Models/process_model.php:27
+#, fuzzy
+msgid "Log to feed"
+msgstr ""
+
+#: Models/process_model.php:30
+msgid "Power to kWh"
+msgstr ""
+
+#: Models/process_model.php:31
+msgid "Power to kWh/d"
+msgstr ""
+
+#: Models/process_model.php:32
+msgid "x input"
+msgstr "entrada x"
+
+#: Models/process_model.php:33
+msgid "input on-time"
+msgstr ""
+
+#: Models/process_model.php:34
+msgid "kWhinc to kWh/d"
+msgstr ""
+
+#: Models/process_model.php:35
+msgid "kWh to kWh/d"
+msgstr ""
+
+#: Models/process_model.php:36
+msgid "update feed @time"
+msgstr "Actualizar fuente @tiempo"
+
+#: Models/process_model.php:37
+msgid "+ input"
+msgstr ""
+
+#: Models/process_model.php:38
+msgid "/ input"
+msgstr ""
+
+#: Models/process_model.php:39
+msgid "phaseshift"
+msgstr ""
+
+#: Models/process_model.php:40
+msgid "accumulator"
+msgstr "acumulador"
+
+#: Models/process_model.php:41
+msgid "rate of change"
+msgstr "ratio de cambio"
+
+#: Models/process_model.php:42
+msgid "histogram"
+msgstr "histograma"
+
+#: Views/en/confirm_view.php:15
+msgid "Yes please"
+msgstr "Sí"
+
+#: Views/en/dashboard_view.php:32
+msgid "Edit"
+msgstr "Editar"
+
+#: Views/en/dashboard_view.php:38
+msgid "Edit dashboard"
+msgstr "Editar panel"
+
+#: Views/en/dashboard_view.php:39
+msgid "Configuration"
+msgstr "Configuración"
+
+#: Views/en/dashboard_view.php:40
+msgid "Preview"
+msgstr "Vista previa"
+
+#: Views/en/dashboard_view.php:47
+msgid "Dashboard name: "
+msgstr "Nombre del panel:"
+
+#: Views/en/dashboard_view.php:48
+msgid "Description: "
+msgstr "Descripción"
+
+#: Views/en/dashboard_view.php:49
+msgid "Main dashboard: "
+msgstr "Panel principal:"
+
+#: Views/en/menu_view.php:11
+msgid "Inputs"
+msgstr "Entradas"
+
+#: Views/en/menu_view.php:12
+msgid "Feeds"
+msgstr "Fuentes"
+
+#: Views/en/menu_view.php:13
+msgid "Vis"
+msgstr ""
+
+#: Views/en/menu_view.php:14
+msgid "Account"
+msgstr "Cuenta"
+
+#: Views/en/menu_view.php:15
+msgid "Dashboard"
+msgstr "Panel"
+
+#: Views/en/menu_view.php:16
+msgid "Dashboards"
+msgstr "Paneles"
+
+#: Views/en/notify_settings_view.php:2
+msgid "Notify settings"
+msgstr "Configuración de notificaciones"
+
+#: Views/en/notify_settings_view.php:4
+msgid "Notification recipiants (To): "
+msgstr ""
+
+#: Views/en/notify_view.php:2
+msgid "Notify "
+msgstr "Notificar"
+
+#: Views/en/notify_view.php:3
+msgid "Setup feed notifications"
+msgstr "Establecer notificaciones de la fuente"
+
+#: Views/en/notify_view.php:6
+msgid "Notify when feed = value: "
+msgstr ""
+
+#: Views/en/notify_view.php:7
+msgid "Notify when feed is inactive "
+msgstr ""
+
+#: Views/en/notify_view.php:8
+msgid "Notify feed status periodically "
+msgstr ""
+
+#: Views/en/notify_view.php:12
+msgid "Edit mail settings"
+msgstr "Editar preferencias de correo"
+
+#: Views/en/user_view.php:22
+msgid "User: "
+msgstr "Usuario"
+
+#: Views/en/user_view.php:26
+msgid "Language"
+msgstr "Lenguaje"
+
+#: Views/en/user_view.php:27
+msgid "Select preferred language:"
+msgstr "Selecciona el idioma por defecto:"
+
+#: Views/en/user_view.php:32
+msgid "English"
+msgstr "Inglés"
+
+#: Views/en/user_view.php:33
+msgid "Spanish"
+msgstr "Español"
+
+#: Views/en/user_view.php:37
+msgid "Set"
+msgstr "Establecer"
+
+#: Views/en/user_view.php:47
+msgid "API keys"
+msgstr "Claves API"
+
+#: Views/en/user_view.php:50
+msgid "Read only access: "
+msgstr "Acceso de solo lectura:"
+
+#: Views/en/user_view.php:53
+#: Views/en/user_view.php:62
+msgid "new"
+msgstr "nuevo"
+
+#: Views/en/user_view.php:59
+msgid "Write only access: "
+msgstr "Acceso de solo escritura"
+
+#: Views/en/user_view.php:76
+msgid "Example: Copy this to your web browser or send from a nanode: "
+msgstr ""
+
+#: Views/en/user_view.php:76
+msgid "try me"
+msgstr "pruébame"
+
+#: Views/en/user_view.php:81
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: Views/en/user_view.php:83
+msgid "Old password:"
+msgstr "Contraseña antigua:"
+
+#: Views/en/user_view.php:85
+msgid "New password:"
+msgstr "Nueva contraseña:"
+
+#: Views/en/user_view.php:87
+msgid "Change"
+msgstr "Cambiar"
+
+#: Views/en/user_view.php:93
+msgid "Account Statistics"
+msgstr "Estadísticas de Cuenta"
+
+#: Views/en/user_view.php:96
+msgid "Disk space use:"
+msgstr "Uso de espacio en disco:"
+
+#: Views/en/user_view.php:97
+msgid "Up hits:"
+msgstr ""
+
+#: Views/en/user_view.php:98
+msgid "Down hits:"
+msgstr ""
+
+#: Views/en/vis_view.php:22
+msgid "Visualisation API"
+msgstr ""
+
+#: Views/en/vis_view.php:25
+#: Views/en/feed/list_view.php:39
+#: Views/en/input/list_view.php:36
+msgid "Name"
+msgstr "Nombre:"
+
+#: Views/en/vis_view.php:25
+msgid "URL"
+msgstr "Enlace"
+
+#: Views/en/vis_view.php:25
+msgid "View"
+msgstr "Vista"
+
+#: Views/en/vis_view.php:28
+msgid "Real-time graph"
+msgstr "Gráfico en tiempo real"
+
+#: Views/en/vis_view.php:34
+msgid "Raw data graph"
+msgstr "Gráfico de datos brutos"
+
+#: Views/en/vis_view.php:40
+#: Views/en/feed/feed_view.php:41
+msgid "Bar graph"
+msgstr "Gráfico de barras"
+
+#: Views/en/vis_view.php:46
+msgid "Smoothie"
+msgstr ""
+
+#: Views/en/vis_view.php:52
+msgid "All time histogram"
+msgstr "Histograma completo"
+
+#: Views/en/vis_view.php:58
+msgid "Daily histogram"
+msgstr "Histograma diario"
+
+#: Views/en/vis_view.php:64
+msgid "kWh/d Zoomer"
+msgstr ""
+
+#: Views/en/vis_view.php:70
+msgid "kWh/d Stacked"
+msgstr ""
+
+#: Views/en/vis_view.php:76
+#: Views/en/vis/multigraph.php:27
+#: Views/en/vis/multigraph_manual.php:25
+msgid "Multigraph"
+msgstr "Gráfico múltiple"
+
+#: Views/en/admin/admin_view.php:2
+msgid "Admin panel"
+msgstr "Panel de administración"
+
+#: Views/en/admin/admin_view.php:3
+msgid "Total feed data disk space use: "
+msgstr "Total de espacio de disco usado por la fuente de datos:"
+
+#: Views/en/admin/admin_view.php:5
+msgid "Users"
+msgstr "Usuarios"
+
+#: Views/en/admin/admin_view.php:6
+msgid "registered users"
+msgstr "usuarios registrados"
+
+#: Views/en/admin/admin_view.php:9
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: Views/en/admin/admin_view.php:9
+msgid "Up hits"
+msgstr ""
+
+#: Views/en/admin/admin_view.php:9
+msgid "Dn hits"
+msgstr ""
+
+#: Views/en/admin/admin_view.php:9
+msgid "Memory use"
+msgstr "Uso de memoria"
+
+#: Views/en/admin/admin_view.php:9
+msgid "Admin"
+msgstr "Administrar"
+
+#: Views/en/feed/feed_view.php:24
+msgid "Select graph type:"
+msgstr "Seleccione un tipo de gráfico:"
+
+#: Views/en/feed/feed_view.php:29
+msgid "Real-time"
+msgstr "Tiempo real"
+
+#: Views/en/feed/feed_view.php:34
+msgid "Raw data"
+msgstr "Datos brutos"
+
+#: Views/en/feed/feed_view.php:48
+msgid "Histogram"
+msgstr "Histograma"
+
+#: Views/en/feed/feed_view.php:52
+msgid "Feed type"
+msgstr "Tipo de fuente"
+
+#: Views/en/feed/feed_view.php:56
+msgid "Undefined"
+msgstr "Indefinido"
+
+#: Views/en/feed/feed_view.php:57
+msgid "Real-time data"
+msgstr "Datos en tiempo real"
+
+#: Views/en/feed/feed_view.php:58
+msgid "Daily data"
+msgstr "Datos diarios"
+
+#: Views/en/feed/feed_view.php:59
+msgid "Histogram data"
+msgstr "Datos de histograma"
+
+#: Views/en/feed/feed_view.php:64
+#: Views/en/feed/feed_view.php:70
+#: Views/en/feed/feed_view.php:76
+msgid "Save"
+msgstr "Guardar"
+
+#: Views/en/feed/feed_view.php:66
+msgid "Tag feed"
+msgstr "Etiqueta de la fuente"
+
+#: Views/en/feed/feed_view.php:72
+msgid "Rename feed"
+msgstr "Renombrar fuente"
+
+#: Views/en/feed/feed_view.php:79
+msgid "Delete feed?"
+msgstr "¿Borrar fuente?"
+
+#: Views/en/feed/feed_view.php:80
+msgid "Are you sure you want to delete feed: "
+msgstr "¿Estás seguro de que quieres borrar la fuente?:"
+
+#: Views/en/feed/feed_view.php:83
+msgid "feed/delete"
+msgstr "fuente/borrar"
+
+#: Views/en/feed/feed_view.php:85
+msgid "delete"
+msgstr "borrar"
+
+#: Views/en/feed/feed_view.php:88
+msgid "Notify"
+msgstr "Notificar"
+
+#: Views/en/feed/feed_view.php:91
+msgid "Set notifications"
+msgstr "Establecer notificaciones"
+
+#: Views/en/feed/list_view.php:39
+msgid "Tag"
+msgstr "Etiqueta"
+
+#: Views/en/feed/list_view.php:39
+msgid "Size"
+msgstr "Tamaño"
+
+#: Views/en/feed/list_view.php:39
+#: Views/en/input/list_view.php:36
+msgid "Updated"
+msgstr "Actualizado"
+
+#: Views/en/feed/list_view.php:39
+#: Views/en/input/list_view.php:36
+msgid "Value"
+msgstr "Valor"
+
+#: Views/en/feed/list_view.php:60
+msgid "s ago"
+msgstr " s atrás"
+
+#: Views/en/feed/list_view.php:61
+msgid " mins ago"
+msgstr " minutros atrás"
+
+#: Views/en/feed/list_view.php:62
+msgid " hours ago"
+msgstr " horas atrás"
+
+#: Views/en/feed/list_view.php:63
+msgid "inactive"
+msgstr "inactivo"
+
+#: Views/en/feed/list_view.php:78
+msgid "updated"
+msgstr "actualizado"
+
+#: Views/en/process/list_view.php:12
+msgid "Input Configuration:   "
+msgstr "Configuración de Entrada:"
+
+#: Views/en/process/list_view.php:19
+msgid "Order"
+msgstr "Ordenar"
+
+#: Views/en/process/list_view.php:19
+msgid "Process"
+msgstr "Procesar"
+
+#: Views/en/process/list_view.php:19
+msgid "Arg"
+msgstr "Argumento"
+
+#: Views/en/process/list_view.php:33
+msgid "New"
+msgstr "Nuevo"
+
+#: Views/en/process/list_view.php:46
+msgid "add"
+msgstr "añadir"
+
+#: Views/en/process/list_view.php:54
+msgid "Reset process list?"
+msgstr ""
+
+#: Views/en/process/list_view.php:56
+msgid "Reset"
+msgstr "Resetear"
+
+#: Views/en/process/list_view.php:67
+msgid "Are you sure you want to delete input: "
+msgstr "Estás seguro de que quieres borrar la entrada:"
+
+#: Views/en/process/list_view.php:70
+msgid "Delete input?"
+msgstr "¿Borrar entrada?"
+
+#: Views/en/user/account_block.php:23
+msgid "Logout"
+msgstr "Desconectar"
+
+#: Views/en/user/login_block.php:32
+msgid "Email:"
+msgstr "Correo:"
+
+#: Views/en/user/login_block.php:34
+msgid "Password:"
+msgstr "Contraseña"
+
+#: Views/en/user/login_block.php:37
+msgid "Login"
+msgstr "Entrar"
+
+#: Views/en/user/login_block.php:40
+msgid "Or if your new enter your email and a "
+msgstr ""
+
+#: Views/en/user/login_block.php:40
+#, fuzzy
+msgid "password above and click register:"
+msgstr ""
+
+#: Views/en/vis/multigraph.php:47
+msgid "Save current configuration"
+msgstr "Guardar configuración actual"
+
+#: Views/en/vis/multigraph.php:83
+msgid "Select Feeds"
+msgstr "Seleccionar Fuentes"
+
+#: Views/en/vis/multigraph.php:83
+msgid "Left"
+msgstr "Izquierda"
+
+#: Views/en/vis/multigraph.php:83
+msgid "Right"
+msgstr "Derecha"
+
+#: Views/en/vis/multigraph.php:83
+msgid "Fill"
+msgstr "Rellenar"
+
+#: Vis/bargraph.php:119
+msgid "Loading...  please wait about 5s"
+msgstr "Cargando... por favor espere unos 5s"
+
+#: Vis/histgraph.php:95
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: Vis/multigraph.php:39
+#: Vis/MultiGraph/multigraph.php:25
+msgid "2 Months"
+msgstr "2 Meses"
+
+#: Vis/multigraph.php:40
+#: Vis/MultiGraph/multigraph.php:26
+msgid "Month"
+msgstr "Mes"
+
+#: Vis/multigraph.php:41
+#: Vis/MultiGraph/multigraph.php:27
+msgid "Week"
+msgstr "Semana"
+
+#: Vis/multigraph.php:42
+#: Vis/MultiGraph/multigraph.php:28
+msgid "Day"
+msgstr "Día"
+
+#: Vis/multigraph.php:43
+#: Vis/MultiGraph/multigraph.php:29
+msgid "Hour"
+msgstr "Hora"
+
+#: Vis/multigraph.php:328
+#: Vis/MultiGraph/multigraph.php:286
+msgid "Left vs"
+msgstr "Izquierda vs"
+
+#: Vis/multigraph.php:342
+#: Vis/MultiGraph/multigraph.php:300
+msgid "Loading a feed can take time.. "
+msgstr "Cargar una fuente puede llevar tiempo..."
+
+#: Vis/multigraph.php:343
+msgid "Load feed on the left for fill and right for line only"
+msgstr ""
+
+#: Vis/realtime.php:44
+msgid "1 day"
+msgstr "1 día"
+
+#: Vis/realtime.php:45
+msgid "12 hours"
+msgstr "12 horas"
+
+#: Vis/realtime.php:46
+msgid "1 hour"
+msgstr "1 hora"
+
+#: Vis/kWhdZoomer/kwhdzoomer.php:46
+msgid ": Hover on bar for info, press to zoom in"
+msgstr ""
+
+#: Vis/kWhdZoomer/kwhdzoomer.php:51
+msgid "Date / Time"
+msgstr "Fecha / Hora"
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:47
+msgid "(Hover for info, press to zoom in. Histogram: "
+msgstr ""
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:120
+msgid "Total: "
+msgstr "Total:"
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:120
+msgid " kWh : pounds"
+msgstr "kWh: libras"
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:120
+msgid " | Average: "
+msgstr "| Media:"
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:120
+msgid " a week, pounds"
+msgstr "una semana, libras"
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:120
+msgid " a year | Unit price: pounds"
+msgstr "un año | Unidad: libras"
+
+#: Vis/kwhd_histogram/kwhdzoomer.php:241
+msgid "The whw parameter must be set in the dashboard to a histogram feed id."
+msgstr ""
+
+#: Vis/MultiGraph/multigraph.php:24
+msgid "Last:"
+msgstr "Último:"
+
+#: Vis/smoothie/smoothie.php:24
+msgid "Graph"
+msgstr "Gráfico"
+

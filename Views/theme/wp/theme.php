@@ -44,13 +44,17 @@
       <div class="header">
 		  <ul id="top-menu">
 
-      <?php if ($session['write']) { ?>
-      <li><a style="padding:0" href='<?php echo $GLOBALS['path']; ?>dashboard/view'>
-      <img id="emoncms-logo" src="<?php print $GLOBALS['path']; ?>Views/theme/wp/emoncms logo.png" /></a></li>
-      <?php } else { ?>
-      <li><a style="padding:0" href='http://openenergymonitor.org/emon/emoncms'>
-      <img id="emoncms-logo" src="<?php print $GLOBALS['path']; ?>Views/theme/wp/emoncms logo.png" /></a></li>
-      <?php } ?>
+		<?php 
+			if ($_SESSION['editmode'] == TRUE) {
+				$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo off.png";
+				$viewl = 'dashboard/run';
+			}
+			else {
+				$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo.png";
+				$viewl = 'dashboards/view';
+		}
+      	?>
+			  <li><a style="padding:0" href='<?php echo $GLOBALS['path'].$viewl;?>'><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
 
 			  <?php print $menu; ?>
 		  </ul>
