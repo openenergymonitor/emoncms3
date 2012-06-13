@@ -32,7 +32,7 @@
   // Returns the dashboards from $userid
   function get_dashboards_info($userid)
   {
-    $result = db_query("SELECT content,name,description,main FROM dashboard WHERE userid='$userid'");
+    $result = db_query("SELECT * FROM dashboard WHERE userid='$userid'");
     //$result = db_fetch_array($result);
     
     $dsb = array();
