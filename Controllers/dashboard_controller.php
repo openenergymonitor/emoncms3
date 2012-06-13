@@ -100,7 +100,7 @@
 			}
 			elseif ($format == 'html')
 			{
-				$output['content'] = view("dashboard_run.php",
+				$output['content'] = view_lang("dashboard_run.php",
       			array(
       				'userid'=>$session['userid'],
       				'page'=>$dashboard_arr['ds_content'],
