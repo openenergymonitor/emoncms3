@@ -10,13 +10,19 @@
 
     FEED CONTROLLER ACTIONS		ACCESS
 
+    type?id=1&type=0			write
     tag?id=1&tag=tag			write
     rename?id=1&name=newname		write
-    delete?id=1				write
+    delete?id=1				write 
+    permanentlydelete			write
+    restore?id=1			write
     list				read
     view?id=1				read
     value?id=1				read
     data?id=1&start=000&end=000&res=1	read
+    histogram				read
+    kwhatpower				read
+    edit?id=1&time=...&newvalue=...	write
     
   */
 
@@ -32,8 +38,8 @@
     $output['message'] = "";
 
     //---------------------------------------------------------------------------------------------------------
-    // Set feed tag
-    // http://yoursite/emoncms/feed/tag?id=1&tag=tag
+    // Set feed datatype: 0: undefined type, 1: real-time data, 2: daily data, 3: histogram data
+    // http://yoursite/emoncms/feed/type?id=1&type=1
     //---------------------------------------------------------------------------------------------------------
     if ($action == "type" && $session['write'])
     { 
@@ -55,7 +61,6 @@
 	  	header("Location: view?id=$feedid");	// Return to feed list page
 	  }
     }
-
 
     //---------------------------------------------------------------------------------------------------------
     // Set feed tag
@@ -110,7 +115,7 @@
     }
 
     //---------------------------------------------------------------------------------------------------------
-    // Delete a feed
+    // Delete a feed ( move to recycle bin, so not permanent )
     // http://yoursite/emoncms/feed/delete?id=1
     //--------------------------------------------------------------------------------------------------------- 
 	elseif ($action == "delete" && $session['write'])
@@ -120,27 +125,49 @@
       {
         delete_feed($userid,$feedid);
         $output['message'] = _("Feed ").get_feed_name($feedid)._(" deleted");
-      }
-      else{
-      	$output['message'] = _("Feed does not exist");
-	  }
+      } else $output['message'] = _("Feed does not exist");
     }
 
     //---------------------------------------------------------------------------------------------------------
-    // List
+    // Permanent delete equivalent to empty recycle bin
+    // http://yoursite/emoncms/feed/permanentlydelete
+    //--------------------------------------------------------------------------------------------------------- 
+    if ($action == "permanentlydelete" && $session['write'])
+    { 
+      permanently_delete_feeds($session['userid']);
+      $output['message'] = "Deleted feeds are now permanently deleted";
+    }
+
+    //---------------------------------------------------------------------------------------------------------
+    // Restore feed ( if in recycle bin )
+    // http://yoursite/emoncms/feed/restore?id=1
+    //--------------------------------------------------------------------------------------------------------- 
+    if ($action == "restore" && $session['write'])
+    { 
+      $feedid = intval($_GET["id"]);
+      if (feed_belongs_user($feedid, $session['userid'])) {
+        restore_feed($userid,$feedid);
+      } 
+      $output['message'] = "feed restored"; 
+      if ($format == 'html') header("Location: list");	// Return to feed list page
+    }
+
+    //---------------------------------------------------------------------------------------------------------
+    // Feed List
     // http://yoursite/emoncms/feed/list.html
     // http://yoursite/emoncms/feed/list.json
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'list' && $session['read'])
     {
-      $feeds = get_user_feeds($session['userid']);
+      $del = intval($_GET["del"]);
+      $feeds = get_user_feeds($session['userid'],$del);
     
       if ($format == 'json') $output['content'] = json_encode($feeds);
-      if ($format == 'html') $output['content'] = view_lang("feed/list_view.php", array('feeds' => $feeds));
+      if ($format == 'html') $output['content'] = view_lang("feed/list_view.php", array('feeds' => $feeds,'del'=>$del));
     }
 
     //---------------------------------------------------------------------------------------------------------
-    // View
+    // Feed View
     // http://yoursite/emoncms/feed/view.html?id=1
     // http://yoursite/emoncms/feed/view.json?id=1
     //---------------------------------------------------------------------------------------------------------
@@ -180,7 +207,8 @@
 
     //---------------------------------------------------------------------------------------------------------
     // get feed data
-    // http://yoursite/emoncms/feed/data?id=1&start=000&end=000&res=1
+    // start: start time, end: end time, dp: number of datapoints in time range to fetch
+    // http://yoursite/emoncms/feed/data?id=1&start=000&end=000&dp=1
     //---------------------------------------------------------------------------------------------------------
 	elseif ($action == 'data' && $session['read'])
     {
@@ -191,15 +219,15 @@
       {
         $start = floatval($_GET['start']);
         $end = floatval($_GET['end']);
-        $dp = intval($_GET['dp']); // New resolution setting: number of datapoints
+        $dp = intval($_GET['dp']);
         $data = get_feed_data($feedid,$start,$end,$dp);
         $output['content'] = json_encode($data);
-      } else { $output['message'] = "This is not your feed..."; }
+      } else { $output['message'] = "Permission denied"; }
     }
 
     //---------------------------------------------------------------------------------------------------------
-    // get feed data
-    // http://yoursite/emoncms/feed/data?id=1&start=000&end=000&res=1
+    // get histogram data: energy used at different powers in the time range given
+    // http://yoursite/emoncms/feed/histogram?id=1&start=000&end=000
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'histogram' && $session['read'])
     {
@@ -212,7 +240,7 @@
         $end = floatval($_GET['end']);
         $data = get_histogram_data($feedid,$start,$end);
         $output['content'] = json_encode($data);
-      } else { $output['message'] = "This is not your feed..."; }
+      } else { $output['message'] = "Permission denied"; }
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -232,6 +260,21 @@
         $output['content'] = json_encode($data);
 
       } else { $output['message'] = "This is not your feed..."; }
+    }
+
+    //---------------------------------------------------------------------------------------------------------
+    // Set a datapoint at a given time.
+    // http://yoursite/emoncms/feed/edit?id=1&time=...&newvalue=... 
+    //---------------------------------------------------------------------------------------------------------
+    if ($action == "edit" && $session['write'])
+    { 
+      $feedid = intval($_GET["id"]);
+      if (feed_belongs_user($feedid, $session['userid'])) {
+        $time = intval($_GET["time"]);
+        $value = intval($_GET["newvalue"]);
+        update_feed_data($feedid,time(),$time,$value);
+        $output['message'] = "Edit";
+      }
     }
 
     return $output;

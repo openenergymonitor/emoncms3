@@ -13,8 +13,8 @@
   $id = $feed[0];
   $name = $feed[1];
   $tag = $feed[2];
-
-  $type = $feed[7];
+  $type = $feed[6];
+  $status = $feed[7];
 
 ?>
 
@@ -49,7 +49,17 @@
  </form>
  <?php } ?>
 
+ <?php if ($type!=3) { ?>
+ <form action="../vis/edit" method="get">
+        <input type="hidden" name="feedid" value="<?php echo $id; ?>">
+          <input type="submit" class="button06" value="Datapoint Editor"></input>
+ </form>
+ <?php } ?>
+
+<?php if ($status==0) { ?>
+
 <h2><?php echo _("Feed type");?></h2>
+
 <form action="type" method="get">
 
 <select name="type">
@@ -76,8 +86,10 @@
 <input type="submit" value="<?php echo _("Save");?>" class="button05"/>
 </form>
 
+
 <h2><?php echo _("Delete feed?");?></h2>
 <?php $message = "<h2>"._("Are you sure you want to delete feed: ").$name."?</h2>"; ?>
+
 <form action="../confirm" method="post">
 <input type="hidden" name="message" value="<?php echo $message; ?>">
 <input type="hidden" name="action" value="<?php echo _("feed/delete");?>">
@@ -93,3 +105,12 @@
 
 </div>
 
+<?php } else { ?>
+
+<h3>Restore feed:
+<form action="restore" method="get">
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+<input type="submit" value="restore" class="button05"/>
+</form>
+</h3>
+<?php } ?>

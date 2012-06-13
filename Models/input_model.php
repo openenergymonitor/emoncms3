@@ -20,7 +20,9 @@
   function create_input_timevalue($user,$name,$time,$value)
   {
     $time = date("Y-n-j H:i:s", $time);  
-    db_query("INSERT INTO input (userid,name,time,value,status) VALUES ('$user','$name','$time','$value','0')");
+    db_query("INSERT INTO input (userid,name,time,value) VALUES ('$user','$name','$time','$value')");
+    $inputid = db_insert_id();
+    return $inputid;
   }
 
   function set_input_timevalue($id, $time, $value)
@@ -52,9 +54,7 @@
     $inputs = array();
     if ($result) {
       while ($row = db_fetch_array($result)) {
-        if ($row['status']!=1){ // 1 is a deleted input
         $inputs[] = array($row['id'],$row['name'],strtotime($row['time'])*1000,$row['value']);
-        }
       }
     }
     return $inputs;
@@ -62,7 +62,7 @@
 
   function get_input_id($user,$name)
   {
-    $result = db_query("SELECT id FROM input WHERE name='$name' AND userid='$user' AND status='0' ");
+    $result = db_query("SELECT id FROM input WHERE name='$name' AND userid='$user'");
     if ($result) { $array = db_fetch_array($result); return $array['id']; } 
     else return 0;
   }
@@ -86,7 +86,7 @@
   //-----------------------------------------------------------------------------------------------
   function get_input_processlist_desc($userid,$id)
   {
-    $process_list = get_input_processlist($userid,$id);			// Get the input's process list
+    $process_list = get_input_processlist($userid,$id);		// Get the input's process list
 
     $list = array();
     if ($process_list){		
@@ -110,8 +110,9 @@
 
   function delete_input($userid,$inputid)
   {
-    // soft deletion
-    db_query("UPDATE input SET status = 1 WHERE userid = '$userid' AND id='$inputid'");
+    // Inputs are deleted permanentely straight away rather than a soft delete 
+    // as in feeds - as no actual feed data will be lost
+    db_query("DELETE FROM input WHERE userid = '$userid' AND id = '$inputid'");
   }
 
 ?>

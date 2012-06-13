@@ -96,6 +96,12 @@ global $path, $session;
   <td><input type="submit" value=">" class="button05"/></td>
 </form></tr>
 
+<tr><form action="edit" method="get">
+  <td>Datapoint Editor</td>
+  <td style="text-align:right">vis/edit?feedid= <input name="feedid" type='text' style='width:50px' /></td>
+  <td><input type="submit" value=">" class="button05"/></td>
+</form></tr>
+
 </table>
 
 <h3>Other options:</h3>

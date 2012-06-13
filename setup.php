@@ -14,7 +14,7 @@
   */
 
   //=====================================================
-  $runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
   define('EMONCMS_EXEC', 1);
   require "Includes/db.php";
@@ -50,8 +50,7 @@
     'name'=> array('type'=>'text'),
     'processList'=> array('type'=>'text'),
     'time'=> array('type'=>'DATETIME'),
-    'value'=> array('type'=>'FLOAT'),
-    'status'=> array('type'=>'int')
+    'value'=> array('type'=>'FLOAT')
   );
 
   $schema['feeds'] = array(
@@ -66,7 +65,6 @@
     'week'=> array('type'=>'FLOAT'),
     'month'=> array('type'=>'FLOAT'),
     'year'=> array('type'=>'FLOAT'),
-    'type'=> array('type'=>'int NOT NULL'),
     'datatype'=> array('type'=>'int NOT NULL')
   );
 

@@ -71,7 +71,7 @@
 		}
 		elseif ($format == 'html')
       	{
-      		$output['content'] = view("dashboard_view.php",
+      		$output['content'] = view_lang("dashboard_view.php",
       			array(
 		      		'page'=>$dashboard_arr['ds_content'],
 		      		'ds_name'=>$dashboard_arr['ds_name'],
@@ -112,7 +112,7 @@
 		}
 		else
 		{
-			$output['content'] = view("dashboard_run_errornomain.php",array());			
+			$output['content'] = view_lang("dashboard_run_errornomain.php",array());			
 		}       
 
     }
