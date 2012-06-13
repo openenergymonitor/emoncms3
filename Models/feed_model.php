@@ -57,7 +57,7 @@
     if ($result) {
       while ($row = db_fetch_array($result)) {
         $feed = get_feed($row['feedid']);
-        if ($feed && $feed[8]==$status) $feeds[] = $feed;
+        if ($feed && $feed[7]==$status) $feeds[] = $feed;
       }
     }
     usort($feeds, 'compare');		// Sort feeds by tag's
@@ -341,7 +341,7 @@
       while ($row = db_fetch_array($result)) {
         $feed = get_feed($row['feedid']);
         $feedid = $feed[0];
-        if ($feed && $feed[8]==1){
+        if ($feed && $feed[7]==1){
           db_query("DELETE FROM feeds WHERE id = '$feedid'");
           db_query("DELETE FROM feeds WHERE id = '$feedid'");
           db_query("DELETE FROM feed_relation WHERE userid = '$userid' AND feedid = '$feedid' LIMIT 1");
