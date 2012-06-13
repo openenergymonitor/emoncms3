@@ -95,7 +95,7 @@
   if ($format == 'json')
   {
     print $message.$content;
-    if (!$message.$content)
+    if (!($message.$content))
 	{
 		echo _("Sorry, you need a valid apikey or be logged in to see this page");
 	}

@@ -14,7 +14,7 @@
   */
 
   //=====================================================
-  //$runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
+  $runnable = TRUE; // ENABLE THIS ONCE TO FORCE UPDATE
   //=====================================================
   define('EMONCMS_EXEC', 1);
   require "Includes/db.php";
