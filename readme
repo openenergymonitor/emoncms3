@@ -6,7 +6,7 @@ Change log 13 June 2012
 - Use preg_replace for input json validation (removal of non-valid characters)
 - Removed upgrade.php, seems to work without it?
 - Removed use of type field in feeds (all feeds need to now be integer timestamp rather than datetime)
-- conv.php script updated to die at any point something goes wrong to minimise change of data loss.
+- conv.php script updated to die at any point something goes wrong to minimise chance of data loss.
 - removal of soft deletion for inputs as it was not needed.
 
 Change log 10 June 2012
