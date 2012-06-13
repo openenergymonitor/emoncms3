@@ -12,12 +12,9 @@
 
 
 <?php
+        global $path;
 	$apikey_read = $_GET['apikey'];
-	
-	require $path.'Includes/dashboard_processor.php';
-	
-	$path = dirname("http://".$_SERVER['HTTP_HOST'].str_replace('Vis/Dashboard', '', $_SERVER['SCRIPT_NAME']))."/";
-
+	require 'Includes/dashboard_processor.php';
 	// Edit mode off, now is time to runtime
 	$_SESSION['editmode'] = FALSE;
 ?>
@@ -33,11 +30,11 @@
   Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <!--[if IE]><script language="javascript" type="text/javascript" src="../flot/excanvas.min.js"></script><![endif]-->
-	<script type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.flot.js"></script>
-	<script type="text/javascript" src="<?php echo $path; ?>Vis/Dashboard/common.js"></script>
-	<script type="text/javascript" src="<?php echo $path; ?>Vis/Dashboard/widgets/dial.js"></script>
-	<script type="text/javascript" src="<?php echo $path; ?>Vis/Dashboard/widgets/led.js"></script>
+	<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
+	<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/common.js"></script>
+	<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/dial.js"></script>
+	<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/led.js"></script>
 	<title>emoncms</title>
   </head>
   
