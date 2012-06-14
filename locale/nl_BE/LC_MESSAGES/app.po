@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-11 22:00+0100\n"
-"PO-Revision-Date: 2012-06-14 13:44+0100\n"
+"PO-Revision-Date: 2012-06-14 13:43+0100\n"
 "Last-Translator: Alco <nightcrawler28@live.nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -79,11 +79,11 @@ msgstr "Bericht"
 
 #: Controllers/feed_controller.php:122
 msgid " deleted"
-msgstr "verwijderd"
+msgstr "wegdoen"
 
 #: Controllers/input_controller.php:54
 msgid "Input deleted"
-msgstr "Invoer verwijderen"
+msgstr "Invoer wegdoen"
 
 #: Controllers/input_controller.php:61
 msgid "Process list has been reset"
