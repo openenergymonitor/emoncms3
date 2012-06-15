@@ -4,7 +4,7 @@ Change log 13 June 2012
 - Automatic input procesing setup given known input names - UNCOMMENT TO ENABLE: api_controller.php
 - "Wastebin" view and option to permanentely delete feeds
 - Use preg_replace for input json validation (removal of non-valid characters)
-- Removed upgrade.php, seems to work without it
+- Removed upgrade.php, seems to work without it?
 - Removed use of type field in feeds (all feeds need to now be integer timestamp rather than datetime)
 - conv.php script updated to die at any point something goes wrong to minimise chance of data loss
 - removal of soft deletion for inputs as it was not needed
