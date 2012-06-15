@@ -7,3 +7,5 @@ To add support for another language, simply follow these steps:
 	- Refresh/scan the catalog, obtaining the words and expressions to be translated
 	- Translate them to the language to add
 	- Save the catalog with the name (language)_(COUNTRY) with 2 letters both (example: es_ES for [es]pañol de [ES]PAÑA) in a new folder on /locale/ with the same name as before
+	- Add your language to the user_view language selector in Views/en/user_view.php
+    	<option value="cy">Welsh</option> below: <option selected value="en">English</option>
