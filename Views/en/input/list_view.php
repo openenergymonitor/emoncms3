@@ -34,6 +34,11 @@
 
     var i = 0;
     var out = "<table class='catlist'><tr><th><?php echo _("Name");?></th><th><?php echo _("Updated");?></th><th><?php echo _("Value");?></th></tr>";
+
+    if (inputs.length==0) {
+    out += "</table><table class='catlist'><tr class='d0' ><td>You have no inputs</td></tr></table>";
+    }
+
     for (z in inputs)
     {
       i++;
