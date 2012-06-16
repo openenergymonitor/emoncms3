@@ -12,7 +12,7 @@
 
 
 <?php
-        global $path;
+	global $path;
 	$apikey_read = $_GET['apikey'];
 	require 'Includes/dashboard_processor.php';
 	// Edit mode off, now is time to runtime
@@ -24,7 +24,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="user-scalable=no, width=device-width" />
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>Views/theme/dark/style.css" />
+   <!-- <link rel="stylesheet" type="text/css" href="<?php echo $path; ?>Views/theme/dark/style.css" />-->
 
 <!------------------------------------------------------------------------------------------
   Dashboard related javascripts

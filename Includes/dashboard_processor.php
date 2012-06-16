@@ -30,7 +30,8 @@ function build_dashboardmenu($userid)
 	// Only show menu if more than one dashboard were created
 	if ($k>1)
 	{
-		$topmenu = '<div class="e3menu"><div class="e3header"><ul id="e3top-menu">';
+		$topmenu = '<div class=""><div class="e3header"><ul id="e3top-menu">';
+		//$topmenu = '<div class="wrapper"><div class="e3header"><ul id="e3top-menu">';		
 			
 		while ($k>0) {
 			$row = $dsb[$k-1];
