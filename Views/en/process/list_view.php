@@ -64,7 +64,7 @@ $name = get_input_name($inputid);
 
 ?>
 
-<?php $message = "<h2>"+ _("Are you sure you want to delete input: ").$name."?</h2>"; ?>
+<?php $message = "<h2>"._("Are you sure you want to delete input: ").$name."?</h2>"; ?>
 
 <form action="../confirm" method="post">
 <b><?php echo _("Delete input?");?></b>
