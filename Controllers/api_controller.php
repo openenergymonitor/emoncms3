@@ -64,28 +64,7 @@ function api_controller()
     if ($id==0) {
       $id = create_input_timevalue($userid,$name,$time,$value);	// Create input if it does not exist
 
-      // AUTOMATIC SETUP - uncomment to enable
-      /*
-      if ($name == "power")
-      {
-        // 1) log to feed
-        $feedid = create_feed($userid,$name,1,1);
-        add_input_process($userid,$id,1,$feedid);
-
-        $feedid = create_feed($userid,"kwhd",1,2);
-        add_input_process($userid,$id,5,$feedid);
-
-        $feedid = create_feed($userid,"histogram",2,3);
-        add_input_process($userid,$id,16,$feedid);
-      }
-
-      if ($name == "temperature")
-      {
-        // 1) log to feed
-        $feedid = create_feed($userid,$name,1,1);
-        add_input_process($userid,$id,1,$feedid);
-      }
-      */
+      // auto_configure_inputs($userid,$id,$name);
 
     } else {			
       $inputs[] = array($id,$time,$value);	
