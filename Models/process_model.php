@@ -27,21 +27,48 @@
     $list[1] = array( _("Log to feed"),		2,		"log_to_feed",		1,	1	);
     $list[2] = array( "x" ,			0,		"scale",		0,	0	);
     $list[3] = array( "+" ,			0,		"offset",		0,	0	);
-    $list[4] = array( _("Power to kWh") ,		2,		"power_to_kwh",		1,	1	);
+    $list[4] = array( _("Power to kWh") ,	2,		"power_to_kwh",		1,	1	);
     $list[5] = array( _("Power to kWh/d"), 	2,		"power_to_kwhd",	1,	2	);
     $list[6] = array( _("x input"),		1,		"times_input",		0,	0	);
-    $list[7] = array( _("input on-time"),		2,		"input_ontime",		1,	2	);
+    $list[7] = array( _("input on-time"),	2,		"input_ontime",		1,	2	);
     $list[8] = array( _("kWhinc to kWh/d"),	2,		"kwhinc_to_kwhd",	1,	2	);
-    $list[9] = array( _("kWh to kWh/d"),		2,		"kwh_to_kwhd",		1,	2	);
+    $list[9] = array( _("kWh to kWh/d"),	2,		"kwh_to_kwhd",		1,	2	);
     $list[10] = array( _("update feed @time"),	2,		"update_feed_data",	1,	0	);
     $list[11] = array( _("+ input"),		1,		"add_input",		0,	0	);
     $list[12] = array( _("/ input"),		0,		"divide",		0,	0	);
-    $list[13] = array( _("phaseshift") ,		0,		"phaseshift",		0,	0	);
-    $list[14] = array( _("accumulator") ,		2,		"accumulator",		1,	1	);
+    $list[13] = array( _("phaseshift") ,	0,		"phaseshift",		0,	0	);
+    $list[14] = array( _("accumulator") ,	2,		"accumulator",		1,	1	);
     $list[15] = array( _("rate of change") ,	2,		"ratechange",		1,	1	);
     $list[16] = array( _("histogram") ,		2,		"histogram",		2,	3	);
+    $list[17] = array( _("average") ,		2,		"average",		2,	2	);
 
     return $list;
+  }
+
+  //---------------------------------------------------------------------------------------------
+  // Setup input processing automatically according to naming convention
+  //---------------------------------------------------------------------------------------------
+  function auto_configure_inputs($userid,$id,$name)
+  {
+      // If a power or solar (power) feed
+      if (preg_match("/power/",$name) || preg_match("/solar/",$name))
+      {
+        $feedid = create_feed($userid,$name,1,1);
+        add_input_process($userid,$id,1,$feedid);
+
+        $feedid = create_feed($userid,$name."-kwhd",1,2);
+        add_input_process($userid,$id,5,$feedid);
+
+        $feedid = create_feed($userid,$name."-histogram",2,3);
+        add_input_process($userid,$id,16,$feedid);
+      }
+
+      if (preg_match("/temperature/",$name) || preg_match("/temp/",$name))
+      {
+        // 1) log to feed
+        $feedid = create_feed($userid,$name,1,1);
+        add_input_process($userid,$id,1,$feedid);
+      }
   }
 
   function get_process($id)
@@ -338,6 +365,32 @@ function accumulator($arg,$time,$value)
 
     $updatetime = date("Y-n-j H:i:s",     $time_now);
     db_query("UPDATE feeds SET value = '$new_value', time = '$updatetime' WHERE id='$feedid'");
+
+    return $value;
+  }
+
+  // Calculates a daily average of a value
+  function average($feedid,$time_now,$value)
+  {
+    $feedname = "feed_".trim($feedid)."";
+    $feedtime = mktime(0, 0, 0, date("m") , date("d") , date("Y"));
+
+    $result = db_query("SELECT * FROM $feedname WHERE time = '$feedtime'");
+    $row = db_fetch_array($result);
+
+    $average = $row['data']; $size = $row['data2'];
+
+    $new_average = (($average * $size) + $value) / ($size+1); 
+    $size = $size + 1;
+
+    if ($row) {
+      db_query("UPDATE $feedname SET data = '$new_average', data2 = '$size' WHERE time = '$feedtime'");
+    } else {
+      db_query("INSERT INTO $feedname (`time`,`data`,`data2`) VALUES ('$feedtime','$value','1')"); 
+    }
+
+    $updatetime = date("Y-n-j H:i:s",     $time_now);
+    db_query("UPDATE feeds SET value = '$new_average', time = '$updatetime' WHERE id='$feedid'");
 
     return $value;
   }
