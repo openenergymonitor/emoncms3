@@ -23,11 +23,11 @@ CKEDITOR.editorConfig = function(config) {
 	{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },'/',
-	{ name: 'e3ui', items : [ 'e3menu' ] },
+	//{ name: 'e3ui', items : [ 'e3menu' ] },
 	{ name: 'e3widgets', items : [ 'e3wc','e3dial','e3graph' ] }
 	];
 		
-	config.extraPlugins = 'stylesheetparser,e3Save,e3Preview,e3wc,e3dial,e3graph,e3menu';
+	config.extraPlugins = 'stylesheetparser,e3Save,e3Preview,e3wc,e3dial,e3graph';
 	config.fillEmptyBlocks = false;
 	
 	config.contentsCss = path+'Views/theme/common/visualdesign_style.css';
