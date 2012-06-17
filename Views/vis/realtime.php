@@ -1,94 +1,112 @@
-
 <html>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!----------------------------------------------------------------------------------------------------
-  
-   All Emoncms code is released under the GNU Affero General Public License.
-   See COPYRIGHT.txt and LICENSE.txt.
+  <!----------------------------------------------------------------------------------------------------
 
-    ---------------------------------------------------------------------
-    Emoncms - open source energy visualisation
-    Part of the OpenEnergyMonitor project:
-    http://openenergymonitor.org
+  All Emoncms code is released under the GNU Affero General Public License.
+  See COPYRIGHT.txt and LICENSE.txt.
 
--------------------------------------------------------------------------------------->
+  ---------------------------------------------------------------------
+  Emoncms - open source energy visualisation
+  Part of the OpenEnergyMonitor project:
+  http://openenergymonitor.org
 
- <?php
+  -------------------------------------------------------------------------------------->
+
+  <?php
   $apikey = $_GET["apikey"];
   global $path, $embed;
+  ?>
+
+  <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/excanvas.min.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+  <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
+  <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
+
+  <!---------------------------------------------------------------------------------------------------
+  // Time window buttons
+  ---------------------------------------------------------------------------------------------------->
+  <?php if (!$embed) {
+  ?>
+  <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
+    <h2>Realtime data: <?php echo $feedname; ?></h2>
+    <?php } ?>
+
+    <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
+      <div id="graph"></div>
+      <div style="position:absolute; top:20px; right:20px;">
+        <button class="viewWindow" time="1.0">
+          1 hour
+        </button>
+        <button class="viewWindow" time="0.50">
+          30 min
+        </button>
+        <button class="viewWindow" time="0.25">
+          15 min
+        </button>
+        <button class="viewWindow" time="0.01">
+          1 min
+        </button>
+      </div>
+    </div>
+
+    <?php
+  if (!$embed)
+    echo "
+  </div>";
  ?>
-    
- <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/excanvas.min.js"></script><![endif]-->
- <script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.js"></script>
- <script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.flot.js"></script>
- <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 
- <!---------------------------------------------------------------------------------------------------
- // Time window buttons
- ---------------------------------------------------------------------------------------------------->
-<?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-<h2>Realtime data: <?php echo $feedname; ?></h2>
-<?php } ?>
+  <script id="source" language="javascript" type="text/javascript">
+    //--------------------------------------------------------------------------------------
+    var feedid =  
+ <?php echo $feedid; ?>
+  ;//Fetch table name
+  var path =  "
+<?php echo $path; ?>
+  ";
+  var apikey = "
+<?php echo $apikey; ?>
+  ";
 
- <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
-   <div id="graph"></div>
-   <div style="position:absolute; top:20px; right:20px;">
-     <button class="viewWindow" time="1.0">1 hour</button>
-     <button class="viewWindow" time="0.50">30 min</button>
-     <button class="viewWindow" time="0.25">15 min</button>
-     <button class="viewWindow" time="0.01">1 min</button>
-   </div>
- </div>
+  //----------------------------------------------------------------------------------------
+  // These start time and end time set the initial graph view window
+  //----------------------------------------------------------------------------------------
+  var timeWindow = (3600000*0.1);				//Initial time window
+  var start = ((new Date()).getTime())-timeWindow;		//Get start time
+  var end = (new Date()).getTime();				//Get end time
 
-<?php if (!$embed) echo "</div>"; ?>
+  $('#graph').width($('#graph_bound').width());
+  $('#graph').height($('#graph_bound').height());
 
- <script id="source" language="javascript" type="text/javascript">
-   //--------------------------------------------------------------------------------------
-   var feedid = <?php echo $feedid; ?>;				//Fetch table name
-   var path = "<?php echo $path; ?>";
-   var apikey = "<?php echo $apikey; ?>";	
+  loop();
+  setInterval ( loop, 2000 );
 
-   //----------------------------------------------------------------------------------------
-   // These start time and end time set the initial graph view window 
-   //----------------------------------------------------------------------------------------
-   var timeWindow = (3600000*0.1);				//Initial time window
-   var start = ((new Date()).getTime())-timeWindow;		//Get start time
-   var end = (new Date()).getTime();				//Get end time
+  function loop()
+  {
+  start = ((new Date()).getTime())-timeWindow;		//Get start time
+  end = (new Date()).getTime();				//Get end time
+  vis_feed_data();
+  }
 
-   $('#graph').width($('#graph_bound').width());
-   $('#graph').height($('#graph_bound').height());
+  function vis_feed_data()
+  {
+  var data = get_feed_data(feedid,start,end,2);
 
-   loop();
-   setInterval ( loop, 2000 );
+  $.plot($("#graph"),
+  [{data: data, lines: { fill: true }}],
+  {xaxis: { mode: "time", localTimezone: true},
+  //grid: { show: true, hoverable: true, clickable: true },
+  selection: { mode: "xy" }
+  });
+  }
 
-   function loop()
-   {
-     start = ((new Date()).getTime())-timeWindow;		//Get start time
-     end = (new Date()).getTime();				//Get end time
-     vis_feed_data();
-   }
-
-   function vis_feed_data()
-   {
-     var data = get_feed_data(feedid,start,end,2);
-
-     $.plot($("#graph"),
-       [{data: data, lines: { fill: true }}],
-       {xaxis: { mode: "time", localTimezone: true},
-       //grid: { show: true, hoverable: true, clickable: true },
-       selection: { mode: "xy" }
-     });
-   }
-
-   //----------------------------------------------------------------------------------------------
-   // Operate buttons
-   //----------------------------------------------------------------------------------------------
-   $('.viewWindow').click(function () { timeWindow = (3600000* $(this).attr("time") ); });
-   //-----------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------------------------
+  // Operate buttons
+  //----------------------------------------------------------------------------------------------
+  $('.viewWindow').click(function () { timeWindow = (3600000* $(this).attr("time") ); });
+  //-----------------------------------------------------------------------------------------------
 
   </script>
 
   </body>
-</html>  
+</html>
