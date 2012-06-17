@@ -1,16 +1,16 @@
 <!--
-   All Emoncms code is released under the GNU Affero General Public License.
-   See COPYRIGHT.txt and LICENSE.txt.
+All Emoncms code is released under the GNU Affero General Public License.
+See COPYRIGHT.txt and LICENSE.txt.
 
-    ---------------------------------------------------------------------
-    Emoncms - open source energy visualisation
-    Part of the OpenEnergyMonitor project:
-    http://openenergymonitor.org
+---------------------------------------------------------------------
+Emoncms - open source energy visualisation
+Part of the OpenEnergyMonitor project:
+http://openenergymonitor.org
 -->
 
 <?php
-  $apikey = $_GET["apikey"];
-  global $path, $embed;
+$apikey = $_GET["apikey"];
+global $path, $embed;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -20,39 +20,48 @@
 
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
- 
-<?php if (!$embed) { ?>
+
+<?php if (!$embed) {
+?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 
-<h2><?php echo _("Multigraph");?></h2>
+  <h2><?php echo _("Multigraph"); ?></h2>
 
-<?php } ?>
+  <?php } ?>
 
-    <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
-      <div id="graph"></div>
-      <div style="position:absolute; top:20px; right:20px;">
+  <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
+    <div id="graph"></div>
+    <div style="position:absolute; top:20px; right:20px;">
 
-        <input class="time" type="button" value="D" time="1"/>
-        <input class="time" type="button" value="W" time="7"/>
-        <input class="time" type="button" value="M" time="30"/>
-        <input class="time" type="button" value="Y" time="365"/> | 
+      <input class="time" type="button" value="D" time="1"/>
+      <input class="time" type="button" value="W" time="7"/>
+      <input class="time" type="button" value="M" time="30"/>
+      <input class="time" type="button" value="Y" time="365"/>
+      |
 
-        <input id="zoomin" type="button" value="+"/>
-        <input id="zoomout" type="button" value="-"/>
-        <input id="left" type="button" value="<"/>
-        <input id="right" type="button" value=">"/>
+      <input id="zoomin" type="button" value="+"/>
+      <input id="zoomout" type="button" value="-"/>
+      <input id="left" type="button" value="<"/>
+      <input id="right" type="button" value=">"/>
 
-      </div>
     </div>
-<?php if (!$embed) echo "</div>"; ?>
+  </div>
+  <?php
+  if (!$embed)
+    echo "
+</div>";
+?>
 
 <script id="source" language="javascript" type="text/javascript">
-
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
 
-  var path = "<?php echo $path; ?>";
-  var apikey = "<?php echo $apikey; ?>";
+  var path =   "
+<?php echo $path; ?>
+  ";
+  var apikey = "
+<?php echo $apikey; ?>
+  ";
 
   var timeWindow = (3600000*24.0*7);				//Initial time window
   var start = ((new Date()).getTime())-timeWindow;		//Get start time
@@ -79,32 +88,32 @@
   */
   function vis_feed_data()
   {
-    var plotdata = [];
-    for(var i in feedlist) {
-      if (timeWindowChanged) feedlist[i].plot.data = null;
-      if (feedlist[i].selected) {        
-        if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,2);
-        if ( feedlist[i].plot.data) plotdata.push(feedlist[i].plot);
-      }
-    }
+  var plotdata = [];
+  for(var i in feedlist) {
+  if (timeWindowChanged) feedlist[i].plot.data = null;
+  if (feedlist[i].selected) {
+  if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,2);
+  if ( feedlist[i].plot.data) plotdata.push(feedlist[i].plot);
+  }
+  }
 
-    var plot = $.plot($("#graph"), plotdata, {
-      grid: { show: true, hoverable: true, clickable: true },
-      xaxis: { mode: "time", min: start, max: end },
-      selection: { mode: "xy" },
-      legend: { position: "nw"}
-    });
+  var plot = $.plot($("#graph"), plotdata, {
+  grid: { show: true, hoverable: true, clickable: true },
+  xaxis: { mode: "time", min: start, max: end },
+  selection: { mode: "xy" },
+  legend: { position: "nw"}
+  });
 
-    timeWindowChanged=0;
+  timeWindowChanged=0;
   }
 
   //--------------------------------------------------------------------------------------
   // Graph zooming
   //--------------------------------------------------------------------------------------
-  $("#graph").bind("plotselected", function (event, ranges) 
+  $("#graph").bind("plotselected", function (event, ranges)
   {
-     start = ranges.xaxis.from; end = ranges.xaxis.to;
-     timeWindowChanged = 1; vis_feed_data();
+  start = ranges.xaxis.from; end = ranges.xaxis.to;
+  timeWindowChanged = 1; vis_feed_data();
   });
 
   //----------------------------------------------------------------------------------------------
