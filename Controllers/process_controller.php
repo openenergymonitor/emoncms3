@@ -101,6 +101,17 @@
       // $rows = histogram_history(4,1,"2008-01-01","2012-05-01");
     }
 
+    elseif ($action == "autoconfigure" && $session['write'])
+    { 
+      $inputs = get_user_inputs($session['userid']);
+      foreach ($inputs as $input)
+      {
+        auto_configure_inputs($session['userid'],$input[0],$input[1]);
+      }
+
+      if ($format == 'html') header("Location: ../feed/list");
+    }
+
     return $output;
   }
 ?>

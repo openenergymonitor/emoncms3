@@ -71,6 +71,7 @@
       out += "<td style='color:"+color+";'>"+updated+"</td><td>"+inputs[z][3]+"</td></tr>";
       }
       out += "</table>";
+      out += "<br><a href='../process/autoconfigure'>Autoconfigure inputs</a>";
       $("#inputlist").html(out);
       }
       });
