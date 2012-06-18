@@ -26,15 +26,9 @@ Dashboard HTML
 <div style="text-align:center; width:100%;"></div>
 <script type="application/javascript">
   // Global page vars definition
-  var path =   "
-<?php echo $path; ?>
-  ";
-  var apikey_read = "
-<?php echo $apikey_read; ?>
-  ";
-  var apikey_write = "
-<?php echo $apikey_write; ?>
-  ";
+  var path =   "<?php echo $path; ?>";
+  var apikey_read = "<?php echo $apikey_read; ?>";
+  var apikey_write = "<?php echo $apikey_write; ?>";
 
   // CKEditor Events and initialization
   $(document).ready(function()
@@ -45,39 +39,28 @@ Dashboard HTML
   $(".edit-dashboard-button").button();
 
   $(".new-dashboard-button").click(function(){
-  $.ajax({
-  type : "POST",
-  url :  "
-<?php echo $path; ?>
-  " + "
-  dashboards / new  ",
-  data : "",
-  dataType : 'json',
-  success : location.reload()
-  });
+    $.ajax({
+      type : "POST",
+      url :  "<?php echo $path; ?>" + "dashboards / new  ",data : "",dataType : 'json',success : location.reload()
+    });
   });
 
   $(".delete-dashboard-button").click(function(){
-  $.ajax({
-  type : "POST",
-  url :  "
-<?php echo $path; ?>dashboards/delete",
-data : "&content="+this.id,
-dataType : 'json',
-success : location.reload()
-});
-});
+    $.ajax({
+      type : "POST",
+      url :  "<?php echo $path; ?>dashboards/delete",
+      data : "&content="+this.id,
+      dataType : 'json',
+      success : location.reload()
+    });
+  });
 
-$(".preview-dashboard-button").click(function(){
-window.open( "<?php echo $path; ?>dashboard/view?apikey=<?php echo $apikey; ?>
-  &id="+this.id+"&embed=1", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
-  640 + ',height=' + 420 + ',left=' + 80 );
+  $(".preview-dashboard-button").click(function(){
+    window.open("<?php echo $path; ?>dashboard/view?apikey=<?php echo $apikey; ?>&id="+this.id+"&embed=1", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );
   });
 
   $(".edit-dashboard-button").click(function(){
-  $(window.location).attr('href', '
-<?php echo $path; ?>
-  dashboard/view&id='+this.id);
+    $(window.location).attr('href', '<?php echo $path; ?>dashboard/view&id='+this.id);
   });
 
   });

@@ -69,18 +69,11 @@
       var mins = secs/60;
       var hour = secs/3600;
 
-      var updated = secs.toFixed(0)+'
-<?php echo _("s ago"); ?>
-  ';
-  if (secs>180) updated = mins.toFixed(0)+'
-<?php echo _(" mins ago"); ?>
-        ';
-        if (secs>(3600*2)) updated = hour.toFixed(0)+'
-<?php echo _(" hours ago"); ?>
-        ';
-        if (hour>24) updated = '
-<?php echo _("inactive"); ?>
-        ';
+      var updated = secs.toFixed(0)+'<?php echo _("s ago"); ?>';
+
+      if (secs>180) updated = mins.toFixed(0)+'<?php echo _(" mins ago"); ?>';
+      if (secs>(3600*2)) updated = hour.toFixed(0)+'<?php echo _(" hours ago"); ?>';
+      if (hour>24) updated = '<?php echo _("inactive"); ?>';
 
         var color = "rgb(255,125,20)";
         if (secs<60) color = "rgb(240,180,20)";
