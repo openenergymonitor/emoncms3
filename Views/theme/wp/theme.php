@@ -11,7 +11,7 @@
   -->
 
 <?php
-  global $embed,$session; 
+global $embed, $session;
 ?>
 
 <html>
@@ -44,17 +44,19 @@
       <div class="header">
 		  <ul id="top-menu">
 
-		<?php 
-			if ($_SESSION['editmode'] == TRUE) {
-				$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo off.png";
-				$viewl = 'dashboard/run';
-			}
-			else {
-				$logo = $GLOBALS['path']."Views/theme/dark/emoncms logo.png";
-				$viewl = 'dashboards/view';
-		}
+		<?php
+    if ($_SESSION['editmode'] == TRUE)
+    {
+      $logo = $GLOBALS['path'] . "Views/theme/dark/emoncms logo off.png";
+      $viewl = 'dashboard/run';
+    }
+    else
+    {
+      $logo = $GLOBALS['path'] . "Views/theme/dark/emoncms logo.png";
+      $viewl = 'dashboards/view';
+    }
       	?>
-			  <li><a style="padding:0" href='<?php echo $GLOBALS['path'].$viewl;?>'><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
+			  <li><a style="padding:0" href='<?php echo $GLOBALS['path'] . $viewl; ?>'><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
 
 			  <?php print $menu; ?>
 		  </ul>

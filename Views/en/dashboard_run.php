@@ -12,11 +12,11 @@
 
 
 <?php
-	global $path;
-	$apikey_read = $_GET['apikey'];
-	require 'Includes/dashboard_processor.php';
-	// Edit mode off, now is time to runtime
-	$_SESSION['editmode'] = FALSE;
+global $path;
+$apikey_read = $_GET['apikey'];
+require 'Includes/dashboard_processor.php';
+// Edit mode off, now is time to runtime
+$_SESSION['editmode'] = FALSE;
 ?>
 
 <html>
@@ -43,12 +43,15 @@
 <div id="page"><?php echo render_dashboard($userid); ?></div>  
   
 <script>
+  // Global page vars definition
+  var path =  "
+<?php echo $path; ?>
+    ";
+    var apikey_read = "
+<?php echo $apikey_read; ?>
+    ";
 
-	// Global page vars definition
-	var path = "<?php echo $path;?>";
-	var apikey_read = "<?php echo $apikey_read;?>";
-	
-	show_dashboard();
+    show_dashboard();
 </script>
 
 </body>
