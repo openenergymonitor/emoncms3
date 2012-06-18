@@ -14,7 +14,6 @@
 <?php
 global $path;
 $apikey_read = $_GET['apikey'];
-require 'Includes/dashboard_processor.php';
 // Edit mode off, now is time to runtime
 $_SESSION['editmode'] = FALSE;
 ?>
@@ -40,7 +39,7 @@ $_SESSION['editmode'] = FALSE;
   
 <body>
 
-<div id="page"><?php echo render_dashboard($userid); ?></div>  
+<div id="page"><?php echo $page; ?></div>  
   
 <script>
   // Global page vars definition

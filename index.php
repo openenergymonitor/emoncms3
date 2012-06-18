@@ -106,6 +106,7 @@ if ($_GET['apikey'])
 $output = controller($controller);
 $message = $output['message'];
 $content = $output['content'];
+$addmenu = $output['menu']; 
 
 if ($format == 'json')
 {
@@ -127,7 +128,7 @@ if ($format == 'html')
   if (!$session['read'])
     $content = view_lang("user/login_block.php", array());
   print view("theme/wp/theme.php", array(
-    'menu' => $menu,
+    'menu' => $menu.$addmenu,
     'user' => $user,
     'content' => $content,
     'message' => $message

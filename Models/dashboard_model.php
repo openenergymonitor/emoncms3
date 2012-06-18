@@ -83,3 +83,23 @@ function get_dashboard_id($userid, $id)
     'ds_main' => $result['main']
   );
 }
+
+function build_dashboardmenu($userid)
+{
+  $dsb = get_dashboards_info($userid);	
+	
+  $k = sizeof($dsb);
+	
+  // Only show menu if more than one dashboard were created
+  if ($k>1)
+  {
+    $topmenu = '';
+
+    while ($k>0) {
+      $row = $dsb[$k-1];
+      $k = $k - 1;
+      $topmenu = $topmenu.'<li><a href="./run&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
+    }
+  }
+  return $topmenu;
+}

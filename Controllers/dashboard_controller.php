@@ -22,10 +22,13 @@
   function dashboard_controller()
   {
     require "Models/dashboard_model.php";
+    require "Models/dashboards_model.php";
+
     global $session, $action, $format;
 
     $output['content'] = "";
     $output['message'] = "";
+    $output['menu'] = "";
 
     // /dashboard/set?content=<h2>HelloWorld</h2>
     if ($action == 'set' && $session['write']) // write access required
@@ -82,39 +85,40 @@
     }
 
     // /dashboard/run
-	elseif ($action == 'run' && $session['read'])
+    elseif ($action == 'run' && $session['read'])
     {
-		if($_GET['id'])
-		{
-   			$dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
-   		}
-		else
-		{
-      		$dashboard_arr = get_dashboard($session['userid']);
-		}
+      if($_GET['id'])
+      {
+        $dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
+      }
+      else
+      {
+        $dashboard_arr = get_dashboard($session['userid']);
+      }
 
-		if ($dashboard_arr == true)
-		{
-      		if ($format == 'json'){
-      			$output['content'] = json_encode($dashboard_arr['ds_content']);
-			}
-			elseif ($format == 'html')
-			{
-				$output['content'] = view_lang("dashboard_run.php",
-      			array(
-      				'userid'=>$session['userid'],
-      				'page'=>$dashboard_arr['ds_content'],
-		      		'ds_name'=>$dashboard_arr['ds_name'],
-      				'ds_description'=>$dashboard_arr['ds_description'],
-					'ds_main'=>$dashboard_arr['ds_main'])
-					);
-			}
-		}
-		else
-		{
-			$output['content'] = view_lang("dashboard_run_errornomain.php",array());			
-		}       
+      $output['menu'] = build_dashboardmenu($session['userid']);
 
+      if ($dashboard_arr == true)
+      {
+      	if ($format == 'json'){
+      	  $output['content'] = json_encode($dashboard_arr['ds_content']);
+	}
+	elseif ($format == 'html')
+	{
+	  $output['content'] = view_lang("dashboard_run.php",
+      	  array(
+      	    'userid'=>$session['userid'],
+      	    'page'=>$dashboard_arr['ds_content'],
+            'ds_name'=>$dashboard_arr['ds_name'],
+      	    'ds_description'=>$dashboard_arr['ds_description'],
+	    'ds_main'=>$dashboard_arr['ds_main'])
+	  );
+	}
+      }
+      else
+      {
+        $output['content'] = view_lang("dashboard_run_errornomain.php",array());			
+      }       
     }
 
     return $output;
