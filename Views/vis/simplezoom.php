@@ -1,18 +1,18 @@
 <!--
-All Emoncms code is released under the GNU Affero General Public License.
-See COPYRIGHT.txt and LICENSE.txt.
+   All Emoncms code is released under the GNU Affero General Public License.
+   See COPYRIGHT.txt and LICENSE.txt.
 
----------------------------------------------------------------------
-Emoncms - open source energy visualisation
-Part of the OpenEnergyMonitor project:
-http://openenergymonitor.org
+    ---------------------------------------------------------------------
+    Emoncms - open source energy visualisation
+    Part of the OpenEnergyMonitor project:
+    http://openenergymonitor.org
 -->
 
 <?php
-$apikey = $_GET["apikey"];
-$power = $_GET["power"];
-$kwhd = $_GET["kwhd"];
-global $path, $embed;
+  $apikey = $_GET["apikey"];
+  $power = $_GET["power"];
+  $kwhd = $_GET["kwhd"];
+  global $path, $embed;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -24,57 +24,43 @@ global $path, $embed;
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
-
-<?php if (!$embed) {
-?>
+ 
+<?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-  <h2>Simpler kWh/d zoomer</h2>
-  <?php } ?>
+<h2>Simpler kWh/d zoomer</h2>
+<?php } ?>
 
-  <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
-    <div id="graph"></div>
-    <div style="position:absolute; top:20px; right:20px;">
+    <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
+      <div id="graph"></div>
+      <div style="position:absolute; top:20px; right:20px;">
 
-      <input id="mode" type="button" value="power" />
-      |
+        <input id="mode" type="button" value="power" /> | 
 
-      <input class="time" type="button" value="D" time="1"/>
-      <input class="time" type="button" value="W" time="7"/>
-      <input class="time" type="button" value="M" time="30"/>
-      <input class="time" type="button" value="Y" time="365"/>
-      |
+        <input class="time" type="button" value="D" time="1"/>
+        <input class="time" type="button" value="W" time="7"/>
+        <input class="time" type="button" value="M" time="30"/>
+        <input class="time" type="button" value="Y" time="365"/> | 
 
-      <input id="zoomin" type="button" value="+"/>
-      <input id="zoomout" type="button" value="-"/>
-      <input id="left" type="button" value="<"/>
-      <input id="right" type="button" value=">"/>
+        <input id="zoomin" type="button" value="+"/>
+        <input id="zoomout" type="button" value="-"/>
+        <input id="left" type="button" value="<"/>
+        <input id="right" type="button" value=">"/>
 
+      </div>
+        <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
     </div>
-    <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
-  </div>
-  <?php
-    if (!$embed)
-      echo "
-</div>";
- ?>
+<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
+
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
 
-  var path =  "
-<?php echo $path; ?>
-  ";
-  var apikey = "
-<?php echo $apikey; ?>
-  ";
+  var path = "<?php echo $path; ?>";
+  var apikey = "<?php echo $apikey; ?>";
 
-  var power = "
-<?php echo $power; ?>
-  ";
-  var kwhd = "
-<?php echo $kwhd; ?>
-  ";
+  var power = "<?php echo $power; ?>";
+  var kwhd = "<?php echo $kwhd; ?>";
 
   var timeWindow = (3600000*24.0*30);				//Initial time window
   var start = ((new Date()).getTime())-timeWindow;		//Get start time
@@ -104,44 +90,44 @@ global $path, $embed;
   */
   function vis_feed_data()
   {
-  var plotdata = [];
-  for(var i in feedlist) {
-  if (timeWindowChanged) feedlist[i].plot.data = null;
-  if (feedlist[i].selected) {
-  if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,500);
-  if ( feedlist[i].plot.data) plotdata.push(feedlist[i].plot);
-  }
+    var plotdata = [];
+    for(var i in feedlist) {
+      if (timeWindowChanged) feedlist[i].plot.data = null;
+      if (feedlist[i].selected) {        
+        if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,500);
+        if ( feedlist[i].plot.data) plotdata.push(feedlist[i].plot);
+      }
+    }
+
+    if (feedlist[0].selected) {
+      var stats = power_stats(feedlist[0].plot.data);
+      $("#stats").html("Average: "+stats['average'].toFixed(0)+"W | "+stats['kwh'].toFixed(2)+" kWh");
+    } else { $("#stats").html(""); }
+
+    var plot = $.plot($("#graph"), plotdata, {
+      selection: { mode: "x" },
+      grid: { show: true,  clickable: true, hoverable: true },
+      xaxis: { mode: "time", min: start, max: end }
+    });
+
+    timeWindowChanged=0;
   }
 
-  if (feedlist[0].selected) {
-  var stats = power_stats(feedlist[0].plot.data);
-  $("#stats").html("Average: "+stats['average'].toFixed(0)+"W | "+stats['kwh'].toFixed(2)+" kWh");
-  } else { $("#stats").html(""); }
-
-  var plot = $.plot($("#graph"), plotdata, {
-  selection: { mode: "x" },
-  grid: { show: true,  clickable: true, hoverable: true },
-  xaxis: { mode: "time", min: start, max: end }
-  });
-
-  timeWindowChanged=0;
-  }
-
-  $("#graph").bind("plothover", function (event, pos, item) {
-  if (feedlist[1].selected) {
-  var mdate = new Date(item.datapoint[0]);
-  $("#stats").html((item.datapoint[1]).toFixed(1)+"kWh | "+mdate.format("ddd, mmm dS, yyyy"));
-  }
+  $("#graph").bind("plothover", function (event, pos, item) { 
+    if (feedlist[1].selected) {
+      var mdate = new Date(item.datapoint[0]);
+      $("#stats").html((item.datapoint[1]).toFixed(1)+"kWh | "+mdate.format("ddd, mmm dS, yyyy"));
+    }
   });
 
   //--------------------------------------------------------------------------------------
   // Graph zooming
   //--------------------------------------------------------------------------------------
-  $("#graph").bind("plotselected", function (event, ranges)
+  $("#graph").bind("plotselected", function (event, ranges) 
   {
-  start = ranges.xaxis.from; end = ranges.xaxis.to;
-  timeWindowChanged = 1; vis_feed_data();
-  panning = true; setTimeout(function() {panning = false; }, 100);
+     start = ranges.xaxis.from; end = ranges.xaxis.to;
+     timeWindowChanged = 1; vis_feed_data();
+     panning = true; setTimeout(function() {panning = false; }, 100);
   });
 
   //--------------------------------------------------------------------------------------
@@ -149,16 +135,16 @@ global $path, $embed;
   //--------------------------------------------------------------------------------------
   $("#graph").bind("plotclick", function (event, pos, item)
   {
-  if (item!=null && feedlist[0].selected == 0 && !panning)
-  {
-  kwhd_start = start; kwhd_end = end;
-  start = item.datapoint[0]; end = item.datapoint[0] + (3600000*24.0);
-  timeWindowChanged = 1;
-  feedlist[0].selected = 1;
-  feedlist[1].selected = 0;
-  $('#mode').val("kwhd");
-  vis_feed_data();
-  }
+    if (item!=null && feedlist[0].selected == 0 && !panning)
+    {
+      kwhd_start = start; kwhd_end = end;
+      start = item.datapoint[0]; end = item.datapoint[0] + (3600000*24.0);
+      timeWindowChanged = 1;
+      feedlist[0].selected = 1;
+      feedlist[1].selected = 0;
+      $('#mode').val("kwhd");
+      vis_feed_data();
+    }
   });
 
   //----------------------------------------------------------------------------------------------
@@ -171,19 +157,19 @@ global $path, $embed;
   $('.time').click(function () {inst_timewindow($(this).attr("time")); vis_feed_data();});
   //-----------------------------------------------------------------------------------------------
 
-  $('#mode').click(function ()
+  $('#mode').click(function () 
   {
-  if ($(this).val() == "kwhd") {
-  start = kwhd_start; end = kwhd_end; timeWindowChanged = 1;
-  feedlist[0].selected = 0;
-  feedlist[1].selected = 1;
-  $('#mode').val("power");
-  } else if ($(this).val() == "power") {
-  feedlist[0].selected = 1;
-  feedlist[1].selected = 0;
-  $('#mode').val("kwhd");
-  }
-  vis_feed_data();
+    if ($(this).val() == "kwhd") {
+      start = kwhd_start; end = kwhd_end; timeWindowChanged = 1;
+      feedlist[0].selected = 0;
+      feedlist[1].selected = 1;
+      $('#mode').val("power");
+    } else if ($(this).val() == "power") {
+      feedlist[0].selected = 1;
+      feedlist[1].selected = 0;
+      $('#mode').val("kwhd");
+    }
+    vis_feed_data();
   });
 
 </script>

@@ -1,17 +1,17 @@
 <!--
-All Emoncms code is released under the GNU Affero General Public License.
-See COPYRIGHT.txt and LICENSE.txt.
+   All Emoncms code is released under the GNU Affero General Public License.
+   See COPYRIGHT.txt and LICENSE.txt.
 
----------------------------------------------------------------------
-Emoncms - open source energy visualisation
-Part of the OpenEnergyMonitor project:
-http://openenergymonitor.org
+    ---------------------------------------------------------------------
+    Emoncms - open source energy visualisation
+    Part of the OpenEnergyMonitor project:
+    http://openenergymonitor.org
 -->
 
 <?php
-$feedid = $_GET["feedid"];
-$apikey = $_GET["apikey"];
-global $path, $embed;
+  $feedid = $_GET["feedid"]; 
+  $apikey = $_GET["apikey"];
+  global $path, $embed;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -23,54 +23,41 @@ global $path, $embed;
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
-
-<?php if (!$embed) {
-?>
+ 
+<?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-  <h2>Raw data: <?php echo $feedname; ?></h2>
-  <?php } ?>
+<h2>Raw data: <?php echo $feedname; ?></h2>
+<?php } ?>
 
-  <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
-    <div id="graph"></div>
-    <div style="position:absolute; top:20px; right:20px;">
+    <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
+      <div id="graph"></div>
+      <div style="position:absolute; top:20px; right:20px;">
 
-      <input class="time" type="button" value="D" time="1"/>
-      <input class="time" type="button" value="W" time="7"/>
-      <input class="time" type="button" value="M" time="30"/>
-      <input class="time" type="button" value="Y" time="365"/>
-      |
+        <input class="time" type="button" value="D" time="1"/>
+        <input class="time" type="button" value="W" time="7"/>
+        <input class="time" type="button" value="M" time="30"/>
+        <input class="time" type="button" value="Y" time="365"/> | 
 
-      <input id="zoomin" type="button" value="+"/>
-      <input id="zoomout" type="button" value="-"/>
-      <input id="left" type="button" value="<"/>
-      <input id="right" type="button" value=">"/>
+        <input id="zoomin" type="button" value="+"/>
+        <input id="zoomout" type="button" value="-"/>
+        <input id="left" type="button" value="<"/>
+        <input id="right" type="button" value=">"/>
 
+      </div>
+
+        <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
     </div>
-
-    <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
-  </div>
-  <?php
-  if (!$embed)
-    echo "
-</div>";
-?>
+<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
+
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
 
-  var feedid =   "
-<?php echo $feedid; ?>
-  ";
-  var feedname = "
-<?php echo $feedname; ?>
-  ";
-  var path = "
-<?php echo $path; ?>
-  ";
-  var apikey = "
-<?php echo $apikey; ?>
-  ";
+  var feedid = "<?php echo $feedid; ?>";
+  var feedname = "<?php echo $feedname; ?>";
+  var path = "<?php echo $path; ?>";
+  var apikey = "<?php echo $apikey; ?>";
 
   var timeWindow = (3600000*24.0*7);				//Initial time window
   var start = ((new Date()).getTime())-timeWindow;		//Get start time
@@ -80,14 +67,14 @@ global $path, $embed;
 
   function vis_feed_data()
   {
-  var graph_data = get_feed_data(feedid,start,end,500);
+    var graph_data = get_feed_data(feedid,start,end,500);
 
-  var plot = $.plot($("#graph"), [{data: graph_data, bars: { show: true, align: "center", barWidth: 3600*18*1000, fill: true}}], {
-  grid: { show: true, hoverable: true, clickable: true },
-  xaxis: { mode: "time", min: start, max: end },
-  yaxis: {min: 0},
-  selection: { mode: "x" }
-  });
+    var plot = $.plot($("#graph"), [{data: graph_data, bars: { show: true, align: "center", barWidth: 3600*18*1000, fill: true}}], {
+      grid: { show: true, hoverable: true, clickable: true },
+      xaxis: { mode: "time", min: start, max: end },
+      yaxis: {min: 0},
+      selection: { mode: "x" }
+    });
   }
 
   //--------------------------------------------------------------------------------------
@@ -95,9 +82,9 @@ global $path, $embed;
   //--------------------------------------------------------------------------------------
   $("#graph").bind("plotselected", function (event, ranges) { start = ranges.xaxis.from; end = ranges.xaxis.to; vis_feed_data(); });
 
-  $("#graph").bind("plothover", function (event, pos, item) {
-  var mdate = new Date(item.datapoint[0]);
-  $("#stats").html((item.datapoint[1]).toFixed(1)+"kWh | "+mdate.format("ddd, mmm dS, yyyy"));
+  $("#graph").bind("plothover", function (event, pos, item) { 
+    var mdate = new Date(item.datapoint[0]);
+    $("#stats").html((item.datapoint[1]).toFixed(1)+"kWh | "+mdate.format("ddd, mmm dS, yyyy"));
   });
   //----------------------------------------------------------------------------------------------
   // Operate buttons

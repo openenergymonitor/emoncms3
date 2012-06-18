@@ -1,79 +1,64 @@
 <!--
-All Emoncms code is released under the GNU Affero General Public License.
-See COPYRIGHT.txt and LICENSE.txt.
+   All Emoncms code is released under the GNU Affero General Public License.
+   See COPYRIGHT.txt and LICENSE.txt.
 
----------------------------------------------------------------------
-Emoncms - open source energy visualisation
-Part of the OpenEnergyMonitor project:
-http://openenergymonitor.org
+    ---------------------------------------------------------------------
+    Emoncms - open source energy visualisation
+    Part of the OpenEnergyMonitor project:
+    http://openenergymonitor.org
 -->
 
 <?php
-global $path, $embed;
-$apikey = $_GET["apikey"];
-$feedid = $_GET['feedid'];
-$thresholdA = $_GET['thresholdA'];
-$thresholdB = $_GET['thresholdB'];
+  global $path, $embed;
+  $apikey = $_GET["apikey"];
+  $feedid = $_GET['feedid'];
+  $thresholdA = $_GET['thresholdA'];
+  $thresholdB = $_GET['thresholdB'];
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.selection.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.stack.js"></script>
+  <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.stack.js"></script>
 
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
-
-<?php if (!$embed) {
-?>
+ 
+<?php if (!$embed) { ?>
 <div style="margin-top:20px; margin-right:3%; margin-left:3%;">
-  <h2>Threshold</h2>
-  <?php } ?>
+<h2>Threshold</h2>
+<?php } ?>
 
-  <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
-    <div id="graph"></div>
-    <div style="position:absolute; top:20px; right:20px;">
+    <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
+      <div id="graph"></div>
+      <div style="position:absolute; top:20px; right:20px;">
 
-      <input class="time" type="button" value="D" time="1"/>
-      <input class="time" type="button" value="W" time="7"/>
-      <input class="time" type="button" value="M" time="30"/>
-      <input class="time" type="button" value="Y" time="365"/>
-      |
+        <input class="time" type="button" value="D" time="1"/>
+        <input class="time" type="button" value="W" time="7"/>
+        <input class="time" type="button" value="M" time="30"/>
+        <input class="time" type="button" value="Y" time="365"/> | 
 
-      <input id="zoomin" type="button" value="+"/>
-      <input id="zoomout" type="button" value="-"/>
-      <input id="left" type="button" value="<"/>
-      <input id="right" type="button" value=">"/>
+        <input id="zoomin" type="button" value="+"/>
+        <input id="zoomout" type="button" value="-"/>
+        <input id="left" type="button" value="<"/>
+        <input id="right" type="button" value=">"/>
 
+      </div>
     </div>
-  </div>
-  <?php
-    if (!$embed)
-      echo "
-</div>";
- ?>
+<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
+
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
 
-  var feedid =  
- <?php echo $feedid; ?>
-  ;
-  var thresholdA =  
- <?php echo $thresholdA; ?>
-  ;
-  var thresholdB =  
- <?php echo $thresholdB; ?>
-  ;
-
-  var path =  "
-<?php echo $path; ?>
-  ";
-  var apikey = "
-<?php echo $apikey; ?>
-  ";
+  var feedid = <?php echo $feedid; ?>;   
+  var thresholdA = <?php echo $thresholdA; ?>;   
+  var thresholdB = <?php echo $thresholdB; ?>;
+  
+  var path = "<?php echo $path; ?>";
+  var apikey = "<?php echo $apikey; ?>";
 
   var timeWindow = (3600000*24.0*7);				//Initial time window
   var start = ((new Date()).getTime())-timeWindow;		//Get start time
@@ -88,26 +73,26 @@ $thresholdB = $_GET['thresholdB'];
   function vis_feed_data()
   {
 
-  $.plot($("#graph"), [{color: "#c1a81f", data:dataA}, {color: "#dec225", data:dataB}, {color: "#deb368", data:dataC}],
-  {
-  series: {
-  stack: true,
-  bars: { show: true,align: "center",barWidth: (3600*18*1000),fill: true }
-  },
-  grid: { show: true, hoverable: true, clickable: true },
-  xaxis: { mode: "time", min: start, max: end, minTickSize: [1, "day"], tickLength: 1 },
-  selection: { mode: "xy" },
-  legend: { position: "nw"}
-  });
+    $.plot($("#graph"), [{color: "#c1a81f", data:dataA}, {color: "#dec225", data:dataB}, {color: "#deb368", data:dataC}], 
+    {
+      series: {
+        stack: true,
+        bars: { show: true,align: "center",barWidth: (3600*18*1000),fill: true }
+      },
+      grid: { show: true, hoverable: true, clickable: true },
+      xaxis: { mode: "time", min: start, max: end, minTickSize: [1, "day"], tickLength: 1 },
+      selection: { mode: "xy" },
+      legend: { position: "nw"}
+    });
   }
 
   //--------------------------------------------------------------------------------------
   // Graph zooming
   //--------------------------------------------------------------------------------------
-  $("#graph").bind("plotselected", function (event, ranges)
+  $("#graph").bind("plotselected", function (event, ranges) 
   {
-  start = ranges.xaxis.from; end = ranges.xaxis.to;
-  vis_feed_data();
+     start = ranges.xaxis.from; end = ranges.xaxis.to;
+     vis_feed_data();
   });
 
   //----------------------------------------------------------------------------------------------

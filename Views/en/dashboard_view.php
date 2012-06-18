@@ -86,19 +86,13 @@ Dashboard HTML
     <script type="text/javascript">
       // Global page vars definition
       var editor = null;
-      var path =    "
-<?php echo $path; ?>
-  ";
-  var apikey_read = "
-<?php echo $apikey_read; ?>
-  ";
-  var apikey_write = "
-<?php echo $apikey_write; ?>
-  ";
+      var path = "<?php echo $path; ?>";
+      var apikey_read = "<?php echo $apikey_read; ?>";
+      var apikey_write = "<?php echo $apikey_write; ?>";
 
   $.urlParam = function(name){
-  var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-  return results[1] || 0;
+    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    return results[1] || 0;
   }
 
   // CKEditor Events and initialization
@@ -140,10 +134,7 @@ Dashboard HTML
   CKEDITOR.on( 'previewPressed', function( ev )
   {
 
-  window.open( "
-<?php echo $path; ?>dashboard/view?apikey=<?php echo $apikey; ?>
-  &id="+$.urlParam('id')+"&embed=1", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' +
-  640 + ',height=' + 420 + ',left=' + 80 );
+  window.open( path+"dashboard/view?apikey="+apikey_read+"&id="+$.urlParam('id')+"&embed=1", null,'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );
   });
 
   // Fired on editor save pressed
@@ -152,10 +143,7 @@ Dashboard HTML
   // Upload changes to server
   $.ajax({
   type : "POST",
-  url :  "
-<?php echo $path; ?>
-  " + "
-  dashboard / set",
+  url :  path+"dashboard / set",
   data : "&content=" + encodeURIComponent(ev.data.getData())+"&id="+$.urlParam('id'),
   dataType : 'json',
   success : function() {
@@ -191,10 +179,7 @@ Dashboard HTML
   //alert($('#confform').serialize());
   $.ajax({
   type : "POST",
-  url :  "
-<?php echo $path; ?>
-  " + "
-  dashboard / setconf",
+  url :  path+"dashboard / setconf",
   data : $('#confform').serialize()+"&id="+$.urlParam('id'),
   dataType : 'json',
   success : function() {
@@ -225,9 +210,7 @@ Dashboard HTML
   // Load the dasboard editor settings from file
   editor = CKEDITOR.appendTo( 'dashboardeditor',
   {
-  customConfig : '
-<?php echo $path; ?>
-  Includes / editors / ckeditor_settings.js'
+    customConfig : path+'Includes/editors/ckeditor_settings.js'
   });
   });
 

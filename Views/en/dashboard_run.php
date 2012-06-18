@@ -43,14 +43,9 @@ $_SESSION['editmode'] = FALSE;
   
 <script>
   // Global page vars definition
-  var path =  "
-<?php echo $path; ?>
-    ";
-    var apikey_read = "
-<?php echo $apikey_read; ?>
-    ";
-
-    show_dashboard();
+  var path =  "<?php echo $path; ?>";
+  var apikey_read = "<?php echo $apikey_read; ?>";
+  show_dashboard();
 </script>
 
 </body>
