@@ -7,19 +7,21 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-<?php global $path; ?>
-<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
+<?php
+  global $path;
+ ?>
+<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
-  <h2>Inputs</h2>
+  <h2><?php echo _("Inputs"); ?></h2>
   <div id="inputlist"></div>
 </div>
 
 
-<script type="text/javascript">
-
-  var path = "<?php echo $path; ?>";
-  var inputs = <?php echo json_encode($inputs); ?>;
+<script type="text/javascript">var path =  "<?php echo $path; ?>
+  ";
+  var inputs = 
+ <?php echo json_encode($inputs); ?>;
 
   update_list();
   setInterval(update_list,2000);
@@ -33,9 +35,15 @@
       success: function(data) { inputs = data; 
 
     var i = 0;
-    var out = "<table class='catlist'><tr><th>Name</th><th>Updated</th><th>Value</th></tr>";
-    for (z in inputs)
-    {
+    var out = "<table class='catlist'><tr><th><?php echo _("Name"); ?></th><th><?php echo _("Updated"); ?></th><th><?php echo _("Value"); ?>
+      </th></tr>";
+
+      if (inputs.length==0) {
+      out += "</table><table class='catlist'><tr class='d0' ><td>You have no inputs</td></tr></table>";
+      }
+
+      for (z in inputs)
+      {
       i++;
       // FEED ID
       out += "<tr class='d"+(i & 1)+"' >";
@@ -61,11 +69,12 @@
       if (secs<25) color = "rgb(50,200,50)";
 
       out += "<td style='color:"+color+";'>"+updated+"</td><td>"+inputs[z][3]+"</td></tr>";
-    }
-    out += "</table>";
-    $("#inputlist").html(out);
-}
-    });
-  }
+      }
+      out += "</table>";
+      out += "<br><a href='../process/autoconfigure'>Autoconfigure inputs</a>";
+      $("#inputlist").html(out);
+      }
+      });
+      }
 
 </script>

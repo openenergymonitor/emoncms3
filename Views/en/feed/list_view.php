@@ -7,22 +7,33 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-<?php global $path; ?>
+<?php
+  global $path;
+ ?>
 
-<script type="text/javascript" src="<?php print $path; ?>Vis/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
-  <h2>Feeds</h2>
+
+  <h2><?php
+  if ($del)
+    echo "Deleted ";
+ ?><?php echo _("Feeds"); ?></h2>
 
 <div id="feedlist">
 </div>
 
+<?php if (!$del) { ?><br><a href="?del=1">Deleted feeds</a><?php } ?>
+<?php if ($del && $feeds) { ?><br><a href="permanentlydelete">Delete feeds permanently</a> (no confirmation)<?php } ?>
 </div>
 
-<script type="text/javascript">
-
-  var path = "<?php echo $path; ?>";
-  var feeds = <?php echo json_encode($feeds); ?>;
+<script type="text/javascript">var path =  "<?php echo $path; ?>
+  ";
+  var feeds = 
+ <?php echo json_encode($feeds); ?>
+    ;
+    var del =  
+ <?php echo $del; ?>;
 
   update_list();
   setInterval(update_list,2000);
@@ -30,15 +41,16 @@
   function update_list()
   {
     $.ajax({                                      
-      url: path+"feed/list.json",                
+      url: path+"feed/list.json?del="+del,                
       dataType: 'json',
       success: function(data) { feeds = data; 
 
     var lastfeed;
     var i = 0;
-    var out = "<table class='catlist'><tr><th>id</th><th>Name</th><th>Tag</th><th>Size</th><th>Updated</th><th>Value</th></tr>";
-    for (z in feeds)
-    {
+    var out = "<table class='catlist'><tr><th>id</th><th><?php echo _("Name"); ?></th><th><?php echo _("Tag"); ?></th><th><?php echo _("Size"); ?></th><th><?php echo _("Updated"); ?></th><th><?php echo _("Value"); ?>
+      </th></tr>";
+      for (z in feeds)
+      {
       i++;
       // FEED ID
       if (feeds[z][2] != lastfeed) {out+= "<tr><td></td></tr>"; }
@@ -57,34 +69,32 @@
       var mins = secs/60;
       var hour = secs/3600;
 
-      var updated = secs.toFixed(0)+"s ago";
-      if (secs>180) updated = mins.toFixed(0)+" mins ago";
-      if (secs>(3600*2)) updated = hour.toFixed(0)+" hours ago";
-      if (hour>24) updated = "inactive";
+      var updated = secs.toFixed(0)+'<?php echo _("s ago"); ?>';
 
-      var color = "rgb(255,125,20)";
-      if (secs<60) color = "rgb(240,180,20)";
-      if (secs<25) color = "rgb(50,200,50)";
+      if (secs>180) updated = mins.toFixed(0)+'<?php echo _(" mins ago"); ?>';
+      if (secs>(3600*2)) updated = hour.toFixed(0)+'<?php echo _(" hours ago"); ?>';
+      if (hour>24) updated = '<?php echo _("inactive"); ?>';
 
-      var value = 0;
-      if (feeds[z][4]>10) value = (1*feeds[z][4]).toFixed(1);
-      if (feeds[z][4]>100) value = (1*feeds[z][4]).toFixed(0);
-      if (feeds[z][4]<10) value = (1*feeds[z][4]).toFixed(2);
- 
-      var tag = feeds[z][2];
-      if (!tag) tag="";
-      
+        var color = "rgb(255,125,20)";
+        if (secs<60) color = "rgb(240,180,20)";
+        if (secs<25) color = "rgb(50,200,50)";
 
-      out += "<td>"+tag+"</td><td>"+(feeds[z][5]/1000).toFixed(1)+" KiB</td><td style='color:"+color+";'>"+updated+"</td><td>"+value+"</td></tr>";
+        var value = 0;
+        if (feeds[z][4]>10) value = (1*feeds[z][4]).toFixed(1);
+        if (feeds[z][4]>100) value = (1*feeds[z][4]).toFixed(0);
+        if (feeds[z][4]<10) value = (1*feeds[z][4]).toFixed(2);
 
+        var tag = feeds[z][2];
+        if (!tag) tag="";
 
+        out += "<td>"+tag+"</td><td>"+(feeds[z][5]/1000).toFixed(1)+" KiB</td><td style='color:"+color+";'>"+updated+"</td><td>"+value+"</td></tr>";
 
-    }
+        }
 
-    out += "</table>";
-    $("#feedlist").html(out);
-    }
-    });
-  }
+        out += "</table>";
+        $("#feedlist").html(out);
+        }
+        });
+        }
 
 </script>

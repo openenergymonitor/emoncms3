@@ -23,12 +23,21 @@ CKEDITOR.editorConfig = function(config) {
 	{ name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },'/',
+	//{ name: 'e3ui', items : [ 'e3menu' ] },
 	{ name: 'e3widgets', items : [ 'e3wc','e3dial','e3graph' ] }
 	];
 		
-	config.extraPlugins = 'e3Save,e3Preview,e3wc,e3dial,e3graph';
+	config.extraPlugins = 'stylesheetparser,e3Save,e3Preview,e3wc,e3dial,e3graph';
 	config.fillEmptyBlocks = false;
-
+	
+	config.contentsCss = path+'Views/theme/common/visualdesign_style.css';
+	config.stylesSet = [];
+				
+	config.width = '100%';
+	config.height = '420px';
+	config.filebrowserBrowseUrl = path + 'Includes/editors/simogeo-Filemanager/index.html'; 
+	config.templates_files = [ path+'Includes/editors/templates/e3templates.js' ];
+	
 	// Save button
 	CKEDITOR.plugins.add('e3Save', {
 		init : function(editor) {
@@ -129,5 +138,23 @@ CKEDITOR.editorConfig = function(config) {
 			});
 		}
 	});	
+	
+			// insert graph
+	CKEDITOR.plugins.add('e3menu', {
+		init : function(editor) {
+			var pluginName = 'e3menu';
+			
+			// dial dialog
+			CKEDITOR.dialog.add(pluginName, path + 'Includes/editors/dialogs/e3menu.js');
 				
+			editor.addCommand(pluginName, new CKEDITOR.dialogCommand(pluginName ) );
+
+			editor.ui.addButton('e3menu', {
+				label : 'Insert dashboards menu',
+				command : pluginName,
+				icon: path+'Includes/editors/images/e3menu.png'
+			});
+		}
+	});	
+	
 };

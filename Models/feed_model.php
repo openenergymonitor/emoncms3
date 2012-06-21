@@ -17,7 +17,11 @@
   //----------------------------------------------------------------------------------------------------------------------------------------------------------------
   function create_feed($userid,$name,$NoOfDataFields,$datatype)
   {
-    $result = db_query("INSERT INTO feeds (name,status,type,datatype) VALUES ('$name','0','1','$datatype')");				// Create the feed entry
+    // Check if feed of given name by the user already exists
+    $feedid = get_feed_id($userid,$name);
+    if ($feedid!=0) return $feedid;
+
+    $result = db_query("INSERT INTO feeds (name,status,datatype) VALUES ('$name','0','$datatype')");				// Create the feed entry
     $feedid = db_insert_id();
     if ($feedid>0) {
       db_query("INSERT INTO feed_relation (userid,feedid) VALUES ('$userid','$feedid')");	        // Create a user->feed relation
@@ -42,20 +46,39 @@
     } else return 0;
   }
 
-  function get_user_feeds($userid)
+  //-----------------------------------------------------------------------------------------------------------
+  // This function gets a users feed list, its used to create the feed/list page
+  // - status: 0 list of active user feeds, 1 list of deleted user feeds
+  //-----------------------------------------------------------------------------------------------------------
+  function get_user_feeds($userid,$status)
   {
     $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
     $feeds = array();
     if ($result) {
       while ($row = db_fetch_array($result)) {
         $feed = get_feed($row['feedid']);
-        if ($feed) $feeds[] = $feed;
+        if ($feed && $feed[7]==$status) $feeds[] = $feed;
       }
     }
     usort($feeds, 'compare');		// Sort feeds by tag's
     return $feeds;
   }
+  
+  // Used as part of get_user_feeds to sort by tag.
+  function compare($x, $y)
+  {
+    if ( $x[2] == $y[2] )
+     return 0;
+    else if ( $x[2] < $y[2] )
+     return -1;
+    else
+     return 1;
+  }
 
+  //-----------------------------------------------------------------------------------------------------------
+  // Return only a list of the users feed id's rather than get_user_feeds 
+  // which returns all the details about the feed
+  //-----------------------------------------------------------------------------------------------------------
   function get_user_feed_ids($userid)
   {
     $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
@@ -67,25 +90,19 @@
     }
     return $feeds;
   }
-
-  function compare($x, $y)
-  {
-    if ( $x[2] == $y[2] )
-     return 0;
-    else if ( $x[2] < $y[2] )
-     return -1;
-    else
-     return 1;
-  }
-
+ 
+  //-----------------------------------------------------------------------------------------------------------
+  // Gets all details about a particular feed, including:
+  // id, name, tag, lastupdatetime, value, size, datatype and status
+  //-----------------------------------------------------------------------------------------------------------
   function get_feed($feedid)
   {
     $feed_result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
     $feed_row = db_fetch_array($feed_result);
-    if ($feed_row['status'] != 1) { // if feed is not deleted
-      $size = get_feedtable_size($feed_row['id']);
-      $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$feed_row['value'],$size, $feed_row['type'], $feed_row['datatype']);
-    }
+
+    $size = get_feedtable_size($feed_row['id']);
+    $feed = array($feed_row['id'],$feed_row['name'],$feed_row['tag'],strtotime($feed_row['time'])*1000,$feed_row['value'],$size, $feed_row['datatype'], $feed_row['status']);
+
     return $feed;
   }
 
@@ -132,11 +149,11 @@
   //---------------------------------------------------------------------------
   function insert_feed_data($feedid,$updatetime,$feedtime,$value)
   { 
+    if (get_feed_status($feedid)==1) return $value;	// Dont insert if deleted
+
     $feedname = "feed_".trim($feedid)."";
 
     // a. Insert data value in feed table
-    $datetime = date("Y-n-j H:i:s", $feedtime); 
-    if (get_feed_type($feedid)==0) $feedtime = $datetime;
     db_query("INSERT INTO $feedname (`time`,`data`) VALUES ('$feedtime','$value')");
 
     // b. Update feeds table
@@ -147,13 +164,12 @@
   }
 
   function update_feed_data($feedid,$updatetime,$feedtime,$value)
-  {                     
+  {        
+    if (get_feed_status($feedid)==1) return $value;	// Dont update if deleted
+             
     $feedname = "feed_".trim($feedid)."";
 
     // a. update or insert data value in feed table
-    $datetime = date("Y-n-j H:i:s", $feedtime); 
-    if (get_feed_type($feedid)==0) $feedtime = $datetime;
-
     $result = db_query("SELECT * FROM $feedname WHERE time = '$feedtime'");
     $row = db_fetch_array($result);
 
@@ -166,53 +182,15 @@
     return $value;
   }
 
-  //---------------------------------------------------------------------------
-  // Get all feed data (it might be best not to call this on a really large dataset use function below to select data @ resolution)
-  //---------------------------------------------------------------------------
-  function get_all_feed_data($feedid)
+  function get_feed_data($feedid,$start,$end,$dp)
   {
-    $feedname = "feed_".trim($feedid)."";
-    $type = get_feed_type($feedid);
-
-    $data = array();   
-    $result = db_query("select * from $feedname order by time Desc");
-    while($array = db_fetch_array($result))
-    {
-      if ($type == 0) $time = strtotime($array['time'])*1000;
-      if ($type == 1) $time = $array['time']*1000;
-      
-      $kwhd = $array['data'];    
-      $data[] = array($time , $kwhd);
-    }
-    return $data;
-  }
-
-  function get_feed_data($feedid,$start,$end,$oldres,$dp)
-  {
-    $type = get_feed_type($feedid);
-    if ($type == 0) $data = get_feed_data_no_index($feedid,$start,$end,$oldres);
-    if ($type == 1) $data = get_feed_data_indexed($feedid,$start,$end,$oldres,$dp);
-
-    return $data;
-  }
-
-  function get_feed_data_indexed($feedid,$start,$end,$resolution,$dp)
-  {
-    if ($dp<2) $dp = 500;
-
     if ($end == 0) $end = time()*1000;
 
     $feedname = "feed_".trim($feedid)."";
     $start = $start/1000; $end = $end/1000;
 
-    $result = db_query("SELECT * FROM $feedname LIMIT 1");
-    $row = db_fetch_array($result);
-    if(!isset($row['data2']))
-    {
-
-    //----------------------------------------------------------------------------
     $data = array();
-    if (($end - $start) > (5000) && $resolution>1) //why 5000?
+    if (($end - $start) > (5000) && $dp>0) //why 5000?
     {
       $range = $end - $start;
       $td = $range / $dp;
@@ -240,78 +218,33 @@
         $data[] = array($time , $dataValue); 
       }
     }
-    //----------------------------------------------------------------------------
-    } else {
-      // Histogram has an extra dimension so a sum and group by needs to be used.
-      $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
-	
-	    $data = array();                                      // create an array for them
-	    while($row = db_fetch_array($result))                 // for all the new lines
-	    {
-	      $dataValue = $row['kWh'];                           // get the datavalue
-	      $data2 = $row['data2'];            		  // and the instant watts
-	      $data[] = array($data2 , $dataValue);               // add time and data to the array
-	    }
-    }
 
     return $data;
   }
 
-  //---------------------------------------------------------------------------
-  // Get feed data - within date range and @ specified resolution
-  //---------------------------------------------------------------------------
-  function get_feed_data_no_index($feedid,$start,$end,$resolution)
-  {
-    if ($end == 0) $end = time()*1000;
+ function get_histogram_data($feedid,$start,$end)
+ {
+   if ($end == 0) $end = time()*1000;
+   $feedname = "feed_".trim($feedid)."";
+   $start = $start/1000; $end = $end/1000;
+   $data = array();
 
-    $feedname = "feed_".trim($feedid)."";
-    $start = date("Y-n-j H:i:s", ($start/1000));		//Time format conversion
-    $end = date("Y-n-j H:i:s", ($end/1000));  			//Time format conversion
-
-    // Check to see type of feed table.
-    $result = db_query("SELECT * FROM $feedname LIMIT 1");
-    $row = db_fetch_array($result);
-    if(!isset($row['data2']))
-    {
-	    //This mysql query selects data from the table at specified resolution
-	    if ($resolution>1){
-	      $result = db_query(
-	      "SELECT * FROM 
-	      (SELECT @row := @row +1 AS rownum, time,data FROM ( SELECT @row :=0) r, $feedname) 
-	      ranked WHERE (rownum % $resolution = 1) AND (time>'$start' AND time<'$end') order by time Desc");
-	    }
-	    else
-	    {
-	      //When resolution is 1 the above query doesnt work so we use this one:
-	      $result = db_query("select * from $feedname WHERE time>'$start' AND time<'$end' order by time Desc"); 
-	    }
+   // Histogram has an extra dimension so a sum and group by needs to be used.
+   $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
 	
-	    $data = array();                                     //create an array for them
-	    while($row = db_fetch_array($result))             // for all the new lines
-	    {
-	      $dataValue = $row['data'] ;                        //get the datavalue
-	      $time = (strtotime($row['time']))*1000;            //and the time value - converted to unix time * 1000
-	      $data[] = array($time , $dataValue);               //add time and data to the array
-	    }
-    } else {
-      // Histogram has an extra dimension so a sum and group by needs to be used.
-      $result = db_query("select data2, sum(data) as kWh from $feedname WHERE time>='$start' AND time<'$end' group by data2 order by data2 Asc"); 
-	
-	    $data = array();                                      // create an array for them
-	    while($row = db_fetch_array($result))                 // for all the new lines
-	    {
-	      $dataValue = $row['kWh'];                           // get the datavalue
-	      $data2 = $row['data2'];            		  // and the instant watts
-	      $data[] = array($data2 , $dataValue);               // add time and data to the array
-	    }
-    }
-    return $data;
-  }
+   $data = array();                                      // create an array for them
+   while($row = db_fetch_array($result))                 // for all the new lines
+   {
+     $dataValue = $row['kWh'];                           // get the datavalue
+     $data2 = $row['data2'];            		 // and the instant watts
+     $data[] = array($data2 , $dataValue);               // add time and data to the array
+   }
+   return $data;
+ }
 
  function get_kwhd_atpower($feedid, $min, $max)
  {
    $feedname = "feed_".trim($feedid)."";
-   
    $result = db_query("SELECT time, sum(data) as kWh FROM `$feedname` WHERE `data2`>='$min' AND `data2`<='$max' group by time");
 
    $data = array();
@@ -351,9 +284,6 @@
   function calc_feed_stats($id)
   {
     $kwhd_table = "feed_".$id;
-
-   $type = get_feed_type($feedid);
-
     $result = db_query("SELECT * FROM $kwhd_table ORDER BY time DESC");
 
     $now = time();
@@ -371,8 +301,7 @@
     {
       $i++;
     
-      if ($type == 0) $time = strtotime($row['time']);
-      if ($type == 1) $time = $row['time'];
+      $time = $row['time'];
 
       $kwhd = $row['data'];
 
@@ -392,14 +321,34 @@
 
   function delete_feed($userid,$feedid)
   {
-    // feed status of 1 = deleted, this provides a way to soft delete so that if the delete was a mistake it can be taken out of the recycle bin as it where.
-    // It would be a good idea to have a hard delete option as well so that one can completely erase data.
+    // feed status of 1 = deleted, this provides a way to soft delete so that if the delete was a mistake
+    // it can be taken out of the recycle bin.
     db_query("UPDATE feeds SET status = 1 WHERE id='$feedid'");
-    //db_query("DELETE FROM feeds WHERE id = '$feedid'");
-    //db_query("DELETE FROM feeds WHERE id = '$feedid'");
-    //db_query("DELETE FROM feed_relation WHERE userid = '$userid' AND feedid = '$feedid' LIMIT 1");
-    //db_query("DROP TABLE feed_".$feedid);
-    //echo "delete feed ".$feedid;
+  }
+
+  function restore_feed($userid,$feedid)
+  {
+    // feed status of 1 = deleted, this provides a way to soft delete so that if the delete was a mistake
+    // it can be taken out of the recycle bin.
+    db_query("UPDATE feeds SET status = 0 WHERE id='$feedid'");
+  }
+
+  function permanently_delete_feeds($userid)
+  {
+    $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
+    $feeds = array();
+    if ($result) {
+      while ($row = db_fetch_array($result)) {
+        $feed = get_feed($row['feedid']);
+        $feedid = $feed[0];
+        if ($feed && $feed[7]==1){
+          db_query("DELETE FROM feeds WHERE id = '$feedid'");
+          db_query("DELETE FROM feeds WHERE id = '$feedid'");
+          db_query("DELETE FROM feed_relation WHERE userid = '$userid' AND feedid = '$feedid' LIMIT 1");
+          db_query("DROP TABLE feed_".$feedid);
+        }
+      }
+    }
   }
 
   function feed_belongs_user($feedid,$userid)
@@ -433,30 +382,29 @@
     return $total;
   }
 
-  function get_feed_type($feedid)
+  // Get the feed status
+  function get_feed_status($feedid)
   {
-    $result = db_query("SELECT type FROM feeds WHERE id='$feedid'");
+    $result = db_query("SELECT status FROM feeds WHERE id='$feedid'");
     $feed = db_fetch_array($result);
-    return $feed['type'];
+    return $feed['status'];
   }
 
-  function set_feed_type($feedid,$type)
-  {
-    db_query("UPDATE feeds SET type = '$type' WHERE id='$feedid'");
-  }
-
+  // Get feed datatype: 0: undefined type, 1: real-time data, 2: daily data, 3: histogram data
   function get_feed_datatype($feedid)
   {
     $result = db_query("SELECT datatype FROM feeds WHERE id='$feedid'");
     $feed = db_fetch_array($result);
-    return $feed['type'];
+    return $feed['datatype'];
   }
 
+  // Set feed datatype: 0: undefined type, 1: real-time data, 2: daily data, 3: histogram data
   function set_feed_datatype($feedid,$type)
   {
     db_query("UPDATE feeds SET datatype = '$type' WHERE id='$feedid'");
   }
 
+  // Get a list of all feeds in table (not just a particular users feeds.
   function get_all_feeds()
   {
     $result = db_query("SELECT id FROM feeds");

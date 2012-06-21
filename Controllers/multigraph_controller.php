@@ -28,7 +28,7 @@
       set_multigraph($session['userid'], $json);
     }
 
-    if ($action == "get" && $session['read'])
+	elseif ($action == "get" && $session['read'])
     {
       $output['content'] =  get_multigraph($session['userid']);
     }
