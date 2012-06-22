@@ -23,10 +23,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<script type="text/javascript" src="<?php echo $path; ?>Vis/flot/jquery.js"></script>
 		<script type="text/javascript" src="<?php echo $path; ?>Vis/kwhdcomparison/kwhdcomparison_functions.js"></script>
-		<script type="text/javascript" src="<?php echo $path; ?>Vis/d3/d3.js?2.7.1"></script>
-		<script type="text/javascript" src="<?php echo $path; ?>Vis/d3/d3.layout.js?2.7.1"></script>
-		<script type="text/javascript" src="<?php echo $path; ?>Vis/d3/d3.time.js?2.7.1"></script>
-		<script type="text/javascript" src="<?php echo $path; ?>Vis/d3/d3.geom.js?2.7.1"></script>
+		<script type="text/javascript" src="<?php echo $path; ?>Vis/d3.v2.js"></script>
 	</head>
 	
 	<style type='text/css'>
