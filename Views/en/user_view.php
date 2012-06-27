@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 All Emoncms code is released under the GNU Affero General Public License.
 See COPYRIGHT.txt and LICENSE.txt.
 
@@ -6,14 +7,14 @@ See COPYRIGHT.txt and LICENSE.txt.
 Emoncms - open source energy visualisation
 Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
--->
-
-<?php
+*/
 
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
 global $path, $session;
+
+require "Includes/forms.php";
 ?>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
@@ -29,15 +30,8 @@ global $path, $session;
           <?php echo _("Select preferred language:"); ?>
         </p></td>
         <td>
-        <form action="setlang" method="get">
-
-          <select name="lang">
-            <option selected value="en"><?php echo _("English"); ?></option>
-            <option value="es"><?php echo _("Spanish"); ?></option>
-          </select>
-
-          <input type="submit" value="<?php echo _("Set"); ?>" class="button05">
-        </form></td>
+			<?php SelectLanguageForm(); ?>
+        </td>
       </tr>
     </table>
 
