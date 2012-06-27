@@ -42,7 +42,7 @@ $schema['users'] = array(
   'apikey_read' => array('type' => 'varchar(64)'),
   'lastlogin' => array('type' => 'DATETIME'),
   'admin' => array('type' => 'INT NOT NULL'),
-  'lang' => array('type' => 'varchar(2)')
+  'lang' => array('type' => 'varchar(5)')
 );
 
 $schema['input'] = array(

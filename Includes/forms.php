@@ -18,7 +18,7 @@ function SelectLanguageForm() {
 	if ($handle = opendir('locale')) {
 	    while (false !== ($entry = readdir($handle))) 
     		if (is_dir('locale/'.$entry) && ($entry !='.') && ($entry!='..'))
-        		echo '<option value="'.$entry.'">'.$entry.'</option>';
+        		echo '<option value="'.$entry.'">'._($entry).'</option>';
 			
 			/*<!-- <option selected value="en"><?php echo _("English"); ?></option>
             <option value="es"><?php echo _("Spanish"); ?></option>*/
@@ -27,7 +27,7 @@ function SelectLanguageForm() {
 	echo '</select>';
 	} /* endif */
 	
-	echo '<input type="submit" value='._("Set").' class="button05">';
+	echo '<input type="submit" value="Set" class="button05">';
 	echo '</form>';
 }
 
