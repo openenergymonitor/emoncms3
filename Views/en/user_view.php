@@ -30,8 +30,7 @@ require "Includes/forms.php";
           <?php echo _("Select preferred language:"); ?>
         </p></td>
         <td>
-        	<?php echo $user['lang']; ?>
-			<?php SelectLanguageForm(); ?>
+			<?php SelectLanguageForm($user['lang']); ?>
         </td>
       </tr>
     </table>
