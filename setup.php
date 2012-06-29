@@ -216,5 +216,20 @@ while ($table = key($schema))
   next($schema);
 }
 $out .= "</table>";
+
+// Test for feed conversion requirement
+$runconv = false;
+require "Models/feed_model.php";
+$feeds = get_all_feeds();
+foreach ($feeds as $feed)
+{
+  $feedname = "feed_" . trim($feed['id']) . "";
+  $result = db_query("DESCRIBE $feedname time");
+  $row = db_fetch_array($result);
+  if ($row['Type'] == "datetime") $runconv = true;
+}
+if ($runconv==true)  echo "<p>You have feeds that need converting from datetime format to indexed timestamp. This improves performance. Its best to backup your data before conversion, then once your ready run: emoncms3/conv.php</p>";
+
 echo $out;
+
 ?>
