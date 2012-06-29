@@ -163,7 +163,7 @@
       $feeds = get_user_feeds($session['userid'],$del);
     
       if ($format == 'json') $output['content'] = json_encode($feeds);
-      if ($format == 'html') $output['content'] = view_lang("feed/list_view.php", array('feeds' => $feeds,'del'=>$del));
+      if ($format == 'html') $output['content'] = view("feed/list_view.php", array('feeds' => $feeds,'del'=>$del));
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@
 		}
       }
 
-      if ($format == 'html') $output['content'] = view_lang("feed/feed_view.php", array('feed' => $feed));
+      if ($format == 'html') $output['content'] = view("feed/feed_view.php", array('feed' => $feed));
     }
 
     //---------------------------------------------------------------------------------------------------------

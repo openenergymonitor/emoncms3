@@ -31,88 +31,88 @@ if (!$runnable)
   die ;
 }
 
-$shema = array();
+$schema = array();
 
 $schema['users'] = array(
-  'id' => array('type' => 'int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id)'),
+  'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'username' => array('type' => 'varchar(30)'),
   'password' => array('type' => 'varchar(64)'),
   'salt' => array('type' => 'varchar(3)'),
   'apikey_write' => array('type' => 'varchar(64)'),
   'apikey_read' => array('type' => 'varchar(64)'),
-  'lastlogin' => array('type' => 'DATETIME'),
-  'admin' => array('type' => 'INT NOT NULL'),
+  'lastlogin' => array('type' => 'datetime'),
+  'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
   'lang' => array('type' => 'varchar(2)')
 );
 
 $schema['input'] = array(
-  'id' => array('type' => 'int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id)'),
+  'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'userid' => array('type' => 'text'),
   'name' => array('type' => 'text'),
   'processList' => array('type' => 'text'),
-  'time' => array('type' => 'DATETIME'),
-  'value' => array('type' => 'FLOAT')
+  'time' => array('type' => 'datetime'),
+  'value' => array('type' => 'float')
 );
 
 $schema['feeds'] = array(
-  'id' => array('type' => 'int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id)'),
+  'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'name' => array('type' => 'text'),
   'tag' => array('type' => 'text'),
-  'time' => array('type' => 'DATETIME'),
-  'value' => array('type' => 'FLOAT'),
-  'status' => array('type' => 'int'),
-  'today' => array('type' => 'FLOAT'),
-  'yesterday' => array('type' => 'FLOAT'),
-  'week' => array('type' => 'FLOAT'),
-  'month' => array('type' => 'FLOAT'),
-  'year' => array('type' => 'FLOAT'),
-  'datatype' => array('type' => 'int NOT NULL')
+  'time' => array('type' => 'datetime'),
+  'value' => array('type' => 'float'),
+  'status' => array('type' => 'int(11)'),
+  'today' => array('type' => 'float'),
+  'yesterday' => array('type' => 'float'),
+  'week' => array('type' => 'float'),
+  'month' => array('type' => 'float'),
+  'year' => array('type' => 'float'),
+  'datatype' => array('type' => 'int(11)', 'Null'=>'NO')
 );
 
 $schema['feed_relation'] = array(
-  'userid' => array('type' => 'int'),
-  'feedid' => array('type' => 'int')
+  'userid' => array('type' => 'int(11)'),
+  'feedid' => array('type' => 'int(11)')
 );
 
 $schema['dashboard'] = array(
-  'id' => array('type' => 'int NOT NULL AUTO_INCREMENT, PRIMARY KEY(id,userid)'),
-  'userid' => array('type' => 'int'),
+  'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
+  'userid' => array('type' => 'int(11)'),
   'content' => array('type' => 'text'),
-  'name' => array('type' => "VARCHAR(30) DEFAULT 'no name'"),
-  'description' => array('type' => "VARCHAR(255) DEFAULT 'no description'"),
-  'main' => array('type' => 'bool default false')
+  'name' => array('type' => "varchar(30)", 'default'=>'no name'),
+  'description' => array('type' => "varchar(255)", 'default'=>'no description'),
+  'main' => array('type' => 'tinyint(1)', 'default'=>false)
 );
 
 $schema['notify'] = array(
-  'userid' => array('type' => 'int'),
-  'feedid' => array('type' => 'int'),
-  'onvalue' => array('type' => 'FLOAT'),
-  'onvalue_sent' => array('type' => 'bool'),
-  'oninactive' => array('type' => 'bool'),
-  'oninactive_sent' => array('type' => 'bool'),
-  'periodic' => array('type' => 'bool')
+  'userid' => array('type' => 'int(11)'),
+  'feedid' => array('type' => 'int(11)'),
+  'onvalue' => array('type' => 'float'),
+  'onvalue_sent' => array('type' => 'tinyint(1)'),
+  'oninactive' => array('type' => 'tinyint(1)'),
+  'oninactive_sent' => array('type' => 'tinyint(1)'),
+  'periodic' => array('type' => 'tinyint(1)')
 );
 
 $schema['notify_mail'] = array(
-  'userid' => array('type' => 'int'),
+  'userid' => array('type' => 'int(11)'),
   'recipients' => array('type' => 'text')
 );
 
 $schema['kwhdproc'] = array(
-  'feedid' => array('type' => 'int'),
-  'time' => array('type' => 'INT UNSIGNED'),
-  'kwh' => array('type' => 'FLOAT')
+  'feedid' => array('type' => 'int(11)'),
+  'time' => array('type' => 'int(10) unsigned'),
+  'kwh' => array('type' => 'float')
 );
 
 $schema['statistics'] = array(
-  'userid' => array('type' => 'int'),
-  'uphits' => array('type' => 'int'),
-  'dnhits' => array('type' => 'int'),
-  'memory' => array('type' => 'int')
+  'userid' => array('type' => 'int(11)'),
+  'uphits' => array('type' => 'int(11)'),
+  'dnhits' => array('type' => 'int(11)'),
+  'memory' => array('type' => 'int(11)')
 );
 
 $schema['multigraph'] = array(
-  'userid' => array('type' => 'int'),
+  'userid' => array('type' => 'int(11)'),
   'feedlist' => array('type' => 'text')
 );
 
@@ -138,18 +138,47 @@ while ($table = key($schema))
     //-----------------------------------------------------
     while ($field = key($schema[$table]))
     {
+      $type = $schema[$table][$field]['type'];
+      $null = $schema[$table][$field]['Null']; if (!$null) $null = "YES";
+      $key = $schema[$table][$field]['Key'];
+      $default = $schema[$table][$field]['default'];
+      $extra = $schema[$table][$field]['Extra'];
+
+      $out .= "<tr>";
       if (field_exists($table, $field))
       {
-        $out .= "<tr><td>.." . $field . "</td><td>ok</td></tr>";
+        $out .= "<td>.." . $field . "</td><td>ok</td>";
       }
       else
       {
-        $type = $schema[$table][$field]['type'];
-        $query = "ALTER TABLE `$table` ADD `$field` $type";
+
+        $query = "ALTER TABLE `$table` ADD `$field` $type default $default";
         echo $query;
         $out .= "<tr><td>.." . $field . "</td><td>added</td></tr>";
         db_query($query);
       }
+
+      $result = db_query("DESCRIBE $table $field");
+      $array = db_fetch_array($result);
+
+      $out .= "<td>";
+
+      $query = "";
+
+      if ($array['Type']!=$type) { $out .= "Type: $type, "; $query .= ";"; }
+      if ($array['Default']!=$default) { $out .= "Default: $default, "; $query .= " Default '$default'"; }
+      if ($array['Null']!=$null) { $out .= "Null: $null, "; $query .= " not null"; }
+      if ($array['Extra']!=$extra) { $out .= "Extra: $extra"; $query .= " auto_increment"; }
+      if ($array['Key']!=$key) { $out .= "Key: $key, "; $query .= " primary key"; }
+
+      $out .= "</td>";
+
+      if ($query) $query = "ALTER TABLE $table MODIFY $field $type".$query;
+      $out .= "<td>$query</td>";
+      db_query($query);
+
+      $out .= "</tr>";
+
       next($schema[$table]);
     }
     //-----------------------------------------------------
@@ -164,7 +193,19 @@ while ($table = key($schema))
     $query = "CREATE TABLE " . $table . " (";
     while ($field = key($schema[$table]))
     {
-      $query .= $field . " " . $schema[$table][$field]['type'];
+      $type = $schema[$table][$field]['type'];
+      $null = $schema[$table][$field]['Null']; if (!$null) $null = "YES";
+      $key = $schema[$table][$field]['Key'];
+      $default = $schema[$table][$field]['default'];
+      $extra = $schema[$table][$field]['Extra'];
+
+      $query .= $field;
+      $query .= " $type";
+      if ($default) $query .= " Default '$default'";
+      if ($null=="NO") $query .= " not null";
+      if ($extra) $query .= " auto_increment";
+      if ($key) $query .= " primary key";
+
       next($schema[$table]);
       if (key($schema[$table]))
       {
@@ -181,14 +222,29 @@ while ($table = key($schema))
   $out .= "<tr><td></td></tr>";
   next($schema);
 }
-	$out .= "</table>";
-	echo $out;
+
+$out .= "</table>";
+
+// Test for feed conversion requirement
+$runconv = false;
+require "Models/feed_model.php";
+$feeds = get_all_feeds();
+foreach ($feeds as $feed)
+{
+  $feedname = "feed_" . trim($feed['id']) . "";
+  $result = db_query("DESCRIBE $feedname time");
+  $row = db_fetch_array($result);
+  if ($row['Type'] == "datetime") $runconv = true;
+}
+if ($runconv==true)  echo "<p>You have feeds that need converting from datetime format to indexed timestamp. This improves performance. Its best to backup your data before conversion, then once your ready run: emoncms3/conv.php</p>";
+
+echo $out;
 
 	db_query("INSERT INTO e3_globals SET dbversion=2012062900;");
 	
 	upgradedatabase();
-}
-
+	}
+	
 function upgradedatabase() {
 	echo "Installed database version";
 	$dbversion = getdatabaseversion();
@@ -218,5 +274,4 @@ function upgrade2012063000()
 	db_query("ALTER TABLE users MODIFY lang varchar(5);");
 	setdatabaseversion("2012063000");
 }
-
 ?>

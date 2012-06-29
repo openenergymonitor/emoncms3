@@ -49,6 +49,11 @@
     var i = 0;
     var out = "<table class='catlist'><tr><th>id</th><th><?php echo _("Name"); ?></th><th><?php echo _("Tag"); ?></th><th><?php echo _("Size"); ?></th><th><?php echo _("Updated"); ?></th><th><?php echo _("Value"); ?>
       </th></tr>";
+
+      if (feeds.length==0) {
+      out += "</table><table class='catlist'><tr class='d0' ><td>You have no feeds</td></tr></table>";
+      }
+
       for (z in feeds)
       {
       i++;

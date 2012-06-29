@@ -28,7 +28,7 @@ require "Includes/db.php";
 $e = db_connect();
 
 require "Models/feed_model.php";
-//$feeds = get_all_feeds();
+$feeds = get_all_feeds();
 //$feeds = get_user_feed_ids(1);
 
 foreach ($feeds as $feed)
