@@ -145,7 +145,7 @@ while ($table = key($schema))
       else
       {
 
-        $query = "ALTER TABLE `$table` ADD `$field` $type default $default";
+        $query = "ALTER TABLE `$table` ADD `$field` $type";
         echo $query;
         $out .= "<tr><td>.." . $field . "</td><td>added</td></tr>";
         db_query($query);
@@ -160,9 +160,9 @@ while ($table = key($schema))
 
       if ($array['Type']!=$type) { $out .= "Type: $type, "; $query .= ";"; }
       if ($array['Default']!=$default) { $out .= "Default: $default, "; $query .= " Default '$default'"; }
-      if ($array['Null']!=$null) { $out .= "Null: $null, "; $query .= " not null"; }
-      if ($array['Extra']!=$extra) { $out .= "Extra: $extra"; $query .= " auto_increment"; }
-      if ($array['Key']!=$key) { $out .= "Key: $key, "; $query .= " primary key"; }
+      if ($array['Null']!=$null && $null=="NO") { $out .= "Null: $null, "; $query .= " not null"; }
+      if ($array['Extra']!=$extra && $extra=="auto_increment") { $out .= "Extra: $extra"; $query .= " auto_increment"; }
+      if ($array['Key']!=$key && $key=="PRI") { $out .= "Key: $key, "; $query .= " primary key"; }
 
       $out .= "</td>";
 
