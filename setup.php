@@ -31,7 +31,7 @@ if (!$runnable)
   die ;
 }
 
-$shema = array();
+$schema = array();
 
 $schema['users'] = array(
   'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
@@ -116,9 +116,16 @@ $schema['multigraph'] = array(
   'feedlist' => array('type' => 'text')
 );
 
+$schema['e3_globals'] = array(
+	'dbversion' => array('type' => 'int unsigned not null default 2012062900')
+);
+
 $out = "<table style='font-size:12px'><tr><th width='220'></th><th></th></tr>";
 
-
+if (!table_exists('e3_globals'))
+{
+ 
+	echo "Creating emoncms3 database";
 
 while ($table = key($schema))
 {
@@ -215,6 +222,7 @@ while ($table = key($schema))
   $out .= "<tr><td></td></tr>";
   next($schema);
 }
+
 $out .= "</table>";
 
 // Test for feed conversion requirement
@@ -232,4 +240,38 @@ if ($runconv==true)  echo "<p>You have feeds that need converting from datetime 
 
 echo $out;
 
+	db_query("INSERT INTO e3_globals SET dbversion=2012062900;");
+	
+	upgradedatabase();
+	}
+	
+function upgradedatabase() {
+	echo "Installed database version";
+	$dbversion = getdatabaseversion();
+	echo "<center>".$dbversion."</center>";
+	echo "Upgrading database<br>";
+	startupgrade($dbversion);
+	echo "<br>Upgrade done";
+}
+
+function startupgrade($dbversion)
+{ 
+	// add here upgrade points
+	if ($dbversion < 2012063000) upgrade2012063000();	
+} 
+
+/*
+ * upgrade points 
+ * yyyymmddxx
+ */
+
+/*
+ * change lang field size from 2 to 5 to support en_EN, es_ES,... format
+ */
+function upgrade2012063000()
+{
+	echo "Upgrade 2012063000";
+	db_query("ALTER TABLE users MODIFY lang varchar(5);");
+	setdatabaseversion("2012063000");
+}
 ?>

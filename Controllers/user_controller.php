@@ -205,7 +205,7 @@
     //---------------------------------------------------------------------------------------------------------
     elseif ($action == 'setlang' && $session['write'])
     {
-      set_user_lang($session['userid'],$session['lang']);
+      set_user_lang($session['userid'],$_GET['lang']);
       if ($format == 'html')
       {
       	header("Location: view");
