@@ -62,9 +62,9 @@ global $path, $session;
     </tr>
 
     <tr>
-      <form action="../Vis/smoothie/smoothie" method="get">
+      <form action="smoothie" method="get">
         <td><?php echo _("Smoothie"); ?></td>
-        <td style="text-align:right">Vis/smoothie/smoothie?feedid=
+        <td style="text-align:right">vis/smoothie?feedid=
         <input name="feedid" type='text' style='width:50px' />
         </td>
         <td>
@@ -86,9 +86,9 @@ global $path, $session;
     </tr>
 
     <tr>
-      <form action="../Vis/kwhd_histogram/kwhdzoomer" method="get">
+      <form action="dailyhistogram" method="get">
         <td><?php echo _("Daily histogram"); ?></td>
-        <td style="text-align:right">Vis/kwhd_histogram/kwhdzoomer?power=
+        <td style="text-align:right">vis/dailyhistogram?power=
         <input name="power" type='text' style='width:50px' />
         &kwhd=
         <input name="kwhd" type='text' style='width:50px' />
@@ -102,9 +102,9 @@ global $path, $session;
     </tr>
 
     <tr>
-      <form action="../Vis/kWhdZoomer/kwhdzoomer" method="get">
-        <td><?php echo _("kWh/d Zoomer"); ?></td>
-        <td style="text-align:right">Vis/kWhdZoomer/kwhdzoomer?power=
+      <form action="zoom" method="get">
+        <td><?php echo _("Zoom"); ?></td>
+        <td style="text-align:right">vis/zoom?power=
         <input name="power" type='text' style='width:50px' />
         &kwhd=
         <input name="kwhd" type='text' style='width:50px' />
@@ -116,9 +116,9 @@ global $path, $session;
     </tr>
 
     <tr>
-      <form action="../Vis/kwhdstacked/kwhdstacked" method="get">
-        <td><?php echo _("kWh/d Stacked"); ?></td>
-        <td style="text-align:right">Vis/kwhdstacked/kwhdstacked?kwhdA=
+      <form action="stacked" method="get">
+        <td><?php echo _("Stacked"); ?></td>
+        <td style="text-align:right">vis/stacked?kwhdA=
         <input name="kwhdA" type='text' style='width:50px' />
         &kwhdB=
         <input name="kwhdB" type='text' style='width:50px' />
@@ -131,13 +131,27 @@ global $path, $session;
 
     <tr>
       <form action="threshold" method="get">
-        <td>kWh/d threshold at power</td>
+        <td>Threshold</td>
         <td style="text-align:right">vis/theshold/?feedid=
         <input name="feedid" type='text' style='width:50px' />
         &thresholdA=
         <input name="thresholdA" type='text' style='width:50px' />
         &thresholdB=
         <input name="thresholdB" type='text' style='width:50px' />
+        </td>
+        <td>
+        <input type="submit" value=">" class="button05"/>
+        </td>
+      </form>
+    </tr>
+
+    <tr>
+      <form action="simplezoom" method="get">
+        <td><?php echo _("Simple zoom"); ?></td>
+        <td style="text-align:right">vis/simplezoom?power=
+        <input name="power" type='text' style='width:50px' />
+        &kwhd=
+        <input name="kwhd" type='text' style='width:50px' />
         </td>
         <td>
         <input type="submit" value=">" class="button05"/>

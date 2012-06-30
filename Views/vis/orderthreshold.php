@@ -69,8 +69,17 @@
     data[dataA[z][0]][1] = 0;
     data[dataA[z][0]][2] = 0;
   }
-  for (z in dataB) data[dataB[z][0]][1] = 1*dataB[z][1];
-  for (z in dataC) data[dataC[z][0]][2] = 1*dataC[z][1];
+  for (z in dataB) 
+  {
+    if (!data[dataB[z][0]]) data[dataB[z][0]] = [];  
+    data[dataB[z][0]][1] = 1*dataB[z][1];
+  }
+
+  for (z in dataC)
+  {
+    if (!data[dataC[z][0]]) data[dataC[z][0]] = [];  
+    data[dataC[z][0]][2] = 1*dataC[z][1];
+  }
 
   // Remove the timestamp replacing it with an index - we still include timestamp for reference
   var data2 = []; var i = 0;
