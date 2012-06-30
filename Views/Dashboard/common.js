@@ -303,7 +303,7 @@ function draw_vis()
 {
   $('.zoom').each(function(index)
   {
-    $(this).html('<iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="'+path+'vis/zoom?embed=1&power='+$(this).attr("power")+'&kwhd='+$(this).attr("kwhd")+'" style="width:674px; height:470px;"></iframe>');
+    $(this).html('<iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="'+path+'vis/zoom?embed=1&power='+$(this).attr("power")+'&kwhd='+$(this).attr("kwhd")+'" style="width:'+$(this).attr("width")+'; height:'+$(this).attr("height")+';"></iframe>');
   });
 }
 
