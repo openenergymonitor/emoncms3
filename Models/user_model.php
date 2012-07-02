@@ -215,7 +215,7 @@ function set_user_lang($userid, $lang)
 
 function get_user_lang($userid)
 {
-	$result = db_query("SELECT lang FROM users WHERE id = '$id';");
+	$result = db_query("SELECT lang FROM users WHERE id = '$userid';");
 	$row = db_fetch_array($result);
 	return $row['lang'];
 }

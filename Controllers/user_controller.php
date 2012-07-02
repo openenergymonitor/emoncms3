@@ -26,6 +26,8 @@
   // no direct access
   defined('EMONCMS_EXEC') or die('Restricted access');
 
+	require_once "Includes/locale.php";
+
   function user_controller()
   {
     global $session, $action,$format;
@@ -51,10 +53,13 @@
       }
       else
       {
-        $output['message'] = _("Welcome, you are now logged in");
-        if ($format == 'html'){
-      	  header("Location: ../dashboards/view");
-	}
+      	$lang = get_user_lang($_SESSION['userid']);
+		set_lang_by_user($lang);
+		
+      	$output['message'] = _("Welcome, you are now logged in");
+    	if ($format == 'html'){
+      		header("Location: ../dashboards/view");
+		}
       }
     }
 
