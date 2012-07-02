@@ -73,7 +73,10 @@ else
   $format = "html";
 }
 
-$lang = preg_replace('/[a-z]/', '', $_GET['lang']);
+//$lang = preg_replace('/[a-z]/', '', $_GET['lang']);
+// Getting the language browser
+$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
 // Multilanguage support
 // Set language from url attribute lang and save it to the session variable
 // The view function in core.inc.php then selects the view depending on the lang session variable
@@ -85,6 +88,11 @@ else
   $lang = null;
 if (!$_SESSION['lang'])
   $_SESSION['lang'] = "en";
+  
+  
+
+
+  
 // Set default language
 
 if ($_GET['embed'])

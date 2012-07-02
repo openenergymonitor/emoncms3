@@ -30,6 +30,16 @@ require "Includes/forms.php";
           <?php echo _("Select preferred language:"); ?>
         </p></td>
         <td>
+<?php        	$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 5);
+echo $lang;
+
+$locale = "es_es";
+//if (isSet($_GET["locale"])) $locale = $_GET["locale"];
+putenv("LC_ALL=$locale");
+setlocale(LC_ALL, $locale);
+bindtextdomain("app", "./locale");
+textdomain("app");
+?>
 			<?php SelectLanguageForm($user['lang']); ?>
         </td>
       </tr>

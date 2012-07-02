@@ -212,4 +212,12 @@ function set_user_lang($userid, $lang)
 {
   db_query("UPDATE users SET lang = '$lang' WHERE id='$userid'");
 }
+
+function get_user_lang($userid)
+{
+	$result = db_query("SELECT lang FROM users WHERE id = '$id';");
+	$row = db_fetch_array($result);
+	return $row['lang'];
+}
+
 ?>
