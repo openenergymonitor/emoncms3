@@ -1,0 +1,770 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: emoncms3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-07-03 14:59+0100\n"
+"PO-Revision-Date: 2012-07-03 14:59+0100\n"
+"Last-Translator: ilde <i.martinez@ismsolar.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../../..\n"
+
+#: ../../../index.php:121
+msgid "Sorry, you need a valid apikey or be logged in to see this page"
+msgstr "Sorry, je moet een geldige API sleutel invoeren of aangemeld zijn om deze pagina te bezoeken"
+
+#: ../../../setup.php:3
+msgid "Continue to emoncms"
+msgstr "Ga naar emoncms"
+
+#: ../../../setup.php:30
+msgid "to run script uncomment runnable"
+msgstr "om dit script te draaien haal de comments weg"
+
+#: ../../../Controllers/dashboards_controller.php:33
+msgid "dashboards new"
+msgstr "Nieuw dashboard"
+
+#: ../../../Controllers/dashboard_controller.php:50
+msgid "dashboard set"
+msgstr "dashboard ingesteld"
+
+#: ../../../Controllers/dashboard_controller.php:57
+msgid "dashboard set configuration"
+msgstr "dashboard configuratie instelling"
+
+#: ../../../Controllers/feed_controller.php:52
+msgid "Feed type changed"
+msgstr "Berich type aangepast"
+
+#: ../../../Controllers/feed_controller.php:56
+#: ../../../Controllers/feed_controller.php:82
+#: ../../../Controllers/feed_controller.php:108
+#: ../../../Controllers/feed_controller.php:128
+msgid "Feed does not exist"
+msgstr "Bericht bestaat niet"
+
+#: ../../../Controllers/feed_controller.php:78
+msgid "Feed tag changed"
+msgstr "Bericht label gewijzigd"
+
+#: ../../../Controllers/feed_controller.php:104
+msgid "Feed renamed"
+msgstr "Bericht hernoemd"
+
+#: ../../../Controllers/feed_controller.php:127
+msgid "Feed "
+msgstr "Bericht"
+
+#: ../../../Controllers/feed_controller.php:127
+msgid " deleted"
+msgstr "verwijderd"
+
+#: ../../../Controllers/input_controller.php:48
+msgid "Input deleted"
+msgstr "Invoer verwijderen"
+
+#: ../../../Controllers/input_controller.php:55
+msgid "Process list has been reset"
+msgstr "Proceslijst is hersteld"
+
+#: ../../../Controllers/user_controller.php:52
+msgid "Invalid username or password"
+msgstr "Ongeldige gebruikersnaam of wachtwoord"
+
+#: ../../../Controllers/user_controller.php:59
+msgid "Welcome, you are now logged in"
+msgstr "Welkom, je bent nu aangemeld"
+
+#: ../../../Controllers/user_controller.php:80
+msgid "Sorry username already exists"
+msgstr "Sorry maar deze gebruikersnaam bestaat al"
+
+#: ../../../Controllers/user_controller.php:84
+msgid "Please enter a username that is 4 to 30 characters long"
+msgstr "Voer een gebruikersnaam tussen de 4 en 30 characters in"
+
+#: ../../../Controllers/user_controller.php:88
+msgid "Please enter a password that is 4 to 30 characters long"
+msgstr "Voer een wachtwoord in tussen de 4 en 30 characters lang"
+
+#: ../../../Controllers/user_controller.php:94
+msgid "Your new account has been created"
+msgstr "U nieuwe account is aangemaakt"
+
+#: ../../../Controllers/user_controller.php:112
+msgid "Your password has been changed"
+msgstr "U wachtwoord is aangepast"
+
+#: ../../../Controllers/user_controller.php:116
+msgid "Invalid old password"
+msgstr "Ongeldig oud wachtwoord"
+
+#: ../../../Controllers/user_controller.php:128
+msgid "New read apikey: "
+msgstr "Nieuwe lees API sleutel"
+
+#: ../../../Controllers/user_controller.php:144
+msgid "New write apikey: "
+msgstr "Nieuwe schrijf API sleutel:"
+
+#: ../../../Controllers/user_controller.php:161
+msgid "You are logged out"
+msgstr "U bent afgemeld"
+
+#: ../../../Controllers/user_controller.php:166
+msgid "Invalid token"
+msgstr "Ontbrekende token"
+
+#: ../../../Controllers/vis_controller.php:24
+msgid "Restricted access"
+msgstr "Beperkte toegang"
+
+#: ../../../Models/mail_model.php:34
+msgid "Message successfully sent!"
+msgstr "Bericht succesvol verzonden!"
+
+#: ../../../Models/notify_model.php:46
+msgid " is"
+msgstr "is"
+
+#: ../../../Models/notify_model.php:53
+msgid " is inactive"
+msgstr "inactief"
+
+#: ../../../Models/process_model.php:28
+msgid "Log to feed"
+msgstr "Bewaar naar feed"
+
+#: ../../../Models/process_model.php:49
+msgid "Power to kWh"
+msgstr "Energie naar kWh"
+
+#: ../../../Models/process_model.php:56
+msgid "Power to kWh/d"
+msgstr "Energie naar Kwh/d"
+
+#: ../../../Models/process_model.php:63
+msgid "x input"
+msgstr "Invoer"
+
+#: ../../../Models/process_model.php:70
+msgid "input on-time"
+msgstr "invoer op tijdsbasis"
+
+# don't get the explination of this function. code says:
+#    // Get last value
+#     $last = get_feed_timevalue($feedid);
+#     $last_kwh = $last['value'];
+#     $kwh_inc = $value / 1000.0;
+#     $new_kwh = $last_kwh + $kwh_inc;
+# ----
+# So it's the last kwh reading divide by 1000?
+#: ../../../Models/process_model.php:77
+msgid "kWhinc to kWh/d"
+msgstr "kWhper. naar kWh/d"
+
+#: ../../../Models/process_model.php:84
+msgid "kWh to kWh/d"
+msgstr "Kwh naar Kwh/d"
+
+#: ../../../Models/process_model.php:91
+msgid "update feed @time"
+msgstr "update feed @tijd"
+
+#: ../../../Models/process_model.php:98
+msgid "+ input"
+msgstr "+ invoer"
+
+#: ../../../Models/process_model.php:105
+msgid "/ input"
+msgstr "/ invoer"
+
+#: ../../../Models/process_model.php:112
+msgid "phaseshift"
+msgstr "faseverschuiving"
+
+#: ../../../Models/process_model.php:119
+msgid "accumulator"
+msgstr "accumulator"
+
+#: ../../../Models/process_model.php:126
+msgid "rate of change"
+msgstr "wisselkoers"
+
+#: ../../../Models/process_model.php:133
+msgid "histogram"
+msgstr "histogram"
+
+#: ../../../Models/process_model.php:140
+#, fuzzy
+msgid "average"
+msgstr "| Gemiddelde:"
+
+#: ../../../Views/confirm_view.php:15
+msgid "Yes please"
+msgstr "Alsublieft!"
+
+#: ../../../Views/dashboard_run_errornomain.php:11
+msgid "No main dashboard defined. Please, check main dashboard in a dashboard configuration."
+msgstr ""
+
+#: ../../../Views/dashboard_view.php:35
+msgid "Edit"
+msgstr "Wijzigen"
+
+#: ../../../Views/dashboard_view.php:44
+msgid "Edit dashboard"
+msgstr "Wijzig dashboard"
+
+#: ../../../Views/dashboard_view.php:47
+msgid "Configuration"
+msgstr "Configuratie"
+
+#: ../../../Views/dashboard_view.php:50
+msgid "Preview"
+msgstr "Voorvertoning"
+
+#: ../../../Views/dashboard_view.php:58
+msgid "Dashboard name: "
+msgstr "Dashboard naam:"
+
+#: ../../../Views/dashboard_view.php:61
+msgid "Description: "
+msgstr "Omschrijving"
+
+#: ../../../Views/dashboard_view.php:63
+msgid "Main dashboard: "
+msgstr "Hoofd dashboard:"
+
+#: ../../../Views/menu_view.php:13
+#: ../../../Views/input/list_view.php:16
+msgid "Inputs"
+msgstr "Invoeren"
+
+#: ../../../Views/menu_view.php:14
+#: ../../../Views/feed/list_view.php:21
+msgid "Feeds"
+msgstr "Berichten"
+
+#: ../../../Views/menu_view.php:15
+msgid "Vis"
+msgstr "Grafisch"
+
+#: ../../../Views/menu_view.php:16
+msgid "Account"
+msgstr "Account"
+
+#: ../../../Views/menu_view.php:17
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: ../../../Views/menu_view.php:18
+msgid "Dashboards"
+msgstr "Dashboards"
+
+#: ../../../Views/notify_settings_view.php:2
+msgid "Notify settings"
+msgstr "Waarschuwingsinstellingen"
+
+#: ../../../Views/notify_settings_view.php:5
+msgid "Notification recipiants (To): "
+msgstr "Notificatie ontvangers (Aan):"
+
+#: ../../../Views/notify_view.php:2
+msgid "Notify "
+msgstr "Notificatie"
+
+#: ../../../Views/notify_view.php:4
+msgid "Setup feed notifications"
+msgstr "instellen bericht waarschuwingen"
+
+#: ../../../Views/notify_view.php:9
+msgid "Notify when feed = value: "
+msgstr "Waarschuw wanneer Bericht = waarde:"
+
+#: ../../../Views/notify_view.php:13
+msgid "Notify when feed is inactive "
+msgstr "Waarschuw wanneer bericht inactief is"
+
+#: ../../../Views/notify_view.php:17
+msgid "Notify feed status periodically "
+msgstr "Waarschuw berichten status periodiek"
+
+#: ../../../Views/notify_view.php:23
+msgid "Edit mail settings"
+msgstr "Wijzig e-mail instellingen"
+
+#: ../../../Views/user_view.php:22
+msgid "User: "
+msgstr "Gebruiker"
+
+#: ../../../Views/user_view.php:27
+msgid "Language"
+msgstr "Taal"
+
+#: ../../../Views/user_view.php:30
+msgid "Select preferred language:"
+msgstr "Selecteer voorkeurstaal:"
+
+#: ../../../Views/user_view.php:43
+msgid "API keys"
+msgstr "API sleutels"
+
+#: ../../../Views/user_view.php:46
+msgid "Read only access: "
+msgstr "Alleen lezen rechten:"
+
+#: ../../../Views/user_view.php:49
+#: ../../../Views/user_view.php:57
+msgid "new"
+msgstr "nieuw"
+
+#: ../../../Views/user_view.php:54
+msgid "Write only access: "
+msgstr "Alleen schrijfrechten:"
+
+#: ../../../Views/user_view.php:75
+msgid "Example: Copy this to your web browser or send from a nanode: "
+msgstr "Voorbeeld: Kopiëer dit naar u web browser of stuur het vanaf een nanode:"
+
+#: ../../../Views/user_view.php:77
+msgid "try me"
+msgstr "probeer mij"
+
+#: ../../../Views/user_view.php:84
+msgid "Change password"
+msgstr "Wijzig wachtwoord"
+
+#: ../../../Views/user_view.php:87
+msgid "Old password:"
+msgstr "Oude wachtwoord:"
+
+#: ../../../Views/user_view.php:92
+msgid "New password:"
+msgstr "Nieuw wachtwoord:"
+
+#: ../../../Views/user_view.php:96
+msgid "Change"
+msgstr "Wijzig"
+
+#: ../../../Views/user_view.php:103
+msgid "Account Statistics"
+msgstr "Account Statistieken"
+
+#: ../../../Views/user_view.php:107
+msgid "Disk space use:"
+msgstr "Schrijfruimte ingebruik:"
+
+#: ../../../Views/user_view.php:110
+msgid "Up hits:"
+msgstr "Hoog hits:"
+
+#: ../../../Views/user_view.php:113
+msgid "Down hits:"
+msgstr "Laag hits:"
+
+#: ../../../Views/vis_view.php:34
+msgid "Visualisation API"
+msgstr "Weergave API"
+
+#: ../../../Views/vis_view.php:40
+#: ../../../Views/feed/list_view.php:50
+#: ../../../Views/input/list_view.php:38
+msgid "Name"
+msgstr "Naam"
+
+#: ../../../Views/vis_view.php:40
+msgid "URL"
+msgstr "Adres"
+
+#: ../../../Views/vis_view.php:40
+msgid "View"
+msgstr "Toon"
+
+#: ../../../Views/vis_view.php:45
+msgid "Real-time graph"
+msgstr "Actuele weergave"
+
+#: ../../../Views/vis_view.php:57
+msgid "Raw data graph"
+msgstr "Raw data grafiek"
+
+#: ../../../Views/vis_view.php:69
+#: ../../../Views/feed/feed_view.php:40
+msgid "Bar graph"
+msgstr "Staaf diagram"
+
+#: ../../../Views/vis_view.php:81
+msgid "Smoothie"
+msgstr "Overgang"
+
+#: ../../../Views/vis_view.php:93
+msgid "All time histogram"
+msgstr "Historisch histogram"
+
+#: ../../../Views/vis_view.php:105
+msgid "Daily histogram"
+msgstr "Dagelijks histogram"
+
+#: ../../../Views/vis_view.php:121
+msgid "Zoom"
+msgstr ""
+
+#: ../../../Views/vis_view.php:135
+#, fuzzy
+msgid "Stacked"
+msgstr "KWh/d Gestapeld"
+
+#: ../../../Views/vis_view.php:165
+msgid "Simple zoom"
+msgstr ""
+
+#: ../../../Views/vis_view.php:209
+msgid "Multigraph"
+msgstr "Multigrafiek"
+
+#: ../../../Views/admin/admin_view.php:2
+msgid "Admin panel"
+msgstr "Administratie paneel"
+
+#: ../../../Views/admin/admin_view.php:3
+msgid "Total feed data disk space use: "
+msgstr "Totaal gebruik van hardeschijfruimte voor feeds:"
+
+#: ../../../Views/admin/admin_view.php:5
+msgid "Users"
+msgstr "Gebruikers"
+
+#: ../../../Views/admin/admin_view.php:6
+msgid "registered users"
+msgstr "geregistreerde gebruikers"
+
+#: ../../../Views/admin/admin_view.php:9
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: ../../../Views/admin/admin_view.php:9
+msgid "Up hits"
+msgstr "Hoog hits"
+
+# = Down hits
+#: ../../../Views/admin/admin_view.php:9
+msgid "Dn hits"
+msgstr "Laag hits"
+
+#: ../../../Views/admin/admin_view.php:9
+msgid "Memory use"
+msgstr "Geheugen gebruik"
+
+#: ../../../Views/admin/admin_view.php:9
+msgid "Admin"
+msgstr "Administratie"
+
+#: ../../../Views/feed/feed_view.php:23
+msgid "Select graph type:"
+msgstr "Selecteer grafiek type:"
+
+#: ../../../Views/feed/feed_view.php:28
+msgid "Real-time"
+msgstr "Actueel:"
+
+#: ../../../Views/feed/feed_view.php:33
+msgid "Raw data"
+msgstr "Raw data"
+
+#: ../../../Views/feed/feed_view.php:47
+msgid "Histogram"
+msgstr "Histogram"
+
+#: ../../../Views/feed/feed_view.php:60
+msgid "Feed type"
+msgstr "Bericht type"
+
+#: ../../../Views/feed/feed_view.php:68
+msgid "Undefined"
+msgstr "Ongedefineerd"
+
+#: ../../../Views/feed/feed_view.php:72
+msgid "Real-time data"
+msgstr "Actuele data"
+
+#: ../../../Views/feed/feed_view.php:76
+msgid "Daily data"
+msgstr "Dagelijkse data"
+
+#: ../../../Views/feed/feed_view.php:80
+msgid "Histogram data"
+msgstr "Histogram data"
+
+#: ../../../Views/feed/feed_view.php:85
+#: ../../../Views/feed/feed_view.php:91
+#: ../../../Views/feed/feed_view.php:97
+msgid "Save"
+msgstr "Bewaar"
+
+#: ../../../Views/feed/feed_view.php:87
+msgid "Tag feed"
+msgstr "Label feed"
+
+#: ../../../Views/feed/feed_view.php:93
+msgid "Rename feed"
+msgstr "Hernoem feed"
+
+#: ../../../Views/feed/feed_view.php:101
+msgid "Delete feed?"
+msgstr "Verwijder feed?"
+
+#: ../../../Views/feed/feed_view.php:102
+msgid "Are you sure you want to delete feed: "
+msgstr "Weet u het zeker dat deze feed moet worden verwijderd:"
+
+#: ../../../Views/feed/feed_view.php:106
+msgid "feed/delete"
+msgstr "Bericht/verwijderen"
+
+#: ../../../Views/feed/feed_view.php:108
+msgid "delete"
+msgstr "verwijderen"
+
+#: ../../../Views/feed/feed_view.php:111
+msgid "Notify"
+msgstr "Waarschuw"
+
+#: ../../../Views/feed/feed_view.php:114
+msgid "Set notifications"
+msgstr "Stel notifacties in"
+
+#: ../../../Views/feed/list_view.php:50
+msgid "Tag"
+msgstr "Label"
+
+#: ../../../Views/feed/list_view.php:50
+msgid "Size"
+msgstr "Groote"
+
+#: ../../../Views/feed/list_view.php:50
+#: ../../../Views/input/list_view.php:38
+msgid "Updated"
+msgstr "Actueel"
+
+#: ../../../Views/feed/list_view.php:50
+#: ../../../Views/input/list_view.php:38
+msgid "Value"
+msgstr "Waarde"
+
+#: ../../../Views/feed/list_view.php:77
+msgid "s ago"
+msgstr "is gebeurd"
+
+#: ../../../Views/feed/list_view.php:79
+msgid " mins ago"
+msgstr "min. geleden"
+
+#: ../../../Views/feed/list_view.php:80
+msgid " hours ago"
+msgstr "uren geleden"
+
+#: ../../../Views/feed/list_view.php:81
+msgid "inactive"
+msgstr "inactief"
+
+#: ../../../Views/process/list_view.php:12
+msgid "Input Configuration:   "
+msgstr "Configuratie invoer:"
+
+#: ../../../Views/process/list_view.php:19
+msgid "Order"
+msgstr "Orderen"
+
+#: ../../../Views/process/list_view.php:19
+msgid "Process"
+msgstr "Proces"
+
+#: ../../../Views/process/list_view.php:19
+msgid "Arg"
+msgstr "Argument"
+
+#: ../../../Views/process/list_view.php:31
+msgid "New"
+msgstr "Nieuw"
+
+#: ../../../Views/process/list_view.php:44
+msgid "add"
+msgstr "toevoegen"
+
+#: ../../../Views/process/list_view.php:52
+msgid "Reset process list?"
+msgstr "Herstel proceslijst?"
+
+#: ../../../Views/process/list_view.php:54
+msgid "Reset"
+msgstr "Herstel"
+
+#: ../../../Views/process/list_view.php:64
+msgid "Are you sure you want to delete input: "
+msgstr "Weet u het zeker om deze invoer te verwijderen:"
+
+#: ../../../Views/process/list_view.php:67
+msgid "Delete input?"
+msgstr "Verwijder invoer?"
+
+#: ../../../Views/user/account_block.php:22
+msgid "Logout"
+msgstr "Afmelden"
+
+#: ../../../Views/user/login_block.php:39
+msgid "Email:"
+msgstr "Email:"
+
+#: ../../../Views/user/login_block.php:43
+msgid "Password:"
+msgstr "Wachtwoord:"
+
+#: ../../../Views/user/login_block.php:47
+msgid "Login"
+msgstr "Aanmelden"
+
+#: ../../../Views/user/login_block.php:52
+msgid "Or if your new enter your email and a "
+msgstr "Of geef hierboven een nieuw e-mail adres in met"
+
+#: ../../../Views/user/login_block.php:52
+msgid "password above and click register:"
+msgstr "wachtwoord en click registeer"
+
+#~ msgid "converted feed: "
+#~ msgstr "converteerd bericht:"
+
+#~ msgid "feed: "
+#~ msgstr "bericht:"
+
+#~ msgid " already converted"
+#~ msgstr "al geconverteerd"
+
+#~ msgid "Missing index added to: "
+#~ msgstr "Ontbrekende inhoudsopgave toegevoegd aan:"
+
+#~ msgid "Embed this graph"
+#~ msgstr "Embed deze grafiek"
+
+#~ msgid "Realtime: "
+#~ msgstr "Actueel:"
+
+#~ msgid "Raw data: "
+#~ msgstr "Raw data:"
+
+#~ msgid "With Level-of-detail zooming"
+#~ msgstr "Met detail nivo inzoomen"
+
+#~ msgid "Bar graph view: "
+#~ msgstr "Staaf grafiek tonen:"
+
+#~ msgid "All-time histogram graph view: "
+#~ msgstr "Historisch grafisch overzicht:"
+
+#~ msgid "English"
+#~ msgstr "Engels"
+
+#~ msgid "Spanish"
+#~ msgstr "Spaans"
+
+#~ msgid "Set"
+#~ msgstr "Wijzig"
+
+#~ msgid "kWh/d Zoomer"
+#~ msgstr "Kwh/d Inzoom"
+
+#~ msgid "updated"
+#~ msgstr "actueel"
+
+#~ msgid "Save current configuration"
+#~ msgstr "Sla huidige configuratie op"
+
+#~ msgid "Select Feeds"
+#~ msgstr "Selecteer berichten"
+
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgid "Fill"
+#~ msgstr "Vul"
+
+#~ msgid "Loading...  please wait about 5s"
+#~ msgstr "Laden...wacht ongeveer 5 sec."
+
+#~ msgid "Loading..."
+#~ msgstr "Laden..."
+
+#~ msgid "2 Months"
+#~ msgstr "2 Maand"
+
+#~ msgid "Month"
+#~ msgstr "Maand"
+
+#~ msgid "Week"
+#~ msgstr "Week"
+
+#~ msgid "Day"
+#~ msgstr "Dag"
+
+#~ msgid "Hour"
+#~ msgstr "Uur"
+
+#~ msgid "Left vs"
+#~ msgstr "Links vs"
+
+#~ msgid "Loading a feed can take time.. "
+#~ msgstr "Het laden kan enige tijd duren..."
+
+#~ msgid "Load feed on the left for fill and right for line only"
+#~ msgstr "Laad berichten links vol en rechts alleen lijn"
+
+#~ msgid "1 day"
+#~ msgstr "1 dag"
+
+#~ msgid "12 hours"
+#~ msgstr "12 uren"
+
+#~ msgid "1 hour"
+#~ msgstr "1 uur"
+
+#~ msgid ": Hover on bar for info, press to zoom in"
+#~ msgstr ": Zweef over staaf voor info, druk om in te zoomen"
+
+#~ msgid "Date / Time"
+#~ msgstr "Datum / Tijd"
+
+#~ msgid "(Hover for info, press to zoom in. Histogram: "
+#~ msgstr "(zweef voor info, druk om in te zoomen. Histogram:"
+
+#~ msgid "Total: "
+#~ msgstr "Total:"
+
+#~ msgid " kWh : pounds"
+#~ msgstr "kWh: euro's"
+
+#~ msgid " a week, pounds"
+#~ msgstr "een week, euro's"
+
+#~ msgid " a year | Unit price: pounds"
+#~ msgstr "een jaar | Prijs per eenheid"
+
+#~ msgid ""
+#~ "The whw parameter must be set in the dashboard to a histogram feed id."
+#~ msgstr ""
+#~ "De kWH parameter moet in het dashboard aan een Feed nummer worden "
+#~ "gekoppeld."
+
+#~ msgid "Last:"
+#~ msgstr "Laatste:"
+
+#~ msgid "Graph"
+#~ msgstr "Grafisch"

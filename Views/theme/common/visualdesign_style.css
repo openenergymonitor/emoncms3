@@ -1,79 +1,13 @@
-
 .dial {
-	width:200px;
-	height:160px;
-	background-image: url("./dial.png");
-	background-repeat: no-repeat
-  }
-  
+  width: 200px;
+  height: 160px;
+  background-image: url("./dial.png");
+  background-repeat: no-repeat
+}
+
 .graph {
-	width:200px;
-	height:190px;
-	background-image: url("./graph.png");
-	background-repeat: no-repeat
-  }
-
-.e3header {
-  border: 1px solid #2A2A2A;
-  
-  background-color: #464646;
-  background-image:-ms-linear-gradient(bottom,#373737,#464646 5px);
-  background-image:-moz-linear-gradient(bottom,#373737,#464646 5px);
-  background-image:-o-linear-gradient(bottom,#373737,#464646 5px);
-  background-image:-webkit-gradient(linear,left bottom,left top,from(#373737),to(#464646));
-  background-image:-webkit-linear-gradient(bottom,#373737,#464646 5px);
-  background-image:linear-gradient(bottom,#373737,#464646 5px);
-  
-  color: #CCCCCC;
-  direction: ltr;
-  font: 13px/28px sans-serif;
-  height: 28px;
-  left: 0;
-  min-width: 600px;
-  position: fixed;
-  top: 0;
-  width: 100%;
- z-index: 100;
-}
-
-#e3top-menu {
-  display: block;
-  list-style: none outside none;
-  margin: 0;
-  padding: 0;
-}
-
-#e3top-menu li {
-  list-style: none outside none;
-  margin: 0;
-  padding: 0;
-  border-right: 1px solid #555555;
-  float: left;
-}
-
-#e3top-menu li:hover {
-  background-color: #3A3A3A;
-  background-image: -moz-linear-gradient(center bottom , #3A3A3A, #222222);
-  color: #FAFAFA;
-}
-
-#e3top-menu li a {
-  display: block;
-  height: 28px;
-  margin: 0;
-  padding: 0 12px;
-  border-right: 1px solid #333333;
-  text-decoration: none;
-  color: #CCCCCC;
-  font: 13px/28px sans-serif;
-  text-shadow: 0 -1px 0 #444444;
-  text-transform: none;
-}
-
-#e3top-menu li:hover > a {
-    color: #FAFAFA;
-}
-
-#e3top-menu li:hover > a {
-    color: #FAFAFA;
+  width: 200px;
+  height: 190px;
+  background-image: url("./graph.png");
+  background-repeat: no-repeat
 }

@@ -30,22 +30,24 @@
     if ($action == 'new' && $session['write']) // write access required
     {
       new_dashboards($session['userid']);
-      $output['message'] = "dashboards new";
+      $output['message'] = _("dashboards new");
 	}
 
-    if ($action == 'delete' && $session['write']) // write access required
+	elseif ($action == 'delete' && $session['write']) // write access required
     {
       $output['message'] = delete_dashboards(intval($_POST["content"]));
       //$output['message'] = "dashboards delete";
 	}
 	
     // /dashboard/view
-    if ($action == 'view' && $session['read'])
+	elseif ($action == 'view' && $session['read'])
     {
+      if ($session['read']) $apikey = get_apikey_read($session['userid']);
       $dashboards = get_dashboards($session['userid']); 
 	  
       //if ($format == 'json') $output['content'] = json_encode($dashboard);
-      if ($format == 'html') $output['content'] = view("dashboards_view.php", array('dashboards'=>$dashboards));
+
+      if ($format == 'html') $output['content'] = view("dashboards_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards));
     }
 
     return $output;
