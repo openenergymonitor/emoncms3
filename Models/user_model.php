@@ -53,7 +53,8 @@ function get_user($userid)
     $user = array(
       'username' => $row['username'],
       'apikey_read' => $row['apikey_read'],
-      'apikey_write' => $row['apikey_write']
+      'apikey_write' => $row['apikey_write'],
+      'lang' => $row['lang']
     );
   }
   return $user;
@@ -211,4 +212,12 @@ function set_user_lang($userid, $lang)
 {
   db_query("UPDATE users SET lang = '$lang' WHERE id='$userid'");
 }
+
+function get_user_lang($userid)
+{
+	$result = db_query("SELECT lang FROM users WHERE id = '$userid';");
+	$row = db_fetch_array($result);
+	return $row['lang'];
+}
+
 ?>

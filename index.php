@@ -73,11 +73,14 @@ else
   $format = "html";
 }
 
-$lang = preg_replace('/[a-z]/', '', $_GET['lang']);
+//$lang = preg_replace('/[a-z]/', '', $_GET['lang']);
+// Getting the language browser
+//$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
 // Multilanguage support
 // Set language from url attribute lang and save it to the session variable
 // The view function in core.inc.php then selects the view depending on the lang session variable
-
+/*
 $lang = $_GET['lang'];
 if ($lang == 'en')
   $_SESSION['lang'] = $lang;
@@ -85,7 +88,9 @@ else
   $lang = null;
 if (!$_SESSION['lang'])
   $_SESSION['lang'] = "en";
+  
 // Set default language
+*/
 
 if ($_GET['embed'])
   $embed = 1;
@@ -122,11 +127,11 @@ if ($format == 'html')
 
   if ($session['write'])
   {
-    $user = view_lang("user/account_block.php", array());
-    $menu = view_lang("menu_view.php", array());
+    $user = view("user/account_block.php", array());
+    $menu = view("menu_view.php", array());
   }
   if (!$session['read'])
-    $content = view_lang("user/login_block.php", array());
+    $content = view("user/login_block.php", array());
   print view("theme/wp/theme.php", array(
     'menu' => $menu.$addmenu,
     'user' => $user,

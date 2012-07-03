@@ -44,6 +44,7 @@ function show_dashboard()
 
 function initialize_dashboard()
 {
+  draw_vis();
 }
 
 // update function
@@ -295,6 +296,14 @@ function draw_graphs()
         });
       }
     });
+  });
+}
+
+function draw_vis()
+{
+  $('.zoom').each(function(index)
+  {
+    $(this).html('<iframe frameborder="0" marginheight="0" marginwidth="0" scrolling="no" src="'+path+'vis/zoom?embed=1&power='+$(this).attr("power")+'&kwhd='+$(this).attr("kwhd")+'" style="width:'+$(this).attr("width")+'; height:'+$(this).attr("height")+';"></iframe>');
   });
 }
 
