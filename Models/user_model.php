@@ -26,7 +26,7 @@ function user_apikey_session_control($apikey_in)
     $session['read'] = 1;
     $session['write'] = 0;
     $session['admin'] = 0;
-    $session['lang'] = "en";
+ //   $session['lang'] = "en";
   }
 
   $userid = get_apikey_write_user($apikey_in);
@@ -37,7 +37,7 @@ function user_apikey_session_control($apikey_in)
     $session['read'] = 1;
     $session['write'] = 1;
     $session['admin'] = 0;
-    $session['lang'] = "en";
+   // $session['lang'] = "en";
 
   }
   //----------------------------------------------------

@@ -15,7 +15,7 @@
   function multigraph_controller()
   {
     require "Models/multigraph_model.php";
-    global $action, $format, $lang, $session;
+    global $action, $format, $session;
 
     $output['content'] = "";
     $output['message'] = "";

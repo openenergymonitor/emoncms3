@@ -101,7 +101,7 @@ $session['read'] = $_SESSION['read'];
 $session['write'] = $_SESSION['write'];
 $session['userid'] = $_SESSION['userid'];
 $session['admin'] = $_SESSION['admin'];
-$session['lang'] = $_SESSION['lang'];
+//$session['lang'] = $_SESSION['lang'];
 
 if ($_GET['apikey'])
 {

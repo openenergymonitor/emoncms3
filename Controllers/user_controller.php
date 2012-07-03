@@ -209,11 +209,13 @@
     // http://yoursite/emoncms/user/setlang
     //---------------------------------------------------------------------------------------------------------
     elseif ($action == 'setlang' && $session['write'])
-    {
+    {	
       set_user_lang($session['userid'],$_GET['lang']);
+	  set_lang_by_user($_GET['lang']);
       if ($format == 'html')
       {
-      	header("Location: view");
+      	//header("Location: view");
+      	$output['content'] = view("user_view.php", array('user' => $user, 'lang'=>$_GET['lang'], 'stats'=>$stats));
       }
     }
 

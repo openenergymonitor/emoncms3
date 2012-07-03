@@ -9,6 +9,8 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
+global $path;
+
 function lang_http_accept()
 {
 	$langs = array();
@@ -35,7 +37,7 @@ function lang_http_accept()
 function set_lang($language)
 {
 	$lang = $language[0];
-	putenv("LC_ALL=".$lang);
+	putenv("LC_ALL=$lang");
 	setlocale(LC_ALL, $lang);
 	bindtextdomain("app", "./locale");
 	textdomain("app");	
@@ -43,7 +45,7 @@ function set_lang($language)
 
 function set_lang_by_user($lang)
 {
-	putenv("LC_ALL=".$lang);
+	putenv("LC_ALL=$lang");
 	setlocale(LC_ALL, $lang);
 	bindtextdomain("app", "./locale");
 	textdomain("app");	
