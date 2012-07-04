@@ -23,6 +23,9 @@ emon_session_start();
 ini_set('display_errors', 'on');
 error_reporting(E_ALL ^ E_NOTICE);
 
+require_once("Includes/locale.php");
+
+
 // Thanks to seanwg for https addition
 $ssl = $_SERVER['HTTPS'];
 echo $ssl;
@@ -73,24 +76,6 @@ else
   $format = "html";
 }
 
-//$lang = preg_replace('/[a-z]/', '', $_GET['lang']);
-// Getting the language browser
-//$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-
-// Multilanguage support
-// Set language from url attribute lang and save it to the session variable
-// The view function in core.inc.php then selects the view depending on the lang session variable
-/*
-$lang = $_GET['lang'];
-if ($lang == 'en')
-  $_SESSION['lang'] = $lang;
-else
-  $lang = null;
-if (!$_SESSION['lang'])
-  $_SESSION['lang'] = "en";
-  
-// Set default language
-*/
 
 if ($_GET['embed'])
   $embed = 1;
@@ -101,7 +86,8 @@ $session['read'] = $_SESSION['read'];
 $session['write'] = $_SESSION['write'];
 $session['userid'] = $_SESSION['userid'];
 $session['admin'] = $_SESSION['admin'];
-//$session['lang'] = $_SESSION['lang'];
+
+set_lang_by_user(get_user_lang($session['userid']));
 
 if ($_GET['apikey'])
 {

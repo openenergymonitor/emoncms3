@@ -11,6 +11,8 @@ http://openenergymonitor.org
 
 global $path;
 
+require_once('./Includes/debug/FirePHPCore/fb.php');
+
 function lang_http_accept()
 {
 	$langs = array();
@@ -41,14 +43,20 @@ function set_lang($language)
 	setlocale(LC_ALL, $lang);
 	bindtextdomain("app", "./locale");
 	textdomain("app");	
+	fb("Poniendo ".$lang);
 }
 
 function set_lang_by_user($lang)
 {
 	putenv("LC_ALL=$lang");
-	setlocale(LC_ALL, $lang);
+	if (!setlocale(LC_ALL, $lang)) 
+		fb("error".$lang);
+	else 
+		fb("ok");
 	bindtextdomain("app", "./locale");
-	textdomain("app");	
+	textdomain("app");
+		
+	//fb("Poniendo1 ".$lang.getenv("LC_ALL"));
 }
 
 ?>
