@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-03 14:56+0100\n"
-"PO-Revision-Date: 2012-07-03 15:02+0100\n"
+"POT-Creation-Date: 2012-07-04 12:43+0100\n"
+"PO-Revision-Date: 2012-07-04 12:48+0100\n"
 "Last-Translator: ilde <i.martinez@ismsolar.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,6 +11,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: ../../../index.php:121
@@ -362,7 +365,7 @@ msgstr ""
 
 #: ../../../Views/vis_view.php:34
 msgid "Visualisation API"
-msgstr ""
+msgstr "API para visualización"
 
 #: ../../../Views/vis_view.php:40
 #: ../../../Views/feed/list_view.php:50
