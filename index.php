@@ -122,11 +122,11 @@ if ($format == 'html')
 
   if ($session['write'])
   {
-    $user = view_lang("user/account_block.php", array());
-    $menu = view_lang("menu_view.php", array());
+    $user = view("user/account_block.php", array());
+    $menu = view("menu_view.php", array());
   }
   if (!$session['read'])
-    $content = view_lang("user/login_block.php", array());
+    $content = view("user/login_block.php", array());
   print view("theme/wp/theme.php", array(
     'menu' => $menu.$addmenu,
     'user' => $user,

@@ -53,7 +53,8 @@ function get_user($userid)
     $user = array(
       'username' => $row['username'],
       'apikey_read' => $row['apikey_read'],
-      'apikey_write' => $row['apikey_write']
+      'apikey_write' => $row['apikey_write'],
+      'lang' => $row['lang']
     );
   }
   return $user;

@@ -35,7 +35,7 @@
 
     if ($action == 'list' && $session['write'])
     {
-      $output['content'] = view_lang("vis_view.php", array('apikey'=>$apikey));
+      $output['content'] = view("vis_view.php", array('apikey'=>$apikey));
     }
 
 

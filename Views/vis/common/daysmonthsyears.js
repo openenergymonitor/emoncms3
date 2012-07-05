@@ -96,11 +96,12 @@
 
           for (var z in data)
           {
+            if (data[z][0]>1000000){
             lyear = year;
    
             d.setTime(data[z][0]);		// Get the date of the day
             year = d.getFullYear();		// Get the year of the day
-
+                       console.log(data[z][0]);
             if (year!=lyear && z!=0)		// We sum all days until we find a new year
             { 
               var tmp = [];
@@ -115,7 +116,7 @@
 
             sum += parseFloat(data[z][1]);	// Add the day kwh/d value to the sum
             s++;				// Sum count
-            
+            }
 
           } 
 
