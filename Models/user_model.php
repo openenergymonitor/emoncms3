@@ -119,6 +119,16 @@ function create_user($username, $password)
   db_query("INSERT INTO users ( username, password, salt ,apikey_read, apikey_write ) VALUES ( '$username' , '$hash' , '$salt', '$apikey_read', '$apikey_write' );");
 }
 
+function ckeck_for_user_directory($username)
+{
+	// Get the user id
+	$id = get_user_id($username);
+	
+	// Check if the user directory exists and create it
+	if (!is_dir("./users/$id"))
+		mkdir("./users/$id", 0700);	
+}
+
 function user_logon($username, $password)
 {
   $result = db_query("SELECT id,password,admin,salt,lang FROM users WHERE username = '$username'");
@@ -141,6 +151,10 @@ function user_logon($username, $password)
     $_SESSION['write'] = 1;
     $_SESSION['admin'] = $userData['admin'];
     $_SESSION['lang'] = $userData['lang'];
+	
+	// If user is created or login we check here if the user directory was created on server
+	ckeck_for_user_directory($username);
+		
     $success = 1;
   }
   return $success;

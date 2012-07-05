@@ -68,8 +68,7 @@ $config['unallowed_dirs']= array('_thumbs','.CDN_ACCESS_LOGS', 'cloudservers');
  *	FEATURED OPTIONS
  *	for Vhost or outside files folder
  */
-// $config['doc_root'] = '/home/user/userfiles'; // No end slash
-
+$config['doc_root'] = $_SERVER['DOCUMENT_ROOT'] . '/emoncms3/users/' . $_SESSION['userid']; // No end slash
 
 /**
  *	Optional Plugin

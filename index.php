@@ -17,7 +17,7 @@
 define('EMONCMS_EXEC', 1);
 
 // Load the debug library for debug purposes ( http://www.firephp.org/ )
-require_once('./Includes/debug/FirePHPCore/fb.php');
+require_once('./Includes/debug/FirePHPCore/fb.php'); ob_start();
 
 require "Includes/core.inc.php";
 emon_session_start();
