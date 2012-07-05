@@ -134,13 +134,13 @@ global $path, $session;
       <form action="../vis/comparison" method="get">
         <td><?php echo _("kWh/d Comparison"); ?></td>
         <td style="text-align:right">vis/comparison?power=
-        <input name="power" type='text' style='width:50px' />
+        <input class="apitext" name="power" type='text' style='width:50px' />
         &amp;kwhd=
-        <input name="kwhd" type='text' style='width:50px' />
+        <input class="apitext" name="kwhd" type='text' style='width:50px' />
         &amp;currency=
-        <input name="currency" type='text' style='width:50px' />
+        <input class="apitext" name="currency" type='text' style='width:50px' />
         &amp;pricekwh=
-        <input name="pricekwh" type='text' style='width:50px' />
+        <input class="apitext" name="pricekwh" type='text' style='width:50px' />
         </td>
         <td>
         <input type="submit" value=">" class="button05"/>
