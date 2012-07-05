@@ -53,9 +53,6 @@
       }
       else
       {
-      	$lang = get_user_lang($_SESSION['userid']);
-		set_lang_by_user($lang);
-		
       	$output['message'] = _("Welcome, you are now logged in");
     	if ($format == 'html'){
       		header("Location: ../dashboards/view");
@@ -200,7 +197,6 @@
       $user = get_user($session['userid']);
       $stats = get_statistics($session['userid']);
 
-	fb($user);
       if ($format == 'json') $output['content'] = json_encode($user);
       if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
@@ -213,7 +209,8 @@
 	{
 		// Store userlang in database
 		set_user_lang($session['userid'],$_GET['lang']);
-	  	
+
+		// Reload the page	  	
 		if ($format == 'html')
 		{
 			header("Location: view");

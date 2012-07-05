@@ -16,8 +16,6 @@ global $path, $session;
 
 require "Includes/forms.php";
 
-		// Set user lang
-	//  	set_lang_by_user($user['lang']);
 ?>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">

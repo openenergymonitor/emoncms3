@@ -9,10 +9,6 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
-global $path;
-
-require_once('./Includes/debug/FirePHPCore/fb.php');
-
 function lang_http_accept()
 {
 	$langs = array();
@@ -38,25 +34,29 @@ function lang_http_accept()
 
 function set_lang($language)
 {
-	$lang = $language[0];
-	putenv("LC_ALL=$lang");
-	setlocale(LC_ALL, $lang);
-	bindtextdomain("app", "./locale");
-	textdomain("app");	
-	fb("Poniendo ".$lang);
+	// set the first browser selected language
+	// TODO: iterate to find a suitable available language
+	set_lang_by_user($language[0]);
 }
 
 function set_lang_by_user($lang)
 {
 	putenv("LC_ALL=$lang");
-	if (!setlocale(LC_ALL, $lang)) 
-		fb("error".$lang);
-	else 
-		fb("ok");
+	setlocale(LC_ALL, $lang); 
 	bindtextdomain("app", "./locale");
 	textdomain("app");
-		
-	//fb("Poniendo1 ".$lang.getenv("LC_ALL"));
+}
+
+function set_emoncms_lang($userid)
+{
+	// Get language from database user
+	$lang = get_user_lang($userid);
+	
+	// If no language defined use the language browser
+	if ($lang == '')
+		set_lang(lang_http_accept());
+	else 
+		set_lang_by_user($lang);
 }
 
 ?>
