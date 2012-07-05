@@ -68,8 +68,10 @@ $config['unallowed_dirs']= array('_thumbs','.CDN_ACCESS_LOGS', 'cloudservers');
  *	FEATURED OPTIONS
  *	for Vhost or outside files folder
  */
-$config['doc_root'] = $_SERVER['DOCUMENT_ROOT'] . '/emoncms3/users/' . $_SESSION['userid']; // No end slash
-
+$config['doc_path'] = '/emoncms3/users/'.$_SESSION['userid'];
+//$config['doc_path'] = '/emoncms3/users/1'; //.($_SESSION['userid']!='/'?$_SESSION['userid']:'')
+//$config['doc_root'] = $_SERVER['DOCUMENT_ROOT'] . '/emoncms3/users/' . $_SESSION['userid']; // No end slash
+$config['doc_root'] = $_SERVER['DOCUMENT_ROOT'] . $config['doc_path'];
 /**
  *	Optional Plugin
  *	rsc: Rackspace Cloud Files: http://www.rackspace.com/cloud/cloud_hosting_products/files/
