@@ -18,17 +18,19 @@ if ($_SESSION['editmode'] == TRUE) {
 }
 ?>		
 
-<a class="brand" href="<?php echo $GLOBALS['path'] . $viewl; ?>"><img id="emoncms-logo" src="<?php echo $logo; ?>" />Emoncms3</a>
+<ul class="nav">
+
+<li><a style="padding:5px;" href="<?php echo $GLOBALS['path'] . $viewl; ?>"><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
 
 <?php if ($_SESSION['editmode'] == TRUE) { ?>
-<ul class="nav">
   <li><a href='<?php echo $GLOBALS['path']; ?>input/list'><?php echo _("Inputs"); ?></a></li>
   <li><a href='<?php echo $GLOBALS['path']; ?>feed/list'><?php echo _("Feeds"); ?></a></li>
   <li><a href='<?php echo $GLOBALS['path']; ?>vis/list'><?php echo _("Vis"); ?></a></li>
   <li><a href='<?php echo $GLOBALS['path']; ?>user/view'><?php echo _("Account"); ?></a></li>
   <li><a href='<?php echo $GLOBALS['path']; ?>dashboards/view'><?php echo _("Dashboards"); ?></a></li>
-</ul>
 <?php } ?>
+
+</ul>
 
 <ul class="nav pull-right">
   <li>
