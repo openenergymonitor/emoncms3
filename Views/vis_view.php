@@ -129,6 +129,24 @@ global $path, $session;
         </td>
       </form>
     </tr>
+    
+    <tr>
+      <form action="../vis/comparison" method="get">
+        <td><?php echo _("kWh/d Comparison"); ?></td>
+        <td style="text-align:right">vis/comparison?power=
+        <input class="apitext" name="power" type='text' style='width:50px' />
+        &amp;kwhd=
+        <input class="apitext" name="kwhd" type='text' style='width:50px' />
+        &amp;currency=
+        <input class="apitext" name="currency" type='text' style='width:50px' />
+        &amp;pricekwh=
+        <input class="apitext" name="pricekwh" type='text' style='width:50px' />
+        </td>
+        <td>
+        <input type="submit" value=">" class="button05"/>
+        </td>
+      </form>
+    </tr>
 
     <tr>
       <form action="stacked" method="get">

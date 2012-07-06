@@ -82,6 +82,11 @@
     {
       $output['content'] = view("vis/zoom/zoom.php", array());
     }
+    
+    if ($action == 'comparison' && $session['read'])
+    {
+      $output['content'] = view("vis/comparison/comparison.php", array());
+    }
 
     if ($action == 'stacked' && $session['read'])
     {
