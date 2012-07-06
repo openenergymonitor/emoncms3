@@ -34,6 +34,7 @@ class Filemanager {
   	  	  'Size'=>null
     );
     if (isset($this->config['doc_root'])) {
+    	$this->doc_path = $this->config['doc_path'];
       $this->doc_root = $this->config['doc_root'];
     } else {
       $this->doc_root = $_SERVER['DOCUMENT_ROOT'];
@@ -89,7 +90,8 @@ class Filemanager {
     $this->get_file_info();
 
     $array = array(
-			'Path'=> $this->get['path'],
+			//'Path'=> $this->get['path'],
+			'Path'=> $this->doc_path.$this->get['path'],
 			'Filename'=>$this->item['filename'],
 			'File Type'=>$this->item['filetype'],
 			'Preview'=>$this->item['preview'],

@@ -26,7 +26,7 @@ function user_apikey_session_control($apikey_in)
     $session['read'] = 1;
     $session['write'] = 0;
     $session['admin'] = 0;
-    $session['lang'] = "en";
+ //   $session['lang'] = "en";
   }
 
   $userid = get_apikey_write_user($apikey_in);
@@ -37,7 +37,7 @@ function user_apikey_session_control($apikey_in)
     $session['read'] = 1;
     $session['write'] = 1;
     $session['admin'] = 0;
-    $session['lang'] = "en";
+   // $session['lang'] = "en";
 
   }
   //----------------------------------------------------
@@ -119,6 +119,16 @@ function create_user($username, $password)
   db_query("INSERT INTO users ( username, password, salt ,apikey_read, apikey_write ) VALUES ( '$username' , '$hash' , '$salt', '$apikey_read', '$apikey_write' );");
 }
 
+function ckeck_for_user_directory($username)
+{
+	// Get the user id
+	$id = get_user_id($username);
+	
+	// Check if the user directory exists and create it
+	if (!is_dir("./users/$id"))
+		mkdir("./users/$id", 0700);	
+}
+
 function user_logon($username, $password)
 {
   $result = db_query("SELECT id,password,admin,salt,lang FROM users WHERE username = '$username'");
@@ -141,6 +151,10 @@ function user_logon($username, $password)
     $_SESSION['write'] = 1;
     $_SESSION['admin'] = $userData['admin'];
     $_SESSION['lang'] = $userData['lang'];
+	
+	// If user is created or login we check here if the user directory was created on server
+	ckeck_for_user_directory($username);
+		
     $success = 1;
   }
   return $success;
@@ -212,4 +226,12 @@ function set_user_lang($userid, $lang)
 {
   db_query("UPDATE users SET lang = '$lang' WHERE id='$userid'");
 }
+
+function get_user_lang($userid)
+{
+	$result = db_query("SELECT lang FROM users WHERE id = '$userid';");
+	$row = db_fetch_array($result);
+	return $row['lang'];
+}
+
 ?>

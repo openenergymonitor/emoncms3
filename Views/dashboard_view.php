@@ -54,25 +54,18 @@ Dashboard HTML
         <div id="dashboardeditor"></div>
       </div>
       <div id="tabs-2">
-        <form id="confform" action="">
-          <?php echo _("Dashboard name: "); ?>
+        <form id="well" action="">
+          <label><?php echo _("Dashboard name: "); ?></label>
           <input type="text" name="name" value='<?php echo $ds_name; ?>' />
-          <br>
-          <?php echo _("Description: "); ?>           <textarea name="description"><?php echo $ds_description; ?></textarea>
-          <br>
-          <?php echo _("Main dashboard: "); ?>
+          <label><?php echo _("Description: "); ?></label>           
+          <textarea name="description"><?php echo $ds_description; ?></textarea>
+          <label><?php echo _("Main dashboard: "); ?></label>
           <input type="checkbox" name="main" value="main" <?php
           if ($ds_main == true)
             echo "checked";
           ?> />
-          <br>
-        </form>
-        <!--Theme:
-        <select>
-        <option value="" selected>dark</option>
-        <option value="">wp</option>
-        </select>-->
-        <input type="submit" name="submit" class="button" id="submit_btn" value="Save configuration" />
+        <br>        
+        <input type="submit" name="submit" class="btn" id="submit_btn" value="Save configuration" />
         </form>
       </div>
       <div id="tabs-3">

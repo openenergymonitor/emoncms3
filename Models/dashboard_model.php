@@ -93,7 +93,7 @@ function build_dashboardmenu($userid)
   // Only show menu if more than one dashboard were created
   if ($k>1)
   {
-    $topmenu = '';
+    $topmenu = '<ul class="nav">';
 
     while ($k>0) {
       $row = $dsb[$k-1];
@@ -101,5 +101,5 @@ function build_dashboardmenu($userid)
       $topmenu = $topmenu.'<li><a href="./run&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
     }
   }
-  return $topmenu;
+  return $topmenu."</ul>";
 }

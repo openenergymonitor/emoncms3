@@ -36,7 +36,7 @@
     return $content;
   }
 
-  function view_lang($filepath, array $args)
+ /* function view_lang($filepath, array $args)
   {
     global $session;
     $lang = $session['lang'];
@@ -46,7 +46,7 @@
     include "Views/$lang/$filepath";   
     $content = ob_get_clean();    
     return $content;
-  }
+  }*/
 
   function validate_json($json)
   {
@@ -67,6 +67,11 @@
             true//http_only
     );
     session_start();
+  }
+  
+  function get_theme_path()
+  {
+  	return $GLOBALS['path']."/Views/theme/".$GLOBALS['theme'];
   }
 
 ?>
