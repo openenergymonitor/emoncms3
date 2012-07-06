@@ -1,14 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+	All Emoncms code is released under the GNU Affero General Public License.
+	See COPYRIGHT.txt and LICENSE.txt.
 
-  <!--
-   All Emoncms code is released under the GNU Affero General Public License.
-   See COPYRIGHT.txt and LICENSE.txt.
-
-    ---------------------------------------------------------------------
-    Emoncms - open source energy visualisation
+	---------------------------------------------------------------------
+	Emoncms - open source energy visualisation
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
-  -->
+-->
 
 <?php
 global $embed, $session;
@@ -34,53 +33,46 @@ global $embed, $session;
 		<title>Emoncms</title>
 	</head>
 	<body>
-		<div class="wrapper">
 		<!------------------------------------------------------
 		HEADER
 		------------------------------------------------------->
-		<?php if (!$embed) { ?>
-		<div class="header">
-			<ul id="top-menu">
-
-			<?php
-			if ($_SESSION['editmode'] == TRUE) {
-				$logo = get_theme_path() . "/emoncms logo off.png";
-				$viewl = 'dashboard/run';
-			} else {
-				$logo = get_theme_path() . "/emoncms logo.png";
-				$viewl = 'dashboards/view';
-			}
-			?>
-
-			<li>
-				<a style="padding:0" href='<?php echo $GLOBALS['path'] . $viewl; ?>'><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
-				<?php print $menu; ?>
-			</ul>
-		<div><?php echo $user; ?></div>
-		</div>
-		<div style='clear:both; height:28px;'></div>
-		<?php } ?>
+		<?php if ($path != $menu) { ?>
+			<?php if (!$embed) { ?>
+				<div class="navbar">
+	    			<div class="navbar-inner">
+	    				<div class="container">
+	    					<?php
+	    						echo $menu;
+	    						if (!$_SESSION['editmode'])	echo $addmenu; 
+	    					?> 
+						</div>
+	    			</div>
+	    		</div>
+			<?php } 
+		} ?>				
+		
 		<?php if ($message) { ?>     	
-		<div id="message"><?php print $message; ?></div>
+			<div class="alert alert-error">
+    			<button class="close" data-dismiss="alert">×</button>
+    			<strong>Error! </strong><?php print $message; ?>
+    		</div>
 		<?php } ?>
-      <!------------------------------------------------------
-      CONTENT
-      ------------------------------------------------------->
-      <div class="content">
-          <?php print $content; ?>
-      </div>
+		
+		<!------------------------------------------------------
+		CONTENT
+		------------------------------------------------------->     	
+		<div class="content">
+		<?php print $content; ?>
+		</div>
 
-      <div style="clear:both; height:37px;"></div> 
-    </div> <!----- END OF WRAPPER --->
+		<div style="clear:both; height:37px;"></div> 
+		</div> <!----- END OF WRAPPER --->
 
-    <!------------------------------------------------------
-    FOOTER
-    ------------------------------------------------------->
-    <?php if (!$embed) { ?>
-	<div class="footer">
-      Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a>
-    </div>
-    <?php } ?>
-    
+		<!------------------------------------------------------
+		FOOTER
+		------------------------------------------------------->
+    	<?php if (!$embed) { ?>
+		<div class="footer">Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a></div>
+    	<?php } ?>   
 	</body>
 </html>

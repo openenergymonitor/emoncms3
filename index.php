@@ -102,12 +102,13 @@ if ($format == 'json') {
 if ($format == 'html') {
 
 	if ($session['write']) {
-		$user = view("user/account_block.php", array());
+		//$user = view("user/account_block.php", array());
 		$menu = view("menu_view.php", array());
 	}
 	if (!$session['read'])
 		$content = view("user/login_block.php", array());
-	echo view("theme/".$GLOBALS['theme']."/theme.php", array('menu' => $menu . $addmenu, 'user' => $user, 'content' => $content, 'message' => $message));
+	
+	echo view("theme/".$GLOBALS['theme']."/theme.php", array('menu' => $menu, 'addmenu' => $addmenu, 'user' => $user, 'content' => $content, 'message' => $message));
 }
 
 if ($controller == "api" && $action == "post") {
