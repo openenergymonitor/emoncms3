@@ -12,10 +12,16 @@ http://openenergymonitor.org
 // Create combo with available languages
 // todo: set selected value from database and set language
 function SelectLanguageForm($selectedlang) {
-	echo '<form action="setlang" method="get">';
+	echo '<form class="well form-inline" action="setlang" method="get">';
+	echo '<span class="help-block">'._("Select preferred language").'</span>';	
 	echo '<select name="lang">';
 	
 	if ($handle = opendir('locale')) {
+		if ($selectedlang=='')
+			echo '<option selected value="">'._("AUTODETECTLANGUAGE").'</option>';
+		else 
+			echo '<option value="">'._("AUTODETECTLANGUAGE").'</option>';
+		
 	    while (false !== ($entry = readdir($handle))) 
     		if (is_dir('locale/'.$entry) && ($entry !='.') && ($entry!='..'))
 			{
@@ -24,14 +30,13 @@ function SelectLanguageForm($selectedlang) {
 				else
         			echo '<option value="'.$entry.'">'._($entry).'</option>';
 			}
-			/*<!-- <option selected value="en"><?php echo _("English"); ?></option>
-            <option value="es"><?php echo _("Spanish"); ?></option>*/
-         
-    closedir($handle);
-	echo '</select>';
-	} /* endif */
+			         
+    	closedir($handle);
+		echo '</select>';
+		
+	} 
 	
-	echo '<input type="submit" value="Set" class="button05">';
+	echo '<input type="submit" value="Set" class="btn">';
 	echo '</form>';
 }
 

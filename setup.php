@@ -1,6 +1,3 @@
-  
-<h3>Emoncms Database Setup Script</h3>
-<p><a href="index.php" ><?php echo _("Continue to emoncms") ?></a></p>
 <?php
 
 /*
@@ -12,7 +9,27 @@
  Part of the OpenEnergyMonitor project:
  http://openenergymonitor.org
  */
+?>
 
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+	<meta charset="UTF-8" />
+	<title>Emoncms3 setup</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="Emoncms3 script setup" />
+	<link href="Includes/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>	
+<body>	
+	<script src="Includes/lib/jquery-ui-1.8.19.custom/js/jquery-1.7.1.min.js"></script>
+	<script src="Includes/lib/bootstrap/js/bootstrap.min.js"></script>	
+	
+	<h1><?php echo _("Emoncms database setup script") ?></h1>
+	<p>
+		<a class="btn" href="index.php" ><?php echo _("Continue to emoncms") ?></a>
+	</p>
+	
+<?php
 //=====================================================
 $runnable = TRUE;
 // ENABLE THIS ONCE TO FORCE UPDATE
@@ -275,3 +292,5 @@ function upgrade2012063000()
 	setdatabaseversion("2012063000");
 }
 ?>
+</body>
+</html>

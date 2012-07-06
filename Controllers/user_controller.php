@@ -26,6 +26,8 @@
   // no direct access
   defined('EMONCMS_EXEC') or die('Restricted access');
 
+	require_once "Includes/locale.php";
+
   function user_controller()
   {
     global $session, $action,$format;
@@ -50,11 +52,11 @@
       	$output['message'] = _("Invalid username or password");
       }
       else
-      {
-        $output['message'] = _("Welcome, you are now logged in");
-        if ($format == 'html'){
-      	  header("Location: ../dashboards/view");
-	}
+      {	      	
+      	$output['message'] = _("Welcome, you are now logged in");
+    	if ($format == 'html'){
+      		header("Location: ../dashboards/view");
+		}
       }
     }
 
@@ -199,18 +201,21 @@
       if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
 
-    //---------------------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------------------
     // SET USERS DEFAULT LANGUAGE
     // http://yoursite/emoncms/user/setlang
     //---------------------------------------------------------------------------------------------------------
     elseif ($action == 'setlang' && $session['write'])
-    {
-      set_user_lang($session['userid'],$_GET['lang']);
-      if ($format == 'html')
-      {
-      	header("Location: view");
-      }
-    }
+	{
+		// Store userlang in database
+		set_user_lang($session['userid'],$_GET['lang']);
+
+		// Reload the page	  	
+		if ($format == 'html')
+		{
+			header("Location: view");
+		}
+	}
 
     return $output;
   }
