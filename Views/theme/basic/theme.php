@@ -32,7 +32,7 @@ global $embed, $session;
 		<link rel="apple-touch-icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
 		<title>Emoncms</title>
 	</head>
-	<body style="padding-top:60px;">
+	<body <?php if (!$embed) { ?> style="padding-top:60px;" <?php } ?> >
 		<!------------------------------------------------------
 		HEADER
 		------------------------------------------------------->
