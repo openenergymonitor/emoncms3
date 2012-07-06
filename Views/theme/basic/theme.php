@@ -32,13 +32,13 @@ global $embed, $session;
 		<link rel="apple-touch-icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
 		<title>Emoncms</title>
 	</head>
-	<body>
+	<body style="padding-top:40px;">
 		<!------------------------------------------------------
 		HEADER
 		------------------------------------------------------->
 		<?php if ($path != $menu) { ?>
 			<?php if (!$embed) { ?>
-				<div class="navbar">
+				<div class="navbar navbar-fixed-top">
 	    			<div class="navbar-inner">
 	    				<div class="container">
 	    					<?php
