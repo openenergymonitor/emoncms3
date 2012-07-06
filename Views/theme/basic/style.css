@@ -287,7 +287,7 @@ table.catlist th {
   background-image: -webkit-linear-gradient(top,#F9F9F9,#ECECEC);
   background-image: linear-gradient(top,#F9F9F9,#ECECEC);
   border-bottom: 1px solid #DFDFDF;
-  border-top: 1px solid #FFFFFF;
+  border-top: 1px solid #DFDFDF;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 

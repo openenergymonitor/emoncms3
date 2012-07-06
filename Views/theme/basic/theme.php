@@ -32,7 +32,7 @@ global $embed, $session;
 		<link rel="apple-touch-icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
 		<title>Emoncms</title>
 	</head>
-	<body style="padding-top:40px;">
+	<body style="padding-top:60px;">
 		<!------------------------------------------------------
 		HEADER
 		------------------------------------------------------->
@@ -52,9 +52,9 @@ global $embed, $session;
 		} ?>				
 		
 		<?php if ($message) { ?>     	
-			<div class="alert alert-error">
+		<div class="alert alert-info">
     			<button class="close" data-dismiss="alert">×</button>
-    			<strong>Error! </strong><?php print $message; ?>
+    			<strong>Message: </strong><?php print $message; ?>
     		</div>
 		<?php } ?>
 		

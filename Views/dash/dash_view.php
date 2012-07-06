@@ -9,7 +9,7 @@
         <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/cylinder.js"></script>
 
 <style>
-.container {
+.whitecontainer {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #E5E5E5;
   box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.7);
@@ -71,7 +71,7 @@
       "options":["topfeed","botfeed"]
     },
 
-    "container": 
+    "whitecontainer": 
     {
       "offsetx":0,"offsety":0,"width":200,"height":200,
       "options":["name"],
