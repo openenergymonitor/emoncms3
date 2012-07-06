@@ -29,8 +29,6 @@ if ($_SESSION['editmode'] == TRUE) {
   <li><a href='<?php echo $GLOBALS['path']; ?>user/view'><?php echo _("Account"); ?></a></li>
   <li><a href='<?php echo $GLOBALS['path']; ?>dashboards/view'><?php echo _("Dashboards"); ?></a></li>
 <?php } ?>
-
-  <li><a href='<?php echo $GLOBALS['path']; ?>user/logout'><?php echo _("Logout"); ?></a></li>
 </ul>
 
 <ul class="nav pull-right">
