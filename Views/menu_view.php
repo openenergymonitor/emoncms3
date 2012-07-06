@@ -30,14 +30,10 @@ if ($_SESSION['editmode'] == TRUE) {
   <li><a href='<?php echo $GLOBALS['path']; ?>dashboards/view'><?php echo _("Dashboards"); ?></a></li>
 <?php } ?>
 
+  <li><a href='<?php echo $GLOBALS['path']; ?>user/logout'><?php echo _("Logout"); ?></a></li>
 </ul>
 
 <ul class="nav pull-right">
-  <li>
-    <form class="navbar-form" action="<?php echo $GLOBALS['path']; ?>user/logout" method="post">
-      <input type="hidden" name="CSRF_token" value="<?php echo $_SESSION['CSRF_token'];?>" />
-      <input type="submit" value="<?php echo _("Logout");?>" />  						
-    </form>
-  </li>
+ <li><a href='<?php echo $GLOBALS['path']; ?>user/logout'><?php echo _("Logout"); ?></a></li>
 </ul>  		
 
