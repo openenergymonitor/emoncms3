@@ -22,43 +22,6 @@ require "Includes/forms.php";
   <h2><?php echo _("User: "); ?><?php echo $user['username']; ?></h2>
   <?php SelectLanguageForm($user['lang']); ?>
     
-  <div class="well">
-
-    <h3><?php echo _("API keys"); ?></h3>
-    <table>
-      <tr>
-        <td><b><?php echo _("Read only access: "); ?></b><?php echo $user['apikey_read']; ?></td>
-        <td>
-        <form action="newapiread" method="post">
-          <input type="submit" class="btn btn-warning" value="<?php echo _("new"); ?>" class="button05">
-        </form></td>
-      </tr>
-
-      <tr>
-        <td><b><?php echo _("Write only access: "); ?></b><?php echo $user['apikey_write']; ?></td>
-        <td>
-        <form action="newapiwrite" method="post">
-          <input type="submit" class="btn btn-warning" value="<?php echo _("new"); ?>" class="button05">
-        </form></td>
-      </tr>
-    </table>
-
-  </div>
-
-  <?php
-  $testjson = $GLOBALS['path']."api/post?apikey=".$user['apikey_write']."&json={power:252.4,temperature:15.4}"
-  ?>
-  <div class="well">
-    <p>
-      <b>API url: </b><?php echo $GLOBALS['path']; ?>a
-      pi/post
-    </p>
-    <p>
-      <b><?php echo _("Example: Copy this to your web browser or send from a nanode: "); ?></b>
-      <br/>
-      <?php echo $testjson; ?> <a href="<?php echo $testjson; ?>"><?php echo _("try me"); ?></a>
-    </p>
-  </div>
 
     
     <form class="well" action="changepass" method="post">

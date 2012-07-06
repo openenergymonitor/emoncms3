@@ -35,7 +35,8 @@
 
     if ($action == 'list' && $session['write'])
     {
-      $output['content'] = view("vis_view.php", array('apikey'=>$apikey));
+      $user = get_user($session['userid']);
+      $output['content'] = view("api_view.php", array('user' => $user));
     }
 
 
