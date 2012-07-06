@@ -80,6 +80,9 @@ $session['admin'] = $_SESSION['admin'];
 // Set user language on every page load to avoid apache multithread setlocale error
 set_emoncms_lang($session['userid']);
 
+// Set emoncms theme TODO: get from user preferences
+$GLOBALS['theme'] = 'basic';
+
 if ($_GET['apikey']) {
 	$session = user_apikey_session_control($_GET['apikey']);
 }
@@ -104,7 +107,7 @@ if ($format == 'html') {
 	}
 	if (!$session['read'])
 		$content = view("user/login_block.php", array());
-	print view("theme/wp/theme.php", array('menu' => $menu . $addmenu, 'user' => $user, 'content' => $content, 'message' => $message));
+	echo view("theme/".$GLOBALS['theme']."/theme.php", array('menu' => $menu . $addmenu, 'user' => $user, 'content' => $content, 'message' => $message));
 }
 
 if ($controller == "api" && $action == "post") {
