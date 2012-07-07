@@ -43,7 +43,7 @@
 
       </div>
 
-        <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
+        <h3 style="position:absolute; top:20px; left:50px;"><span id="stats"></span></h3>
     </div>
 <?php if (!$embed) echo "</div>"; ?>
 
