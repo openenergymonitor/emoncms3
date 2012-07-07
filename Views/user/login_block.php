@@ -44,8 +44,12 @@ set_lang($accepted_languages);
 				<br/>
 				<br/>
 				<div style="background-color:#ddd;">
-				<table style="font-size:13px"><tr><td width="265px">
-				<?php echo _("Or if you are new enter your email and password above and click register"); ?></td><td><input type="submit" class="btn btn-info" value="Register" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" /></td></tr></table>
+				<table style="font-size:13px">
+					<tr>
+						<td width="265px">
+							<?php echo _("Or if you are new enter your email and password above and click register"); ?></td><td><input type="submit" class="btn btn-info" value="Register" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />	
+						</td>
+					</tr>
 				</table>
 				<?php echo $error; ?>
 			</form>

@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-05 16:31+0100\n"
-"PO-Revision-Date: 2012-07-05 16:32+0100\n"
-"Last-Translator: ilde <i.martinez@ismsolar.com>\n"
+"POT-Creation-Date: 2012-07-07 21:05+0100\n"
+"PO-Revision-Date: 2012-07-07 21:07+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,15 +16,19 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../index.php:95
+#: ../../../index.php:98
 msgid "Sorry, you need a valid apikey or be logged in to see this page"
 msgstr "Lo siento, necesitas una clave válida o estar loggeado para ver esta página"
 
-#: ../../../setup.php:3
+#: ../../../setup.php:27
+msgid "Emoncms database setup script"
+msgstr ""
+
+#: ../../../setup.php:29
 msgid "Continue to emoncms"
 msgstr "Continuar a emoncms"
 
-#: ../../../setup.php:30
+#: ../../../setup.php:47
 msgid "to run script uncomment runnable"
 msgstr "para ejecutar el código descomenta 'runnable'"
 
@@ -121,14 +125,18 @@ msgstr "Te has desconectado"
 
 #: ../../../Controllers/user_controller.php:163
 msgid "Invalid token"
-msgstr ""
+msgstr "Token inválido"
 
 #: ../../../Controllers/vis_controller.php:24
 msgid "Restricted access"
 msgstr "Acceso restringido"
 
-#: ../../../Includes/forms.php:20
-#: ../../../Includes/forms.php:22
+#: ../../../Includes/forms.php:16
+msgid "Select preferred language"
+msgstr "Selecciona el idioma por defecto:"
+
+#: ../../../Includes/forms.php:21
+#: ../../../Includes/forms.php:23
 msgid "AUTODETECTLANGUAGE"
 msgstr "Browser language"
 
@@ -205,11 +213,100 @@ msgstr "histograma"
 msgid "average"
 msgstr "| Media:"
 
+#: ../../../Views/api_view.php:33
+msgid "API Helper"
+msgstr ""
+
+#: ../../../Views/api_view.php:39
+msgid "Read only access: "
+msgstr "Acceso de solo lectura:"
+
+#: ../../../Views/api_view.php:42
+#: ../../../Views/api_view.php:50
+msgid "new"
+msgstr "nuevo"
+
+#: ../../../Views/api_view.php:47
+msgid "Write only access: "
+msgstr "Acceso de solo escritura"
+
+#: ../../../Views/api_view.php:55
+msgid "Post API"
+msgstr ""
+
+#: ../../../Views/api_view.php:64
+msgid "Example: Copy this to your web browser or send from your monitoring hardware: "
+msgstr ""
+
+#: ../../../Views/api_view.php:66
+msgid "try me"
+msgstr "pruébame"
+
+#: ../../../Views/api_view.php:70
+msgid "Visualisation API"
+msgstr "API para visualización"
+
+#: ../../../Views/api_view.php:76
+msgid "Name"
+msgstr "Nombre:"
+
+#: ../../../Views/api_view.php:76
+msgid "URL"
+msgstr "Enlace"
+
+#: ../../../Views/api_view.php:76
+msgid "View"
+msgstr "Vista"
+
+#: ../../../Views/api_view.php:81
+msgid "Real-time graph"
+msgstr "Gráfico en tiempo real"
+
+#: ../../../Views/api_view.php:93
+msgid "Raw data graph"
+msgstr "Gráfico de datos brutos"
+
+#: ../../../Views/api_view.php:105
+msgid "Bar graph"
+msgstr "Gráfico de barras"
+
+#: ../../../Views/api_view.php:117
+msgid "Smoothie"
+msgstr ""
+
+#: ../../../Views/api_view.php:129
+msgid "All time histogram"
+msgstr "Histograma completo"
+
+#: ../../../Views/api_view.php:141
+msgid "Daily histogram"
+msgstr "Histograma diario"
+
+#: ../../../Views/api_view.php:157
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../../../Views/api_view.php:171
+msgid "kWh/d Comparison"
+msgstr ""
+
+#: ../../../Views/api_view.php:189
+msgid "Stacked"
+msgstr ""
+
+#: ../../../Views/api_view.php:219
+msgid "Simple zoom"
+msgstr ""
+
+#: ../../../Views/api_view.php:263
+msgid "Multigraph"
+msgstr "Gráfico múltiple"
+
 #: ../../../Views/confirm_view.php:15
 msgid "Yes please"
 msgstr "Sí"
 
-#: ../../../Views/dashboard_run_errornomain.php:11
+#: ../../../Views/dashboard_run_errornomain.php:14
 msgid "No main dashboard defined. Please, check main dashboard in a dashboard configuration."
 msgstr ""
 
@@ -233,39 +330,39 @@ msgstr "Vista previa"
 msgid "Dashboard name: "
 msgstr "Nombre del panel:"
 
-#: ../../../Views/dashboard_view.php:61
+#: ../../../Views/dashboard_view.php:60
 msgid "Description: "
 msgstr "Descripción"
 
-#: ../../../Views/dashboard_view.php:63
+#: ../../../Views/dashboard_view.php:62
 msgid "Main dashboard: "
 msgstr "Panel principal:"
 
-#: ../../../Views/menu_view.php:17
+#: ../../../Views/menu_view.php:26
 #: ../../../Views/input/list_view.php:16
 msgid "Inputs"
 msgstr "Entradas"
 
-#: ../../../Views/menu_view.php:18
+#: ../../../Views/menu_view.php:27
 #: ../../../Views/feed/list_view.php:21
 msgid "Feeds"
 msgstr "Fuentes"
 
-#: ../../../Views/menu_view.php:19
-msgid "Vis"
+#: ../../../Views/menu_view.php:28
+msgid "Dashboards"
+msgstr "Paneles"
+
+#: ../../../Views/menu_view.php:29
+msgid "API"
 msgstr ""
 
-#: ../../../Views/menu_view.php:20
+#: ../../../Views/menu_view.php:35
 msgid "Account"
 msgstr "Cuenta"
 
-#: ../../../Views/menu_view.php:21
-msgid "Dashboard"
-msgstr "Panel"
-
-#: ../../../Views/menu_view.php:22
-msgid "Dashboards"
-msgstr "Paneles"
+#: ../../../Views/menu_view.php:37
+msgid "Logout"
+msgstr "Desconectar"
 
 #: ../../../Views/notify_settings_view.php:2
 msgid "Notify settings"
@@ -299,133 +396,41 @@ msgstr ""
 msgid "Edit mail settings"
 msgstr "Editar preferencias de correo"
 
-#: ../../../Views/user_view.php:23
+#: ../../../Views/user_view.php:20
 msgid "User: "
-msgstr "Usuario"
+msgstr "Usuario:"
 
-#: ../../../Views/user_view.php:28
-msgid "Language"
-msgstr "Lenguaje"
-
-#: ../../../Views/user_view.php:31
-msgid "Select preferred language:"
-msgstr "Selecciona el idioma por defecto:"
-
-#: ../../../Views/user_view.php:44
-msgid "API keys"
-msgstr "Claves API"
-
-#: ../../../Views/user_view.php:47
-msgid "Read only access: "
-msgstr "Acceso de solo lectura:"
-
-#: ../../../Views/user_view.php:50
-#: ../../../Views/user_view.php:58
-msgid "new"
-msgstr "nuevo"
-
-#: ../../../Views/user_view.php:55
-msgid "Write only access: "
-msgstr "Acceso de solo escritura"
-
-#: ../../../Views/user_view.php:76
-msgid "Example: Copy this to your web browser or send from a nanode: "
-msgstr ""
-
-#: ../../../Views/user_view.php:78
-msgid "try me"
-msgstr "pruébame"
-
-#: ../../../Views/user_view.php:85
+#: ../../../Views/user_view.php:26
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: ../../../Views/user_view.php:88
+#: ../../../Views/user_view.php:28
 msgid "Old password:"
 msgstr "Contraseña antigua:"
 
-#: ../../../Views/user_view.php:93
+#: ../../../Views/user_view.php:31
 msgid "New password:"
 msgstr "Nueva contraseña:"
 
-#: ../../../Views/user_view.php:97
+#: ../../../Views/user_view.php:34
 msgid "Change"
 msgstr "Cambiar"
 
-#: ../../../Views/user_view.php:104
+#: ../../../Views/user_view.php:38
 msgid "Account Statistics"
 msgstr "Estadísticas de Cuenta"
 
-#: ../../../Views/user_view.php:108
+#: ../../../Views/user_view.php:42
 msgid "Disk space use:"
 msgstr "Uso de espacio en disco:"
 
-#: ../../../Views/user_view.php:111
+#: ../../../Views/user_view.php:50
 msgid "Up hits:"
 msgstr ""
 
-#: ../../../Views/user_view.php:114
+#: ../../../Views/user_view.php:58
 msgid "Down hits:"
 msgstr ""
-
-#: ../../../Views/vis_view.php:34
-msgid "Visualisation API"
-msgstr "API para visualización"
-
-#: ../../../Views/vis_view.php:40
-#: ../../../Views/feed/list_view.php:50
-#: ../../../Views/input/list_view.php:38
-msgid "Name"
-msgstr "Nombre:"
-
-#: ../../../Views/vis_view.php:40
-msgid "URL"
-msgstr "Enlace"
-
-#: ../../../Views/vis_view.php:40
-msgid "View"
-msgstr "Vista"
-
-#: ../../../Views/vis_view.php:45
-msgid "Real-time graph"
-msgstr "Gráfico en tiempo real"
-
-#: ../../../Views/vis_view.php:57
-msgid "Raw data graph"
-msgstr "Gráfico de datos brutos"
-
-#: ../../../Views/vis_view.php:69
-#: ../../../Views/feed/feed_view.php:40
-msgid "Bar graph"
-msgstr "Gráfico de barras"
-
-#: ../../../Views/vis_view.php:81
-msgid "Smoothie"
-msgstr ""
-
-#: ../../../Views/vis_view.php:93
-msgid "All time histogram"
-msgstr "Histograma completo"
-
-#: ../../../Views/vis_view.php:105
-msgid "Daily histogram"
-msgstr "Histograma diario"
-
-#: ../../../Views/vis_view.php:121
-msgid "Zoom"
-msgstr ""
-
-#: ../../../Views/vis_view.php:135
-msgid "Stacked"
-msgstr ""
-
-#: ../../../Views/vis_view.php:165
-msgid "Simple zoom"
-msgstr ""
-
-#: ../../../Views/vis_view.php:209
-msgid "Multigraph"
-msgstr "Gráfico múltiple"
 
 #: ../../../Views/admin/admin_view.php:2
 msgid "Admin panel"
@@ -611,29 +616,30 @@ msgstr "Estás seguro de que quieres borrar la entrada:"
 msgid "Delete input?"
 msgstr "¿Borrar entrada?"
 
-#: ../../../Views/user/account_block.php:22
-msgid "Logout"
-msgstr "Desconectar"
-
-#: ../../../Views/user/login_block.php:39
+#: ../../../Views/user/login_block.php:35
 msgid "Email:"
 msgstr "Correo:"
 
-#: ../../../Views/user/login_block.php:43
+#: ../../../Views/user/login_block.php:39
 msgid "Password:"
 msgstr "Contraseña"
 
-#: ../../../Views/user/login_block.php:47
+#: ../../../Views/user/login_block.php:43
 msgid "Login"
 msgstr "Entrar"
 
-#: ../../../Views/user/login_block.php:52
-msgid "Or if your new enter your email and a "
+#: ../../../Views/user/login_block.php:50
+msgid "Or if you are new enter your email and password above and click register"
 msgstr ""
 
-#: ../../../Views/user/login_block.php:52
-msgid "password above and click register:"
-msgstr ""
+#~ msgid "Dashboard"
+#~ msgstr "Panel"
+
+#~ msgid "Language"
+#~ msgstr "Lenguaje"
+
+#~ msgid "API keys"
+#~ msgstr "Claves API"
 
 #~ msgid "converted feed: "
 #~ msgstr "fuente convertida:"
