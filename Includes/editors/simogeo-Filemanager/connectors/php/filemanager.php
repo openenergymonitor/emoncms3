@@ -13,6 +13,9 @@
  *  @author		Simon Georget <simon (at) linea21 (dot) com>
  *	@copyright	Authors
  */
+
+session_start();
+ 
 require_once('./inc/filemanager.inc.php');
 require_once('filemanager.config.php');
 require_once('filemanager.class.php');

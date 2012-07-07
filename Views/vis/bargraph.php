@@ -51,24 +51,37 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
-  $('#graph').width($('#graph_bound').width());
-  $('#graph').height($('#graph_bound').height());
-
   var feedid = "<?php echo $feedid; ?>";
   var feedname = "<?php echo $feedname; ?>";
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
+  var embed = <?php echo $embed; ?>;
+
+  $('#graph').width($('#graph_bound').width());
+  $('#graph').height($('#graph_bound').height());
+  if (embed) $('#graph').height($(window).height());
 
   var timeWindow = (3600000*24.0*7);				//Initial time window
   var start = ((new Date()).getTime())-timeWindow;		//Get start time
   var end = (new Date()).getTime();				//Get end time
 
+  var graph_data = [];
   vis_feed_data();
+
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plot();
+  });
 
   function vis_feed_data()
   {
-    var graph_data = get_feed_data(feedid,start,end,500);
+    graph_data = get_feed_data(feedid,start,end,500);
+    plot();
+  }
 
+  function plot()
+  {
     var plot = $.plot($("#graph"), [{data: graph_data, bars: { show: true, align: "center", barWidth: 3600*18*1000, fill: true}}], {
       grid: { show: true, hoverable: true, clickable: true },
       xaxis: { mode: "time", min: start, max: end },

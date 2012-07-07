@@ -35,7 +35,8 @@
 
     if ($action == 'list' && $session['write'])
     {
-      $output['content'] = view("vis_view.php", array('apikey'=>$apikey));
+      $user = get_user($session['userid']);
+      $output['content'] = view("api_view.php", array('user' => $user));
     }
 
 
@@ -81,6 +82,11 @@
     if ($action == 'zoom' && $session['read'])
     {
       $output['content'] = view("vis/zoom/zoom.php", array());
+    }
+    
+    if ($action == 'comparison' && $session['read'])
+    {
+      $output['content'] = view("vis/comparison/comparison.php", array());
     }
 
     if ($action == 'stacked' && $session['read'])

@@ -52,10 +52,7 @@
       	$output['message'] = _("Invalid username or password");
       }
       else
-      {
-      	$lang = get_user_lang($_SESSION['userid']);
-		set_lang_by_user($lang);
-		
+      {	      	
       	$output['message'] = _("Welcome, you are now logged in");
     	if ($format == 'html'){
       		header("Location: ../dashboards/view");
@@ -204,20 +201,21 @@
       if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
 
-    //---------------------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------------------
     // SET USERS DEFAULT LANGUAGE
     // http://yoursite/emoncms/user/setlang
     //---------------------------------------------------------------------------------------------------------
     elseif ($action == 'setlang' && $session['write'])
-    {	
-      set_user_lang($session['userid'],$_GET['lang']);
-	  set_lang_by_user($_GET['lang']);
-      if ($format == 'html')
-      {
-      	//header("Location: view");
-      	$output['content'] = view("user_view.php", array('user' => $user, 'lang'=>$_GET['lang'], 'stats'=>$stats));
-      }
-    }
+	{
+		// Store userlang in database
+		set_user_lang($session['userid'],$_GET['lang']);
+
+		// Reload the page	  	
+		if ($format == 'html')
+		{
+			header("Location: view");
+		}
+	}
 
     return $output;
   }

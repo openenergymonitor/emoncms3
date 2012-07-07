@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-03 14:56+0100\n"
-"PO-Revision-Date: 2012-07-03 15:02+0100\n"
+"POT-Creation-Date: 2012-07-05 16:31+0100\n"
+"PO-Revision-Date: 2012-07-05 16:32+0100\n"
 "Last-Translator: ilde <i.martinez@ismsolar.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,9 +11,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
-#: ../../../index.php:121
+#: ../../../index.php:95
 msgid "Sorry, you need a valid apikey or be logged in to see this page"
 msgstr "Lo siento, necesitas una clave válida o estar loggeado para ver esta página"
 
@@ -76,53 +79,58 @@ msgstr "La lista de procesos ha sido reseteada"
 msgid "Invalid username or password"
 msgstr "Usuario o contraseña inválidos"
 
-#: ../../../Controllers/user_controller.php:59
+#: ../../../Controllers/user_controller.php:56
 msgid "Welcome, you are now logged in"
 msgstr "Bienvenido, ya estás conectado"
 
-#: ../../../Controllers/user_controller.php:80
+#: ../../../Controllers/user_controller.php:77
 msgid "Sorry username already exists"
 msgstr "El usuario ya existe"
 
-#: ../../../Controllers/user_controller.php:84
+#: ../../../Controllers/user_controller.php:81
 msgid "Please enter a username that is 4 to 30 characters long"
 msgstr "Por favor introduzca un nombre de usuario de 4 a 40 caracteres"
 
-#: ../../../Controllers/user_controller.php:88
+#: ../../../Controllers/user_controller.php:85
 msgid "Please enter a password that is 4 to 30 characters long"
 msgstr "Por favor introduzca una contraseña de 4 a 30 caracteres"
 
-#: ../../../Controllers/user_controller.php:94
+#: ../../../Controllers/user_controller.php:91
 msgid "Your new account has been created"
 msgstr "Tu nueva cuenta ha sido creada"
 
-#: ../../../Controllers/user_controller.php:112
+#: ../../../Controllers/user_controller.php:109
 msgid "Your password has been changed"
 msgstr "Tu contraseña ha sido cambiada"
 
-#: ../../../Controllers/user_controller.php:116
+#: ../../../Controllers/user_controller.php:113
 msgid "Invalid old password"
 msgstr "Contraseña antigua errónea"
 
-#: ../../../Controllers/user_controller.php:128
+#: ../../../Controllers/user_controller.php:125
 msgid "New read apikey: "
 msgstr "Nueva clave de lectura (API):"
 
-#: ../../../Controllers/user_controller.php:144
+#: ../../../Controllers/user_controller.php:141
 msgid "New write apikey: "
 msgstr "Nueva clave de escritura (API):"
 
-#: ../../../Controllers/user_controller.php:161
+#: ../../../Controllers/user_controller.php:158
 msgid "You are logged out"
 msgstr "Te has desconectado"
 
-#: ../../../Controllers/user_controller.php:166
+#: ../../../Controllers/user_controller.php:163
 msgid "Invalid token"
 msgstr ""
 
 #: ../../../Controllers/vis_controller.php:24
 msgid "Restricted access"
 msgstr "Acceso restringido"
+
+#: ../../../Includes/forms.php:20
+#: ../../../Includes/forms.php:22
+msgid "AUTODETECTLANGUAGE"
+msgstr "Browser language"
 
 #: ../../../Models/mail_model.php:34
 msgid "Message successfully sent!"
@@ -233,29 +241,29 @@ msgstr "Descripción"
 msgid "Main dashboard: "
 msgstr "Panel principal:"
 
-#: ../../../Views/menu_view.php:13
+#: ../../../Views/menu_view.php:17
 #: ../../../Views/input/list_view.php:16
 msgid "Inputs"
 msgstr "Entradas"
 
-#: ../../../Views/menu_view.php:14
+#: ../../../Views/menu_view.php:18
 #: ../../../Views/feed/list_view.php:21
 msgid "Feeds"
 msgstr "Fuentes"
 
-#: ../../../Views/menu_view.php:15
+#: ../../../Views/menu_view.php:19
 msgid "Vis"
 msgstr ""
 
-#: ../../../Views/menu_view.php:16
+#: ../../../Views/menu_view.php:20
 msgid "Account"
 msgstr "Cuenta"
 
-#: ../../../Views/menu_view.php:17
+#: ../../../Views/menu_view.php:21
 msgid "Dashboard"
 msgstr "Panel"
 
-#: ../../../Views/menu_view.php:18
+#: ../../../Views/menu_view.php:22
 msgid "Dashboards"
 msgstr "Paneles"
 
@@ -291,78 +299,78 @@ msgstr ""
 msgid "Edit mail settings"
 msgstr "Editar preferencias de correo"
 
-#: ../../../Views/user_view.php:22
+#: ../../../Views/user_view.php:23
 msgid "User: "
 msgstr "Usuario"
 
-#: ../../../Views/user_view.php:27
+#: ../../../Views/user_view.php:28
 msgid "Language"
 msgstr "Lenguaje"
 
-#: ../../../Views/user_view.php:30
+#: ../../../Views/user_view.php:31
 msgid "Select preferred language:"
 msgstr "Selecciona el idioma por defecto:"
 
-#: ../../../Views/user_view.php:43
+#: ../../../Views/user_view.php:44
 msgid "API keys"
 msgstr "Claves API"
 
-#: ../../../Views/user_view.php:46
+#: ../../../Views/user_view.php:47
 msgid "Read only access: "
 msgstr "Acceso de solo lectura:"
 
-#: ../../../Views/user_view.php:49
-#: ../../../Views/user_view.php:57
+#: ../../../Views/user_view.php:50
+#: ../../../Views/user_view.php:58
 msgid "new"
 msgstr "nuevo"
 
-#: ../../../Views/user_view.php:54
+#: ../../../Views/user_view.php:55
 msgid "Write only access: "
 msgstr "Acceso de solo escritura"
 
-#: ../../../Views/user_view.php:75
+#: ../../../Views/user_view.php:76
 msgid "Example: Copy this to your web browser or send from a nanode: "
 msgstr ""
 
-#: ../../../Views/user_view.php:77
+#: ../../../Views/user_view.php:78
 msgid "try me"
 msgstr "pruébame"
 
-#: ../../../Views/user_view.php:84
+#: ../../../Views/user_view.php:85
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: ../../../Views/user_view.php:87
+#: ../../../Views/user_view.php:88
 msgid "Old password:"
 msgstr "Contraseña antigua:"
 
-#: ../../../Views/user_view.php:92
+#: ../../../Views/user_view.php:93
 msgid "New password:"
 msgstr "Nueva contraseña:"
 
-#: ../../../Views/user_view.php:96
+#: ../../../Views/user_view.php:97
 msgid "Change"
 msgstr "Cambiar"
 
-#: ../../../Views/user_view.php:103
+#: ../../../Views/user_view.php:104
 msgid "Account Statistics"
 msgstr "Estadísticas de Cuenta"
 
-#: ../../../Views/user_view.php:107
+#: ../../../Views/user_view.php:108
 msgid "Disk space use:"
 msgstr "Uso de espacio en disco:"
 
-#: ../../../Views/user_view.php:110
+#: ../../../Views/user_view.php:111
 msgid "Up hits:"
 msgstr ""
 
-#: ../../../Views/user_view.php:113
+#: ../../../Views/user_view.php:114
 msgid "Down hits:"
 msgstr ""
 
 #: ../../../Views/vis_view.php:34
 msgid "Visualisation API"
-msgstr ""
+msgstr "API para visualización"
 
 #: ../../../Views/vis_view.php:40
 #: ../../../Views/feed/list_view.php:50

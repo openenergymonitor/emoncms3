@@ -68,5 +68,10 @@
     );
     session_start();
   }
+  
+  function get_theme_path()
+  {
+  	return $GLOBALS['path']."/Views/theme/".$GLOBALS['theme'];
+  }
 
 ?>
