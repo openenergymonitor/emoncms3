@@ -7,7 +7,7 @@ http://openenergymonitor.org/emon/node/600
 
   global $path, $embed;
   $feedid2 = $_GET["feedid2"];
-  $feedid = $_GET["feedid"];
+  $feedid = $_GET["feedid"]?$_GET["feedid"]:0;
   $ufac = $_GET["ufac"];
   $apikey = $_GET["apikey"];
 ?>

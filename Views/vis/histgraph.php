@@ -24,6 +24,8 @@
 <?php
   $apikey = $_GET["apikey"];
   global $path, $embed;
+
+  if (!$feedid) $feedid = 0;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -55,12 +57,21 @@
      //----------------------------------------------------------------------------------------
      // Get window width and height from page size
      //----------------------------------------------------------------------------------------
+     var embed = <?php echo $embed; ?>;
      $('#graph').width($('#graph_bound').width());
      $('#graph').height($('#graph_bound').height());
+     if (embed) $('#graph').height($(window).height());
      //----------------------------------------------------------------------------------------
 
      var graph_data = [];                              //data array declaration
      vis_feed_data(apikey,feedid);
+     if (feedid == 0) plotGraph();
+
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plotGraph();
+  });
 
      //--------------------------------------------------------------------------------------
      // Plot flot graph
@@ -84,7 +95,6 @@
      function vis_feed_data(apikey,feedid)
      {
        $('#loading').show();
-       $("#stat").html("Loading...");
        $.ajax({                                       //Using JQuery and AJAX
          url: path+'feed/histogram.json',                         
          data: "&apikey="+apikey+"&id="+feedid+"&start=0&end=0&res=1",

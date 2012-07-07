@@ -23,7 +23,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
 
     var page_width = $(canvas).attr("width");
     var page_height = $(canvas).attr("height");
-
+    $("#when-selected").hide();
     draw();
     scan();
     widget_buttons();
@@ -145,7 +145,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
 
     for (z in select)
     {
-      widget_html += "<select id='"+z+"' class='widgetmenu' style='width:120px; margin:5px;'><option>Visualisations:</option>"+select[z]+"</select>";
+      widget_html += "<select id='"+z+"' class='widgetmenu' style='width:120px; margin:5px;'><option title=1 >"+z+":</option>"+select[z]+"</select>";
     }
     $("#widget-buttons").html(widget_html);
 
@@ -156,7 +156,8 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
 
     $(".widgetmenu").click(function(event) { 
       create = ($(this).find("option:selected").text());
-      if (create && create!="Visualisations:") edit_mode = false;
+      var title = $(this).find("option:selected").attr("title");
+      if (create && title!=1) edit_mode = false;
     });
 
   }
@@ -178,7 +179,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
     var mx = event.layerX;
     var my = event.layerY;
     if (edit_mode) selected_box = onbox(mx,my);
-    if (!selected_box)  $("#testo").hide();
+    if (!selected_box)  {$("#testo").hide(); $("#when-selected").hide();}
 
     draw()
   });
@@ -194,6 +195,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
       if (!selected_box) selected_box = onbox(mx,my);
 
       if (selected_box) {
+      $("#when-selected").show();
       resize = boxlist[selected_box];
 
       var rightedge = resize['left']+resize['width'];
@@ -216,6 +218,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
         add_widget(mx,my,create);
         create = null;
         $('option:selected', 'select').removeAttr('selected');
+        $("#when-selected").show();
       }
     }
   });
@@ -252,6 +255,12 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
         boxlist[selected_box]['left'] = (snap(mx-boxlist[selected_box]['width']/2));
         boxlist[selected_box]['top'] = (snap(my-boxlist[selected_box]['height']/2));
       }
+
+   if (bottedge>parseInt($("#page-container").css("height"))){
+     $("#page-container").css("height",bottedge);
+     $("#can").attr("height",bottedge);
+     page_height = bottedge;
+   }
 
       draw();
     }

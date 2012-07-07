@@ -49,7 +49,7 @@
    var feedid = <?php echo $feedid; ?>;				//Fetch table name
    var path = "<?php echo $path; ?>";
    var apikey = "<?php echo $apikey; ?>";	
-
+  var embed = <?php echo $embed; ?>;
    //----------------------------------------------------------------------------------------
    // These start time and end time set the initial graph view window 
    //----------------------------------------------------------------------------------------
@@ -59,6 +59,9 @@
 
    $('#graph').width($('#graph_bound').width());
    $('#graph').height($('#graph_bound').height());
+   if (embed) $('#graph').height($(window).height());
+
+   var data = [];
 
    loop();
    setInterval ( loop, 2000 );
@@ -70,10 +73,20 @@
      vis_feed_data();
    }
 
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plot();
+  });
+
    function vis_feed_data()
    {
-     var data = get_feed_data(feedid,start,end,2);
-
+     data = get_feed_data(feedid,start,end,2);
+     plot();
+   }
+  
+   function plot()
+   {
      $.plot($("#graph"),
        [{data: data, lines: { fill: true }}],
        {xaxis: { mode: "time", localTimezone: true},

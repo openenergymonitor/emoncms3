@@ -13,8 +13,8 @@
 
   global $path, $embed;
 
-  $power = $_GET['power'];
-  $kwhd = $_GET['kwhd'];
+  $power = $_GET['power']?$_GET['power']:0;
+  $kwhd = $_GET['kwhd']?$_GET['kwhd']:0;
   $apikey = $_GET['apikey'];
   $currency = $_GET['currency']?$_GET['currency']:'&pound;';
   $pricekwh = $_GET['pricekwh']?$_GET['pricekwh']:0.14;
@@ -73,9 +73,11 @@
       var power = <?php echo $power; ?>;    
       var path = "<?php echo $path; ?>";  
       var apikey = "<?php echo $apikey; ?>";  
+      var embed = <?php echo $embed; ?>;
 
       $('#placeholder').width($('#test').width()-60);
       $('#placeholder').height($('#test').height()-120);
+    //  if (embed) $('#graph').height($(window).height());
       $('#inst-buttons').hide();
 
       var data = [];

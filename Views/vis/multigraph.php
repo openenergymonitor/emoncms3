@@ -52,8 +52,10 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
+  var embed = <?php echo $embed; ?>;
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
+  if (embed) $('#graph').height($(window).height());
 
   var clear = "<?php echo $clear; ?>";
   var path = "<?php echo $path; ?>";
@@ -66,6 +68,8 @@
   var end = (new Date()).getTime();				//Get end time
 
   var timeWindowChanged = 0;
+
+    var plotdata = [];
 
   // Load list of feeds from server
 
@@ -133,6 +137,12 @@
 
   vis_feed_data();
 
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plot();
+  });
+
 
   function load_feedlist(apikey)
   {
@@ -164,7 +174,7 @@
   */
   function vis_feed_data()
   {
-    var plotdata = [];
+    plotdata = [];
     for(var i in feedlist) {
       if (timeWindowChanged) feedlist[i].plot.data = null;
       if (feedlist[i].selected) {        
@@ -173,14 +183,19 @@
       }
     }
 
+    plot();
+
+    timeWindowChanged=0;
+  }
+
+  function plot()
+  {
     var plot = $.plot($("#graph"), plotdata, {
       grid: { show: true, hoverable: true, clickable: true },
       xaxis: { mode: "time", min: start, max: end },
       selection: { mode: "xy" },
       legend: { position: "nw"}
     });
-
-    timeWindowChanged=0;
   }
 
   $("#save").click(function (){

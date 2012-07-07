@@ -53,8 +53,11 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
+  var embed = <?php echo $embed; ?>;
+
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
+  if (embed) $('#graph').height($(window).height());
 
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
@@ -71,9 +74,17 @@
 
   var timeWindowChanged = 0;
 
+  var plotdata = [];
+
   var feedlist = [];
   feedlist[0] = {id: power, selected: 0, plot: {data: null, lines: { show: true, fill: true } } };
   feedlist[1] = {id: kwhd, selected: 1, plot: {data: null, bars: { show: true, align: "center", barWidth: 3600*18*1000, fill: true}, yaxis:2} };
+
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plot();
+  });
 
   vis_feed_data();
 
@@ -90,7 +101,6 @@
   */
   function vis_feed_data()
   {
-    var plotdata = [];
     for(var i in feedlist) {
       if (timeWindowChanged) feedlist[i].plot.data = null;
       if (feedlist[i].selected) {        
@@ -104,13 +114,18 @@
       $("#stats").html("Average: "+stats['average'].toFixed(0)+"W | "+stats['kwh'].toFixed(2)+" kWh");
     } else { $("#stats").html(""); }
 
+    plot();
+
+    timeWindowChanged=0;
+  }
+
+  function plot()
+  {
     var plot = $.plot($("#graph"), plotdata, {
       selection: { mode: "x" },
       grid: { show: true,  clickable: true, hoverable: true },
       xaxis: { mode: "time", min: start, max: end }
     });
-
-    timeWindowChanged=0;
   }
 
   $("#graph").bind("plothover", function (event, pos, item) { 

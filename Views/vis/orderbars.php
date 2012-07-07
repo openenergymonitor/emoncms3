@@ -36,19 +36,28 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
+  var embed = <?php echo $embed; ?>;
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
+  if (embed) $('#graph').height($(window).height());
 
   var feedid = "<?php echo $feedid; ?>";
   var feedname = "<?php echo $feedname; ?>";
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
 
+  var graph_data = [];
   vis_feed_data();
+
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plot();
+  });
 
   function vis_feed_data()
   {
-    var graph_data = get_feed_data(feedid,0,0,0);
+    graph_data = get_feed_data(feedid,0,0,0);
 
     for(x = 0; x < graph_data.length; x++) {
       for(y = 0; y < (graph_data.length-1); y++) {
@@ -62,6 +71,11 @@
 
     for(x = 0; x < graph_data.length; x++) graph_data[x][0] = x;
 
+    plot();
+  }
+
+  function plot()
+  {
     var plot = $.plot($("#graph"), [{data: graph_data, bars: { show: true, align: "center", fill: true}}], {
       grid: { show: true, hoverable: true },
       yaxis: {min: 0}

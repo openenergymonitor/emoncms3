@@ -53,8 +53,8 @@
   var feedname = "<?php echo $feedname; ?>";
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
-  var embed = <?php echo $embed; ?>;
 
+  var embed = <?php echo $embed; ?>;
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
   if (embed) $('#graph').height($(window).height());

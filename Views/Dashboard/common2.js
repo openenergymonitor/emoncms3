@@ -54,7 +54,7 @@ function initialize_dashboard()
 
 function onetime()
 {
-  $('.rawdata,.bargraph,.zoom').each(function(index)
+  $('.rawdata,.bargraph,.zoom,.realtime,.simplezoom,.threshold,.orderthreshold,.orderbars,.stacked,.multigraph,.histgraph,.smoothie').each(function(index)
   {
     var id = $(this).attr("id");
     var feed = $(this).attr("feed") || 0;

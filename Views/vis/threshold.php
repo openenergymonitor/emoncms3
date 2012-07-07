@@ -11,9 +11,9 @@
 <?php
   global $path, $embed;
   $apikey = $_GET["apikey"];
-  $feedid = $_GET['feedid'];
-  $thresholdA = $_GET['thresholdA'];
-  $thresholdB = $_GET['thresholdB'];
+  $feedid = $_GET['feedid']?$_GET['feedid']:0;
+  $thresholdA = $_GET['thresholdA']?$_GET['thresholdA']:500;
+  $thresholdB = $_GET['thresholdB']?$_GET['thresholdB']:2500;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
@@ -50,8 +50,11 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
+  var embed = <?php echo $embed; ?>;
+
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
+  if (embed) $('#graph').height($(window).height());
 
   var feedid = <?php echo $feedid; ?>;   
   var thresholdA = <?php echo $thresholdA; ?>;   
@@ -69,6 +72,12 @@
   var dataC = get_kwhatpower(feedid,thresholdB+1,20000);
 
   vis_feed_data();
+
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    vis_feed_data();
+  });
 
   function vis_feed_data()
   {
