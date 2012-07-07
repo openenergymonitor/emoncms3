@@ -29,10 +29,10 @@
   text-align:center;
 }
 </style>
+<div class='lightbox' >
+<div style="margin: 0px auto; text-align:left; width:800px;">
 
-<div style="width:800px;">
-
-<div style="background-color:#ddd; width:794px; padding:4px;">
+<div style="background-color:#ddd; width:792px; padding:4px;">
   <span id="widget-buttons"></span>
   <button id="options-button">Options</button>
   <button id="delete-button">Delete</button>
@@ -48,6 +48,7 @@
   <input id='options-save' type='button' value='save'/ >
 </div>
 
+</div>
 </div>
 
 <script type="text/javascript" src="<?php echo $path; ?>Views/dash/designer.js"></script>
