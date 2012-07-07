@@ -131,18 +131,34 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
   function widget_buttons()
   {
     var widget_html = "";
+    var select = [];
     for (z in widgets)
     {
-      widget_html +="<input class='widget-button' name='"+z+"' type='button' value='"+z+"' / >";
+      var menu = widgets[z]['menu'];
+      if (menu) 
+      { 
+        select[menu] += "<option>"+z+"</option>";
+      } else {
+        widget_html +="<input class='widget-button' name='"+z+"' type='button' value='"+z+"' / >";
+      }
+    }
+
+    for (z in select)
+    {
+      widget_html += "<select id='"+z+"' class='widgetmenu' style='width:120px; margin:5px;'><option>Visualisations:</option>"+select[z]+"</select>";
     }
     $("#widget-buttons").html(widget_html);
-    for (z in widgets)
-    {
-      $(".widget-button").click(function(event) { 
-        create = $(this).attr("name");
-        edit_mode = false;
-      });
-    }
+
+    $(".widget-button").click(function(event) { 
+      create = $(this).attr("name");
+      edit_mode = false;
+    });
+
+    $(".widgetmenu").click(function(event) { 
+      create = ($(this).find("option:selected").text());
+      if (create && create!="Visualisations:") edit_mode = false;
+    });
+
   }
 
   function add_widget(mx,my,type)
@@ -199,6 +215,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
       {
         add_widget(mx,my,create);
         create = null;
+        $('option:selected', 'select').removeAttr('selected');
       }
     }
   });

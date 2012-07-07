@@ -88,6 +88,7 @@
     "rawdata": 
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
+      "menu":"vis",
       "options":["feedid"],
       "html":""
     },
@@ -95,6 +96,7 @@
     "bargraph": 
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
+      "menu":"vis",
       "options":["feedid"],
       "html":""
     },
@@ -102,6 +104,7 @@
     "zoom": 
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
+      "menu":"vis",
       "options":["power","kwhd"],
       "html":""
     },
