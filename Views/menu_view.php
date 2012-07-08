@@ -11,7 +11,7 @@
 			
 if ($_SESSION['editmode'] == TRUE) { 
   $logo = get_theme_path() . "/emoncms logo off.png";
-  $viewl = 'dashboard/run';
+  $viewl = 'dash/run';
 } else {
   $logo = get_theme_path() . "/emoncms logo.png"; 
   $viewl = 'dashboards/view'; 

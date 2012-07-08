@@ -103,3 +103,21 @@ function build_dashboardmenu($userid)
   }
   return $topmenu."</ul>";
 }
+
+function build_dashboard_menu($userid,$location)
+{
+  $dsb = get_dashboards_info($userid);	
+	
+  $k = sizeof($dsb);
+	
+  // Only show menu if more than one dashboard were created
+  if ($k>1)
+  {
+    while ($k>0) {
+      $row = $dsb[$k-1];
+      $k = $k - 1;
+      $topmenu = $topmenu.'<li><a href="./'.$location.'&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
+    }
+  }
+  return $topmenu;
+}

@@ -1,4 +1,4 @@
-<?php global $path; ?>
+<?php global $session, $path; ?>
 
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
@@ -8,9 +8,16 @@
   <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/led.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/cylinder.js"></script>
 
-<style>
-
-</style>
+<?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
+<div style="width:100%; background-color:#ddd;">
+  <div style="margin: 0px auto; text-align:right; width:940px;">
+    <ul class="greydashmenu"><?php echo $menu; ?></ul>
+    <div style="padding:5px; margin-right:5px;">
+      <a href="edit?id=<?php echo $dashid; ?>">Edit</a>
+    </div>
+  </div>
+</div><br>
+<?php } ?>
 
 <div class='lightbox' >
   <div style="margin: 0px auto; text-align:left; width:800px;">

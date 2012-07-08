@@ -32,7 +32,7 @@ global $embed, $session;
 		<link rel="apple-touch-icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
 		<title>Emoncms</title>
 	</head>
-	<body <?php if (!$embed) { ?> style="padding-top:60px;" <?php } ?> >
+	<body <?php if (!$embed) { ?> style="padding-top:42px;" <?php } ?> >
 		<!------------------------------------------------------
 		HEADER
 		------------------------------------------------------->
@@ -42,8 +42,7 @@ global $embed, $session;
 	    			<div class="navbar-inner">
 	    				<div class="container">
 	    					<?php
-	    						echo $menu;
-	    						if (!$_SESSION['editmode'])	echo $addmenu; 
+	    						echo $menu.$addmenu; 
 	    					?> 
 						</div>
 	    			</div>

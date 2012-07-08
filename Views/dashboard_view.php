@@ -54,7 +54,7 @@ Dashboard HTML
         <div id="dashboardeditor"></div>
       </div>
       <div id="tabs-2">
-        <form id="well" action="">
+        <form id="confform" action="">
           <label><?php echo _("Dashboard name: "); ?></label>
           <input type="text" name="name" value='<?php echo $ds_name; ?>' />
           <label><?php echo _("Description: "); ?></label>           
@@ -65,7 +65,7 @@ Dashboard HTML
             echo "checked";
           ?> />
         <br>        
-        <input type="submit" name="submit" class="btn" id="submit_btn" value="Save configuration" />
+        <input type="button" class="btn" id="submit_btn" value="Save configuration" />
         </form>
       </div>
       <div id="tabs-3">
@@ -169,7 +169,7 @@ Dashboard HTML
   });
 
   // Save dashboard configuration
-  $(".button").click(function() {
+  $("#submit_btn").click(function() {
   //alert($('#confform').serialize());
   $.ajax({
   type : "POST",
