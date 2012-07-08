@@ -59,7 +59,7 @@ Dashboard HTML
     });
 
     $(".preview-dashboard-button").click(function(){
-    window.open(path+"dashboard/view?apikey="+apikey_read+"&id="+this.id+"&embed=1", null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );
+    window.open(path+"dash/view?apikey="+apikey_read+"&id="+this.id, null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );
   });
 
   $(".edit-dashboard-button").click(function(){
@@ -83,13 +83,12 @@ Dashboard HTML
 <?php while ($row = $dashboards -> fetch_array(MYSQLI_ASSOC)) { ?>
   <div class="dashboard-preview">
     <img src="<?php echo $path; ?>Views/theme/common/ds.png"/>
-    <br><br>
-    <span><br>
+    <br>
       <div class="delete-dashboard-button" id="<?php echo $row['id']; ?>">X</div>
-      <div class="preview-dashboard-button" id="<?php echo $row['id']; ?>">preview</div>
+      <div class="preview-dashboard-button" id="<?php echo $row['id']; ?>">view</div><br>
       <div class="edit-dashboard-button" id="<?php echo $row['id']; ?>">ckeditor</div>
       <div class="edit-dashboard-button-draw" id="<?php echo $row['id']; ?>">draw</div>
-    </span>
+    
   </div>
 <?php } ?>
 </div>
