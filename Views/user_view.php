@@ -12,8 +12,6 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
-global $path, $session;
-
 require "Includes/forms.php";
 ?>
 
@@ -40,15 +38,30 @@ require "Includes/forms.php";
 		<h3><?php echo _("Account Statistics"); ?></h3>
 		<table>
 			<tr>
-				<td><?php echo _("Disk space use:"); ?></td><td><?php echo number_format($stats['memory'] / 1024.0, 1); ?> KiB</td>
-      </tr>
-      <tr>
-        <td><?php echo _("Up hits:"); ?></td><td><?php echo $stats['uphits']; ?></td>
-      </tr>
-      <tr>
-        <td><?php echo _("Down hits:"); ?></td><td><?php echo $stats['dnhits']; ?></td>
-      </tr>
-    </table>
-  </div>
+				<td>
+					<?php echo _("Disk space use:"); ?>
+				</td>
+				<td>
+					<?php echo number_format($stats['memory'] / 1024.0, 1); ?> KiB
+				</td>
+      		</tr>
+     		<tr>
+        		<td>
+        			<?php echo _("Up hits:"); ?>
+        		</td>
+        		<td>
+        			<?php echo $stats['uphits']; ?>
+        		</td>
+      		</tr>
+      		<tr>
+        		<td>
+        			<?php echo _("Down hits:"); ?>
+        		</td>
+        		<td>
+        			<?php echo $stats['dnhits']; ?>
+        		</td>
+      		</tr>
+    	</table>
+  	</div>
 </div>
 
