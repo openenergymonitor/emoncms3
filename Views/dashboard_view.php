@@ -17,8 +17,8 @@ Dashboard related javascripts
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path;?>Vis/flot/excanvas.min.js"></script><![endif]-->
 <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
-<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/common.js"></script>
-<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/dial.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/common2.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/dial2.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>Includes/editors/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>Includes/editors/ckeditor/adapters/jquery.js"></script>
@@ -69,8 +69,10 @@ Dashboard HTML
         </form>
       </div>
       <div id="tabs-3">
+  <div id="page-container" style="height:400px; position:relative;">
         <div id="page">
           <?php echo $page; ?>
+        </div>
         </div>
         <div style="clear:both;"></div>
       </div>
@@ -83,6 +85,10 @@ Dashboard HTML
       var path = "<?php echo $path; ?>";
       var apikey_read = "<?php echo $apikey_read; ?>";
       var apikey_write = "<?php echo $apikey_write; ?>";
+
+ var redraw = 1; 
+
+ var ckeditor_widget_id = 0;
 
   $.urlParam = function(name){
     var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
