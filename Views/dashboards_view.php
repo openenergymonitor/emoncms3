@@ -74,14 +74,30 @@ Dashboard HTML
 
 </script>
 
+<br><p>
+  <a href="<?php echo $path.'dashboards/new'; ?>" class="btn btn">New dashboard</a>
+</p>
 <br>
-<div class="new-dashboard-button">
-  New dashboard
-</div>
-<br>
-
+<ul class="thumbnails">
+	
 <?php while ($row = $dashboards -> fetch_array(MYSQLI_ASSOC)) { ?>
-  <div class="dashboard-preview">
+  <li class="span3">
+    <div class="thumbnail">
+      <img src="http://placehold.it/260x180" alt="">
+        <div class="caption">
+          <h5><?php echo $row['name']; ?></h5>
+          <p><?php echo $row['description']; ?></p>
+          <p>
+            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="#" class="btn">View</a>
+            <a href="#" class="btn">ckEditor</a>
+            <a href="#" class="btn">Draw</a>            
+          </p>
+        </div>
+    </div>
+  </li>
+      
+ <div class="dashboard-preview">
     <img src="<?php echo $path; ?>Views/theme/common/ds.png"/>
     <br>
       <div class="delete-dashboard-button" id="<?php echo $row['id']; ?>">X</div>
@@ -89,6 +105,7 @@ Dashboard HTML
       <div class="edit-dashboard-button" id="<?php echo $row['id']; ?>">ckeditor</div>
       <div class="edit-dashboard-button-draw" id="<?php echo $row['id']; ?>">draw</div>
     
-  </div>
+ </div>
 <?php } ?>
+</ul>
 </div>
