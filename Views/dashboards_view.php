@@ -15,7 +15,7 @@ $_SESSION['editmode'] = TRUE;
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+<!-- <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script> -->
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
