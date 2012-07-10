@@ -16,11 +16,6 @@ $_SESSION['editmode'] = TRUE;
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
-<script type="application/javascript" src="<?php echo $path; ?>Views/Dashboard/common.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $path; ?>Views/theme/common/style.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $path; ?>Includes/lib/jquery-ui-1.8.20.custom/css/smoothness/jquery-ui-1.8.20.custom.css" />
-<script type="text/javascript" src="<?php echo $path; ?>Includes/lib/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js"></script>
-
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
@@ -31,81 +26,33 @@ Dashboard HTML
   var path =   "<?php echo $path; ?>";
   var apikey_read = "<?php echo $apikey_read; ?>";
   var apikey_write = "<?php echo $apikey_write; ?>";
-
-  // CKEditor Events and initialization
-  $(document).ready(function()
-  {
-    $(".new-dashboard-button").button();
-    $(".delete-dashboard-button").button();
-    $(".preview-dashboard-button").button();
-    $(".edit-dashboard-button").button();
-    $(".edit-dashboard-button-draw").button();
-
-    $(".new-dashboard-button").click(function(){
-      $.ajax({
-        type : "POST",
-        url :  path + "dashboards / new  ",data : "",dataType : 'json',success : location.reload()
-      });
-    });
-
-    $(".delete-dashboard-button").click(function(){
-      $.ajax({
-        type : "POST",
-        url :  path+"dashboards/delete",
-        data : "&content="+this.id,
-        dataType : 'json',
-        success : location.reload()
-      });
-    });
-
-    $(".preview-dashboard-button").click(function(){
-    window.open(path+"dash/view?apikey="+apikey_read+"&id="+this.id, null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );
-  });
-
-  $(".edit-dashboard-button").click(function(){
-    $(window.location).attr('href',path+'dashboard/view&id='+this.id);
-  });
-
-  $(".edit-dashboard-button-draw").click(function(){
-    $(window.location).attr('href',path+'dash/edit&id='+this.id);
-  });
-
-  });
-
 </script>
 
-<br><p>
-  <a href="<?php echo $path.'dashboards/new'; ?>" class="btn btn">New dashboard</a>
-</p>
 <br>
+
+<p>
+  <a href="#" class="btn btn" onclick="$.ajax({type : 'POST',url :  path + 'dashboards / new  ',data : '',dataType : 'json',success : location.reload()});"><?php echo _('New dashboard') ?></a>
+</p>
+
+<br>
+
 <ul class="thumbnails">
-	
 <?php while ($row = $dashboards -> fetch_array(MYSQLI_ASSOC)) { ?>
   <li class="span3">
     <div class="thumbnail">
-      <img src="http://placehold.it/260x180" alt="">
+      <img src="<?php echo $path ?>./Views/theme/common/ds.png" alt="">
         <div class="caption">
           <h5><?php echo $row['name']; ?></h5>
           <p><?php echo $row['description']; ?></p>
           <p>
-            <a href="#" class="btn btn-danger">Delete</a>
-            <a href="#" class="btn">View</a>
-            <a href="#" class="btn">ckEditor</a>
-            <a href="#" class="btn">Draw</a>            
+            <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST', url : path+'dashboards/delete', data : '&content=<?php echo $row['id']; ?>', dataType : 'json', success : location.reload()});"><?php echo _(Delete); ?></a>
+            <a href="#" class="btn" onclick="window.open(path+'dash/view?apikey='+apikey_read+'&id='<?php echo $row[' id']; ?>, null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );">View</a>
+            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $row['id']; ?>')">ckEditor</a>
+            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dash/edit&id=<?php echo $row['id']; ?>')">Draw</a>            
           </p>
         </div>
     </div>
   </li>
-      
- <div class="dashboard-preview">
-    <img src="<?php echo $path; ?>Views/theme/common/ds.png"/>
-    <br>
-      <div class="delete-dashboard-button" id="<?php echo $row['id']; ?>">X</div>
-      <div class="preview-dashboard-button" id="<?php echo $row['id']; ?>">view</div><br>
-      <div class="edit-dashboard-button" id="<?php echo $row['id']; ?>">ckeditor</div>
-      <div class="edit-dashboard-button-draw" id="<?php echo $row['id']; ?>">draw</div>
-    
- </div>
-<?php } ?>
+  <?php } ?>
 </ul>
 </div>
