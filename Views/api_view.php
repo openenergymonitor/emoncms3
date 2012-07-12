@@ -31,13 +31,12 @@ global $path, $session;
   
   <h2><?php echo _("API Helper"); ?></h2>
   <table class="table table-striped table-bordered">
-    <p><?php echo _("API keys are used to give authenticated access without login in via a normal session."); ?></p>
-    <tr>
-      <th>API Key</th><th>Action</th>
-    </tr>
+    <p><?php echo _("API keys are used to give authenticated access without login in via a normal session."); ?></p>   
     <tr>
       <td>
         <b><?php echo _("Read only access: "); ?></b><?php echo $user['apikey_read']; ?>
+        <br>
+        <span class="label label-info"><?php echo _("Allows to access in read only mode"); ?></span>
       </td>
       <td>
         <form action="newapiread" method="post">
@@ -49,6 +48,8 @@ global $path, $session;
     <tr>
       <td style="vertical-align:middle">
         <b><?php echo _("Write only access: "); ?></b><?php echo $user['apikey_write']; ?>
+        <br>
+        <span class="label label-warning"><?php echo _("Keep secret. Write mode access"); ?></span>
       </td>
       <td>
         <form action="newapiwrite" method="post">
