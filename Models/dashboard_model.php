@@ -93,7 +93,7 @@ function build_dashboardmenu($userid)
   // Only show menu if more than one dashboard were created
   if ($k>1)
   {
-    $topmenu = '<ul class="nav">';
+    $topmenu = '<div class="nav-collapse collapse"> <ul class="nav">';
 
     while ($k>0) {
       $row = $dsb[$k-1];
@@ -101,7 +101,9 @@ function build_dashboardmenu($userid)
       $topmenu = $topmenu.'<li><a href="./run&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
     }
   }
-  return $topmenu."</ul>";
+  
+  // Dashboard list + logout
+  return $topmenu."</ul><ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul></div>";
 }
 
 function build_dashboard_menu($userid,$location)

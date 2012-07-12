@@ -15,7 +15,7 @@ $_SESSION['editmode'] = TRUE;
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+<!-- <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script> -->
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
@@ -46,7 +46,7 @@ Dashboard HTML
           <p><?php echo $row['description']; ?></p>
           <p>
             <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST', url : path+'dashboards/delete', data : '&content=<?php echo $row['id']; ?>', dataType : 'json', success : location.reload()});"><?php echo _(Delete); ?></a>
-            <a href="#" class="btn" onclick="window.open(path+'dash/view?apikey='+apikey_read+'&id='<?php echo $row[' id']; ?>, null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );">View</a>
+            <a href="#" class="btn" onclick="window.open(path+'dash/view?apikey=<?php echo $apikey_read; ?>'+'&id=<?php echo $row['id']; ?>', null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );">View</a>
             <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $row['id']; ?>')">ckEditor</a>
             <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dash/edit&id=<?php echo $row['id']; ?>')">Draw</a>            
           </p>
