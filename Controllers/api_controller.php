@@ -23,15 +23,32 @@ function api_controller()
   // POST arduino posts up to emoncms 				
   if ($action == 'post' && $session['write'])
   {
+	$node = intval($_GET['node']);
   	$json = db_real_escape_string($_GET['json']);
-  }		
+  	$csv = db_real_escape_string($_GET['csv']);
+  }
+
+  if ($csv)
+  {
+    $values = explode(',', $csv);
+    $i = 0;
+    foreach ($values as $value)
+    {
+      $i++; 
+      if ($node) $key = "node".$node."_".$i; else $key = "csv".$i;
+      $datapairs[] = $key.":".$value;
+    }
+  }	
 
   if ($json)
   {
     // preg_replace strips out everything appart from alphanumeric characters, whitespace and -.:,
     $json = preg_replace('/[^\w\s-.:,]/','',$json);
     $datapairs = explode(',', $json);
+  }
 
+  if ($json || $csv)
+  {
     $time = time();						// get the time - data recived time
     if (isset($_GET["time"]))
     {
