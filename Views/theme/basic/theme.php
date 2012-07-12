@@ -34,14 +34,13 @@ global $embed, $session;
 		<link rel="apple-touch-icon" href="<?php print $GLOBALS['path']; ?>Views/theme/dark/logo_normal.png">
 		<title>Emoncms</title>
 	</head>
-	<!-- <body <?php if (!$embed) { ?> style="padding-top:42px; " <?php } ?> > -->
-  <body>	  
+	<body <?php if (!$embed) { ?> style="padding-top:42px; " <?php } ?> >	  
 		<!------------------------------------------------------
 		HEADER
 		------------------------------------------------------->
 		<?php if ($path != $menu) { ?>
 			<?php if (!$embed) { ?>
-				<div class="navbar">
+				<div class="navbar navbar-fixed-top">
 	    			<div class="navbar-inner">
 	    				<div class="container">
 	    					<?php
@@ -63,7 +62,7 @@ global $embed, $session;
 		<!------------------------------------------------------
 		CONTENT
 		------------------------------------------------------->     	
-    <div class="content">
+    <div>
 		  <?php print $content; ?>
 		</div>
 

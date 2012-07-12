@@ -13,7 +13,7 @@ http://openenergymonitor.org
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
-global $path, $session;
+global $path;
 ?>
 
 <style>
@@ -24,7 +24,6 @@ global $path, $session;
     font-weight: bold;
     width: 30px;
   }
-
 </style>
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">

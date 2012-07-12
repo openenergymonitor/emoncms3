@@ -86,7 +86,7 @@
 
     // /dashboard/run
     elseif ($action == 'run' && $session['read'])
-    {
+    {      
       if($_GET['id'])
       {
         $dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
@@ -102,18 +102,18 @@
       {
       	if ($format == 'json'){
       	  $output['content'] = json_encode($dashboard_arr['ds_content']);
-	}
-	elseif ($format == 'html')
-	{
-	  $output['content'] = view("dashboard_run.php",
-      	  array(
-      	    'userid'=>$session['userid'],
-      	    'page'=>$dashboard_arr['ds_content'],
-            'ds_name'=>$dashboard_arr['ds_name'],
-      	    'ds_description'=>$dashboard_arr['ds_description'],
-	    'ds_main'=>$dashboard_arr['ds_main'])
-	  );
-	}
+	       }
+	       elseif ($format == 'html')
+	       {
+	         $output['content'] = view("dashboard_run.php",
+      	   array(
+        	    'userid'=>$session['userid'],
+        	    'page'=>$dashboard_arr['ds_content'],
+              'ds_name'=>$dashboard_arr['ds_name'],
+        	    'ds_description'=>$dashboard_arr['ds_description'],
+  	           'ds_main'=>$dashboard_arr['ds_main'])
+	         );
+	       }
       }
       else
       {
