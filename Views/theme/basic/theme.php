@@ -75,7 +75,7 @@ global $embed, $session;
 		FOOTER
 		------------------------------------------------------->
     <?php if (!$embed) { ?>
-		  <div class="footer">Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a></div>
+		  <div class="footer">Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a></div>		  
     <?php } ?>   
     	    
     <!-- Placed at the end of the document so the pages load faster -->
