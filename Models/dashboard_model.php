@@ -115,11 +115,16 @@ function build_dashboard_menu($userid,$location)
   // Only show menu if more than one dashboard were created
   if ($k>1)
   {
+    $topmenu = '<div class="nav-collapse collapse"> <ul class="nav">';
+    
     while ($k>0) {
       $row = $dsb[$k-1];
       $k = $k - 1;
       $topmenu = $topmenu.'<li><a href="./'.$location.'&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
     }
   }
+  
   return $topmenu;
 }
+
+
