@@ -218,6 +218,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
         add_widget(mx,my,create);
         create = null;
         $('option:selected', 'select').removeAttr('selected');
+        $('option[title=1]').attr('selected','selected');
         $("#when-selected").show();
       }
     }
