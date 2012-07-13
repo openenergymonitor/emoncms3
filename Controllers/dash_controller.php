@@ -14,7 +14,15 @@
     if ($action == 'view' && $session['write']) // write access required
     {
       $id = intval($_GET['id']);
-      $page = get_dashboard_id($session['userid'],$id);
+
+      if ($_GET['id'])      
+        $page = get_dashboard_id($session['userid'],$id);
+      else
+      {
+        $page = get_dashboard($session['userid']);
+        $id = $page['ds_id'];
+      }
+
       $apikey = get_apikey_read($session['userid']);
       $menu = build_dashboard_menu($session['userid'],"view");
       $output['content'] = view("dash/dash_view.php", array("dashid"=>$id,"apikey_read"=>$apikey,'page'=>$page, 'menu'=>$menu));
