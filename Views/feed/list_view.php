@@ -23,7 +23,7 @@
 <div id="feedlist">
 </div>
 
-<?php if (!$del) { ?><br><a href="?del=1">Deleted feeds</a><?php } ?>
+<?php if (!$del) { ?><br><a href="?del=1" class="btn btn-danger">Deleted feeds</a><?php } ?>
 <?php if ($del && $feeds) { ?><br><a href="permanentlydelete">Delete feeds permanently</a> (no confirmation)<?php } ?>
 </div>
 
@@ -64,7 +64,7 @@
       out += "<tr class='d"+(i & 1)+"' ><td>"+feeds[z][0]+"</td>";
 
       // FEED NAME AND BUTTON
-      out += "<td><form action='view' method='get'><input type='hidden' name='id' value='"+feeds[z][0]+"'><input type='submit' value='"+feeds[z][1]+"' class='button05' style='width:150px'/ ></form></td>";
+      out += "<td><form action='view' method='get'><input type='hidden' name='id' value='"+feeds[z][0]+"'><input type='submit' value='"+feeds[z][1]+"' class='btn btn-info' style='width:150px'/ ></form></td>";
 
       var now = (new Date()).getTime();
       var update = (new Date(feeds[z][3])).getTime();

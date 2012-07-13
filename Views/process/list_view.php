@@ -49,9 +49,9 @@
   <?php } ?>
 
 <form action="../input/resetprocess" method="get">
-<b><?php echo _("Reset process list?"); ?></b>
+
 <input type="hidden" name="inputid" value="<?php echo $inputid; ?>">
-<input type="submit" value="<?php echo _("Reset"); ?>" class="button05"/>
+<input type="submit" value="<?php echo _("Reset process list?"); ?>" class="btn btn-danger"/>
 </form>
 
 <hr/>
@@ -64,11 +64,10 @@ $name = get_input_name($inputid);
 <?php $message = "<h2>" . _("Are you sure you want to delete input: ") . $name . "?</h2>"; ?>
 
 <form action="../confirm" method="post">
-<b><?php echo _("Delete input?"); ?></b>
 <input type="hidden" name="message" value="<?php echo $message; ?>">
 <input type="hidden" name="action" value="input/delete">
 <input type="hidden" name="id" value="<?php echo $inputid; ?>">
-<input type="submit" value="delete" class="button05"/>
+<input type="submit" value="<?php echo _("Delete input?"); ?>" class="btn btn-danger"/>
 </form>
 
 </div>
