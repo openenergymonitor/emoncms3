@@ -31,7 +31,7 @@ Dashboard HTML
 <br>
 
 <p>
-  <a href="#" class="btn btn" onclick="$.ajax({type : 'POST',url :  path + 'dashboards / new  ',data : '',dataType : 'json',success : location.reload()});"><?php echo _('New dashboard') ?></a>
+  <a href="#" class="btn btn" onclick="$.ajax({type : 'POST',url :  path + 'dashboards / new.json  ',data : '',dataType : 'json',success : location.reload()});"><?php echo _('New dashboard') ?></a>
 </p>
 
 <br>
