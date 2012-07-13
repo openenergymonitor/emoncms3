@@ -63,6 +63,7 @@ function get_dashboard($userid)
     return FALSE;
   else
     return array(
+      'ds_id' => $result['id'],
       'ds_content' => $result['content'],
       'ds_name' => $result['name'],
       'ds_description' => $result['description'],
@@ -113,7 +114,7 @@ function build_dashboard_menu($userid,$location)
   $k = sizeof($dsb);
 	
   // Only show menu if more than one dashboard were created
-  if ($k>1)
+  if ($k>0)
   {
     // Is this line needed - it breaks dash menu?
     // $topmenu = '<div class="nav-collapse collapse"> <ul class="nav">';
@@ -121,7 +122,7 @@ function build_dashboard_menu($userid,$location)
     while ($k>0) {
       $row = $dsb[$k-1];
       $k = $k - 1;
-      $topmenu = $topmenu.'<li><a href="./'.$location.'&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
+      $topmenu = $topmenu.'<li><a href="../dash/'.$location.'&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
     }
   }
   
