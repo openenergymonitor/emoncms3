@@ -15,6 +15,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 function new_dashboards($userid)
 {
   db_query("INSERT INTO dashboard (`userid`) VALUES ('$userid')");
+  return db_insert_id();
 }
 
 function get_dashboards($userid)
