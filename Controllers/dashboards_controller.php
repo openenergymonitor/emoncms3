@@ -20,6 +20,7 @@
 
   function dashboards_controller()
   {
+    require "Models/dashboard_model.php";
     require "Models/dashboards_model.php";
     global $session, $action, $format;
 
@@ -29,9 +30,14 @@
     // /dashboard/set?content=<h2>HelloWorld</h2>
     if ($action == 'new' && $session['write']) // write access required
     {
-      new_dashboards($session['userid']);
+      $dashid = new_dashboards($session['userid']);
       $output['message'] = _("dashboards new");
-	}
+
+      if ($format == 'html')
+      {
+    	header("Location: ../dash/edit?id=".$dashid);
+      }
+    }
 
 	elseif ($action == 'delete' && $session['write']) // write access required
     {
@@ -44,10 +50,11 @@
     {
       if ($session['read']) $apikey = get_apikey_read($session['userid']);
       $dashboards = get_dashboards($session['userid']); 
+      $menu = build_dashboard_menu($session['userid'],"edit");
 	  
       //if ($format == 'json') $output['content'] = json_encode($dashboard);
 
-      if ($format == 'html') $output['content'] = view("dashboards_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards));
+      if ($format == 'html') $output['content'] = view("dashboards_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu));
     }
 
     return $output;
