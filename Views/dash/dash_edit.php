@@ -8,13 +8,27 @@
   <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/led.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/cylinder.js"></script>
 
-<?php if ($session['write']) { ?>
+<?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
 <div style="width:100%; background-color:#ddd;">
-  <div style="margin: 0px auto; text-align:right; width:940px;">
-    <ul class="greydashmenu"><?php echo $menu; ?></ul>
-    <div style="padding:5px; margin-right:5px;">
-      <a href="view?id=<?php echo $dashid; ?>">View</a>
-    </div>
+  <div style="margin: 0px auto; text-align:left; width:940px;">
+
+    <span style="float:left; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Dashboards:</span>
+    <ul class="greydashmenu">
+      <?php echo $menu; ?>
+      <li><a href="../dashboards/new"><b>+ New</b></a></li>
+    </ul>
+
+    <ul class="greydashmenu" style="float:right; padding-right:5px;">
+      <li><a href="../dashboard/view?id=<?php echo $dashid; ?>">CKEditor</a></li>
+      <li><a href="source?id=<?php echo $dashid; ?>">Source</a></li>
+    </ul>
+    <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>
+
+    <ul class="greydashmenu" style="float:right; padding-right:5px;">
+      <li><a href="view?id=<?php echo $dashid; ?>">View</a></li>
+    </ul>
+
+    <div style="clear:both"></div>
   </div>
 </div><br>
 <?php } ?>
