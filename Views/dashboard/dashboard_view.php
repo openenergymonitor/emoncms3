@@ -26,9 +26,9 @@
     <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">View:</span>
 
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="edit?id=<?php echo $dashboard['id']; ?>">Draw</a></li>
-      <li><a href="ckeditor?id=<?php echo $dashboard['id']; ?>">CKEditor</a></li>
-      <li><a href="source?id=<?php echo $dashboard['id']; ?>">Source</a></li>
+      <li><a href="<?php echo $path; ?>dashboard/edit?id=<?php echo $dashboard['id']; ?>">Draw</a></li>
+      <li><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $dashboard['id']; ?>">CKEditor</a></li>
+      <li><a href="<?php echo $path; ?>dashboard/source?id=<?php echo $dashboard['id']; ?>">Source</a></li>
     </ul>
     <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>
     <div style="clear:both"></div>

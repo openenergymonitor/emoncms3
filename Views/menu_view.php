@@ -1,4 +1,5 @@
 <?php
+  global $session;
 /*
    All Emoncms code is released under the GNU Affero General Public License.
    See COPYRIGHT.txt and LICENSE.txt.
@@ -11,7 +12,7 @@
 			
 if ($_SESSION['editmode'] == TRUE) { 
   $logo = get_theme_path() . "/emoncms logo off.png";
-  $viewl = 'dashboard/run';
+  $viewl = $session['username'];
 } else {
   $logo = get_theme_path() . "/emoncms logo.png"; 
   $viewl = 'dashboard/thumb'; 

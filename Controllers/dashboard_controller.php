@@ -24,7 +24,7 @@
   function dashboard_controller()
   {
     require "Models/dashboard_model.php";
-    global $session, $action, $format;
+    global $path, $session, $action, $subaction, $format;
 
     $output['content'] = "";
     $output['message'] = "";
@@ -66,14 +66,19 @@
     //----------------------------------------------------------------------------------------------------------------------
     // View or run dashboard (id)
     //----------------------------------------------------------------------------------------------------------------------
-    elseif (($action == 'run' || $action == 'view' ) && $session['write']) // write access required
+    elseif (($action == 'run' || $action == 'view' ) && $session['read']) // write access required
     {
       $id = intval($_GET['id']);
+      $alias = preg_replace('/[^a-z]/','',$subaction);
       
       if ($id) 
       {     
         // If a dashboard id is given we get the coresponding dashboard
         $dashboard = get_dashboard_id($session['userid'],$id);
+      }
+      elseif ($alias)
+      {
+        $dashboard = get_dashboard_alias($session['userid'],$alias);
       }
       else
       {  
@@ -121,7 +126,23 @@
     elseif ($action == 'edit' && $session['write']) // write access required
     {
       $id = intval($_GET['id']);
-      $dashboard = get_dashboard_id($session['userid'],$id);
+      $alias = preg_replace('/[^a-z]/','',$subaction);
+
+      if ($id) 
+      {     
+        // If a dashboard id is given we get the coresponding dashboard
+        $dashboard = get_dashboard_id($session['userid'],$id);
+      }
+      elseif ($alias)
+      {
+        $dashboard = get_dashboard_alias($session['userid'],$alias);
+      }
+      else
+      {  
+        // Otherwise we get the main dashboard
+        $dashboard = get_main_dashboard($session['userid']);
+      }
+
       $apikey = get_apikey_read($session['userid']);
       $menu = build_dashboard_menu($session['userid'],"edit");
       $output['content'] = view("dashboard/dashboard_edit_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey, 'menu'=>$menu));
@@ -133,14 +154,23 @@
     elseif ($action == 'ckeditor' && $session['write'])
     {
       $id = intval($_GET['id']);
-      if ($id)
-      {
+      $alias = preg_replace('/[^a-z]/','',$subaction);
+
+      if ($id) 
+      {     
+        // If a dashboard id is given we get the coresponding dashboard
         $dashboard = get_dashboard_id($session['userid'],$id);
       }
-      else
+      elseif ($alias)
       {
+        $dashboard = get_dashboard_alias($session['userid'],$alias);
+      }
+      else
+      {  
+        // Otherwise we get the main dashboard
         $dashboard = get_main_dashboard($session['userid']);
       }
+
       $menu = build_dashboard_menu($session['userid'],"ckeditor");
       $output['content'] = view("dashboard/dashboard_ckeditor_view.php",array('dashboard' => $dashboard,'menu'=>$menu));
     }
@@ -173,9 +203,10 @@
     {
       $id = intval($_POST['id']);
       $name = preg_replace('/[^\w\s-]/','',$_POST['name']);
+      $alias = preg_replace('/[^a-z]/','',$_POST['alias']);
       $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
       $main = intval($_POST['main']);
-      set_dashboard_conf($session['userid'],$id,$name,$description,$main);
+      set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main);
       $output['message'] = _("dashboard set configuration");
     }
 

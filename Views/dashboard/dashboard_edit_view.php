@@ -19,13 +19,13 @@
     </ul>
 
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="ckeditor?id=<?php echo $dashboard['id']; ?>">CKEditor</a></li>
-      <li><a href="source?id=<?php echo $dashboard['id']; ?>">Source</a></li>
+      <li><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $dashboard['id']; ?>">CKEditor</a></li>
+      <li><a href="<?php echo $path; ?>dashboard/source?id=<?php echo $dashboard['id']; ?>">Source</a></li>
     </ul>
     <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>
 
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="view?id=<?php echo $dashboard['id']; ?>">View</a></li>
+      <li><a href="<?php echo $path; ?>dashboard/view?id=<?php echo $dashboard['id']; ?>">View</a></li>
     </ul>
 
     <div style="clear:both"></div>
@@ -64,6 +64,8 @@
         <form id="confform" action="">
           <label><?php echo _("Dashboard name: "); ?></label>
           <input type="text" name="name" value="<?php echo $dashboard['name']; ?>" />
+          <label><?php echo _("Menu name: (lowercase a-z only)"); ?></label>
+          <input type="text" name="alias" value="<?php echo $dashboard['alias']; ?>" />
           <label><?php echo _("Description: "); ?></label>           
           <textarea name="description"><?php echo $dashboard['description']; ?></textarea>
           <label><?php echo _("Main dashboard: "); ?></label>

@@ -147,6 +147,7 @@ function user_logon($username, $password)
     //this is a security measure
     session_regenerate_id();
     $_SESSION['userid'] = $userData['id'];
+    $_SESSION['username'] = $username;
     $_SESSION['read'] = 1;
     $_SESSION['write'] = 1;
     $_SESSION['admin'] = $userData['admin'];

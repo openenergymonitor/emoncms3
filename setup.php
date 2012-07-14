@@ -59,7 +59,7 @@ $schema['users'] = array(
   'apikey_read' => array('type' => 'varchar(64)'),
   'lastlogin' => array('type' => 'datetime'),
   'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
-  'lang' => array('type' => 'varchar(2)')
+  'lang' => array('type' => 'varchar(5)')
 );
 
 $schema['input'] = array(
@@ -96,6 +96,7 @@ $schema['dashboard'] = array(
   'userid' => array('type' => 'int(11)'),
   'content' => array('type' => 'text'),
   'name' => array('type' => "varchar(30)", 'default'=>'no name'),
+  'alias' => array('type' => "varchar(10)"),
   'description' => array('type' => "varchar(255)", 'default'=>'no description'),
   'main' => array('type' => 'tinyint(1)', 'default'=>false)
 );
@@ -133,16 +134,11 @@ $schema['multigraph'] = array(
   'feedlist' => array('type' => 'text')
 );
 
-$schema['e3_globals'] = array(
-	'dbversion' => array('type' => 'int unsigned not null default 2012062900')
-);
+//$schema['e3_globals'] = array(
+//	'dbversion' => array('type' => 'int unsigned not null default 2012062900')
+//);
 
 $out = "<table style='font-size:12px'><tr><th width='220'></th><th></th></tr>";
-
-if (!table_exists('e3_globals'))
-{
- 
-	echo "Creating emoncms3 database";
 
 while ($table = key($schema))
 {
@@ -257,10 +253,10 @@ if ($runconv==true)  echo "<p>You have feeds that need converting from datetime 
 
 echo $out;
 
-	db_query("INSERT INTO e3_globals SET dbversion=2012062900;");
+	//db_query("INSERT INTO e3_globals SET dbversion=2012062900;");
 	
-	upgradedatabase();
-	}
+	//upgradedatabase();
+	//}
 	
 function upgradedatabase() {
 	echo "Installed database version";

@@ -56,16 +56,18 @@ $q = preg_replace('/[^.\/a-z0-9]/', '', $_GET['q']);
 // filter out all except a-z / .
 $q = db_real_escape_string($q);
 // second layer
-$args = preg_split('/[\/.]/', $q);
-// split string at / .
+$args = preg_split('/[\/]/', $q);
+
+// get format (part of last argument after . i.e view.json)
+$lastarg = sizeof($args) - 1;
+$lastarg_split = preg_split('/[.]/', $args[$lastarg]);
+$format = $lastarg_split[1];
+if ($format!="json" && $format!="html") $format = "html";
+$args[$lastarg] = $lastarg_split[0];
 
 $controller = $args[0];
 $action = $args[1];
-if ($args[2]) {
-	$format = $args[2];
-} else {
-	$format = "html";
-}
+$subaction = $args[2];
 
 if ($_GET['embed'])
 	$embed = 1;
@@ -75,6 +77,7 @@ else
 $session['read'] = $_SESSION['read'];
 $session['write'] = $_SESSION['write'];
 $session['userid'] = $_SESSION['userid'];
+$session['username'] = $_SESSION['username'];
 $session['admin'] = $_SESSION['admin'];
 
 // Set user language on every page load to avoid apache multithread setlocale error
@@ -88,6 +91,20 @@ if ($_GET['apikey']) {
 }
 
 $output = controller($controller);
+
+if ($output == null)
+{
+  $userid = get_user_id($controller);
+  if ($userid) {
+    $subaction = $action;
+    $session['userid'] = $userid;
+    $session['username'] = $controller;
+    $session['read'] = 1; 
+    $action = "run";
+    $output = controller("dashboard"); 
+  }
+}
+
 $message = $output['message'];
 $content = $output['content'];
 $addmenu = $output['menu'];
@@ -101,7 +118,7 @@ if ($format == 'json') {
 
 if ($format == 'html') {
 
-	if ($session['write']) {
+	if ($session['read']) {
 		//$user = view("user/account_block.php", array());
 		$menu = view("menu_view.php", array());
 	}

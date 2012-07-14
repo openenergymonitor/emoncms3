@@ -26,7 +26,7 @@ function delete_dashboard($userid, $id)
 
 function get_dashboard_list($userid)
 {
-  $result = db_query("SELECT id, name, description, main FROM dashboard WHERE userid='$userid'");
+  $result = db_query("SELECT id, name, alias, description, main FROM dashboard WHERE userid='$userid'");
   $list = array();
   while ($row = db_fetch_array($result)) $list[] = $row;
   return $list;
@@ -48,14 +48,14 @@ function set_dashboard_content($userid, $content, $id)
   }
 }
 
-function set_dashboard_conf($userid, $id, $name, $description, $main)
+function set_dashboard_conf($userid, $id, $name, $alias, $description, $main)
 {
   $result = db_query("SELECT id FROM dashboard WHERE userid = '$userid' AND id='$id'");
   $row = db_fetch_array($result);
 
   if ($row)
   {
-    db_query("UPDATE dashboard SET name = '$name', description = '$description' WHERE userid='$userid' AND id='$id'");
+    db_query("UPDATE dashboard SET name = '$name', alias = '$alias', description = '$description' WHERE userid='$userid' AND id='$id'");
 
     // set user main dashboard
     if ($main == 'main')
@@ -87,13 +87,30 @@ function get_dashboard_id($userid, $id)
   return db_fetch_array($result);
 }
 
-// Builds a <li> list of all the dashboards
+// Returns the $id dashboard from $userid
+function get_dashboard_alias($userid, $alias)
+{
+  $result = db_query("SELECT * FROM dashboard WHERE userid='$userid' and alias='$alias'");
+  return db_fetch_array($result);
+}
+
+
 function build_dashboard_menu($userid,$location)
 {
+  global $path, $session;
+  if ($location!="run") { $dashpath = 'dashboard/'.$location; } else { $dashpath = $session['username']; }
+
   $dashboards = get_dashboard_list($userid);
   foreach ($dashboards as $dashboard)
   {
-    $topmenu.='<li><a href="../dashboard/'.$location.'&id='.$dashboard['id'].'">'.$path.$dashboard['name'].'</a></li>';
+    if ($dashboard['alias'])
+    {
+      $topmenu.='<li><a href="'.$path.$dashpath."/".$dashboard['alias'].'">'.$dashboard['name'].'</a></li>';
+    }
+    else
+    {
+      $topmenu.='<li><a href="'.$path.$dashpath.'&id='.$dashboard['id'].'">'.$dashboard['name'].'</a></li>';
+    }
   }
   return $topmenu;
 }
