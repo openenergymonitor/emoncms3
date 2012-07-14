@@ -2,11 +2,11 @@
 
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>Views/dash/widgetlist.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/common2.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/dial2.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/led.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>Views/Dashboard/widgets/cylinder.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgetlist.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/render.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgets/dial.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgets/led.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgets/cylinder.js"></script>
 
 <?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
 <div style="width:100%; background-color:#ddd;">
@@ -15,17 +15,17 @@
     <span style="float:left; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Dashboards:</span>
     <ul class="greydashmenu">
       <?php echo $menu; ?>
-      <li><a href="../dashboards/new"><b>+ New</b></a></li>
+      <li><a href="new"><b>+ New</b></a></li>
     </ul>
 
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="../dashboard/view?id=<?php echo $dashid; ?>">CKEditor</a></li>
-      <li><a href="source?id=<?php echo $dashid; ?>">Source</a></li>
+      <li><a href="ckeditor?id=<?php echo $dashboard['id']; ?>">CKEditor</a></li>
+      <li><a href="source?id=<?php echo $dashboard['id']; ?>">Source</a></li>
     </ul>
     <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>
 
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="view?id=<?php echo $dashid; ?>">View</a></li>
+      <li><a href="view?id=<?php echo $dashboard['id']; ?>">View</a></li>
     </ul>
 
     <div style="clear:both"></div>
@@ -48,7 +48,7 @@
 </div>
 
 <div id="page-container" style="height:400px; position:relative;">
-  <div id="page"><?php echo $dashboard['ds_content']; ?></div>
+  <div id="page"><?php echo $dashboard['content']; ?></div>
   <canvas id="can" width="800px" height="400px" style="position:absolute; top:0px; left:0px; margin:0; padding:0;"></canvas>
 
   <div id="testo" style="position:absolute; top:0px; left:0px; width:798px; background-color:rgba(255,255,255,0.9); border: 1px solid #ddd;">
@@ -63,12 +63,12 @@
 
         <form id="confform" action="">
           <label><?php echo _("Dashboard name: "); ?></label>
-          <input type="text" name="name" value="<?php echo $dashboard['ds_name']; ?>" />
+          <input type="text" name="name" value="<?php echo $dashboard['name']; ?>" />
           <label><?php echo _("Description: "); ?></label>           
-          <textarea name="description"><?php echo $dashboard['ds_description']; ?></textarea>
+          <textarea name="description"><?php echo $dashboard['description']; ?></textarea>
           <label><?php echo _("Main dashboard: "); ?></label>
           <input type="checkbox" name="main" value="main" <?php
-          if ($dashboard['ds_main'] == true)
+          if ($dashboard['main'] == true)
             echo "checked";
           ?> />
         <br>        
@@ -82,10 +82,10 @@
 </div>
 </div>
 
-<script type="text/javascript" src="<?php echo $path; ?>Views/dash/designer.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/designer.js"></script>
 <script type="application/javascript">
 
-  var dashid = <?php echo $dashid; ?>;
+  var dashid = <?php echo $dashboard['id']; ?>;
   var path = "<?php echo $path; ?>";
   var apikey_read = "<?php echo $apikey_read; ?>";
   $("#testo").hide();
@@ -104,7 +104,7 @@
     console.log($("#page").html());
     $.ajax({
       type : "POST",
-      url :  path+"dashboard / set",
+      url :  path+"dashboard/set",
       data : "&content=" + encodeURIComponent($("#page").html())+"&id="+dashid,
       dataType : 'json',
       success : function() { } 

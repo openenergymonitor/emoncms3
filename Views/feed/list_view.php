@@ -15,7 +15,7 @@
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
 
-  <h2><?php
+  <BR><h2><?php
   if ($del)
     echo "Deleted ";
  ?><?php echo _("Feeds"); ?></h2>
@@ -64,7 +64,7 @@
       out += "<tr class='d"+(i & 1)+"' ><td>"+feeds[z][0]+"</td>";
 
       // FEED NAME AND BUTTON
-      out += "<td><form action='view' method='get'><input type='hidden' name='id' value='"+feeds[z][0]+"'><input type='submit' value='"+feeds[z][1]+"' class='btn btn-info' style='width:150px'/ ></form></td>";
+      out += "<td><form style='margin:0; padding:0;' action='view' method='get'><input type='hidden' name='id' value='"+feeds[z][0]+"'><input type='submit' value='"+feeds[z][1]+"' class='button05' style='width:150px'/ ></form></td>";
 
       var now = (new Date()).getTime();
       var update = (new Date(feeds[z][3])).getTime();

@@ -12,14 +12,35 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
-function set_dashboard($userid, $content, $id)
+function new_dashboard($userid)
 {
-  $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid' and id='$id'");
+  db_query("INSERT INTO dashboard (`userid`) VALUES ('$userid')");
+  return db_insert_id();
+}
+
+function delete_dashboard($userid, $id)
+{
+  $result = db_query("DELETE FROM dashboard WHERE userid = '$userid' AND id = '$id'");
+  return $result;
+}
+
+function get_dashboard_list($userid)
+{
+  $result = db_query("SELECT id, name, description, main FROM dashboard WHERE userid='$userid'");
+  $list = array();
+  while ($row = db_fetch_array($result)) $list[] = $row;
+  return $list;
+}
+
+
+function set_dashboard_content($userid, $content, $id)
+{
+  $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid' AND id='$id'");
   $row = db_fetch_array($result);
 
   if ($row)
   {
-    db_query("UPDATE dashboard SET content = '$content' WHERE userid='$userid' and id='$id'");
+    db_query("UPDATE dashboard SET content = '$content' WHERE userid='$userid' AND id='$id'");
   }
   else
   {
@@ -29,103 +50,51 @@ function set_dashboard($userid, $content, $id)
 
 function set_dashboard_conf($userid, $id, $name, $description, $main)
 {
-  $result = db_query("SELECT * FROM dashboard WHERE userid = '$userid' and id='$id'");
+  $result = db_query("SELECT id FROM dashboard WHERE userid = '$userid' AND id='$id'");
   $row = db_fetch_array($result);
 
   if ($row)
   {
-    db_query("UPDATE dashboard SET name = '$name', description = '$description' WHERE userid='$userid' and id='$id'");
+    db_query("UPDATE dashboard SET name = '$name', description = '$description' WHERE userid='$userid' AND id='$id'");
 
     // set user main dashboard
     if ($main == 'main')
     {
-      db_query("update dashboard SET main = FALSE WHERE userid='$userid' and id<>'$id'");
+      db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id<>'$id'");
 
       // set main to the main dashboard
-      db_query("update dashboard SET main = TRUE WHERE userid='$userid' and id='$id'");
+      db_query("UPDATE dashboard SET main = TRUE WHERE userid='$userid' AND id='$id'");
     }
     else
     {
       // set main to false all other user dashboards
-      db_query("update dashboard SET main = FALSE WHERE userid='$userid' and id='$id'");
+      db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id='$id'");
     }
   }
-
 }
 
 // Return the main dashboard from $userid
-function get_dashboard($userid)
+function get_main_dashboard($userid)
 {
   $result = db_query("SELECT * FROM dashboard WHERE userid='$userid' and main=TRUE");
-  $result = db_fetch_array($result);
-
-  if ($result == FALSE)
-    return FALSE;
-  else
-    return array(
-      'ds_id' => $result['id'],
-      'ds_content' => $result['content'],
-      'ds_name' => $result['name'],
-      'ds_description' => $result['description'],
-      'ds_main' => $result['main']
-    );
+  return db_fetch_array($result);
 }
 
 // Returns the $id dashboard from $userid
 function get_dashboard_id($userid, $id)
 {
-  $result = db_query("SELECT content,name,description,main FROM dashboard WHERE userid='$userid' and id='$id'");
-  $result = db_fetch_array($result);
-
-  return array(
-    'ds_content' => $result['content'],
-    'ds_name' => $result['name'],
-    'ds_description' => $result['description'],
-    'ds_main' => $result['main']
-  );
+  $result = db_query("SELECT * FROM dashboard WHERE userid='$userid' and id='$id'");
+  return db_fetch_array($result);
 }
 
-function build_dashboardmenu($userid)
-{
-  $dsb = get_dashboards_info($userid);	
-	
-  $k = sizeof($dsb);
-	
-  // Only show menu if more than one dashboard were created
-  if ($k>1)
-  {
-    $topmenu = '<div class="nav-collapse collapse"> <ul class="nav">';
-
-    while ($k>0) {
-      $row = $dsb[$k-1];
-      $k = $k - 1;
-      $topmenu = $topmenu.'<li><a href="./run&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
-    }
-  }
-  
-  // Dashboard list + logout
-  return $topmenu."</ul><ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul></div>";
-}
-
+// Builds a <li> list of all the dashboards
 function build_dashboard_menu($userid,$location)
 {
-  $dsb = get_dashboards_info($userid);	
-	
-  $k = sizeof($dsb);
-	
-  // Only show menu if more than one dashboard were created
-  if ($k>0)
+  $dashboards = get_dashboard_list($userid);
+  foreach ($dashboards as $dashboard)
   {
-    // Is this line needed - it breaks dash menu?
-    // $topmenu = '<div class="nav-collapse collapse"> <ul class="nav">';
-    
-    while ($k>0) {
-      $row = $dsb[$k-1];
-      $k = $k - 1;
-      $topmenu = $topmenu.'<li><a href="../dash/'.$location.'&id='.$row['id'].'">'.$path.$row['name'].'</a></li>';
-    }
+    $topmenu.='<li><a href="../dashboard/'.$location.'&id='.$dashboard['id'].'">'.$path.$dashboard['name'].'</a></li>';
   }
-  
   return $topmenu;
 }
 

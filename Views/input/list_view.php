@@ -42,16 +42,16 @@
         }
         else
         { 
-          out = "<h2><?php echo _("Inputs"); ?></h2>";
-          out += "<table class='table table-striped table-bordered'><tr><th><?php echo _("Name"); ?></th><th><?php echo _("Updated"); ?></th><th><?php echo _("Value"); ?></th></tr>";
+          out = "<br><h2><?php echo _("Inputs"); ?></h2>";
+          out += "<table class='table table-striped'><tr><th><?php echo _("Name"); ?></th><th><?php echo _("Updated"); ?></th><th><?php echo _("Value"); ?></th></tr>";
     
           for (z in inputs) {
             i++;
             // FEED ID
-            out += "<tr class='d"+(i & 1)+"' >";
+            out += "<tr>";
 
-            // FEED NAME AND BUTTON
-            out += "<td><form action='../process/list.html' method='get'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='btn btn-info' style='width:150px'/ ></form></td>";
+            // INPUT NAME AND BUTTON
+            out += "<td><form style='margin:0; padding:0;' action='../process/list.html' method='get'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px;'/ ></form></td>";
 
             var now = (new Date()).getTime();
             var update = (new Date(inputs[z][2])).getTime();

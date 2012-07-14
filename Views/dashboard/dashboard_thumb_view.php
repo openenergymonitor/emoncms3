@@ -9,9 +9,17 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
-global $path;
-$_SESSION['editmode'] = TRUE;
+global $session, $path;
 ?>
+
+<?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
+<div style="width:100%; background-color:#ddd; height:27px;">
+  <div style="margin: 0px auto; text-align:left; width:940px;">
+    <div style="clear:both"></div>
+  </div>
+</div><br>
+<?php } ?>
+
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
@@ -24,31 +32,27 @@ Dashboard HTML
 <script type="application/javascript">
   // Global page vars definition
   var path =   "<?php echo $path; ?>";
-  var apikey_read = "<?php echo $apikey_read; ?>";
-  var apikey_write = "<?php echo $apikey_write; ?>";
 </script>
 
-<br>
-
 <p>
-  <a href="#" class="btn btn" onclick="$.ajax({type : 'POST',url :  path + 'dashboards / new.json  ',data : '',dataType : 'json',success : location.reload()});"><?php echo _('New dashboard') ?></a>
+  <a href="#" class="btn btn" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});"><?php echo _('New dashboard') ?></a>
 </p>
 
 <br>
 
 <ul class="thumbnails">
-<?php while ($row = $dashboards -> fetch_array(MYSQLI_ASSOC)) { ?>
+<?php foreach ($dashboards as $dashboard) { ?>
   <li class="span3">
     <div class="thumbnail">
       <img src="<?php echo $path ?>./Views/theme/common/ds.png" alt="">
         <div class="caption">
-          <h5><?php echo $row['name']; ?></h5>
-          <p><?php echo $row['description']; ?></p>
+          <h5><?php echo $dashboard['name']; ?></h5>
+          <p><?php echo $dashboard['description']; ?></p>
           <p>
-            <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST', url : path+'dashboards/delete', data : '&content=<?php echo $row['id']; ?>', dataType : 'json', success : location.reload()});"><?php echo _(Delete); ?></a>
-            <a href="#" class="btn" onclick="window.open(path+'dash/view?apikey=<?php echo $apikey_read; ?>'+'&id=<?php echo $row['id']; ?>', null, 'toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=' + 640 + ',height=' + 420 + ',left=' + 80 );">View</a>
-            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $row['id']; ?>')">ckEditor</a>
-            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dash/edit&id=<?php echo $row['id']; ?>')">Draw</a>            
+            <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST', url : path+'dashboards/delete', data : '&content=<?php echo $dashboard['id']; ?>', dataType : 'json', success : location.reload()});"><?php echo _(Delete); ?></a>
+            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')">View</a>
+            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')">ckEditor</a>
+            <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')">Draw</a>            
           </p>
         </div>
     </div>

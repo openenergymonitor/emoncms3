@@ -28,8 +28,8 @@ global $path;
 
 <div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
   
-  <h2><?php echo _("API Helper"); ?></h2>
-  <table class="table table-striped table-bordered">
+  <br><h2><?php echo _("API Helper"); ?></h2>
+  <table class="table table-striped ">
     <p><?php echo _("API keys are used to give authenticated access without login in via a normal session."); ?></p>   
     <tr>
       <td>
@@ -58,14 +58,14 @@ global $path;
     </tr>
   </table>
   
-  <h2><?php echo _("Post API"); ?></h2>
-  <table class="table table-striped table-bordered">
+  <br><h2><?php echo _("Post API"); ?></h2>
+  <table class="table table-striped ">
     <tr>
       <td>
         <p>
           <b>API url: </b><?php echo $GLOBALS['path']; ?>api/post
        </td>
-
+       <td></td>
     </tr>
     <tr>
       <td>
@@ -81,10 +81,10 @@ global $path;
     </tr>
   </table>
 
-  <h2><?php echo _("Visualisation API"); ?></h2>
+  <br><h2><?php echo _("Visualisation API"); ?></h2>
   <p><?php echo _("These are all the visualisations that are available in emoncms3. To view a visualisation enter in a relevant feedid in the underlined boxes below and then click on the > button."); ?></p>  
 
-  <table class='table table-striped table-bordered'>
+  <table class='table table-striped '>
     <tr>
       <th>
         <?php echo _("Name"); ?>
@@ -348,7 +348,7 @@ global $path;
   
   <h3><?php echo _("Other options:"); ?></h3>
 
-  <table class='table table-striped table-bordered'>
+  <table class='table table-striped '>
     <tr>
       <td>
         <b><?php echo _("Hide menu") ?></b>   

@@ -1,4 +1,5 @@
 <?php
+
   /*
    All Emoncms code is released under the GNU Affero General Public License.
    See COPYRIGHT.txt and LICENSE.txt.
@@ -7,118 +8,175 @@
     Emoncms - open source energy visualisation
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
-
-    DASHBOARD ACTIONS		ACCESS
-    set				write
-   	setconf			write
-    view			read
-	run				read
-
   */
 
-  // no direct access
+  // dashboard/new				New dashboard
+  // dashboard/delete POST: id=			Delete dashboard
+  // dashboard/list 				List dashboards
+  // dashboard/view?id=1			View and run dashboard (id)
+  // dashboard/edit?id=1			Edit dashboard (id) with the draw editor
+  // dashboard/ckeditor?id=1			Edit dashboard (id) with the CKEditor
+  // dashboard/set POST				Set dashboard
+  // dashboard/setconf POST 			Set dashboard configuration
+
   defined('EMONCMS_EXEC') or die('Restricted access');
 
   function dashboard_controller()
   {
     require "Models/dashboard_model.php";
-    require "Models/dashboards_model.php";
-
     global $session, $action, $format;
 
     $output['content'] = "";
     $output['message'] = "";
-    $output['menu'] = "";
 
-    // /dashboard/set?content=<h2>HelloWorld</h2>
+    //----------------------------------------------------------------------------------------------------------------------
+    // New dashboard
+    //----------------------------------------------------------------------------------------------------------------------
+    if ($action == 'new' && $session['write']) // write access required
+    {
+      $dashid = new_dashboard($session['userid']);
+      $output['message'] = _("dashboards new");
+
+      if ($format == 'html')
+      {
+    	header("Location: ../dashboard/edit?id=".$dashid);
+      }
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // Delete dashboard
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'delete' && $session['write']) // write access required
+    {
+      $output['message'] = delete_dashboard($session['userid'], intval($_POST["id"]));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // List dashboards
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'thumb' && $session['read'])
+    {
+      $_SESSION['editmode'] = TRUE;
+      if ($session['read']) $apikey = get_apikey_read($session['userid']);
+      $dashboards = get_dashboard_list($session['userid']); 
+      $menu = build_dashboard_menu($session['userid'],"edit");
+      if ($format == 'html') $output['content'] = view("dashboard/dashboard_thumb_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // View or run dashboard (id)
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif (($action == 'run' || $action == 'view' ) && $session['write']) // write access required
+    {
+      $id = intval($_GET['id']);
+      
+      if ($id) 
+      {     
+        // If a dashboard id is given we get the coresponding dashboard
+        $dashboard = get_dashboard_id($session['userid'],$id);
+      }
+      else
+      {  
+        // Otherwise we get the main dashboard
+        $dashboard = get_main_dashboard($session['userid']);
+      }
+
+      // URL ENCODE...
+      if ($format == 'json') 
+      {
+        $output['content'] = urlencode($dashboard['content']);
+        return $output;
+      }
+
+      $menu = build_dashboard_menu($session['userid'], $action);
+           
+      if ($action=="run")
+      {
+        // In run mode dashboard menu becomes the main menu
+        $_SESSION['editmode'] = FALSE;
+        $output['menu'] =  '<div class="nav-collapse collapse">';
+        $output['menu'] .= '<ul class="nav">'.$menu.'</ul>';
+        $output['menu'] .= "<ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul></div>";
+      }
+      else
+      {
+        // Otherwise in view mode the dashboard menu is an additional grey menu
+        $_SESSION['editmode'] = TRUE;
+      }
+      
+      //if ($dashboard_arr) 
+      //{
+        $apikey = get_apikey_read($session['userid']);
+        $output['content'] = view("dashboard/dashboard_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey, 'menu'=>$menu));
+      //}
+      //else
+      //{
+      //  $output['content'] = view("dashboard_run_errornomain.php",array());	
+      //}
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // Edit dashboard (id) with the draw editor
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'edit' && $session['write']) // write access required
+    {
+      $id = intval($_GET['id']);
+      $dashboard = get_dashboard_id($session['userid'],$id);
+      $apikey = get_apikey_read($session['userid']);
+      $menu = build_dashboard_menu($session['userid'],"edit");
+      $output['content'] = view("dashboard/dashboard_edit_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey, 'menu'=>$menu));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // Edit dashboard (id) with the CKEditor
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'ckeditor' && $session['write'])
+    {
+      $id = intval($_GET['id']);
+      if ($id)
+      {
+        $dashboard = get_dashboard_id($session['userid'],$id);
+      }
+      else
+      {
+        $dashboard = get_main_dashboard($session['userid']);
+      }
+      $menu = build_dashboard_menu($session['userid'],"ckeditor");
+      $output['content'] = view("dashboard/dashboard_ckeditor_view.php",array('dashboard' => $dashboard,'menu'=>$menu));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // SET dashboard
+    // dashboard/set?content=<h2>HelloWorld</h2>
+    //----------------------------------------------------------------------------------------------------------------------
     if ($action == 'set' && $session['write']) // write access required
     {
-		$content = $_POST['content'];
-		if (!$content) $content = $_GET['content'];
+      $content = $_POST['content'];
+      if (!$content) $content = $_GET['content'];
 
-		$id = $_POST['id'];
-		if (!$id){
-			$id = $_GET['id'];
-		}
+      $id = intval($_POST['id']);
+      if (!$id) $id = intval($_GET['id']);
 
-		// IMPORTANT: if you get problems with characters being removed check this line:
-		$content = preg_replace('/[^\w\s-.#<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
+      // IMPORTANT: if you get problems with characters being removed check this line:
+      $content = preg_replace('/[^\w\s-.#<>?",;:=&\/%]/','',$content);	// filter out all except characters usually used
 
-		$content = db_real_escape_string($content);
+      $content = db_real_escape_string($content);
 
-		set_dashboard($session['userid'],$content,$id);
-		$output['message'] = _("dashboard set");
+      set_dashboard_content($session['userid'],$content,$id);
+      $output['message'] = _("dashboard set");
     }
 
-	elseif ($action == 'setconf' && $session['write']) // write access required
+    //----------------------------------------------------------------------------------------------------------------------
+    // SET dashboard configuration
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'setconf' && $session['write']) // write access required
     {
-     // $output['message'] = "dashboard setconf";
-		set_dashboard_conf($session['userid'],$_POST['id'],$_POST['name'],$_POST['description'],$_POST['main']);
-		$output['message'] = _("dashboard set configuration");
-    }
-	
-    // /dashboard/view
-	elseif ($action == 'view' && $session['read'])
-    {
-   		if ($_GET['id'])
-		{
-   			$dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
-		}
-		else
-		{
-      		$dashboard = get_dashboard($session['userid']);
-		}
-
-      	if ($format == 'json'){
-      		$output['content'] = json_encode($dashboard_arr['ds_content']);
-		}
-		elseif ($format == 'html')
-      	{
-      		$output['content'] = view("dashboard_view.php",
-      			array(
-		      		'page'=>$dashboard_arr['ds_content'],
-		      		'ds_name'=>$dashboard_arr['ds_name'],
-		      		'ds_description'=>$dashboard_arr['ds_description'],
-					'ds_main'=>$dashboard_arr['ds_main'])
-					);
-		}      
-    }
-
-    // /dashboard/run
-    elseif ($action == 'run' && $session['read'])
-    {      
-      if($_GET['id'])
-      {
-        $dashboard_arr = get_dashboard_id($session['userid'],$_GET['id']);
-      }
-      else
-      {
-        $dashboard_arr = get_dashboard($session['userid']);
-      }
-
-      $output['menu'] = build_dashboardmenu($session['userid']);
-
-      if ($dashboard_arr == true)
-      {
-      	if ($format == 'json'){
-      	  $output['content'] = json_encode($dashboard_arr['ds_content']);
-	       }
-	       elseif ($format == 'html')
-	       {
-	         $output['content'] = view("dashboard_run.php",
-      	   array(
-        	    'userid'=>$session['userid'],
-        	    'page'=>$dashboard_arr['ds_content'],
-              'ds_name'=>$dashboard_arr['ds_name'],
-        	    'ds_description'=>$dashboard_arr['ds_description'],
-  	           'ds_main'=>$dashboard_arr['ds_main'])
-	         );
-	       }
-      }
-      else
-      {
-        $output['content'] = view("dashboard_run_errornomain.php",array());			
-      }       
+      $id = intval($_POST['id']);
+      $name = preg_replace('/[^\w\s-]/','',$_POST['name']);
+      $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
+      $main = intval($_POST['main']);
+      set_dashboard_conf($session['userid'],$id,$name,$description,$main);
+      $output['message'] = _("dashboard set configuration");
     }
 
     return $output;
