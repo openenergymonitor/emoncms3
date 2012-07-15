@@ -15,7 +15,7 @@ global $session, $path;
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<!-- <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script> -->
+<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
@@ -40,7 +40,7 @@ Dashboard HTML
           <h5><?php echo $dashboard['name']; ?></h5>
           <p><?php echo $dashboard['description']; ?></p>
           <p>
-            <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST', url : path+'dashboards/delete', data : '&content=<?php echo $dashboard['id']; ?>', dataType : 'json', success : location.reload()});"><?php echo _(Delete); ?></a>
+            <a href="#" class="btn btn-danger" onclick="$(window.location).attr('href',path+'dashboard/delete&id=<?php echo $dashboard['id']; ?>')"><?php echo _(Delete); ?></a>
             <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')">View</a>
             <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')">ckEditor</a>
             <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')">Draw</a>            
