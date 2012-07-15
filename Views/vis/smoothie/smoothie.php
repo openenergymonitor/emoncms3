@@ -26,14 +26,11 @@ http://openenergymonitor.org/emon/node/600
 <script type="text/javascript" src="<?php echo $path;?>Views/vis/smoothie/smoothie.js"></script>
 
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>Smoothie</h2>
 <?php } ?>
 
-	<canvas id="mycanvas" style="position: absolute; width: 100%; 
-	    height: 100%; overflow: hidden"></canvas>
+<canvas id="mycanvas" style="position: absolute; width: 100%; height: 100%; overflow: hidden"></canvas>
 
-<?php if (!$embed) echo "</div>"; ?>
 
 	<script id="source" language="javascript" type="text/javascript">
 	    var feedid = <?php echo $feedid; ?>;

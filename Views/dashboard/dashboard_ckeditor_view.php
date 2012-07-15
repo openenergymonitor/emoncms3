@@ -1,15 +1,15 @@
 <?php
-/*
-  All Emoncms code is released under the GNU Affero General Public License.
-  See COPYRIGHT.txt and LICENSE.txt.
+  /*
+    All Emoncms code is released under the GNU Affero General Public License.
+    See COPYRIGHT.txt and LICENSE.txt.
 
-  ---------------------------------------------------------------------
-  Emoncms - open source energy visualisation
-  Part of the OpenEnergyMonitor project:
-  http://openenergymonitor.org
-*/
+    ---------------------------------------------------------------------
+    Emoncms - open source energy visualisation
+    Part of the OpenEnergyMonitor project:
+    http://openenergymonitor.org
+  */
 
-global $path, $session, $embed;
+  global $path, $session, $embed;
 ?>
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
@@ -29,34 +29,6 @@ Dashboard related javascripts
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
 
-<?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
-<div style="width:100%; background-color:#ddd;">
-  <div style="margin: 0px auto; text-align:left; width:940px;">
-
-    <span style="float:left; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Dashboards:</span>
-    <ul class="greydashmenu">
-      <?php echo $menu; ?>
-      <li><a href="new"><b>+ New</b></a></li>
-    </ul>
-
-    <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="edit?id=<?php echo $dashboard['id']; ?>">Draw</a></li>
-      <li><a href="source?id=<?php echo $dashboard['id']; ?>">Source</a></li>
-    </ul>
-    <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>
-
-    <ul class="greydashmenu" style="float:right; padding-right:5px;">
-      <li><a href="view?id=<?php echo $dashboard['id']; ?>">View</a></li>
-    </ul>
-
-    <div style="clear:both"></div>
-  </div>
-</div><br>
-<?php } ?>
-
-<div style="text-align:center; width:100%;">
-  <div style="width: 960px; margin: 0px auto; padding:0px; text-align:left; margin-bottom:20px; margin-top:5px;">
-  
         <div id="dashboardeditor"></div>
 
         <br>
@@ -80,9 +52,6 @@ Dashboard HTML
             <?php echo $dashboard['content']; ?>
           </div>
         </div>
-        <div style="clear:both;"></div>
-  </div>
-</div>
 
 <script type="text/javascript">
   $("#page-container").hide();

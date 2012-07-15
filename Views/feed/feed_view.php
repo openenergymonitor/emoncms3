@@ -14,7 +14,7 @@ $tag = $feed[2];
 $type = $feed[6];
 $status = $feed[7];
 ?>
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
+
   <h2><?php echo $name; ?></h2>
 
   <div class="row">
@@ -112,4 +112,3 @@ $status = $feed[7];
       <?php } ?>
     </div>
   </div>
-</div>

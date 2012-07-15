@@ -12,23 +12,14 @@ http://openenergymonitor.org
 global $session, $path;
 ?>
 
-<?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
-<div style="width:100%; background-color:#ddd; height:27px;">
-  <div style="margin: 0px auto; text-align:left; width:940px;">
-    <div style="clear:both"></div>
-  </div>
-</div><br>
-<?php } ?>
-
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <!-- <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script> -->
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
-<div style="text-align:center; width:100%;"></div>
+
 <script type="application/javascript">
   // Global page vars definition
   var path =   "<?php echo $path; ?>";
@@ -59,4 +50,3 @@ Dashboard HTML
   </li>
   <?php } ?>
 </ul>
-</div>

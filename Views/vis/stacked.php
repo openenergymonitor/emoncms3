@@ -22,7 +22,6 @@
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/daysmonthsyears.js"></script>
 
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>Stacked</h2>
 <?php } ?>
 
@@ -31,8 +30,6 @@
       <div id="loading" style="position:absolute; top:0px; left:0px; width:100%; height:100%; background-color: rgba(255,255,255,0.5);"></div>
       <h2 style="position:absolute; top:0px; left:40px;"><span id="out"></span></h2>
     </div>
-
-<?php if (!$embed) echo "</div>"; ?>
 
     <script id="source" language="javascript" type="text/javascript">
       var kwhdA = <?php echo $kwhdA; ?>;   

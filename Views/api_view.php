@@ -25,10 +25,8 @@ global $path;
     width: 30px;
   }
 </style>
-
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
   
-  <br><h2><?php echo _("API Helper"); ?></h2>
+  <h2><?php echo _("API Helper"); ?></h2>
   <table class="table table-striped ">
     <p><?php echo _("API keys are used to give authenticated access without login in via a normal session."); ?></p>   
     <tr>
@@ -378,6 +376,4 @@ global $path;
       </td>
     </tr>   
   </table>
-
-</div>
 

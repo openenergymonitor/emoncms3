@@ -26,7 +26,6 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
  
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>Simpler kWh/d zoomer</h2>
 <?php } ?>
 
@@ -49,7 +48,6 @@
       </div>
         <h3 style="position:absolute; top:00px; left:50px;"><span id="stats"></span></h3>
     </div>
-<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
 

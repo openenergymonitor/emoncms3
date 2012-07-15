@@ -13,12 +13,10 @@
 
 <script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
 
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
   <h2><?php if ($del) echo "Deleted "; ?><?php echo _("Feeds"); ?></h2>
   <div id="feedlist"></div>
   <?php if (!$del) { ?><br><a href="?del=1" class="btn btn-danger">Deleted feeds</a><?php } ?>
   <?php if ($del && $feeds) { ?><br><a href="permanentlydelete">Delete feeds permanently</a> (no confirmation)<?php } ?>
-</div>
 
 <script type="text/javascript">
   var path =  "<?php echo $path; ?>";

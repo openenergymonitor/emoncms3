@@ -36,7 +36,6 @@
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
 
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>kWh/d Zoomer</h2>
 <?php } ?>
 
@@ -66,7 +65,6 @@
       </div>
 
     </div>
-<?php if (!$embed) echo "</div>"; ?>
 
     <script id="source" language="javascript" type="text/javascript">  
       var kwhd = <?php echo $kwhd; ?>;   

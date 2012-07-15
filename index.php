@@ -108,29 +108,35 @@ if ($output == null)
 $message = $output['message'];
 $content = $output['content'];
 $addmenu = $output['menu'];
+$submenu = $output['submenu'];
 
 if ($format == 'json') {
-	print $message . $content;
-	if (!($message . $content)) {
-		echo _("Sorry, you need a valid apikey or be logged in to see this page");
-	}
+  print $message . $content;
 }
 
 if ($format == 'html') {
 
-	if ($session['read']) {
-		//$user = view("user/account_block.php", array());
-		$menu = view("menu_view.php", array());
-	}
-	if (!$session['read'])
-		$content = view("user/login_block.php", array());
-	
-	echo view("theme/".$GLOBALS['theme']."/theme.php", array('menu' => $menu, 'addmenu' => $addmenu, 'user' => $user, 'content' => $content, 'message' => $message));
+  if ($session['read']) {
+    $menu = view("menu_view.php", array());
+  }
+  else
+  {
+    $content = view("user/login_block.php", array());
+  }
+
+  if ($embed)
+  {
+    echo view("theme/".$GLOBALS['theme']."/embed.php", array('content' => $content));
+  }
+  else 
+  {
+    echo view("theme/".$GLOBALS['theme']."/theme.php", array('menu' => $menu, 'addmenu' => $addmenu, 'submenu' => $submenu, 'user' => $user, 'content' => $content, 'message' => $message));
+  }
 }
 
 if ($controller == "api" && $action == "post") {
-	inc_uphits_statistics($session['userid']);
+  inc_uphits_statistics($session['userid']);
 } else {
-	inc_dnhits_statistics($session['userid']);
+  inc_dnhits_statistics($session['userid']);
 }
 ?>

@@ -22,7 +22,6 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
  
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>Multigraph</h2>
 <?php } ?>
 
@@ -42,7 +41,6 @@
 
       </div>
     </div>
-<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
 

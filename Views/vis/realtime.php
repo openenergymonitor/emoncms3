@@ -28,7 +28,6 @@
  // Time window buttons
  ---------------------------------------------------------------------------------------------------->
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>Realtime data: <?php echo $feedname; ?></h2>
 <?php } ?>
 
@@ -41,8 +40,6 @@
      <button class="viewWindow" time="0.01">1 min</button>
    </div>
  </div>
-
-<?php if (!$embed) echo "</div>"; ?>
 
  <script id="source" language="javascript" type="text/javascript">
    //--------------------------------------------------------------------------------------

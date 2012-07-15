@@ -1,4 +1,4 @@
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
+
   <h2><?php echo _("Notify "); ?><?php echo $feedid; ?></h2>
   <p>
     <?php echo _("Setup feed notifications"); ?>
@@ -21,4 +21,4 @@
   </form>
   <br/>
   <a href="../notify/settings"><?php echo _("Edit mail settings"); ?></a>
-</div>
+

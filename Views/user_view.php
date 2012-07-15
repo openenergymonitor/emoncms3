@@ -15,8 +15,6 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 require "Includes/forms.php";
 ?>
 
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
-
   <h2><?php echo _("User: "); ?><?php echo $user['username']; ?></h2>
   <?php SelectLanguageForm($user['lang']); ?>
   
@@ -61,5 +59,4 @@ require "Includes/forms.php";
       </tr>
     </table>
   </div>
-</div>
 

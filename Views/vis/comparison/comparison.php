@@ -81,7 +81,6 @@
     </style>
 
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>kWh/d Comparison</h2>
 <?php } ?>
 

@@ -14,11 +14,8 @@
 
 <script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
 
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
-  <h2><?php echo _("Inputs"); ?></h2>
-  <div id="inputlist"></div>
-</div>
-
+<h2><?php echo _("Inputs"); ?></h2>
+<div id="inputlist"></div>
 
 <script type="text/javascript">
 

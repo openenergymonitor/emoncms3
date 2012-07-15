@@ -107,12 +107,14 @@
       {
         // Otherwise in view mode the dashboard menu is an additional grey menu
         $_SESSION['editmode'] = TRUE;
+        $output['submenu'] = view("dashboard/dashboard_menu.php", array('id'=>$dashboard['id'], 'menu'=>$menu, 'type'=>"view"));
       }
       
       //if ($dashboard_arr) 
       //{
         $apikey = get_apikey_read($session['userid']);
-        $output['content'] = view("dashboard/dashboard_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey, 'menu'=>$menu));
+        $output['content'] = view("dashboard/dashboard_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey));
+
       //}
       //else
       //{
@@ -145,7 +147,8 @@
 
       $apikey = get_apikey_read($session['userid']);
       $menu = build_dashboard_menu($session['userid'],"edit");
-      $output['content'] = view("dashboard/dashboard_edit_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey, 'menu'=>$menu));
+      $output['content'] = view("dashboard/dashboard_edit_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey));
+      $output['submenu'] = view("dashboard/dashboard_menu.php", array('id'=>$dashboard['id'], 'menu'=>$menu, 'type'=>"edit"));
     }
 
     //----------------------------------------------------------------------------------------------------------------------
@@ -173,6 +176,7 @@
 
       $menu = build_dashboard_menu($session['userid'],"ckeditor");
       $output['content'] = view("dashboard/dashboard_ckeditor_view.php",array('dashboard' => $dashboard,'menu'=>$menu));
+      $output['submenu'] = view("dashboard/dashboard_menu.php", array('id'=>$dashboard['id'], 'menu'=>$menu, 'type'=>"ckeditor"));
     }
 
     //----------------------------------------------------------------------------------------------------------------------

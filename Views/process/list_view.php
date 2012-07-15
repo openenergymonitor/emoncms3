@@ -7,7 +7,6 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-<div style="margin: 0px auto; max-width:940px; padding:10px;">
   <h2><?php echo _("Input configuration:   "); ?><?php echo get_input_name($inputid); ?></h2>
 
   <?php if (isset($input_processlist)) { ?>
@@ -55,4 +54,3 @@
     <input type="hidden" name="id" value="<?php echo $inputid; ?>">
     <input type="submit" value="<?php echo _("Delete input?"); ?>" class="btn btn-danger"/>
   </form>
-</div>

@@ -23,7 +23,6 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
 
 <?php if (!$embed) { ?>
-<div style="margin-top:20px; margin-right:3%; margin-left:3%;">
 <h2>Datapoint editor: <?php echo $feedname; ?></h2>
 <p>Click on a datapoint to select, then in the edit box below the graph enter in the new value. You can also add another datapoint by changing the time to a point in time that does not yet have a datapoint.</p>
 <?php } ?>
@@ -52,7 +51,6 @@
     <input type="text" id="newvalue" style="width:150px;" value="" />
     <input id="okb" type="submit" value="ok" class="button05"/>
     </div>
-<?php if (!$embed) echo "</div>"; ?>
 
 <script id="source" language="javascript" type="text/javascript">
 
