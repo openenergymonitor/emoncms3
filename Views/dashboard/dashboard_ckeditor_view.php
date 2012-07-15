@@ -22,8 +22,6 @@ Dashboard related javascripts
 <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgets/led.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>Includes/editors/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?php echo $path; ?>Includes/editors/ckeditor/adapters/jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo $path; ?>Includes/lib/jquery-ui-1.8.20.custom/css/smoothness/jquery-ui-1.8.20.custom.css" />
-<script type="text/javascript" src="<?php echo $path; ?>Includes/lib/jquery-ui-1.8.20.custom/js/jquery-ui-1.8.20.custom.min.js"></script>
 
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
