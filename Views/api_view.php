@@ -26,7 +26,7 @@ global $path;
   }
 </style>
 
-<div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
+<div style="margin: 0px auto; max-width:940px; padding:10px;">
   
   <br><h2><?php echo _("API Helper"); ?></h2>
   <table class="table table-striped ">

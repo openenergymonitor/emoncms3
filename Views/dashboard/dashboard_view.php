@@ -10,7 +10,7 @@
 
 <?php if ($session['write'] && $_SESSION['editmode'] ==TRUE) { ?>
 <div style="width:100%; background-color:#ddd;">
-  <div style="margin: 0px auto; text-align:left; width:940px;">
+  <div style="margin: 0px auto; text-align:left; max-width:940px;">
 
     <span style="float:left; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Dashboards:</span>
     <ul class="greydashmenu">

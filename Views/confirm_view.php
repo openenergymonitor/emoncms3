@@ -7,7 +7,7 @@ Emoncms - open source energy visualisation
 Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 -->
-<div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
+<div style="margin: 0px auto; max-width:940px; padding:10px;">
 
   <?php echo $message; ?>
   <form action="<?php echo $action; ?>" method="get">

@@ -1,4 +1,4 @@
-<div style="padding:20px;">
+<div style="margin: 0px auto; max-width:940px; padding:10px;">
   <h2><?php echo _("Notify settings"); ?></h2>
   <form action="../notify/setrecipients" method="get">
     <p>

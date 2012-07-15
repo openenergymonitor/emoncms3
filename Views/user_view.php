@@ -15,7 +15,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 require "Includes/forms.php";
 ?>
 
-<div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
+<div style="margin: 0px auto; max-width:940px; padding:10px;">
 
   <h2><?php echo _("User: "); ?><?php echo $user['username']; ?></h2>
   <?php SelectLanguageForm($user['lang']); ?>

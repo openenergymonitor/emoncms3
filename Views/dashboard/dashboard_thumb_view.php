@@ -24,7 +24,7 @@ global $session, $path;
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
 <!-- <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script> -->
-<div class='lightbox' style="margin-bottom:20px; margin-left:3%; margin-right:3%;">
+<div style="margin: 0px auto; max-width:940px; padding:10px;">
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->

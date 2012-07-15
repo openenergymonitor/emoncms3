@@ -23,7 +23,7 @@ $accepted_languages = lang_http_accept();
 set_lang($accepted_languages);
 ?>
 
-<div style="margin-left:20px;">
+<div style="margin: 0px auto; max-width:392px; padding:10px;">
 	<div style="max-width:392px; margin-right:20px; padding-top:45px; padding-bottom:15px; color: #888;">
 		<img style="margin:12px;" src="<?php echo get_theme_path(); ?>/emoncms_logo.png" />
 	</div>
