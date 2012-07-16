@@ -23,9 +23,9 @@ function api_controller()
   // POST arduino posts up to emoncms 				
   if ($action == 'post' && $session['write'])
   {
-	$node = intval($_GET['node']);
-  	$json = db_real_escape_string($_GET['json']);
-  	$csv = db_real_escape_string($_GET['csv']);
+    $node = intval($_GET['node']);
+    $json = db_real_escape_string($_GET['json']);
+    $csv = db_real_escape_string($_GET['csv']);
   }
 
   if ($csv)
@@ -52,8 +52,8 @@ function api_controller()
     $time = time();						// get the time - data recived time
     if (isset($_GET["time"]))
     {
-    	$time = intval($_GET["time"]);	// - or use sent timestamp if present
-	}
+      $time = intval($_GET["time"]);	// - or use sent timestamp if present 
+    }
     $inputs = register_inputs($session['userid'],$datapairs,$time);          // register inputs
     process_inputs($session['userid'],$inputs,$time);                        // process inputs to feeds etc
     $output['message'] = "ok";

@@ -587,4 +587,3 @@ function average($feedid, $time_now, $value)
  }
  */
 ?>
-
