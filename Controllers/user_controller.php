@@ -57,7 +57,7 @@
         {	      	
       	  $output['message'] = _("Welcome, you are now logged in");
     	  if ($format == 'html'){
-      	    header("Location: ../dashboards/thumb");
+      	    header("Location: ../dashboard/thumb");
 	  }
         }
       } 
