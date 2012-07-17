@@ -36,11 +36,31 @@ Dashboard HTML
           <input type="text" name="name" value="<?php echo $dashboard['name']; ?>" />
           <label><?php echo _("Description: "); ?></label>           
           <textarea name="description"><?php echo $dashboard['description']; ?></textarea>
-          <label><?php echo _("Main dashboard: "); ?></label>
-          <input type="checkbox" name="main" value="main" <?php
-          if ($dashboard['main']== true)
-            echo "checked";
-          ?> />
+
+           <table>
+            <tr>
+              <td width="112"><?php echo _("Main: "); ?></td>
+              <td><input type="checkbox" name="main" value="1" <?php
+              if ($dashboard['main'] == true)
+                echo "checked";
+              ?> /></td>
+            </tr>
+            <tr>
+              <td><?php echo _("Published: "); ?></td>
+              <td><input type="checkbox" name="published" value="1" <?php
+              if ($dashboard['published'] == true)
+                echo "checked";
+              ?> /></td>
+            </tr>
+            <tr>
+              <td><?php echo _("Public: "); ?></td>
+              <td><input type="checkbox" name="public" value="1" <?php
+              if ($dashboard['public'] == true)
+                echo "checked";
+              ?> /></td>
+            </tr>
+
+          </table>
         <br>        
         <input type="button" class="btn" id="submit_btn" value="Save configuration" />
         </form>

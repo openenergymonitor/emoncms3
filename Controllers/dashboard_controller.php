@@ -62,7 +62,7 @@
     {
       $_SESSION['editmode'] = TRUE;
       if ($session['read']) $apikey = get_apikey_read($session['userid']);
-      $dashboards = get_dashboard_list($session['userid']); 
+      $dashboards = get_dashboard_list($session['userid'],0,0); 
       $menu = build_dashboard_menu($session['userid'],"edit");
       if ($format == 'html') $output['content'] = view("dashboard/dashboard_thumb_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu));
     }
@@ -74,15 +74,16 @@
     {
       $id = intval($_GET['id']);
       $alias = preg_replace('/[^a-z]/','',$subaction);
-      
+     
+      if ($action == "run") {$public = !$session['write']; $published = 1;} else {$public = 0; $published = 0;}
       if ($id) 
       {     
         // If a dashboard id is given we get the coresponding dashboard
-        $dashboard = get_dashboard_id($session['userid'],$id);
+        $dashboard = get_dashboard_id($session['userid'],$id, $public, $published);
       }
       elseif ($alias)
       {
-        $dashboard = get_dashboard_alias($session['userid'],$alias);
+        $dashboard = get_dashboard_alias($session['userid'],$alias, $public, $published);
       }
       else
       {  
@@ -137,11 +138,11 @@
       if ($id) 
       {     
         // If a dashboard id is given we get the coresponding dashboard
-        $dashboard = get_dashboard_id($session['userid'],$id);
+        $dashboard = get_dashboard_id($session['userid'],$id,0,0);
       }
       elseif ($alias)
       {
-        $dashboard = get_dashboard_alias($session['userid'],$alias);
+        $dashboard = get_dashboard_alias($session['userid'],$alias,0,0);
       }
       else
       {  
@@ -166,11 +167,11 @@
       if ($id) 
       {     
         // If a dashboard id is given we get the coresponding dashboard
-        $dashboard = get_dashboard_id($session['userid'],$id);
+        $dashboard = get_dashboard_id($session['userid'],$id,0,0);
       }
       elseif ($alias)
       {
-        $dashboard = get_dashboard_alias($session['userid'],$alias);
+        $dashboard = get_dashboard_alias($session['userid'],$alias,0,0);
       }
       else
       {  
@@ -214,7 +215,9 @@
       $alias = preg_replace('/[^a-z]/','',$_POST['alias']);
       $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
       $main = intval($_POST['main']);
-      set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main);
+      $public = intval($_POST['public']);
+      $published = intval($_POST['published']);
+      set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
       $output['message'] = _("dashboard set configuration");
     }
 

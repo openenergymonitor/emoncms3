@@ -1,4 +1,5 @@
 <?php
+die;
 define('EMONCMS_EXEC', 1);
 
 if ($_GET['key'] == "xTC7005d")// IMPORTANT SET THIS TO A UNIQUE PASSWORD OF YOUR CHOICE

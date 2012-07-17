@@ -23,14 +23,14 @@
   <div id="page"><?php echo $dashboard['content']; ?></div>
   <canvas id="can" width="940px" height="400px" style="position:absolute; top:0px; left:0px; margin:0; padding:0;"></canvas>
 
-  <div id="testo" style="position:absolute; top:0px; left:0px; width:798px; background-color:rgba(255,255,255,0.9); border: 1px solid #ddd;">
+  <div id="testo" style="position:absolute; top:0px; left:0px; width:938px; background-color:rgba(255,255,255,0.9); border: 1px solid #ddd;">
     <div style="padding:20px;">
       <div id="box-options"></div>
       <input id='options-save' type='button' value='save'/ >
     </div>
   </div>
 
-  <div id="configure-dashboard" style="position:absolute; top:0px; left:0px; width:798px; background-color:rgba(255,255,255,0.9); border: 1px solid #ddd;">
+  <div id="configure-dashboard" style="position:absolute; top:0px; left:0px; width:938px; background-color:rgba(255,255,255,0.9); border: 1px solid #ddd;">
     <div style="padding:20px;">
 
         <form id="confform" action="">
@@ -40,11 +40,31 @@
           <input type="text" name="alias" value="<?php echo $dashboard['alias']; ?>" />
           <label><?php echo _("Description: "); ?></label>           
           <textarea name="description"><?php echo $dashboard['description']; ?></textarea>
-          <label><?php echo _("Main dashboard: "); ?></label>
-          <input type="checkbox" name="main" value="main" <?php
-          if ($dashboard['main'] == true)
-            echo "checked";
-          ?> />
+ 
+          <table>
+            <tr>
+              <td width="112"><?php echo _("Main: "); ?></td>
+              <td><input type="checkbox" name="main" value="1" <?php
+              if ($dashboard['main'] == true)
+                echo "checked";
+              ?> /></td>
+            </tr>
+            <tr>
+              <td><?php echo _("Published: "); ?></td>
+              <td><input type="checkbox" name="published" value="1" <?php
+              if ($dashboard['published'] == true)
+                echo "checked";
+              ?> /></td>
+            </tr>
+            <tr>
+              <td><?php echo _("Public: "); ?></td>
+              <td><input type="checkbox" name="public" value="1" <?php
+              if ($dashboard['public'] == true)
+                echo "checked";
+              ?> /></td>
+            </tr>
+
+          </table>
         <br>        
         <input type="button" class="btn" id='configure-save' value="Save configuration" />
         </form>

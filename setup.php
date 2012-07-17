@@ -1,5 +1,4 @@
 <?php
-
 /*
  All Emoncms code is released under the GNU Affero General Public License.
  See COPYRIGHT.txt and LICENSE.txt.
@@ -98,7 +97,9 @@ $schema['dashboard'] = array(
   'name' => array('type' => "varchar(30)", 'default'=>'no name'),
   'alias' => array('type' => "varchar(10)"),
   'description' => array('type' => "varchar(255)", 'default'=>'no description'),
-  'main' => array('type' => 'tinyint(1)', 'default'=>false)
+  'main' => array('type' => 'tinyint(1)', 'default'=>false),
+  'public' => array('type' => 'tinyint(1)', 'default'=>false),
+  'published' => array('type' => 'tinyint(1)', 'default'=>false)
 );
 
 $schema['notify'] = array(
@@ -252,7 +253,7 @@ foreach ($feeds as $feed)
 if ($runconv==true)  echo "<p>You have feeds that need converting from datetime format to indexed timestamp. This improves performance. Its best to backup your data before conversion, then once your ready run: emoncms3/conv.php</p>";
 
 echo $out;
-
+/*
 	//db_query("INSERT INTO e3_globals SET dbversion=2012062900;");
 	
 	//upgradedatabase();
@@ -273,20 +274,19 @@ function startupgrade($dbversion)
 	if ($dbversion < 2012063000) upgrade2012063000();	
 } 
 
-/*
- * upgrade points 
- * yyyymmddxx
- */
 
-/*
- * change lang field size from 2 to 5 to support en_EN, es_ES,... format
- */
+// upgrade points 
+// yyyymmddxx
+
+// change lang field size from 2 to 5 to support en_EN, es_ES,... format
+
 function upgrade2012063000()
 {
 	echo "Upgrade 2012063000";
 	db_query("ALTER TABLE users MODIFY lang varchar(5);");
 	setdatabaseversion("2012063000");
 }
+*/
 ?>
 </body>
 </html>
