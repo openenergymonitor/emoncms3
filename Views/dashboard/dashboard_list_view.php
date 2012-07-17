@@ -25,13 +25,14 @@ Dashboard HTML
   var path =   "<?php echo $path; ?>";
 </script>
 
-<!-- tool menu TODO:is the same at dashboard_list_view so it could be include from one place to share code -->
+<!-- tool menu TODO:is the same at dashboard_thumb_view so it could be include from one place to share code -->
 <div align="right">
   <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});"><i class="icon-plus-sign"></i></a>
   <a href="<?php echo $path; ?>dashboard/thumb"><i class="icon-th-large"></i></a>
   <a href="<?php echo $path; ?>dashboard/list"><i class="icon-th-list"></i></a>
 </div>
 
+<!--
 <ul class="thumbnails">
 <?php foreach ($dashboards as $dashboard) { ?>
   <li class="span3">
@@ -51,3 +52,5 @@ Dashboard HTML
   </li>
   <?php } ?>
 </ul>
+-->
+

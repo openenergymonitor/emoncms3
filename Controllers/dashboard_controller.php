@@ -12,7 +12,8 @@
 
   // dashboard/new				New dashboard
   // dashboard/delete POST: id=			Delete dashboard
-  // dashboard/list 				List dashboards
+  // dashboard/thumb 				List dashboards
+  // dashboard/list         List mode
   // dashboard/view?id=1			View and run dashboard (id)
   // dashboard/edit?id=1			Edit dashboard (id) with the draw editor
   // dashboard/ckeditor?id=1			Edit dashboard (id) with the CKEditor
@@ -58,6 +59,18 @@
     //----------------------------------------------------------------------------------------------------------------------
     // List dashboards
     //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'list' && $session['read'])
+    {
+      $_SESSION['editmode'] = TRUE;
+      if ($session['read']) $apikey = get_apikey_read($session['userid']);
+      $dashboards = get_dashboard_list($session['userid'],0,0); 
+      $menu = build_dashboard_menu($session['userid'],"edit");
+      if ($format == 'html') $output['content'] = view("dashboard/dashboard_list_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
+    // Thumb List dashboards
+    //----------------------------------------------------------------------------------------------------------------------
     elseif ($action == 'thumb' && $session['read'])
     {
       $_SESSION['editmode'] = TRUE;
@@ -66,7 +79,7 @@
       $menu = build_dashboard_menu($session['userid'],"edit");
       if ($format == 'html') $output['content'] = view("dashboard/dashboard_thumb_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu));
     }
-
+    
     //----------------------------------------------------------------------------------------------------------------------
     // View or run dashboard (id)
     //----------------------------------------------------------------------------------------------------------------------
