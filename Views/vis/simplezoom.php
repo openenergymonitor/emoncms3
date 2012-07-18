@@ -99,6 +99,7 @@
   */
   function vis_feed_data()
   {
+    plotdata = [];
     for(var i in feedlist) {
       if (timeWindowChanged) feedlist[i].plot.data = null;
       if (feedlist[i].selected) {        
