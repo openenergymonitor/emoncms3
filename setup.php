@@ -24,6 +24,8 @@
     <a href="index.php" ><?php echo _("Continue to emoncms") ?></a>
   </p>
 <?php
+
+
 //=====================================================
 // $runnable = TRUE;
 // ENABLE THIS ONCE TO FORCE UPDATE
