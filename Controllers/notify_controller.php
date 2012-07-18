@@ -31,31 +31,35 @@
 
       $output['content'] = set_notify($userid,$feedid,$onvalue,$oninactive,$periodic);
 
-      if ($format == 'html') header("Location: ../notify/view?id=".$feedid);
+      if ($format == 'html')
+      {
+      	header("Location: ../notify/view?id=".$feedid);
+	  }
     }
 
-    if ($action == 'view' && $session['write'])
+	elseif ($action == 'view' && $session['write'])
     {
       $feedid = intval($_GET['id']);
       $notify = get_notify($userid, $feedid);
       //if ($format == 'json') $output = json_encode($feeds);
+
       if ($format == 'html') $output['content'] = view("notify_view.php", array('feedid'=>$feedid,'notify'=>$notify));
     }
 
-
-
-    if ($action == 'setrecipients' && $session['write'])
+	elseif ($action == 'setrecipients' && $session['write'])
     {
       $recipients = preg_replace('/[^\w\s-.,@]/','',$_GET["recipients"]);
       set_notify_recipients($userid,$recipients);
 
       $recipients = get_notify_recipients($userid);
+
       if ($format == 'html') $output['content'] = view("notify_settings_view.php", array('recipients'=>$recipients));
     }
 
-    if ($action == 'settings' && $session['write'])
+	elseif ($action == 'settings' && $session['write'])
     {
       $recipients = get_notify_recipients($userid);
+
       if ($format == 'html') $output['content'] = view("notify_settings_view.php", array('recipients'=>$recipients));
     }
 

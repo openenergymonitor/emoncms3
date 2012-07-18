@@ -90,7 +90,7 @@
     return $row[0];
   }
 
-  function field_exists($tablename,$field)
+	function field_exists($tablename,$field)
   {
     $field_exists = 0;
     $result = db_query("SHOW COLUMNS FROM $tablename");
@@ -99,7 +99,17 @@
     }
     return $field_exists;
   }
+  
+	function getdatabaseversion()
+	{
+		$result = db_query("SELECT dbversion FROM e3_globals;");
+		$row = db_fetch_array($result);
+		return $row['dbversion'];	
+	}
 
-
-
+	function setdatabaseversion($dbversion)
+	{
+		db_query("UPDATE e3_globals SET dbversion=".$dbversion);	
+	}
+	
 ?>

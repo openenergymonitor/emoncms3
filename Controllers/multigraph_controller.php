@@ -15,7 +15,7 @@
   function multigraph_controller()
   {
     require "Models/multigraph_model.php";
-    global $action, $format, $lang, $session;
+    global $action, $format, $session;
 
     $output['content'] = "";
     $output['message'] = "";
@@ -28,7 +28,7 @@
       set_multigraph($session['userid'], $json);
     }
 
-    if ($action == "get" && $session['read'])
+	elseif ($action == "get" && $session['read'])
     {
       $output['content'] =  get_multigraph($session['userid']);
     }

@@ -9,8 +9,8 @@ CKEDITOR.dialog.add( 'e3dial', function( editor ) {
 			max = this.getContentElement('tab1','max').getValue();
 			scale = this.getContentElement('tab1','scale').getValue();
 			units = this.getContentElement('tab1','units').getValue();
-			
-			editor.insertHtml("<div class='dial' feed='"+feed+"' max='"+max+"' scale='"+scale+"' units='"+units+"'></div>");    
+			ckeditor_widget_id ++;
+			editor.insertHtml("<div class='dial' id='"+ckeditor_widget_id+"' feed='"+feed+"' max='"+max+"' scale='"+scale+"' units='"+units+"' style='width:180px; height:180px;'></div>");    
 		},
 		contents : [
 			{
