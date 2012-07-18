@@ -1,5 +1,4 @@
 <?php
-die;
 /*
  All Emoncms code is released under the GNU Affero General Public License.
  See COPYRIGHT.txt and LICENSE.txt.
