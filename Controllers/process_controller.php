@@ -28,6 +28,7 @@
 
     $output['content'] = "";
     $output['message'] = "";
+	
     //---------------------------------------------------------------------------------------------------------
     // Get process list of input
     // http://yoursite/emoncms/process/list.html?inputid=1
@@ -46,7 +47,7 @@
     // Add process
     // http://yoursite/emoncms/process/add?inputid=1&type=1&arg=power
     //---------------------------------------------------------------------------------------------------------
-    if ($action == "add" && $session['write']) // write access required
+	elseif ($action == "add" && $session['write']) // write access required
     { 
       $inputid = intval($_GET["inputid"]);
       $processid = intval($_GET["type"]);			// get process type
@@ -57,31 +58,58 @@
       $process = get_process($processid);
 
       // If arg type value
-      if ($process[1] == 0) $arg = floatval($arg);
+      if ($process[1] == 0)
+      {
+      	$arg = floatval($arg);
+	  }
 
       // If arg type input
-      if ($process[1] == 1) $arg = get_input_id($session['userid'],$arg);
+	  elseif ($process[1] == 1)
+	  {
+	  	$arg = get_input_id($session['userid'],$arg);
+	  }
 
       // If arg type feed
-      if ($process[1] == 2) {
+	  elseif ($process[1] == 2)
+	  {
         // First check if feed exists of given feed name and user.
         $id = get_feed_id($_SESSION['userid'],$arg);
         // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
-        if ($id==0)  $id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
+        if ($id == 0){
+        	$id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
+		}
         $arg = $id;
       }
 
-      if ($process[1] == 3) $arg = get_feed_id($session['userid'],$arg);
+	  elseif ($process[1] == 3)
+	  {
+	  	$arg = get_feed_id($session['userid'],$arg);
+	  }
+	  
       add_input_process($session['userid'],$inputid,$processid,$arg);
 
-      if ($format == 'html') header("Location: list?inputid=".$inputid);
+      if ($format == 'html')
+      {
+      	header("Location: list?inputid=".$inputid);
+	  }
     }
 
-    if ($action == "test" && $_SESSION['write']) // write access required
+	elseif ($action == "test" && $_SESSION['write']) // write access required
     {
       set_time_limit(360);  // Increase PHP limit
       // Create Histogram data - (to feed, from feed, from date, to date).
       // $rows = histogram_history(4,1,"2008-01-01","2012-05-01");
+    }
+
+    elseif ($action == "autoconfigure" && $session['write'])
+    { 
+      $inputs = get_user_inputs($session['userid']);
+      foreach ($inputs as $input)
+      {
+        auto_configure_inputs($session['userid'],$input[0],$input[1]);
+      }
+
+      if ($format == 'html') header("Location: ../feed/list");
     }
 
     return $output;

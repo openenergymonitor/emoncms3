@@ -1,4 +1,24 @@
-     
+Change log 13 June 2012
+
+- New visual datapoint editor
+- Automatic input procesing setup given known input names - UNCOMMENT TO ENABLE: api_controller.php
+- "Wastebin" view and option to permanentely delete feeds
+- Use preg_replace for input json validation (removal of non-valid characters)
+- Removed upgrade.php, seems to work without it?
+- Removed use of type field in feeds (all feeds need to now be integer timestamp rather than datetime)
+- conv.php script updated to die at any point something goes wrong to minimise chance of data loss
+- removal of soft deletion for inputs as it was not needed
+
+Change log 10 June 2012
+
+- Visualisation are integrated into Views so it is part of the MVC architecture rather than a separate entity in the Vis folder
+- Visualisation javascript is also more modularised, common code is placed in the common folder that can be found here: Views/vis/commom
+- There are also a couple of new visualisations.  All the visualisations are linked from the vis menu tab
+- Vis/Dashboard/embed.php has been removed. A dashboard can now be embedded by adding the property &embed=1 to emoncms/dashboard/view?id=1. This removes the topmenu and footer
+- New view_lang() function in core.inc.php to call Views that are of a specific language calling view() only now calls non language specific views
+- Removed support for the old type of feeds, the non-indexed datetime feeds, this simplifies the feed_model.php
+- One of the problems with this update is that it might break some installations as it removes the support for the old feed type and also the url for the visualisations have largely changed. Before committing it to the master branch I will try and write a good upgrade page that details how to run the feed converter and what visualisation URL's to change
+
   ___ _ __ ___   ___  _ __     ___ _ __ ___  ___  
  / _ \ '_ ` _ \ / _ \| '_ \   / __| '_ ` _ \/ __|
 |  __/ | | | | | (_) | | | | | (__| | | | | \__ \ 
