@@ -28,7 +28,7 @@ function get_dashboard_list($userid, $public, $published)
 {
   if ($public) $qB = " and public=1";
   if ($published) $qC = " and published=1";
-  $result = db_query("SELECT id, name, alias, description, main FROM dashboard WHERE userid='$userid'".$qB.$qC);
+  $result = db_query("SELECT id, name, alias, description, main, published, public FROM dashboard WHERE userid='$userid'".$qB.$qC);
 
   $list = array();
   while ($row = db_fetch_array($result)) $list[] = $row;
