@@ -115,7 +115,8 @@
         $_SESSION['editmode'] = FALSE;
         $output['menu'] =  '<div class="nav-collapse collapse">';
         $output['menu'] .= '<ul class="nav">'.$menu.'</ul>';
-        $output['menu'] .= "<ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul></div>";
+        if ($session['write']) $output['menu'] .= "<ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul>";
+        $output['menu'] .= "</div>";
       }
       else
       {
