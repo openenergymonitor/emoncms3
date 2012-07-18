@@ -49,11 +49,7 @@
     //----------------------------------------------------------------------------------------------------------------------
     elseif ($action == 'delete' && $session['write']) // write access required
     {
-      $output['message'] = delete_dashboard($session['userid'], intval($_GET["id"]));
-      if ($format == 'html')
-      {
-    	header("Location: ../dashboard/thumb");
-      }
+      $output['message'] = delete_dashboard($session['userid'], intval($_POST["id"]));
     }
 
     //----------------------------------------------------------------------------------------------------------------------
