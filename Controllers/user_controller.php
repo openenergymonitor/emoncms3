@@ -57,7 +57,7 @@
         {	      	
       	  $output['message'] = _("Welcome, you are now logged in");
     	  if ($format == 'html'){
-      	    header("Location: ../dashboard/thumb");
+      	    header("Location: ../dashboard/list");
 	  }
         }
       } 
@@ -98,7 +98,7 @@
         $output['message'] = _("Your new account has been created");
         if ($format == 'html')
         {
-          header("Location: ../dashboard/thumb");
+          header("Location: ../dashboard/list");
 	}
         if ($_SESSION['write']){
           create_user_statistics($_SESSION['userid']);

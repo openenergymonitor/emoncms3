@@ -32,7 +32,7 @@ if ($_SESSION['editmode'] == TRUE) {
     <?php if ($_SESSION['editmode'] == TRUE) { ?>
     <li><a href='<?php echo $GLOBALS['path']; ?>input/list'><?php echo _("Inputs"); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>feed/list'><?php echo _("Feeds"); ?></a></li>
-    <li><a href='<?php echo $GLOBALS['path']; ?>dashboard/thumb'><?php echo _("Dashboards"); ?></a></li>
+    <li><a href='<?php echo $GLOBALS['path']; ?>dashboard/list'><?php echo _("Dashboards"); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>vis/list'><?php echo _("API"); ?></a></li>
 
   <?php } ?>
