@@ -15,7 +15,7 @@ if ($_SESSION['editmode'] == TRUE) {
   $viewl = $session['username'];
 } else {
   $logo = get_theme_path() . "/emoncms logo.png"; 
-  if ($session['write']) $viewl = 'dashboard/thumb'; else $viewl = '';
+  if ($session['write']) $viewl = 'dashboard/list'; else $viewl = '';
 
 }
 
