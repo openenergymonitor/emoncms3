@@ -226,14 +226,17 @@
       $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
       
       // testing setconfs
-      // if (isset($_POST['main']))
-      //    set_dashboard_main($session['userid'],$id,intval($_POST['main']));
+      if (isset($_POST['main']))
+      	set_dashboard_main($session['userid'],$id,intval($_POST['main']));
       
+	  /*
       $main = intval($_POST['main']);
       
       $public = intval($_POST['public']);
       $published = intval($_POST['published']);
       set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
+	   * 
+	   */
       $output['message'] = _("dashboard set configuration");
     }
 
