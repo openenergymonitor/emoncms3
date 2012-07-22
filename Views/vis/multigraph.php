@@ -72,7 +72,7 @@
 
   var feedlist = get_multigraph(apikey); 
 
-  if (feedlist[0] && !clear) {
+  if (feedlist && !clear) {
     end = feedlist[0].end;
     if (end==0) end = (new Date()).getTime();
     if (feedlist[0].timeWindow) start = end - feedlist[0].timeWindow;
