@@ -65,10 +65,10 @@ require_once "Includes/messages.php";
        </td>
       <td>
         <?php
-          if ($dashboard['main']) { ?> 
-            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'main=0',dataType : 'json',success : location.reload()});"><i class='icon-star'></i></a>
+          if ($dashboard['main']) { ?>             
+              <i class='icon-star'></i>
           <?php } else { ?>          
-          <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'main=1',dataType : 'json',success : location.reload()});"><i class='icon-star-empty'></i></a>
+          <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'main=1&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-star-empty'></i></a>
         <?php } ?> 
       </td>
       <td>

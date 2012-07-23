@@ -225,7 +225,7 @@
       $alias = preg_replace('/[^a-z]/','',$_POST['alias']);
       $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
       
-      // testing setconfs
+      
       if (isset($_POST['main']))
       	set_dashboard_main($session['userid'],$id,intval($_POST['main']));
       

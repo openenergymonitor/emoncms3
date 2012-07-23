@@ -12,9 +12,18 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
+/*
+ * Create a new user dashboard
+ * 
+ */
 function new_dashboard($userid)
 {
-  db_query("INSERT INTO dashboard (`userid`) VALUES ('$userid')");
+  // If it is first user dashboard, set it the main one or no one exists 
+  if (!get_main_dashboard($userid))
+    db_query("INSERT INTO dashboard (`userid`,`main`) VALUES ('$userid',TRUE)");  
+  else
+    db_query("INSERT INTO dashboard (`userid`) VALUES ('$userid')");
+  
   return db_insert_id();
 }
 
@@ -103,6 +112,26 @@ function get_dashboard_alias($userid, $alias, $public, $published)
   return db_fetch_array($result);
 }
 
+/*
+ * Set a $id dashboard from $userid as main dashboard
+ * Only one dashboard can be main so first set all dashboards main property to false if new main dashboard is set
+ */
+function set_dashboard_main($userid, $id, $main)
+{
+  // set user main dashboard
+  if ($main == '1')
+  {
+    db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id<>'$id'");
+
+    // set main to the main dashboard
+    db_query("UPDATE dashboard SET main = TRUE WHERE userid='$userid' AND id='$id'");
+  }
+  else
+  {
+    // set main to false all other user dashboards
+    db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id='$id'");
+  }
+}
 
 function build_dashboard_menu($userid,$location)
 {
