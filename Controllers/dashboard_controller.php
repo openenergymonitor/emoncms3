@@ -229,14 +229,18 @@
       if (isset($_POST['main']))
       	set_dashboard_main($session['userid'],$id,intval($_POST['main']));
       
-	  /*
-      $main = intval($_POST['main']);
+      if (isset($_POST['published']))
+        set_dashboard_publish($session['userid'],$id,intval($_POST['published']));
       
-      $public = intval($_POST['public']);
-      $published = intval($_POST['published']);
-      set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
-	   * 
-	   */
+      if (isset($_POST['public']))
+        set_dashboard_public($session['userid'],$id,intval($_POST['public']));
+      
+      if (isset($_POST['name'])) ;
+      if (isset($_POST['alias'])) ;
+      if (isset($_POST['description'])) ;
+      
+      //set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
+	  
       $output['message'] = _("dashboard set configuration");
     }
 

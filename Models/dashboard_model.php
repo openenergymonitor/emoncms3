@@ -115,6 +115,7 @@ function get_dashboard_alias($userid, $alias, $public, $published)
 /*
  * Set a $id dashboard from $userid as main dashboard
  * Only one dashboard can be main so first set all dashboards main property to false if new main dashboard is set
+ * Main dashboard is set published too
  */
 function set_dashboard_main($userid, $id, $main)
 {
@@ -125,12 +126,39 @@ function set_dashboard_main($userid, $id, $main)
 
     // set main to the main dashboard
     db_query("UPDATE dashboard SET main = TRUE WHERE userid='$userid' AND id='$id'");
+    
+    // main dashboard must be published
+    set_dashboard_publish($userid,$id,'1');
   }
   else
   {
     // set main to false all other user dashboards
     db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id='$id'");
   }
+}
+
+/*
+ * Set a $id dashboard from $userid as published/unpublished dashboard
+ * 
+ */
+function set_dashboard_publish($userid, $id, $published)
+{
+  if ($published == '1')  
+    db_query("UPDATE dashboard SET published = TRUE WHERE userid='$userid' AND id='$id'");
+  else
+    db_query("UPDATE dashboard SET published = FALSE WHERE userid='$userid' AND id='$id'");
+}
+
+/*
+ * Set a $id dashboard from $userid as public/private dashboard
+ * 
+ */
+function set_dashboard_public($userid, $id, $public)
+{
+  if ($public == '1')  
+    db_query("UPDATE dashboard SET public = TRUE WHERE userid='$userid' AND id='$id'");
+  else
+    db_query("UPDATE dashboard SET public = FALSE WHERE userid='$userid' AND id='$id'");
 }
 
 function build_dashboard_menu($userid,$location)

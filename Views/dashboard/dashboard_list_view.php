@@ -73,17 +73,19 @@ require_once "Includes/messages.php";
       </td>
       <td>
         <?php
-          if ($dashboard['published']) echo "<i class='icon-ok'></i>";
-          else echo "<i class='icon-remove'></i>";
-        ?>
+          if ($dashboard['published']) { ?>           
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'published=0&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-ok'></i></a>
+          <?php } else { ?>
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'published=1&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-remove'></i></a>
+          <?php } ?>
       </td>
       <td>
         <?php 
-          if ($dashboard['public']) 
-            echo "<i class='icon-globe'></i>";
-          else 
-            echo "<i class='icon-lock'></i>";
-        ?>
+          if ($dashboard['public']) { ?>           
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'public=0&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-globe'></i></a>
+          <?php } else { ?>
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'public=1&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-lock'></i></a>
+          <?php } ?>
       </td>  
       <td>
         <div>       
