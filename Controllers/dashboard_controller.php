@@ -224,16 +224,28 @@
       $name = preg_replace('/[^\w\s-]/','',$_POST['name']);
       $alias = preg_replace('/[^a-z]/','',$_POST['alias']);
       $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
+       
+	  // Separated functions to allow set values in independent way
+      if (isset($_POST['main']))
+      	set_dashboard_main($session['userid'],$id,intval($_POST['main']));
       
-      // testing setconfs
-      // if (isset($_POST['main']))
-      //    set_dashboard_main($session['userid'],$id,intval($_POST['main']));
+      if (isset($_POST['published']))
+        set_dashboard_publish($session['userid'],$id,intval($_POST['published']));
       
-      $main = intval($_POST['main']);
+      if (isset($_POST['public']))
+        set_dashboard_public($session['userid'],$id,intval($_POST['public']));
       
-      $public = intval($_POST['public']);
-      $published = intval($_POST['published']);
-      set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
+      if (isset($_POST['name'])) 
+        set_dashboard_name($session['userid'],$id,$name);
+      
+      if (isset($_POST['alias'])) 
+        set_dashboard_alias($session['userid'],$id,$alias);
+      
+      if (isset($_POST['description']))
+        set_dashboard_description($session['userid'],$id,$description);
+      
+      //set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
+	  
       $output['message'] = _("dashboard set configuration");
     }
 
