@@ -134,10 +134,10 @@ function get_dashboard_alias($userid, $alias, $public, $published)
  */
 function set_dashboard_main($userid, $id, $main)
 {
-  error_log($main);
   // set user main dashboard
   if ($main == '1')
   {
+	// set main to false all other user dashboards  	
     db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id<>'$id'");
 
     // set main to the main dashboard
@@ -147,11 +147,7 @@ function set_dashboard_main($userid, $id, $main)
     set_dashboard_publish($userid,$id,'1');
   }
   else
-  {
-    
-    //error_log($id);error_log($main);
-    
-    // set main to false all other user dashboards
+  {       
     db_query("UPDATE dashboard SET main = FALSE WHERE userid='$userid' AND id='$id'");
   }
 }

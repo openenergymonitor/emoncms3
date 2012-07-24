@@ -224,7 +224,8 @@
       $name = preg_replace('/[^\w\s-]/','',$_POST['name']);
       $alias = preg_replace('/[^a-z]/','',$_POST['alias']);
       $description = preg_replace('/[^\w\s-]/','',$_POST['description']);
-                        
+       
+	  // Separated functions to allow set values in independent way
       if (isset($_POST['main']))
       	set_dashboard_main($session['userid'],$id,intval($_POST['main']));
       
