@@ -65,7 +65,7 @@
     }
     else if (type == 8)  //temperature dial blue-red, first segment blue should mean below freezing C
     {
-      offset = 0;
+      offset = -0.25;
       segment = ["#b7beff","#ffd9d9","#ffbebe","#ff9c9c","#ff6e6e","#ff3d3d"];
     }
 
