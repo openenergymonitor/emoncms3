@@ -130,6 +130,7 @@
         $apikey = get_apikey_read($session['userid']);
         $output['content'] = view("dashboard/dashboard_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey));
 
+        $output['content'] .= view("dashboard/dashboard_config.php", array('dashboard'=>$dashboard));
       //}
       //else
       //{
@@ -163,6 +164,8 @@
       $apikey = get_apikey_read($session['userid']);
       $menu = build_dashboard_menu($session['userid'],"edit");
       $output['content'] = view("dashboard/dashboard_edit_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey));
+
+      $output['content'] .= view("dashboard/dashboard_config.php", array('dashboard'=>$dashboard));
       $output['submenu'] = view("dashboard/dashboard_menu.php", array('id'=>$dashboard['id'], 'menu'=>$menu, 'type'=>"edit"));
     }
 
