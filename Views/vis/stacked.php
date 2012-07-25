@@ -14,9 +14,9 @@
   ?>
 
     <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.stack.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.stack.min.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/date.format.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/daysmonthsyears.js"></script>

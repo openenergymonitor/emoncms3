@@ -14,7 +14,7 @@ global $session, $path;
 require_once "Includes/messages.php";
 ?>
 
-<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
 
 <script type="application/javascript">
   // Global page vars definition
@@ -65,32 +65,34 @@ require_once "Includes/messages.php";
        </td>
       <td>
         <?php
-          if ($dashboard['main']) { ?> 
-            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'main=0',dataType : 'json',success : location.reload()});"><i class='icon-star'></i></a>
+          if ($dashboard['main']) { ?>             
+              <i class='icon-star'></i>
           <?php } else { ?>          
-          <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'main=1',dataType : 'json',success : location.reload()});"><i class='icon-star-empty'></i></a>
+          <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'main=1&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-star-empty'></i></a>
         <?php } ?> 
       </td>
       <td>
         <?php
-          if ($dashboard['published']) echo "<i class='icon-ok'></i>";
-          else echo "<i class='icon-remove'></i>";
-        ?>
+          if ($dashboard['published']) { ?>           
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'published=0&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-ok'></i></a>
+          <?php } else { ?>
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'published=1&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-remove'></i></a>
+          <?php } ?>
       </td>
       <td>
         <?php 
-          if ($dashboard['public']) 
-            echo "<i class='icon-globe'></i>";
-          else 
-            echo "<i class='icon-lock'></i>";
-        ?>
+          if ($dashboard['public']) { ?>           
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'public=0&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-globe'></i></a>
+          <?php } else { ?>
+            <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/setconf  ',data : 'public=1&id=<?php echo $dashboard['id'] ?>',dataType : 'json',success : location.reload()});"><i class='icon-lock'></i></a>
+          <?php } ?>
       </td>  
       <td>
         <div>       
           <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><?php echo _(Delete); ?></a>        
           <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')"><?php echo _(View); ?></a>
           <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')"><?php echo _(Draw); ?></a>
-          <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><?php echo _(CKEditor); ?></a>            
+<?php if ($ckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><?php echo _(CKEditor); ?></a><?php } ?>           
         </div>            
       </td>    
     </tr>

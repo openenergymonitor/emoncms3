@@ -17,10 +17,10 @@
 define('EMONCMS_EXEC', 1);
 
 // Load the debug library for debug purposes ( http://www.firephp.org/ )
-require_once('./Includes/debug/FirePHPCore/fb.php'); ob_start();
+//require_once('./Includes/debug/FirePHPCore/fb.php'); ob_start();
+$ckeditor = false;	// ckeditor installed
 
 require "Includes/core.inc.php";
-emon_session_start();
 
 //error_reporting(E_ALL);
 ini_set('display_errors', 'on');
@@ -52,6 +52,9 @@ if ($e == 2) {
 	header("Location: setup.php");
 }
 
+//---------------------------------------------------------------------------------
+// DECONDE URL ARGUMENT
+//---------------------------------------------------------------------------------
 $q = preg_replace('/[^.\/a-z0-9]/', '', $_GET['q']);
 // filter out all except a-z / .
 $q = db_real_escape_string($q);
@@ -74,11 +77,21 @@ if ($_GET['embed'])
 else
 	$embed = 0;
 
-$session['read'] = $_SESSION['read'];
-$session['write'] = $_SESSION['write'];
-$session['userid'] = $_SESSION['userid'];
-$session['username'] = $_SESSION['username'];
-$session['admin'] = $_SESSION['admin'];
+//---------------------------------------------------------------------------------
+// SESSION CONTROL
+// if the apikey is set then the session is controlled by the apikey
+// otherwise it is controlled by the cookie based php session.
+//---------------------------------------------------------------------------------
+if ($_GET['apikey'])
+{
+  $session = user_apikey_session_control($_GET['apikey']);
+}
+else
+{
+  emon_session_start();
+  $session = $_SESSION;
+}
+
 
 // Set user language on every page load to avoid apache multithread setlocale error
 set_emoncms_lang($session['userid']);
@@ -86,12 +99,15 @@ set_emoncms_lang($session['userid']);
 // Set emoncms theme TODO: get from user preferences
 $GLOBALS['theme'] = 'basic';
 
-if ($_GET['apikey']) {
-	$session = user_apikey_session_control($_GET['apikey']);
-}
+//---------------------------------------------------------------------------------
+// CREATE OUTPUT CONTENT ARRAY
+// All content is stored in the $output array
+//---------------------------------------------------------------------------------
 
+// 1) Based on controller
 $output = controller($controller);
 
+// 2) If no controller of this name - then try username
 if ($output == null)
 {
   $userid = get_user_id($controller);
@@ -105,33 +121,25 @@ if ($output == null)
   }
 }
 
-$message = $output['message'];
-$content = $output['content'];
-$addmenu = $output['menu'];
-$submenu = $output['submenu'];
+if (!$session['read']) $output['content'] = view("user/login_block.php", array());
 
-if ($format == 'json') {
-  print $message . $content;
+// 3) Add the main menu
+$output['mainmenu'] = view("menu_view.php", array());
+
+//---------------------------------------------------------------------------------
+// PRINT THE CONTENT
+//---------------------------------------------------------------------------------
+if ($format == 'json') 
+{
+  print $output['message'] . $output['content'];
 }
-
-if ($format == 'html') {
-
-  if ($session['read']) {
-    $menu = view("menu_view.php", array());
-  }
-  else
-  {
-    $content = view("user/login_block.php", array());
-  }
-
-  if ($embed)
-  {
-    echo view("theme/".$GLOBALS['theme']."/embed.php", array('content' => $content));
-  }
-  else 
-  {
-    echo view("theme/".$GLOBALS['theme']."/theme.php", array('menu' => $menu, 'addmenu' => $addmenu, 'submenu' => $submenu, 'user' => $user, 'content' => $content, 'message' => $message));
-  }
+elseif ($embed)
+{
+  print view("theme/".$GLOBALS['theme']."/embed.php", $output);
+}
+else
+{
+  print view("theme/".$GLOBALS['theme']."/theme.php", $output);
 }
 
 if ($controller == "api" && $action == "post") {
@@ -139,4 +147,5 @@ if ($controller == "api" && $action == "post") {
 } else {
   inc_dnhits_statistics($session['userid']);
 }
+
 ?>

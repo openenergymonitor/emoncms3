@@ -12,7 +12,7 @@
   global $path;
 ?>
 
-<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.min.js"></script>
 
 <h2><?php echo _("Inputs"); ?></h2>
 <div id="inputlist"></div>

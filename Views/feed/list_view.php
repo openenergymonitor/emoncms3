@@ -11,7 +11,7 @@
   global $path;
  ?>
 
-<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.min.js"></script>
 
   <h2><?php if ($del) echo "Deleted "; ?><?php echo _("Feeds"); ?></h2>
   <div id="feedlist"></div>

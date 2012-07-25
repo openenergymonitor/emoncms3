@@ -14,6 +14,7 @@
  */ 
 function show_nodashboards_message()
 {
+  // TODO optimize output format (now is better readable)
   echo '<div class="alert alert-block">';
   echo '<h4 class="alert-heading">No dashboards created</h4>';
   echo 'Maybe you would like to add your first dashboard using the <a href="#" onclick="';
