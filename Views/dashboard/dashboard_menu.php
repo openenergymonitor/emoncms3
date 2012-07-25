@@ -8,11 +8,11 @@
 
 <div align="right" style="padding:4px;">
   <?php if ($type=="view") { ?>
-  <?php if ($ckeditor) { ?><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>">CKEditor</a><?php } ?>
   <a href="<?php echo $path; ?>dashboard/edit?id=<?php echo $id; ?>"><i class="icon-edit"></i></a>
+  <?php if ($ckeditor) { ?><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>"><img src="<?php echo $path; ?>/Includes/editors/images/ckicon.png" style="margin-top:-5px;"/></a><?php } ?>
   <?php } ?>
 
-  <?php if ($type=="edit") { ?>
+  <?php if ($type=="edit" || $type=="ckeditor") { ?>
   <a href="<?php echo $path; ?>dashboard/view?id=<?php echo $id; ?>"><i class="icon-eye-open"></i></a>
   <?php } ?>
   <a  data-toggle="modal" href="#myModal"><i class="icon-wrench"></i></a>
