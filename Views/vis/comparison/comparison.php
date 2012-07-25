@@ -22,7 +22,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Vis/flot/excanvas.min.js"></script><![endif]-->
-    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/lib/d3.js/d3.v2.min.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/comparison/comparison.js"></script>
     

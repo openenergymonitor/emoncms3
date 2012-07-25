@@ -9,7 +9,7 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
-global $session, $path;
+global $session, $path, $ckeditor;
 
 require_once "Includes/messages.php";
 ?>
@@ -17,7 +17,7 @@ require_once "Includes/messages.php";
 <!------------------------------------------------------------------------------------------
 Dashboard related javascripts
 ------------------------------------------------------------------------------------------->
-<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
 <!------------------------------------------------------------------------------------------
 Dashboard HTML
 ------------------------------------------------------------------------------------------->
@@ -40,14 +40,16 @@ Dashboard HTML
     <?php foreach ($dashboards as $dashboard) { ?>
       <li class="span3">
         <div class="thumbnail">
-          <img src="<?php echo $path ?>./Views/theme/common/ds.png" alt="">
+          <img src="http://placehold.it/260x180" alt="">
             <div class="caption">
               <h5><?php echo $dashboard['name']; ?></h5>
               <p><?php echo $dashboard['description']; ?></p>
               <p>
                 <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><?php echo _(Delete); ?></a>            
                 <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')">View</a>
-                <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')">ckEditor</a>
+
+<?php if ($ckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')">ckEditor</a><?php } ?>
+
                 <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')">Draw</a>            
               </p>
             </div>

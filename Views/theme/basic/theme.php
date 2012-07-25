@@ -36,7 +36,7 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <?php echo $menu.$addmenu; ?> 
+          <?php echo $mainmenu.$runmenu; ?> 
         </div>
       </div>
     </div>
@@ -72,5 +72,31 @@
     FOOTER
     ------------------------------------------------------->
     <div class="footer">Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a></div>  
+    
+    
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- do not remove, for dev tests -->
+    <!-- 
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/jquery.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/google-code-prettify/prettify.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-alert.js"></script>    
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-button.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/application.js"></script>
+    -->
+    
+    <!-- needed for modal -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/jquery.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-transition.js"></script>
   </body>
 </html>

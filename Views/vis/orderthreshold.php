@@ -12,28 +12,28 @@
   global $path, $embed;
   $apikey = $_GET["apikey"];
   $feedid = $_GET['feedid']?$_GET['feedid']:0;
-  $feedid = $_GET['power']?$_GET['power']:0;
+  $powerfeed = $_GET['power']?$_GET['power']:0;
   $thresholdA = $_GET['thresholdA']?$_GET['thresholdA']:500;
   $thresholdB = $_GET['thresholdB']?$_GET['thresholdB']:2500;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.selection.js"></script>
-  <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.stack.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.min.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.selection.min.js"></script>
+  <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.stack.min.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/date.format.js"></script>
 
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/api.js"></script>
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/inst.js"></script>
  
 <?php if (!$embed) { ?>
-<h2>Threshold</h2>
+<h2>Threshold Order</h2>
 <?php } ?>
 
     <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
       <div id="graph"></div>
-        <h3 style="position:absolute; top:00px; right:0px; text-align:right;"><span id="stats"></span> <input id="back" type="button" value="Reload" /></h3>
+        <h3 style="position:absolute; top:10px; right:12px; text-align:right;"><span id="stats"></span> <input id="back" type="button" value="Reload" /></h3>
     </div>
 
 <script id="source" language="javascript" type="text/javascript">
