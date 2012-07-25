@@ -69,7 +69,6 @@
       segment = ["#b7beff","#ffd9d9","#ffbebe","#ff9c9c","#ff6e6e","#ff3d3d"];
     }
 
-
     if (position>maxvalue) position = maxvalue;
     var a = 1.75 - ((position/maxvalue) * 1.5) + offset;
 
