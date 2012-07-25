@@ -1,4 +1,4 @@
-<?php global $path; ?>
+<?php global $path, $ckeditor; ?>
 
     <span style="float:left; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Dashboards:</span>
     <ul class="greydashmenu">
@@ -9,7 +9,7 @@
 <?php if ($type=="edit" || $type=="ckeditor") { ?>
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
       <?php if ($type=="ckeditor") { ?> <li><a href="edit?id=<?php echo $id; ?>">Draw</a></li><?php } ?>
-      <?php if ($type=="edit") { ?> <li><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>">CKEditor</a></li><?php } ?>
+      <?php if ($type=="edit" && $ckeditor==true) { ?> <li><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>">CKEditor</a></li><?php } ?>
       <li><a href="<?php echo $path; ?>dashboard/source?id=<?php echo $id; ?>">Source</a></li>
     </ul>
     <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>
@@ -30,7 +30,7 @@
 
     <ul class="greydashmenu" style="float:right; padding-right:5px;">
       <li><a href="<?php echo $path; ?>dashboard/edit?id=<?php echo $id; ?>">Draw</a></li>
-      <li><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>">CKEditor</a></li>
+      <?php if ($ckeditor==true) { ?><li><a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>">CKEditor</a></li><?php } ?>
       <li><a href="<?php echo $path; ?>dashboard/source?id=<?php echo $id; ?>">Source</a></li>
     </ul>
     <span style="float:right; color:#888; font: 13px/27px sans-serif; font-weight:bold; ">Edit:</span>

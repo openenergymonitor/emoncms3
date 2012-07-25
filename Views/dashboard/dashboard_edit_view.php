@@ -1,7 +1,7 @@
 <?php global $session,$path; ?>
 
-  <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.js"></script>
-  <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
+  <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.min.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgetlist.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/render.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgets/dial.js"></script>

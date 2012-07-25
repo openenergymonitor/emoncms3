@@ -22,7 +22,7 @@ http://openenergymonitor.org/emon/node/600
 	    bar { height: 32px; background: red; }
 	</style>
 
-<script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo $path;?>Includes/flot/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $path;?>Views/vis/smoothie/smoothie.js"></script>
 
 <?php if (!$embed) { ?>

@@ -10,6 +10,9 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 */
+
+if (!$session['read']) return;
+
 if ($_SESSION['editmode'] == TRUE) { 
   $logo = get_theme_path() . "/emoncms logo off.png";
   $viewl = $session['username'];
@@ -39,6 +42,9 @@ if ($_SESSION['editmode'] == TRUE) {
   </ul>
   <?php if ($_SESSION['editmode'] == TRUE) { ?>
   <ul class="nav pull-right">  
+    <?php if ($session['admin']) { ?>
+      <li><a href='<?php echo $GLOBALS['path']; ?>admin'><?php echo _("Admin"); ?></a></li>
+    <?php } ?>
     <li><a href='<?php echo $GLOBALS['path']; ?>user/view'><?php echo _("Account"); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>user/logout'><?php echo _("Logout"); ?></a></li>
   </ul>  		

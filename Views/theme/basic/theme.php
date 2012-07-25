@@ -36,7 +36,7 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <?php echo $menu.$addmenu; ?> 
+          <?php echo $mainmenu.$runmenu; ?> 
         </div>
       </div>
     </div>

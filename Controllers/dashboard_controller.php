@@ -113,10 +113,10 @@
       {
         // In run mode dashboard menu becomes the main menu
         $_SESSION['editmode'] = FALSE;
-        $output['menu'] =  '<div class="nav-collapse collapse">';
-        $output['menu'] .= '<ul class="nav">'.$menu.'</ul>';
-        if ($session['write']) $output['menu'] .= "<ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul>";
-        $output['menu'] .= "</div>";
+        $output['runmenu'] =  '<div class="nav-collapse collapse">';
+        $output['runmenu'] .= '<ul class="nav">'.$menu.'</ul>';
+        if ($session['write']) $output['runmenu'] .= "<ul class='nav pull-right'><li><a href='".$GLOBALS['path']."user/logout'>"._("Logout")."</a></li></ul>";
+        $output['runmenu'] .= "</div>";
       }
       else
       {

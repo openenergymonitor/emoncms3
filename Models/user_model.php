@@ -117,6 +117,13 @@ function create_user($username, $password)
   $apikey_read = md5(uniqid(mt_rand(), true));
 
   db_query("INSERT INTO users ( username, password, salt ,apikey_read, apikey_write ) VALUES ( '$username' , '$hash' , '$salt', '$apikey_read', '$apikey_write' );");
+
+  // Make the first user an admin
+  $userid = db_insert_id();
+  if ($userid == 1)
+  {
+    db_query("UPDATE users SET admin = 1 WHERE id = '$userid'");
+  }
 }
 
 function ckeck_for_user_directory($username)

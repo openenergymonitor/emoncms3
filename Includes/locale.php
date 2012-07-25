@@ -26,7 +26,7 @@ function lang_http_accept()
 			if ($splits["subtag"]<> "") $a = $a."_".$splits["subtag"];
 				$langs[]=$a;
     		} else {
-        		echo "\nno match\n";
+        		//echo "\nno match\n"; 
     	}
 	}
 	return $langs;
