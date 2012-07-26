@@ -18,9 +18,9 @@ function SelectLanguageForm($selectedlang) {
 	
 	if ($handle = opendir('locale')) {
 		if ($selectedlang=='')
-			echo '<option selected value="">'._("AUTODETECTLANGUAGE").'</option>';
+			echo '<option selected value="">'._("Browser language").'</option>';
 		else 
-			echo '<option value="">'._("AUTODETECTLANGUAGE").'</option>';
+			echo '<option value="">'._("Browser language").'</option>';
 		
 	    while (false !== ($entry = readdir($handle))) 
     		if (is_dir('locale/'.$entry) && ($entry !='.') && ($entry!='..'))
@@ -32,12 +32,20 @@ function SelectLanguageForm($selectedlang) {
 			}
 			         
     	closedir($handle);
-		echo '</select>';
-		
+		echo '</select>';		
 	} 
 	
 	echo '<input type="submit" value="Set" class="btn">';
 	echo '</form>';
+}
+
+{
+  // Fake code to be detected by POedit to translate languages name 
+  // Do you know a better way to do that? If not here POedit will delete them in the mo file
+  _("en_EN");
+  _("es_ES");
+  _("nl_BE");
+  _("nl_NL");     
 }
 
 ?>
