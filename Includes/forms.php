@@ -8,9 +8,10 @@ Emoncms - open source energy visualisation
 Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
-
-// Create combo with available languages
-// todo: set selected value from database and set language
+ 
+/*
+ * Create combo with available languages
+ */
 function SelectLanguageForm($selectedlang) {
 	echo '<form class="well form-inline" action="setlang" method="get">';
 	echo '<span class="help-block">'._("Select preferred language").'</span>';	
@@ -39,9 +40,11 @@ function SelectLanguageForm($selectedlang) {
 	echo '</form>';
 }
 
+/*
+ * Fake code to be detected by POedit to translate languages name
+ * Do you know a better way to do that? If not here POedit will delete them in the mo file 
+ */
 {
-  // Fake code to be detected by POedit to translate languages name 
-  // Do you know a better way to do that? If not here POedit will delete them in the mo file
   _("en_EN");
   _("es_ES");
   _("nl_BE");
