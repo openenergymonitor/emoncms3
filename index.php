@@ -72,6 +72,8 @@ $controller = $args[0];
 $action = $args[1];
 $subaction = $args[2];
 
+if (!$controller) {$controller = "user"; $action = "login";}
+
 if ($_GET['embed'])
 	$embed = 1;
 else
@@ -120,8 +122,6 @@ if ($output == null)
     $output = controller("dashboard"); 
   }
 }
-
-if (!$session['read']) $output['content'] = view("user/login_block.php", array());
 
 // 3) Add the main menu
 $output['mainmenu'] = view("menu_view.php", array());
