@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-26 14:11+0100\n"
-"PO-Revision-Date: 2012-07-26 14:13+0100\n"
+"POT-Creation-Date: 2012-07-26 14:29+0100\n"
+"PO-Revision-Date: 2012-07-26 14:29+0100\n"
 "Last-Translator: ilde <i.martinez@ismsolar.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -137,8 +137,24 @@ msgstr "Selecciona el idioma por defecto:"
 
 #: ../../../Includes/forms.php:21
 #: ../../../Includes/forms.php:23
-msgid "AUTODETECTLANGUAGE"
-msgstr "Browser language"
+msgid "Browser language"
+msgstr "Lenguaje del navegador"
+
+#: ../../../Includes/forms.php:45
+msgid "en_EN"
+msgstr "Inglés"
+
+#: ../../../Includes/forms.php:46
+msgid "es_ES"
+msgstr "Español"
+
+#: ../../../Includes/forms.php:47
+msgid "nl_BE"
+msgstr ""
+
+#: ../../../Includes/forms.php:48
+msgid "nl_NL"
+msgstr ""
 
 #: ../../../Models/mail_model.php:34
 msgid "Message successfully sent!"
@@ -741,6 +757,9 @@ msgstr "Entrar"
 #: ../../../Views/user/login_block.php:50
 msgid "Or if you are new enter a username and password above and click register"
 msgstr ""
+
+#~ msgid "AUTODETECTLANGUAGE"
+#~ msgstr "Browser language"
 
 #~ msgid "Sorry, you need a valid apikey or be logged in to see this page"
 #~ msgstr ""
