@@ -94,9 +94,6 @@
     -->
     
     <!-- needed for modal -->
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/jquery.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-modal.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-transition.js"></script>
+    <!-- MOVED TO DASHBOARD_CONFIG_VIEW (declaring jquery here conflics with the jquery lib loaded by the visualisations)-->
   </body>
 </html>
