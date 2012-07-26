@@ -84,6 +84,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
     //--------------------------------------------------------------------
     if (selected_box)
     {
+    $("#state").html("Changed");
       var top = boxlist[selected_box]['top'];
       var left = boxlist[selected_box]['left'];
       var width = boxlist[selected_box]['width'];
@@ -185,7 +186,6 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
   });
 
   $(canvas).mousedown(function(event) { 
-
     mousedown = true;
     var mx = event.layerX;
     var my = event.layerY;
@@ -277,6 +277,7 @@ function dashboard_designer(_canvas, _grid_size, _widgets)
     $("#testo").hide();
     redraw = 1;
     reloadiframe = selected_box;
+    $("#state").html("Changed");
   });
 
  $("#delete-button").click(function(event) { 

@@ -14,8 +14,9 @@
   <button id="options-button">Options</button>
   <button id="delete-button">Delete</button>
   </span>
-  
+
   <button style="float:right; margin:6px;" id="save-dashboard">Save</button>
+  <span id="state"  style="float:right; margin-top:9px; color:#888;"></span>
 </div>
 
 <div id="page-container" style="height:400px; position:relative;">
@@ -48,12 +49,13 @@
   show_dashboard();
 
   $("#save-dashboard").click(function (){
+    console.log("Saving");
     $.ajax({
-      type : "POST",
-      url :  path+"dashboard/set",
+      type: "GET",
+      url :  path+"dashboard/set.json",
       data : "&content=" + encodeURIComponent($("#page").html())+"&id="+dashid,
-      dataType : 'json',
-      success : function() { } 
+      
+      success : function(data) { if (data=="ok") $("#state").html("Saved"); } 
     });
   });
 </script>
