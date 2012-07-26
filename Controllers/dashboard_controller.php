@@ -215,7 +215,15 @@
       $content = db_real_escape_string($content);
 
       set_dashboard_content($session['userid'],$content,$id);
-      $output['message'] = _("dashboard set");
+
+      if ($format == 'html')
+      {
+        $output['message'] = _("dashboard set");
+      }
+      else
+      {
+        $output['message'] = "ok";
+      }
     }
 
     //----------------------------------------------------------------------------------------------------------------------
