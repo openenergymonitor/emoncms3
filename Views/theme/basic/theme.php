@@ -62,9 +62,9 @@
     CONTENT
     ------------------------------------------------------->     	
     <div class="content">
-      <div style="margin: 0px auto; max-width:940px; padding:10px;">
+      <?php if (!$fullwidth) {?><div style="margin: 0px auto; max-width:940px; padding:10px;"><?php } ?>
         <?php print $content; ?>
-      </div>
+      <?php if (!$fullwidth) {?></div><?php } ?>
     </div>
 
     <div style="clear:both; height:37px;"></div> 
