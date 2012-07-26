@@ -120,5 +120,3 @@ function api_controller()
   }
 
 ?>
-
-
