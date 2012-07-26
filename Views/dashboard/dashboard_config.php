@@ -1,4 +1,9 @@
 <?php global $session,$path; ?>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/jquery.js"></script>
+<script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-modal.js"></script>
+<script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-transition.js"></script>
+
 <!-- TODO put in separated unit -->
 <div class="modal hide fade" id="myModal">
   <div class="modal-header">

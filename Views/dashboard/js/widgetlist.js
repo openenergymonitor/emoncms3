@@ -14,6 +14,13 @@
       "options":["topfeed","botfeed"]
     },
 
+    "led": 
+    {
+      "offsetx":-40,"offsety":-40,"width":80,"height":80,
+      "menu":"Widgets",
+      "options":["feed"]
+    },
+
     "paragraph": 
     {
       "offsetx":-50,"offsety":-30,"width":100,"height":60,

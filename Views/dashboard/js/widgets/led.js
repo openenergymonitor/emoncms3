@@ -8,11 +8,12 @@
     http://openenergymonitor.org
   */
 
-  function draw_led(circle,status)
-  {
-    circle.clearRect(0,0,50,50);
+function draw_led(circle,status)
+{
+    if (!circle) return; 
+  circle.clearRect(0,0,80,80);
 
-  var radgrad = circle.createRadialGradient(30,30,0,30,30,20);  
+  var radgrad = circle.createRadialGradient(40,40,0,40,40,20);  
 
 if (status==0) {                   // red
   radgrad.addColorStop(0, '#F75D59');  
@@ -40,7 +41,7 @@ if (status==0) {                   // red
   radgrad.addColorStop(1, 'rgba(1,159,98,0)');
   // draw shapes  
  circle.fillStyle = radgrad;  
- circle.fillRect(0,0,60,60);  
+ circle.fillRect(20,20,60,60);  
 
 
 }
@@ -49,7 +50,7 @@ if (status==0) {                   // red
 
 function draw_led_ie8(circle,status)
 {
-
+    if (!circle) return; 
 
 	if (status==0) {			// red
 	  circle.fillStyle = "#C11B17"; 
@@ -75,9 +76,10 @@ function draw_led_ie8(circle,status)
 
   function draw_binary_led(circle,status)
   {
-    circle.clearRect(0,0,50,50);
+    if (!circle) return; 
+    circle.clearRect(0,0,80,80);
 
-  var radgrad = circle.createRadialGradient(30,30,0,30,30,20);  
+  var radgrad = circle.createRadialGradient(40,40,0,40,40,20);  
 
 if (status==0) {                   // red
   radgrad.addColorStop(0, '#F75D59');  
@@ -90,14 +92,14 @@ if (status==0) {                   // red
   radgrad.addColorStop(1, 'rgba(1,159,98,0)');
   // draw shapes  
  circle.fillStyle = radgrad;  
- circle.fillRect(0,0,60,60);  
+ circle.fillRect(20,20,60,60);  
 
 
 }
 
 function draw_binary_led_ie8(circle,status)
 {
-
+    if (!circle) return; 
 
 	if (status==0) {			// red
 	  circle.fillStyle = "#C11B17"; 

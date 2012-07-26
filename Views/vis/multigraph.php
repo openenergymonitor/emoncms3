@@ -30,6 +30,8 @@
       <div id="graph"></div>
       <div style="position:absolute; top:20px; right:20px;">
 
+        <input class="time" type="button" value="1H" time="0.04"/>
+        <input class="time" type="button" value="6H" time="0.25"/>
         <input class="time" type="button" value="D" time="1"/>
         <input class="time" type="button" value="W" time="7"/>
         <input class="time" type="button" value="M" time="30"/>
@@ -187,7 +189,7 @@
 
   function plot()
   {
-    var plot = $.plot($("#graph"), plotdata, {
+    $.plot($("#graph"), plotdata, {
       grid: { show: true, hoverable: true, clickable: true },
       xaxis: { mode: "time", min: start, max: end },
       selection: { mode: "xy" },

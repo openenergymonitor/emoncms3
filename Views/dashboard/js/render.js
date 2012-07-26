@@ -137,6 +137,17 @@ function update()
     var id = "can-"+$(this).attr("id");
     draw_cylinder(widgetcanvas[id],cyl_bot,cyl_top,$(this).width(),$(this).height());
   });
+
+  $('.led').each(function(index)
+  {
+    var feed = $(this).attr("feed");
+    var val = assoc[feed];
+    var id = "can-"+$(this).attr("id");
+    if (browserVersion < 9)
+      draw_led_ie8(widgetcanvas[id], val);
+    else
+      draw_led(widgetcanvas[id], val);
+  });
 }
 
 function fast_update()
@@ -192,7 +203,7 @@ function curve_value(feed,rate)
 
 function setup_widget_canvas()
 {
-  $('.dial,.cylinder').each(function(index)
+  $('.dial,.cylinder,.led').each(function(index)
   {
     var widgetId = $(this).attr("id");
 
