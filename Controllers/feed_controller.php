@@ -271,7 +271,7 @@
       $feedid = intval($_GET["id"]);
       if (feed_belongs_user($feedid, $session['userid'])) {
         $time = intval($_GET["time"]);
-        $value = intval($_GET["newvalue"]);
+        $value = floatval($_GET["newvalue"]);
         update_feed_data($feedid,time(),$time,$value);
         $output['message'] = "Edit";
       }
