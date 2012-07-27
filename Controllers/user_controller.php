@@ -208,21 +208,21 @@
       if ($format == 'html') $output['content'] = view("user_view.php", array('user' => $user, 'stats'=>$stats));
     }
 
-	//---------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------
     // SET USERS DEFAULT LANGUAGE
     // http://yoursite/emoncms/user/setlang
     //---------------------------------------------------------------------------------------------------------
     elseif ($action == 'setlang' && $session['write'])
-	{
-		// Store userlang in database
-		set_user_lang($session['userid'],$_GET['lang']);
+    {
+		  // Store userlang in database
+		  set_user_lang($session['userid'],$_GET['lang']);
 
-		// Reload the page	  	
-		if ($format == 'html')
-		{
-			header("Location: view");
-		}
-	}
+		  // Reload the page	  	
+		  if ($format == 'html')
+		  {
+  			header("Location: view");
+	   	}
+    }
 
     return $output;
   }

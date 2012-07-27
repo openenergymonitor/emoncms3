@@ -15,7 +15,7 @@
   function controller($cat)
   {
     $controller = $cat."_controller";
-    $controllerScript = "Controllers/".$controller.".php";
+    $controllerScript = "Controllers/".$controller.".php";   
 
     if (is_file($controllerScript))
     {
