@@ -12,12 +12,41 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
-require "Includes/forms.php";
 ?>
 
   <h2><?php echo _("User: "); ?><?php echo $user['username']; ?></h2>
-  <?php SelectLanguageForm($user['lang']); ?>
+  <?php   
+  /*
+  * Create combo with available languages
+  */
+  echo '<form class="well form-inline" action="setlang" method="get">';
+  echo '<span class="help-block">'._("Select preferred language").'</span>';  
+  echo '<select name="lang">';
   
+  if ($handle = opendir('locale')) {
+    if ($user['lang']=='')
+      echo '<option selected value="">'._("Browser language").'</option>';
+    else 
+      echo '<option value="">'._("Browser language").'</option>';
+    
+      while (false !== ($entry = readdir($handle))) 
+        if (is_dir('locale/'.$entry) && ($entry !='.') && ($entry!='..'))
+      {
+        if ($entry == $user['lang'])
+          echo '<option selected value="'.$entry.'">'._($entry).'</option>';
+        else
+              echo '<option value="'.$entry.'">'._($entry).'</option>';
+      }
+               
+    closedir($handle);
+    echo '</select>';   
+  } 
+    
+  echo '<input type="submit" value="'._("Save").'" class="btn">';
+  echo '</form>';
+  
+  ?>
+               
   <form class="well" action="changepass" method="post">
     <h3><?php echo _("Change password"); ?></h3>
       
@@ -60,3 +89,16 @@ require "Includes/forms.php";
     </table>
   </div>
 
+<?php
+/*
+ * Fake code to be detected by POedit to translate languages name
+ * Do you know a better way to do that? If not here POedit will delete them in the mo file 
+ * Compiler (php interpreter will ignore it)
+ */
+{
+  _("en_EN");
+  _("es_ES");
+  _("nl_BE");
+  _("nl_NL");     
+}
+?>

@@ -16,8 +16,6 @@
 
 define('EMONCMS_EXEC', 1);
 
-// Load the debug library for debug purposes ( http://www.firephp.org/ )
-//require_once('./Includes/debug/FirePHPCore/fb.php'); ob_start();
 $ckeditor = false;	// ckeditor installed
 
 require "Includes/core.inc.php";
@@ -38,22 +36,20 @@ if ($ssl == "on") {
 $path = dirname("$proto://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']) . "/";
 
 require "Includes/db.php";
+require "Includes/messages.php";
 require "Models/user_model.php";
 require "Models/statistics_model.php";
-$e = db_connect();
 
-if ($e == 2) {
-	echo "no settings.php";
-	die ;
-} else if ($e == 3) {
-	echo "db settings error";
-	die ;
-} else if ($e == 4) {
-	header("Location: setup.php");
+switch(db_connect()) {
+  case 0: break;
+  case 1: break;
+  case 2: show_nosettingsfile_message(); die;
+  case 3: show_dbsettingserror_message(); die ;
+  case 4: header("Location: setup.php"); break;
 }
-
+  
 //---------------------------------------------------------------------------------
-// DECONDE URL ARGUMENT
+// DECODE URL ARGUMENT
 //---------------------------------------------------------------------------------
 $q = preg_replace('/[^.\/a-z0-9]/', '', $_GET['q']);
 // filter out all except a-z / .
@@ -93,7 +89,6 @@ else
   emon_session_start();
   $session = $_SESSION;
 }
-
 
 // Set user language on every page load to avoid apache multithread setlocale error
 set_emoncms_lang($session['userid']);
