@@ -72,14 +72,14 @@ $status = $feed[7];
       <h3><?php echo _("Tag feed"); ?></h3>
       <form action="tag" method="get" style="margin:0px;">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="text" name="tag" style="width:100px;" value="<?php echo $tag; ?>" />
+        <input type="text" name="tag" class="span3" value="<?php echo $tag; ?>" />
         <input type="submit" value="<?php echo _('Save'); ?>" class="button05"/>
       </form>
       <h3><?php echo _("Rename feed"); ?></h3>
       <form action="rename" method="get" style="margin:0px;">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="text" name="name" style="width:100px;" value="<?php echo $name; ?>" />
-        <input type="submit" value="<?php echo _('Save'); ?>" class="button05"/>
+        <input type="text" name="name" class="span3" value="<?php echo $name; ?>" />
+        <input type="submit" value="<?php echo _('Rename'); ?>" class="button05"/>
       </form>
   	</div>
   
@@ -87,7 +87,11 @@ $status = $feed[7];
       <h3><?php echo _("Notify"); ?></h3>
       <form action="../notify/view" method="get">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="submit" value="<?php echo _('Set notifications'); ?>" class="button05" style="width:150px"/>
+        <input type="submit" value="<?php echo _('Set notifications'); ?>" class="button05"/>
+        <p>
+          <span class="label label-warning"><?php echo _("Set notification behavior for this feed"); ?></span>
+     
+        </p>          
       </form>
 		</div>
 
@@ -98,7 +102,7 @@ $status = $feed[7];
         	<input type="hidden" name="message" value="<?php echo $message; ?>">
         	<input type="hidden" name="action" value="<?php echo _('feed/delete'); ?>">
         	<input type="hidden" name="id" value="<?php echo $id; ?>">
-        	<input type="submit" value="<?php echo _('delete'); ?>" class="btn btn-danger"/>
+        	<input type="submit" value="<?php echo _('Delete'); ?>" class="btn btn-danger"/>
     	  </form>
   	</div>
       

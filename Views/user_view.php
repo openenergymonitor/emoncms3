@@ -42,11 +42,11 @@ defined('EMONCMS_EXEC') or die('Restricted access');
     echo '</select>';   
   } 
     
-  echo '<input type="submit" value="Set" class="btn">';
+  echo '<input type="submit" value="'._("Save").'" class="btn">';
   echo '</form>';
   
   ?>
-  
+               
   <form class="well" action="changepass" method="post">
     <h3><?php echo _("Change password"); ?></h3>
       
@@ -93,6 +93,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 /*
  * Fake code to be detected by POedit to translate languages name
  * Do you know a better way to do that? If not here POedit will delete them in the mo file 
+ * Compiler (php interpreter will ignore it)
  */
 {
   _("en_EN");
