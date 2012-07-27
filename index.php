@@ -36,14 +36,15 @@ if ($ssl == "on") {
 $path = dirname("$proto://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']) . "/";
 
 require "Includes/db.php";
+require "Includes/messages.php";
 require "Models/user_model.php";
 require "Models/statistics_model.php";
 
 switch(db_connect()) {
   case 0: break;
   case 1: break;
-  case 2: echo "no settings.php"; die;
-  case 3: echo "db settings error"; die ;
+  case 2: show_nosettingsfile_message(); die;
+  case 3: show_dbsettingserror_message(); die ;
   case 4: header("Location: setup.php"); break;
 }
   
@@ -88,7 +89,6 @@ else
   emon_session_start();
   $session = $_SESSION;
 }
-
 
 // Set user language on every page load to avoid apache multithread setlocale error
 set_emoncms_lang($session['userid']);
