@@ -18,8 +18,8 @@ function api_controller()
   require "Models/input_model.php";
   require "Models/feed_model.php";
   require "Models/process_model.php";
-
-
+  
+      
   // POST arduino posts up to emoncms 				
   if ($action == 'post' && $session['write'])
   {

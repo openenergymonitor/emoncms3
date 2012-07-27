@@ -108,7 +108,7 @@
             bars: { show: true,align: "center",barWidth: (barwidth*1000),fill: true }
             },
   	    grid: { show: true, hoverable: true, clickable: true },
-            xaxis: { mode: "time", minTickSize: [1, mode],
+            xaxis: { mode: "time", localTimezone: true, minTickSize: [1, mode],
                  tickLength: 1 }
           });
         }

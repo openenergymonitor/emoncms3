@@ -23,4 +23,27 @@ function show_nodashboards_message()
   echo '</div>';
 } 
 
+/*
+ * DB Settings error
+ * TODO: bootstrap style
+ */
+function show_dbsettingserror_message()
+{
+  echo '<div class="alert alert-block">';
+  echo '<h4 class="alert-heading">BD Settings error</h4>';
+  echo 'Please, check database settings.php file';
+  echo '</div>';
+}
+
+/*
+ * No settings.php file found
+ */
+function show_nosettingsfile_message()
+{
+  echo '<div class="alert alert-block">';
+  echo '<h4 class="alert-heading">No settings.php file found</h4>';
+  echo 'Copy and modify default.settings.php to settings.php';
+  echo '</div>'; 
+}
+
 ?>
