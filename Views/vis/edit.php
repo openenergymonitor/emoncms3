@@ -80,7 +80,7 @@
     
     var plot = $.plot($("#graph"), [plotdata], {
       grid: { show: true, clickable: true},
-      xaxis: { mode: "time", min: start, max: end },
+      xaxis: { mode: "time", localTimezone: true, min: start, max: end },
       yaxis: {min: 0},
       selection: { mode: "xy" }
     });

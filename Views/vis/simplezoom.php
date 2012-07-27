@@ -122,7 +122,7 @@
   {
     var plot = $.plot($("#graph"), plotdata, {
       selection: { mode: "x" },
-      grid: { show: true,  clickable: true, hoverable: true },
+      grid: { show: true, localTimezone: true, clickable: true, hoverable: true },
       xaxis: { mode: "time", min: start, max: end }
     });
   }
