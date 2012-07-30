@@ -9,7 +9,7 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
-global $session, $path;
+global $session, $path, $useckeditor;
 
 require_once "Includes/messages.php";
 ?>
@@ -90,8 +90,8 @@ require_once "Includes/messages.php";
       <td>
         <div>       
           <a href="#" title="<?php echo _("Draw"); ?>" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')"><i class='icon-edit'></i></a>
-					<a href="#" title="<?php echo _("View"); ?>" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')"><i class='icon-eye-open'></i></a>          
-					<?php if ($ckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><?php echo _("CKEditor"); ?></a><?php } ?>
+					<a href="#" title="<?php echo _("View"); ?>" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')"><i class='icon-eye-open'></i></a>
+					<?php if ($useckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><?php echo _("CKEditor"); ?></a><?php } ?>
           <a href="#" title="<?php echo _("Delete"); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><i class='icon-trash'></i></a>
         </div>            
       </td>    

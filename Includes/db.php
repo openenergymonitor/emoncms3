@@ -4,7 +4,8 @@
   defined('EMONCMS_EXEC') or die('Restricted access');
 
   $mysqli = 0;
-
+  $useckeditor = false;
+  
   /*
    All Emoncms code is released under the GNU Affero General Public License.
    See COPYRIGHT.txt and LICENSE.txt.
@@ -17,7 +18,9 @@
 
   function db_connect()
   {
-    global $mysqli;
+    global $mysqli, $useckeditor;
+    //TODO create a unit to process settings.php file 
+    
     // ERROR CODES
     // 1: success!
     // 2: no settings.php file

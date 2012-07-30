@@ -1,1 +1,10 @@
-https://github.com/simogeo/Filemanager
+install from https://github.com/simogeo/Filemanager in emoncms3_install_dir/Includes/simogeo-Filemanager
+
+- copy simogeo-Filemanager/scripts/filemanager.config.js.default to simogeo-Filemanager/scripts/filemanager.config.js
+- change file
+    var fileRoot = '/' + am + 'userfiles/';
+    to 
+    var fileRoot = '/';
+    
+- apply these changes too
+  https://github.com/openenergymonitor/emoncms3/commit/5e0d4dc032595f99205e511a03a35b02c6e0450b

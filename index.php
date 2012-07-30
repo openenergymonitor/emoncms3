@@ -16,8 +16,6 @@
 
 define('EMONCMS_EXEC', 1);
 
-$ckeditor = false;	// ckeditor installed
-
 require "Includes/core.inc.php";
 
 //error_reporting(E_ALL);
