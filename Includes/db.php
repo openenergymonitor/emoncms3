@@ -30,7 +30,7 @@
     if ($mysqli->connect_error) 
       return 3;
     else                     
-      if (db_query("SELECT * FROM users"))
+      if (db_query("SELECT id FROM users LIMIT 1"))
         return 1;
       else
         return 4;
