@@ -111,14 +111,48 @@
     {
       $oldpass =  db_real_escape_string($_POST['oldpass']);
       $newpass =  db_real_escape_string($_POST['newpass']);
-      if (change_password($_SESSION['userid'],$oldpass,$newpass))
+      if (strlen($newpass) < 4 || strlen($newpass) > 30)
+      {
+        $output['message'] = _("Please enter a password that is 4 to 30 characters long")."<br/>";
+      }
+      elseif (change_password($_SESSION['userid'],$oldpass,$newpass))
       {
         $output['message'] = _("Your password has been changed");
       } 
       else
       {
-        $output['message'] = _("Invalid old password");
+        $output['message'] = _("Invalid password");
       }
+    }
+
+    // http://yoursite/emoncms/user/changepass?old=sdgs43&new=sdsg345
+    elseif ($action == 'changedetails' && $_SESSION['write'])
+    {
+      $username = preg_replace('/[^\w\s-.]/','',$_POST["username"]);
+      $username =  db_real_escape_string($username);
+
+      $email = preg_replace('/[^\w\s-.@]/','',$_POST["email"]);
+      $email =  db_real_escape_string($email);
+
+      $id = get_user_id($username);
+      if ($id && $id!=$_SESSION['userid'])
+      {
+      	$output['message'] = _("Sorry username already exists");
+      }
+      elseif (strlen($username) < 4 || strlen($username) > 30)
+      {
+      	$output['message'] = _("Please enter a username that is 4 to 30 characters long")."<br/>";
+      }
+      elseif (!$email)
+      {
+      	$output['message'] = _("No email address present")."<br/>";
+      }
+      else
+      {
+        set_user_username($_SESSION['userid'], $username);
+        set_user_email($_SESSION['userid'], $email);
+      }
+
     }
 
     //---------------------------------------------------------------------------------------------------------

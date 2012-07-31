@@ -47,10 +47,21 @@ defined('EMONCMS_EXEC') or die('Restricted access');
   
   ?>
                
+  <form class="well" action="changedetails" method="post">
+    <h3><?php echo _("Change details"); ?></h3>
+
+    <label><?php echo _("Username:"); ?></label>
+    <input type="username" name="username" value="<?php echo $user['username']; ?>" />
+
+    <label><?php echo _("Email:"); ?></label>
+    <input type="email" name="email" value="<?php echo $user['email']; ?>" />
+    <br>
+    <input type="submit" class="btn btn-danger" value="<?php echo _("Change"); ?>" />
+  </form>
+
   <form class="well" action="changepass" method="post">
     <h3><?php echo _("Change password"); ?></h3>
-      
-    <label><?php echo _("Old password:"); ?></label>
+    <label><?php echo _("Current password:"); ?></label>
     <input type="password" name="oldpass" />
         
     <label><?php echo _("New password:"); ?></label>
