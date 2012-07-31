@@ -47,7 +47,7 @@ set_lang($accepted_languages);
 				<table style="font-size:13px">
 					<tr>
 						<td width="265px">
-							<?php echo _("Or if you are new enter a username and password above and click register"); ?></td><td><input type="submit" class="btn btn-info" value="Register" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />	
+							<?php echo _("Or if you are new enter a username and password above and click register"); ?></td><td><input type="submit" class="btn btn-info" value="<?php echo _("Register"); ?>" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />	
 						</td>
 					</tr>
 				</table>

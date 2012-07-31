@@ -61,7 +61,8 @@
       if ($session['read']) $apikey = get_apikey_read($session['userid']);
       $dashboards = get_dashboard_list($session['userid'],0,0); 
       $menu = build_dashboard_menu($session['userid'],"edit");
-      if ($format == 'html') $output['content'] = view("dashboard/dashboard_list_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu));
+      $user = get_user($session['userid']);
+      if ($format == 'html') $output['content'] = view("dashboard/dashboard_list_view.php", array('apikey'=>$apikey, 'dashboards'=>$dashboards,'menu'=>$menu, 'user'=>$user));
     }
 
     //----------------------------------------------------------------------------------------------------------------------
