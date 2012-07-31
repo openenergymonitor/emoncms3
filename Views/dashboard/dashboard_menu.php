@@ -9,7 +9,7 @@
   http://openenergymonitor.org
 */
   
-global $path, $ckeditor;
+global $path, $useckeditor;
 ?>
 
 <span style="float:left; color:#888; font: 13px/27px sans-serif; font-weight:bold; "><?php echo _("Dashboards:"); ?></span>
@@ -22,7 +22,7 @@ global $path, $ckeditor;
   <?php if ($type=="view") { ?>
     <a href="<?php echo $path; ?>dashboard/edit?id=<?php echo $id; ?>" title="<?php echo _("Draw Editor"); ?>" ><i class="icon-edit"></i></a>
     
-    <?php if ($ckeditor) { ?>
+    <?php if ($useckeditor) { ?>
       <a href="<?php echo $path; ?>dashboard/ckeditor?id=<?php echo $id; ?>" title="CKEditor" >
       <img src="<?php echo $path; ?>/Includes/editors/images/ckicon.png" style="margin-top:-5px;"/></a>
     <?php } ?>
