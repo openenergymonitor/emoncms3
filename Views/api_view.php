@@ -356,23 +356,23 @@ global $path;
     </tr>
     <tr>
       <td>
-        <b>Share</b>
+        <b><?php echo _("Share"); ?></b>
         <br>
         <?php echo _("To share a visualisation use your read apikey. Add the attribute "); ?><i>&apikey=<?php echo $user['apikey_read']; ?></i><?php echo _(" to the URL"); ?>
       </td>
     </tr>   
     <tr>
       <td>
-        <b>Embed</b>
+        <b><?php echo _("Embed"); ?></b>
         <br>
          <?php echo htmlspecialchars('<iframe style="width:650px; height:400px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="' . $path . 'vis/rawdata?feedid=1&apikey=' . $user['apikey_read'] . '&embed=1"></iframe>'); ?>
       </td>
     </tr>
     <tr>
       <td>
-        <b>Reset Multigraph</b>
+        <b><?php echo _("Reset Multigraph"); ?></b>
         <br>
-        <?php echo _("The multigraph can be reset using the &clear=1 attribute."); ?>
+        <?php echo _("The multigraph can be reset using the <i>&clear=1</i> attribute."); ?>
       </td>
     </tr>   
   </table>

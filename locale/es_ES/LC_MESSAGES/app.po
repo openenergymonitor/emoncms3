@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-26 14:29+0100\n"
-"PO-Revision-Date: 2012-07-26 14:29+0100\n"
+"POT-Creation-Date: 2012-07-28 19:16+0100\n"
+"PO-Revision-Date: 2012-07-31 09:49+0100\n"
 "Last-Translator: ilde <i.martinez@ismsolar.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,11 +36,11 @@ msgstr "Nuevo panel"
 msgid "Logout"
 msgstr "Desconectar"
 
-#: ../../../Controllers/dashboard_controller.php:218
+#: ../../../Controllers/dashboard_controller.php:221
 msgid "dashboard set"
 msgstr "establecer panel"
 
-#: ../../../Controllers/dashboard_controller.php:252
+#: ../../../Controllers/dashboard_controller.php:260
 msgid "dashboard set configuration"
 msgstr "establecer configuración del panel"
 
@@ -131,31 +131,6 @@ msgstr "Token inválido"
 msgid "Restricted access"
 msgstr "Acceso restringido"
 
-#: ../../../Includes/forms.php:16
-msgid "Select preferred language"
-msgstr "Selecciona el idioma por defecto:"
-
-#: ../../../Includes/forms.php:21
-#: ../../../Includes/forms.php:23
-msgid "Browser language"
-msgstr "Lenguaje del navegador"
-
-#: ../../../Includes/forms.php:45
-msgid "en_EN"
-msgstr "Inglés"
-
-#: ../../../Includes/forms.php:46
-msgid "es_ES"
-msgstr "Español"
-
-#: ../../../Includes/forms.php:47
-msgid "nl_BE"
-msgstr ""
-
-#: ../../../Includes/forms.php:48
-msgid "nl_NL"
-msgstr ""
-
 #: ../../../Models/mail_model.php:34
 msgid "Message successfully sent!"
 msgstr "¡Mensaje enviado correctamente!"
@@ -170,15 +145,15 @@ msgstr "está inactivo"
 
 #: ../../../Models/process_model.php:28
 msgid "Log to feed"
-msgstr ""
+msgstr "Enviar a una fuente"
 
 #: ../../../Models/process_model.php:49
 msgid "Power to kWh"
-msgstr ""
+msgstr "Power to kWh"
 
 #: ../../../Models/process_model.php:56
 msgid "Power to kWh/d"
-msgstr ""
+msgstr "Power to kWh/d"
 
 #: ../../../Models/process_model.php:63
 msgid "x input"
@@ -186,15 +161,15 @@ msgstr "entrada x"
 
 #: ../../../Models/process_model.php:70
 msgid "input on-time"
-msgstr ""
+msgstr "input on-time"
 
 #: ../../../Models/process_model.php:77
 msgid "kWhinc to kWh/d"
-msgstr ""
+msgstr "kWhinc to kWh/d"
 
 #: ../../../Models/process_model.php:84
 msgid "kWh to kWh/d"
-msgstr ""
+msgstr "kWh to kWh/d"
 
 #: ../../../Models/process_model.php:91
 msgid "update feed @time"
@@ -202,15 +177,15 @@ msgstr "Actualizar fuente @tiempo"
 
 #: ../../../Models/process_model.php:98
 msgid "+ input"
-msgstr ""
+msgstr "+ input"
 
 #: ../../../Models/process_model.php:105
 msgid "/ input"
-msgstr ""
+msgstr "/ input"
 
 #: ../../../Models/process_model.php:112
 msgid "phaseshift"
-msgstr ""
+msgstr "phaseshift"
 
 #: ../../../Models/process_model.php:119
 msgid "accumulator"
@@ -225,17 +200,16 @@ msgid "histogram"
 msgstr "histograma"
 
 #: ../../../Models/process_model.php:140
-#, fuzzy
 msgid "average"
-msgstr "| Media:"
+msgstr "media"
 
 #: ../../../Views/api_view.php:29
 msgid "API Helper"
-msgstr ""
+msgstr "API Helper"
 
 #: ../../../Views/api_view.php:31
 msgid "API keys are used to give authenticated access without login in via a normal session."
-msgstr ""
+msgstr "Las siguientes claves son usadas para permitir acceso autenticado sin necesidad de login."
 
 #: ../../../Views/api_view.php:34
 msgid "Read only access: "
@@ -243,7 +217,7 @@ msgstr "Acceso de solo lectura:"
 
 #: ../../../Views/api_view.php:36
 msgid "Allows to access in read only mode"
-msgstr ""
+msgstr "Permite el acceso en modo de sólo lectura"
 
 #: ../../../Views/api_view.php:40
 #: ../../../Views/api_view.php:53
@@ -252,20 +226,19 @@ msgstr "nuevo"
 
 #: ../../../Views/api_view.php:47
 msgid "Write only access: "
-msgstr "Acceso de solo escritura"
+msgstr "Acceso en modo escritura:"
 
 #: ../../../Views/api_view.php:49
-#, fuzzy
 msgid "Keep secret. Write mode access"
-msgstr "Acceso restringido"
+msgstr "Mentener en secreto. Acceso en modo escritura"
 
 #: ../../../Views/api_view.php:59
 msgid "Post API"
-msgstr ""
+msgstr "Post API"
 
 #: ../../../Views/api_view.php:70
 msgid "Example: Click or copy this to your web browser or send from your monitoring hardware"
-msgstr ""
+msgstr "Por ejemplo: Pulsa o copia la siguiente url en el navegador or mándala desde tu hardware de monitorización"
 
 #: ../../../Views/api_view.php:77
 msgid "try me"
@@ -277,10 +250,9 @@ msgstr "API para visualización"
 
 #: ../../../Views/api_view.php:83
 msgid "These are all the visualisations that are available in emoncms3. To view a visualisation enter in a relevant feedid in the underlined boxes below and then click on the > button."
-msgstr ""
+msgstr "Estas son todas la formas de visualización disponibles en Emoncms3. Para ejecutar una vista introduce los datos apropiados en las cajas de texto y pulsa en el boton >."
 
 #: ../../../Views/api_view.php:88
-#: ../../../Views/feed/list_view.php:40
 msgid "Name"
 msgstr "Nombre:"
 
@@ -289,7 +261,6 @@ msgid "URL"
 msgstr "Enlace"
 
 #: ../../../Views/api_view.php:94
-#: ../../../Views/dashboard/dashboard_list_view.php:93
 msgid "View"
 msgstr "Vista"
 
@@ -302,13 +273,12 @@ msgid "Raw data graph"
 msgstr "Gráfico de datos brutos"
 
 #: ../../../Views/api_view.php:130
-#: ../../../Views/feed/feed_view.php:39
 msgid "Bar graph"
 msgstr "Gráfico de barras"
 
 #: ../../../Views/api_view.php:145
 msgid "Smoothie"
-msgstr ""
+msgstr "Smoothie"
 
 #: ../../../Views/api_view.php:160
 msgid "All time histogram"
@@ -324,23 +294,23 @@ msgstr "Zoom"
 
 #: ../../../Views/api_view.php:210
 msgid "kWh/d Comparison"
-msgstr ""
+msgstr "kWh/d Comparison"
 
 #: ../../../Views/api_view.php:231
 msgid "Stacked"
-msgstr ""
+msgstr "Apliada"
 
 #: ../../../Views/api_view.php:267
 msgid "Simple zoom"
-msgstr ""
+msgstr "Zoom sencillo"
 
 #: ../../../Views/api_view.php:284
 msgid "Bar graph (ordered by height)"
-msgstr ""
+msgstr "Bar graph (ordered by height)"
 
 #: ../../../Views/api_view.php:299
 msgid "Threshold ordered by height"
-msgstr ""
+msgstr "Threshold ordered by height"
 
 #: ../../../Views/api_view.php:319
 msgid "Multigraph"
@@ -348,7 +318,7 @@ msgstr "Gráfico múltiple"
 
 #: ../../../Views/api_view.php:333
 msgid "Datapoint Editor"
-msgstr ""
+msgstr "Editor de datos"
 
 #: ../../../Views/api_view.php:347
 msgid "Other options:"
@@ -360,25 +330,38 @@ msgstr "Ocultar menu"
 
 #: ../../../Views/api_view.php:354
 msgid "Hide the top menu and footer by adding the attribute <i>&embed=1</i> to the URL."
-msgstr ""
+msgstr "Puedes ocultar el menu superior y el pié añadiendo el atributo <i>&embed=1</i> en la URL. "
+
+#: ../../../Views/api_view.php:359
+msgid "Share"
+msgstr "Compartir"
 
 #: ../../../Views/api_view.php:361
 msgid "To share a visualisation use your read apikey. Add the attribute "
-msgstr ""
+msgstr "Para compartir una vista utiliza you clave de lectura. Añade el atributo "
 
 #: ../../../Views/api_view.php:361
 msgid " to the URL"
-msgstr ""
+msgstr " en la URL"
+
+#: ../../../Views/api_view.php:366
+msgid "Embed"
+msgstr "Incrustar"
+
+#: ../../../Views/api_view.php:373
+msgid "Reset Multigraph"
+msgstr "Inicializar Multigráfico"
 
 #: ../../../Views/api_view.php:375
-msgid "The multigraph can be reset using the &clear=1 attribute."
-msgstr ""
+msgid "The multigraph can be reset using the <i>&clear=1</i> attribute."
+msgstr "El multigráfico puede ser inicializado usando el atributo <i>&clear=1</i> en la URL."
 
 #: ../../../Views/confirm_view.php:17
 msgid "Yes please"
 msgstr "Sí"
 
 #: ../../../Views/menu_view.php:36
+#: ../../../Views/input/list_view.php:17
 msgid "Inputs"
 msgstr "Entradas"
 
@@ -393,7 +376,7 @@ msgstr "Paneles"
 
 #: ../../../Views/menu_view.php:39
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: ../../../Views/menu_view.php:46
 #: ../../../Views/admin/admin_view.php:8
@@ -404,73 +387,106 @@ msgstr "Administrar"
 msgid "Account"
 msgstr "Cuenta"
 
-#: ../../../Views/notify_settings_view.php:2
+#: ../../../Views/notify_settings_view.php:12
 msgid "Notify settings"
 msgstr "Configuración de notificaciones"
 
-#: ../../../Views/notify_settings_view.php:5
+#: ../../../Views/notify_settings_view.php:14
 msgid "Notification recipiants (To): "
-msgstr ""
+msgstr "Destinatarios de las notificaciones (To):"
 
-#: ../../../Views/notify_view.php:2
+#: ../../../Views/notify_settings_view.php:19
+#: ../../../Views/notify_view.php:29
+#: ../../../Views/user_view.php:45
+#: ../../../Views/feed/feed_view.php:69
+#: ../../../Views/feed/feed_view.php:76
+msgid "Save"
+msgstr "Guardar"
+
+#: ../../../Views/notify_view.php:13
 msgid "Notify "
 msgstr "Notificar"
 
-#: ../../../Views/notify_view.php:4
+#: ../../../Views/notify_view.php:15
 msgid "Setup feed notifications"
 msgstr "Establecer notificaciones de la fuente"
 
-#: ../../../Views/notify_view.php:9
+#: ../../../Views/notify_view.php:19
 msgid "Notify when feed = value: "
-msgstr ""
-
-#: ../../../Views/notify_view.php:13
-msgid "Notify when feed is inactive "
-msgstr ""
-
-#: ../../../Views/notify_view.php:17
-msgid "Notify feed status periodically "
-msgstr ""
+msgstr "Notificar cuando la fuente = valor:"
 
 #: ../../../Views/notify_view.php:23
+msgid "Notify when feed is inactive"
+msgstr "Notificar cuando esta fuente esté inactiva"
+
+#: ../../../Views/notify_view.php:27
+msgid "Notify feed status periodically"
+msgstr "Notificar el estado de la fuente de manera periódica"
+
+#: ../../../Views/notify_view.php:31
 msgid "Edit mail settings"
 msgstr "Editar preferencias de correo"
 
-#: ../../../Views/user_view.php:18
+#: ../../../Views/user_view.php:17
 msgid "User: "
 msgstr "Usuario:"
 
-#: ../../../Views/user_view.php:22
+#: ../../../Views/user_view.php:23
+msgid "Select preferred language"
+msgstr "Selecciona el idioma por defecto:"
+
+#: ../../../Views/user_view.php:28
+#: ../../../Views/user_view.php:30
+msgid "Browser language"
+msgstr "Lenguaje del navegador"
+
+#: ../../../Views/user_view.php:51
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: ../../../Views/user_view.php:24
+#: ../../../Views/user_view.php:53
 msgid "Old password:"
 msgstr "Contraseña antigua:"
 
-#: ../../../Views/user_view.php:27
+#: ../../../Views/user_view.php:56
 msgid "New password:"
 msgstr "Nueva contraseña:"
 
-#: ../../../Views/user_view.php:30
+#: ../../../Views/user_view.php:59
 msgid "Change"
 msgstr "Cambiar"
 
-#: ../../../Views/user_view.php:34
+#: ../../../Views/user_view.php:63
 msgid "Account Statistics"
 msgstr "Estadísticas de Cuenta"
 
-#: ../../../Views/user_view.php:38
+#: ../../../Views/user_view.php:67
 msgid "Disk space use:"
 msgstr "Uso de espacio en disco:"
 
-#: ../../../Views/user_view.php:46
+#: ../../../Views/user_view.php:75
 msgid "Up hits:"
-msgstr ""
+msgstr "Up hits:"
 
-#: ../../../Views/user_view.php:54
+#: ../../../Views/user_view.php:83
 msgid "Down hits:"
-msgstr ""
+msgstr "Down hits:"
+
+#: ../../../Views/user_view.php:99
+msgid "en_EN"
+msgstr "Inglés"
+
+#: ../../../Views/user_view.php:100
+msgid "es_ES"
+msgstr "Español"
+
+#: ../../../Views/user_view.php:101
+msgid "nl_BE"
+msgstr "Belga"
+
+#: ../../../Views/user_view.php:102
+msgid "nl_NL"
+msgstr "Holandés"
 
 #: ../../../Views/admin/admin_view.php:1
 msgid "Admin panel"
@@ -494,48 +510,48 @@ msgstr "Nombre de usuario"
 
 #: ../../../Views/admin/admin_view.php:8
 msgid "Up hits"
-msgstr ""
+msgstr "Up hits"
 
 #: ../../../Views/admin/admin_view.php:8
 msgid "Dn hits"
-msgstr ""
+msgstr "Dn hits"
 
 #: ../../../Views/admin/admin_view.php:8
 msgid "Memory use"
 msgstr "Uso de memoria"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:35
-#: ../../../Views/dashboard/dashboard_config.php:10
+#: ../../../Views/dashboard/dashboard_config.php:15
 msgid "Dashboard name: "
 msgstr "Nombre del panel:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:37
-#: ../../../Views/dashboard/dashboard_config.php:14
+#: ../../../Views/dashboard/dashboard_config.php:19
 msgid "Description: "
 msgstr "Descripción"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:42
-#: ../../../Views/dashboard/dashboard_config.php:19
+#: ../../../Views/dashboard/dashboard_config.php:24
 msgid "Main: "
 msgstr "Principal:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:49
-#: ../../../Views/dashboard/dashboard_config.php:26
+#: ../../../Views/dashboard/dashboard_config.php:31
 msgid "Published: "
 msgstr "Publicado:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:56
-#: ../../../Views/dashboard/dashboard_config.php:33
+#: ../../../Views/dashboard/dashboard_config.php:38
 msgid "Public: "
 msgstr "Público:"
 
-#: ../../../Views/dashboard/dashboard_config.php:12
+#: ../../../Views/dashboard/dashboard_config.php:17
 msgid "Menu name: (lowercase a-z only)"
 msgstr "Nombre para el menu: (sólo letras de la \"a\" a la \"z\")"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:36
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:39
 msgid "Dashboard"
@@ -557,36 +573,56 @@ msgstr "Público"
 msgid "Actions"
 msgstr "Acciones"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:92
-#, fuzzy
-msgid "Delete"
-msgstr "borrar"
+#: ../../../Views/dashboard/dashboard_list_view.php:69
+msgid "This is the main dashboard"
+msgstr "Este es el panel principal del proyecto"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:94
+#: ../../../Views/dashboard/dashboard_list_view.php:71
+msgid "Set main dashboard"
+msgstr "Establecer panel principal"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:77
+msgid "Unpublish dashboard"
+msgstr "Despublicar panel"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:79
+msgid "Publish dashboard"
+msgstr "Publicar panel"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:85
+msgid "Make dashboard private"
+msgstr "Hacer panel privado"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:87
+msgid "Make dashboard public"
+msgstr "Hacer panel público"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:92
 msgid "Draw"
 msgstr "Diseñar"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:95
-#, fuzzy
+#: ../../../Views/dashboard/dashboard_list_view.php:94
 msgid "CKEditor"
-msgstr "Editar"
+msgstr "CKEditor"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:95
+#: ../../../Views/feed/feed_view.php:105
+msgid "Delete"
+msgstr "Borrar"
 
 #: ../../../Views/dashboard/dashboard_menu.php:15
-#, fuzzy
 msgid "Dashboards:"
-msgstr "Paneles"
+msgstr "Paneles:"
 
 #: ../../../Views/dashboard/dashboard_menu.php:23
 msgid "Draw Editor"
 msgstr "Diseñador"
 
 #: ../../../Views/dashboard/dashboard_menu.php:32
-#, fuzzy
 msgid "View mode"
 msgstr "Vista"
 
 #: ../../../Views/dashboard/dashboard_menu.php:35
-#, fuzzy
 msgid "Config"
 msgstr "Configuración"
 
@@ -606,15 +642,15 @@ msgstr "Formato lista"
 msgid "Select graph type:"
 msgstr "Seleccione un tipo de gráfico:"
 
-#: ../../../Views/feed/feed_view.php:27
+#: ../../../Views/feed/feed_view.php:26
 msgid "Real-time"
 msgstr "Tiempo real"
 
-#: ../../../Views/feed/feed_view.php:32
+#: ../../../Views/feed/feed_view.php:31
 msgid "Raw data"
 msgstr "Datos brutos"
 
-#: ../../../Views/feed/feed_view.php:46
+#: ../../../Views/feed/feed_view.php:45
 msgid "Histogram"
 msgstr "Histograma"
 
@@ -638,12 +674,6 @@ msgstr "Datos diarios"
 msgid "Histogram data"
 msgstr "Datos de histograma"
 
-#: ../../../Views/feed/feed_view.php:69
-#: ../../../Views/feed/feed_view.php:76
-#: ../../../Views/feed/feed_view.php:82
-msgid "Save"
-msgstr "Guardar"
-
 #: ../../../Views/feed/feed_view.php:72
 msgid "Tag feed"
 msgstr "Etiqueta de la fuente"
@@ -652,29 +682,33 @@ msgstr "Etiqueta de la fuente"
 msgid "Rename feed"
 msgstr "Renombrar fuente"
 
-#: ../../../Views/feed/feed_view.php:88
-msgid "Delete feed?"
-msgstr "¿Borrar fuente?"
+#: ../../../Views/feed/feed_view.php:82
+msgid "Rename"
+msgstr "Renombrar"
 
-#: ../../../Views/feed/feed_view.php:89
-msgid "Are you sure you want to delete feed: "
-msgstr "¿Estás seguro de que quieres borrar la fuente?:"
-
-#: ../../../Views/feed/feed_view.php:93
-msgid "feed/delete"
-msgstr "fuente/borrar"
-
-#: ../../../Views/feed/feed_view.php:95
-msgid "delete"
-msgstr "borrar"
-
-#: ../../../Views/feed/feed_view.php:98
+#: ../../../Views/feed/feed_view.php:87
 msgid "Notify"
 msgstr "Notificar"
 
-#: ../../../Views/feed/feed_view.php:101
+#: ../../../Views/feed/feed_view.php:90
 msgid "Set notifications"
 msgstr "Establecer notificaciones"
+
+#: ../../../Views/feed/feed_view.php:92
+msgid "Set notification behavior for this feed"
+msgstr "Establecer notificaciones para esta fuente"
+
+#: ../../../Views/feed/feed_view.php:99
+msgid "Delete feed?"
+msgstr "¿Borrar fuente?"
+
+#: ../../../Views/feed/feed_view.php:100
+msgid "Are you sure you want to delete feed: "
+msgstr "¿Estás seguro de que quieres borrar la fuente?:"
+
+#: ../../../Views/feed/feed_view.php:103
+msgid "feed/delete"
+msgstr "fuente/borrar"
 
 #: ../../../Views/feed/list_view.php:40
 msgid "Tag"
@@ -685,10 +719,12 @@ msgid "Size"
 msgstr "Tamaño"
 
 #: ../../../Views/feed/list_view.php:40
+#: ../../../Views/input/list_view.php:39
 msgid "Updated"
 msgstr "Actualizado"
 
 #: ../../../Views/feed/list_view.php:40
+#: ../../../Views/input/list_view.php:39
 msgid "Value"
 msgstr "Valor"
 
@@ -709,9 +745,8 @@ msgid "inactive"
 msgstr "inactivo"
 
 #: ../../../Views/process/list_view.php:10
-#, fuzzy
 msgid "Input configuration:   "
-msgstr "Configuración de Entrada:"
+msgstr "Configuración de entrada:"
 
 #: ../../../Views/process/list_view.php:13
 msgid "Order"
@@ -731,7 +766,7 @@ msgstr "añadir"
 
 #: ../../../Views/process/list_view.php:43
 msgid "Reset process list?"
-msgstr ""
+msgstr "¿Inicializar la lista de procesos?"
 
 #: ../../../Views/process/list_view.php:49
 msgid "Are you sure you want to delete input: "
@@ -742,9 +777,8 @@ msgid "Delete input?"
 msgstr "¿Borrar entrada?"
 
 #: ../../../Views/user/login_block.php:35
-#, fuzzy
 msgid "Username:"
-msgstr "Nombre de usuario"
+msgstr "Nombre de usuario:"
 
 #: ../../../Views/user/login_block.php:39
 msgid "Password:"
@@ -756,7 +790,14 @@ msgstr "Entrar"
 
 #: ../../../Views/user/login_block.php:50
 msgid "Or if you are new enter a username and password above and click register"
-msgstr ""
+msgstr "O si eres un nuevo usuario introduce un nombre de usuario y contraseña y pulsa en registarse"
+
+#: ../../../Views/user/login_block.php:50
+msgid "Register"
+msgstr "Registrase"
+
+#~ msgid "delete"
+#~ msgstr "borrar"
 
 #~ msgid "AUTODETECTLANGUAGE"
 #~ msgstr "Browser language"
@@ -766,17 +807,8 @@ msgstr ""
 #~ "Lo siento, necesitas una clave válida o estar loggeado para ver esta "
 #~ "página"
 
-#~ msgid "Edit dashboard"
-#~ msgstr "Editar panel"
-
 #~ msgid "Preview"
 #~ msgstr "Vista previa"
-
-#~ msgid "Main dashboard: "
-#~ msgstr "Panel principal:"
-
-#~ msgid "Reset"
-#~ msgstr "Resetear"
 
 #~ msgid "Email:"
 #~ msgstr "Correo:"

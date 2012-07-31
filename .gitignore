@@ -3,3 +3,5 @@ mail_settings.php
 .project
 .settings/com.aptana.formatter.epl.prefs
 .settings
+Includes/editors/ckeditor
+Includes/editors/simogeo-Filemanager

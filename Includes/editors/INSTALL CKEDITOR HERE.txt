@@ -1,2 +1,6 @@
 Install ckeditor by copying downloading and unziping ckeditor here
 http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.4/ckeditor_3.6.4.zip
+
+ckeditor must be in the ckeditor folder in emoncms3_install_dir/Includes/editors
+
+then you should activate ckeditor in Include/settings.php file

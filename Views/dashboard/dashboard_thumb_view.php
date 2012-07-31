@@ -9,7 +9,7 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
-global $session, $path, $ckeditor;
+global $session, $path, $useckeditor;
 
 require_once "Includes/messages.php";
 ?>
@@ -47,9 +47,9 @@ Dashboard HTML
               <p>
                 <a href="#" class="btn btn-danger" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><?php echo _(Delete); ?></a>            
                 <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')">View</a>
-
-<?php if ($ckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')">ckEditor</a><?php } ?>
-
+                <?php if ($useckeditor) { ?>
+                  <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')">ckEditor</a>
+                <?php } ?>
                 <a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')">Draw</a>            
               </p>
             </div>
