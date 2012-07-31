@@ -36,26 +36,16 @@ var Browser =
 
 function show_dashboard()
 {
-  initialize_dashboard();
-  update();
-
-  setInterval(update, 5000);
-  setInterval(fast_update, 30);
-  setInterval(slow_update, 60000);
-  slow_update();
+  update(apikey_read);
+  slow_update(apikey_read);
 }
 
-function initialize_dashboard()
-{
 
-
-
-}
-
-function onetime()
+function onetime(apikey_read)
 {
   $('.rawdata,.bargraph,.zoom,.realtime,.simplezoom,.threshold,.orderthreshold,.orderbars,.stacked,.multigraph,.histgraph,.smoothie').each(function(index)
   {
+
     var id = $(this).attr("id");
     var feed = $(this).attr("feed") || 0;
     var width = $(this).width();
@@ -88,21 +78,18 @@ function onetime()
 }
 
 // update function
-function update()
+function update(apikey_read)
 {
-
   browserVersion = Browser.Version();
   if (browserVersion < 9)
     dialrate = 0.2;
-
 
   $.ajax(
   {
     url : path + "feed/list.json?apikey=" + apikey_read,
     dataType : 'json',
     success : function(data)
-    {
-      
+    { 
       for (z in data)
       {
         var newstr = data[z][1].replace(/\s/g, '-');
@@ -150,13 +137,13 @@ function update()
   });
 }
 
-function fast_update()
+function fast_update(apikey_read)
 {
   if (redraw)
   { 
     setup_widget_canvas();
-    update();
-    onetime();
+    update(apikey_read);
+    onetime(apikey_read);
   }
   draw_dials();
   //draw_leds();
