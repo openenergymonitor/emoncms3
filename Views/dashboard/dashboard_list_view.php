@@ -93,8 +93,8 @@ require_once "Includes/messages.php";
       <td>
         <div>       
           <a href="#" title="<?php echo _("Draw"); ?>" onclick="$(window.location).attr('href',path+'dashboard/edit&id=<?php echo $dashboard['id']; ?>')"><i class='icon-edit'></i></a>
-					<a href="#" title="<?php echo _("View"); ?>" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')"><i class='icon-eye-open'></i></a>
-					<?php if ($useckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><?php echo _("CKEditor"); ?></a><?php } ?>
+	  <?php if ($useckeditor) { ?><a href="#" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><img src="<?php echo $path; ?>/Includes/editors/images/ckicon.png" style="margin-top:-5px;" /></a><?php } ?>
+          <a href="#" title="<?php echo _("View"); ?>" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')"><i class='icon-eye-open'></i></a>
           <a href="#" title="<?php echo _("Delete"); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><i class='icon-trash'></i></a>
         </div>            
       </td> 
