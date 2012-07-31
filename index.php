@@ -9,7 +9,7 @@
  Part of the OpenEnergyMonitor project:
  http://openenergymonitor.org
 
- Author: Trystan Lea: trystan.lea@googlemail.com
+ Contributors: Trystan Lea: trystan.lea@googlemail.com, Ildefonso Martínez Marchena
  If you have any questions please get in touch, try the forums here:
  http://openenergymonitor.org/emon/forum
  */

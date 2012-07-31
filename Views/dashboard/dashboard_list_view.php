@@ -9,7 +9,7 @@ Part of the OpenEnergyMonitor project:
 http://openenergymonitor.org
 */
 
-global $session, $path;
+global $session, $path, $ckeditor;
 
 require_once "Includes/messages.php";
 ?>
