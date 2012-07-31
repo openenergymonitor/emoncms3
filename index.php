@@ -16,13 +16,12 @@
 
 define('EMONCMS_EXEC', 1);
 
+// Process user settings
+require "Includes/process_settings.php";
+
 require "Includes/core.inc.php";
 
-//error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-error_reporting(E_ALL ^ E_NOTICE);
-
-require_once ("Includes/locale.php");
+require_once "Includes/locale.php";
 
 // Thanks to seanwg for https addition
 $ssl = $_SERVER['HTTPS'];
@@ -34,14 +33,12 @@ if ($ssl == "on") {
 $path = dirname("$proto://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']) . "/";
 
 require "Includes/db.php";
-require "Includes/messages.php";
 require "Models/user_model.php";
 require "Models/statistics_model.php";
 
 switch(db_connect()) {
   case 0: break;
-  case 1: break;
-  case 2: show_nosettingsfile_message(); die;
+  case 1: break;  
   case 3: show_dbsettingserror_message(); die ;
   case 4: header("Location: setup.php"); break;
 }

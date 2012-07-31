@@ -3,8 +3,7 @@
   // no direct access
   defined('EMONCMS_EXEC') or die('Restricted access');
 
-  $mysqli = 0;
-  $useckeditor = false;
+  $mysqli = 0; 
   
   /*
    All Emoncms code is released under the GNU Affero General Public License.
@@ -18,34 +17,23 @@
 
   function db_connect()
   {
-    global $mysqli, $useckeditor;
-    //TODO create a unit to process settings.php file 
+    global $mysqli, $server, $username, $password, $database;
     
     // ERROR CODES
     // 1: success!
-    // 2: no settings.php file
     // 3: database settings are wrong 
     // 4: launch setup.php
-      
-    $success = 1; 
-
-    if(!file_exists(dirname(__FILE__)."/settings.php"))
-    {
-      $success = 2;
-    }
-    else
-    {
-      require_once ('settings.php');
-      $mysqli = new mysqli($server, $username, $password, $database);
-      if ($mysqli->connect_error) $success = 3;
-    }
-
-    if ($success == 1){ 
-      $result = db_query("SELECT * FROM users");
-      if (!$result) $success = 4;
-    }
-
-    return $success;
+ 
+    // Lets try to connect
+    $mysqli = new mysqli($server, $username, $password, $database);
+    
+    if ($mysqli->connect_error) 
+      return 3;
+    else                     
+      if (db_query("SELECT * FROM users"))
+        return 1;
+      else
+        return 4;
   }
 
   function db_query($query)

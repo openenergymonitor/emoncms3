@@ -49,7 +49,10 @@ require_once "Includes/messages.php";
         </th>
         <th>
           <?php echo _("Actions"); ?> 
-        </th>      
+        </th>
+        <th>
+          <?php echo _("Share"); ?> 
+        </th> 
     </tr>
   
     <?php foreach ($dashboards as $dashboard) { ?>
@@ -94,7 +97,18 @@ require_once "Includes/messages.php";
 					<?php if ($useckeditor) { ?><a href="#" class="btn" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><?php echo _("CKEditor"); ?></a><?php } ?>
           <a href="#" title="<?php echo _("Delete"); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><i class='icon-trash'></i></a>
         </div>            
-      </td>    
+      </td> 
+      <td>
+        <?php
+          if ($dashboard['published']) {
+            if ($dashboard['public']) {  ?>
+              <a href="<?php echo $GLOBALS['path'].$user['username']."&id=".$dashboard['id'] ?>" title="<?php echo _("Public share URL"); ?>"<i class='icon-share'></i></a>
+            <?php } else { ?>
+              <a href="<?php echo $GLOBALS['path'].$user['username']."&id=".$dashboard['id']."&apikey=".$user['apikey_read'] ?>" title="<?php echo _("Private share URL"); ?>"<i class='icon-share'></i></a>
+            <?php         
+            } 
+          } ?>
+      </td>   
     </tr>
     <?php } // end foreach 
   } // endif  
