@@ -48,6 +48,10 @@
 
   show_dashboard();
 
+  setInterval(function() { update("<?php echo $apikey_read; ?>"); }, 5000);
+  setInterval(function() { fast_update("<?php echo $apikey_read; ?>"); }, 30);
+  setInterval(function() { slow_update("<?php echo $apikey_read; ?>"); }, 60000);
+
   $("#save-dashboard").click(function (){
     console.log("Saving");
     $.ajax({
