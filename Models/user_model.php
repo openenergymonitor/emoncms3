@@ -52,6 +52,7 @@ function get_user($userid)
     $row = db_fetch_array($result);
     $user = array(
       'username' => $row['username'],
+      'email' => $row['email'],
       'apikey_read' => $row['apikey_read'],
       'apikey_write' => $row['apikey_write'],
       'lang' => $row['lang']
@@ -80,6 +81,16 @@ function get_apikey_write($userid)
     $apikey = $row['apikey_write'];
   }
   return $apikey;
+}
+
+function set_user_username($userid, $username)
+{
+  db_query("UPDATE users SET username = '$username' WHERE id='$userid'");
+}
+
+function set_user_email($userid, $email)
+{
+  db_query("UPDATE users SET email = '$email' WHERE id='$userid'");
 }
 
 function set_apikey_read($userid, $apikey)

@@ -31,11 +31,13 @@
 // ENABLE THIS ONCE TO FORCE UPDATE
 //=====================================================
 define('EMONCMS_EXEC', 1);
+require "Includes/process_settings.php";
 require "Includes/db.php";
-$e = db_connect();
-if ($e == 4)
-{
-  $runnable = TRUE;
+switch(db_connect()) {
+  case 0: break;
+  case 1: break;  
+  case 3: show_dbsettingserror_message(); die ;
+  case 4: $runnable==true; break;
 }
 
 if (!$runnable)
@@ -49,6 +51,7 @@ $schema = array();
 $schema['users'] = array(
   'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'username' => array('type' => 'varchar(30)'),
+  'email' => array('type' => 'varchar(30)'),
   'password' => array('type' => 'varchar(64)'),
   'salt' => array('type' => 'varchar(3)'),
   'apikey_write' => array('type' => 'varchar(64)'),
@@ -186,7 +189,7 @@ while ($table = key($schema))
 
       if ($query) $query = "ALTER TABLE $table MODIFY $field $type".$query;
       $out .= "<td>$query</td>";
-      db_query($query);
+      if ($query) db_query($query);
 
       $out .= "</tr>";
 
@@ -225,7 +228,9 @@ while ($table = key($schema))
     }
     $query .= ")";
     $out .= "<tr><td>TABLE " . $table . "</td><td>created</td></tr>";
-    db_query($query);
+
+     
+    if ($query) db_query($query);
     // EXECUTE QUERY
     //-----------------------------------------------------
   }
@@ -250,7 +255,6 @@ foreach ($feeds as $feed)
 if ($runconv==true)  echo "<p>You have feeds that need converting from datetime format to indexed timestamp. This improves performance. Its best to backup your data before conversion, then once your ready run: emoncms3/conv.php</p>";
 
 echo $out;
-
 
 /*
   This code may be used in future to do more complex upgrade procedures

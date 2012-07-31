@@ -66,6 +66,27 @@
     }
 
     //----------------------------------------------------------------------------------------------------------------------
+    // List of all public dashboards from all users
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'public')
+    {
+      $userlist = get_user_list();
+
+      $dashboard_list = array();
+      foreach ($userlist as $user)
+      {
+        $user_dash_list = get_dashboard_list($user['userid'],1,1);
+        foreach ($user_dash_list as $user_dash)
+        {
+          $user_dash['username'] = $user['name'];
+          $dashboard_list[] = $user_dash;
+        }
+      }
+
+      if ($format == 'html') $output['content'] = view("dashboard/dashboard_publiclist_view.php", array('dashboards'=>$dashboard_list));
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------
     // Thumb List dashboards
     //----------------------------------------------------------------------------------------------------------------------
     elseif ($action == 'thumb' && $session['read'])

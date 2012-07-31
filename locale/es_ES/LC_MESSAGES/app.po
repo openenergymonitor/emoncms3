@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-28 19:16+0100\n"
-"PO-Revision-Date: 2012-07-31 09:49+0100\n"
+"POT-Creation-Date: 2012-07-31 13:40+0100\n"
+"PO-Revision-Date: 2012-07-31 13:43+0100\n"
 "Last-Translator: ilde <i.martinez@ismsolar.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,15 +32,15 @@ msgstr "para ejecutar el código descomenta 'runnable'"
 msgid "dashboards new"
 msgstr "Nuevo panel"
 
-#: ../../../Controllers/dashboard_controller.php:118
+#: ../../../Controllers/dashboard_controller.php:119
 msgid "Logout"
 msgstr "Desconectar"
 
-#: ../../../Controllers/dashboard_controller.php:221
+#: ../../../Controllers/dashboard_controller.php:222
 msgid "dashboard set"
 msgstr "establecer panel"
 
-#: ../../../Controllers/dashboard_controller.php:260
+#: ../../../Controllers/dashboard_controller.php:261
 msgid "dashboard set configuration"
 msgstr "establecer configuración del panel"
 
@@ -261,6 +261,7 @@ msgid "URL"
 msgstr "Enlace"
 
 #: ../../../Views/api_view.php:94
+#: ../../../Views/dashboard/dashboard_list_view.php:97
 msgid "View"
 msgstr "Vista"
 
@@ -333,12 +334,13 @@ msgid "Hide the top menu and footer by adding the attribute <i>&embed=1</i> to t
 msgstr "Puedes ocultar el menu superior y el pié añadiendo el atributo <i>&embed=1</i> en la URL. "
 
 #: ../../../Views/api_view.php:359
+#: ../../../Views/dashboard/dashboard_list_view.php:54
 msgid "Share"
 msgstr "Compartir"
 
 #: ../../../Views/api_view.php:361
 msgid "To share a visualisation use your read apikey. Add the attribute "
-msgstr "Para compartir una vista utiliza you clave de lectura. Añade el atributo "
+msgstr "Para compartir una vista utiliza tu clave de lectura. Añade el atributo "
 
 #: ../../../Views/api_view.php:361
 msgid " to the URL"
@@ -361,12 +363,10 @@ msgid "Yes please"
 msgstr "Sí"
 
 #: ../../../Views/menu_view.php:36
-#: ../../../Views/input/list_view.php:17
 msgid "Inputs"
 msgstr "Entradas"
 
 #: ../../../Views/menu_view.php:37
-#: ../../../Views/feed/list_view.php:16
 msgid "Feeds"
 msgstr "Fuentes"
 
@@ -398,8 +398,6 @@ msgstr "Destinatarios de las notificaciones (To):"
 #: ../../../Views/notify_settings_view.php:19
 #: ../../../Views/notify_view.php:29
 #: ../../../Views/user_view.php:45
-#: ../../../Views/feed/feed_view.php:69
-#: ../../../Views/feed/feed_view.php:76
 msgid "Save"
 msgstr "Guardar"
 
@@ -573,42 +571,45 @@ msgstr "Público"
 msgid "Actions"
 msgstr "Acciones"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:69
+#: ../../../Views/dashboard/dashboard_list_view.php:72
 msgid "This is the main dashboard"
 msgstr "Este es el panel principal del proyecto"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:71
+#: ../../../Views/dashboard/dashboard_list_view.php:74
 msgid "Set main dashboard"
 msgstr "Establecer panel principal"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:77
+#: ../../../Views/dashboard/dashboard_list_view.php:80
 msgid "Unpublish dashboard"
 msgstr "Despublicar panel"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:79
+#: ../../../Views/dashboard/dashboard_list_view.php:82
 msgid "Publish dashboard"
 msgstr "Publicar panel"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:85
+#: ../../../Views/dashboard/dashboard_list_view.php:88
 msgid "Make dashboard private"
 msgstr "Hacer panel privado"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:87
+#: ../../../Views/dashboard/dashboard_list_view.php:90
 msgid "Make dashboard public"
 msgstr "Hacer panel público"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:92
+#: ../../../Views/dashboard/dashboard_list_view.php:95
 msgid "Draw"
 msgstr "Diseñar"
 
-#: ../../../Views/dashboard/dashboard_list_view.php:94
-msgid "CKEditor"
-msgstr "CKEditor"
-
-#: ../../../Views/dashboard/dashboard_list_view.php:95
-#: ../../../Views/feed/feed_view.php:105
+#: ../../../Views/dashboard/dashboard_list_view.php:98
 msgid "Delete"
 msgstr "Borrar"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:105
+msgid "Public share URL"
+msgstr "URL pública"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:107
+msgid "Private share URL"
+msgstr "URL privada"
 
 #: ../../../Views/dashboard/dashboard_menu.php:15
 msgid "Dashboards:"
@@ -795,6 +796,9 @@ msgstr "O si eres un nuevo usuario introduce un nombre de usuario y contraseña 
 #: ../../../Views/user/login_block.php:50
 msgid "Register"
 msgstr "Registrase"
+
+#~ msgid "CKEditor"
+#~ msgstr "CKEditor"
 
 #~ msgid "delete"
 #~ msgstr "borrar"

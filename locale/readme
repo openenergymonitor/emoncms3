@@ -5,9 +5,11 @@ To add support for another language, simply follow these steps:
 	- After running poEdit, go to File -> New catalog…
 	- In the 'Settings' dialog, enter emoncms3 as project name, UTF-8 charset
 	- At folder tab use . as root directory and add above ../../.. to folders so you can have a relative path for future use
-	- Save the catalog with the name (language)_(COUNTRY) with 2 letters both (example: es_ES for [es]pañol de [ES]PAÑA) in a new folder on /locale/ with the same name as before into a directory called LC_MESSAGES
+	- Create a directory with the name (language)_(COUNTRY) with 2 letters both (example: es_ES for [es]pañol de [ES]PAÑA)
+	- Save the catalog with the name app.mo in the directory LC_MESSAGES into the previous directory
 	- Refresh/scan the catalog, obtaining the words and expressions to be translated
-	- Translate them to the language to add
+	- Translate them to the language to add and save the catalog (you should have app.mo and app.po files)
+	- You should restart your webserver to see the changes
 	
     	
 Language list
