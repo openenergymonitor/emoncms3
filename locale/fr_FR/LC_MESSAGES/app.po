@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-01 12:11+0100\n"
-"PO-Revision-Date: 2012-08-01 12:16+0100\n"
+"PO-Revision-Date: 2012-08-01 13:25+0100\n"
 "Last-Translator: Baptiste Gaultier <baptiste.gaultier@telecom-bretagne.eu>\n"
 "Language-Team: Baptiste Gaultier (Télécom Bretagne) <baptiste.gaultier@telecom-bretagne.eu>\n"
 "Language: \n"
@@ -571,19 +571,16 @@ msgid "Unpublish dashboard"
 msgstr "Ne plus publier"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:82
-#, fuzzy
 msgid "Publish dashboard"
-msgstr "Editar panel"
+msgstr "Publier ce teableau de bord"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:88
-#, fuzzy
 msgid "Make dashboard private"
-msgstr "Panel principal:"
+msgstr "Rendre ce tableau de bord privé"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:90
-#, fuzzy
 msgid "Make dashboard public"
-msgstr "Panel principal:"
+msgstr "Rendre ce tableau de bord public"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:95
 msgid "Draw"
@@ -594,9 +591,8 @@ msgid "Delete"
 msgstr "Supprimer"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:105
-#, fuzzy
 msgid "Public share URL"
-msgstr "Publi&eacute; : "
+msgstr "Adresse de partage (public)"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:107
 msgid "Private share URL"
@@ -735,9 +731,8 @@ msgid "Rename feed"
 msgstr "Renommer le flux"
 
 #: ../../../Views/feed/feed_view.php:82
-#, fuzzy
 msgid "Rename"
-msgstr "Nombre d'utilisateur"
+msgstr "Renommer"
 
 #: ../../../Views/feed/feed_view.php:87
 msgid "Notify"
@@ -748,9 +743,8 @@ msgid "Set notifications"
 msgstr "Configurer les notifications"
 
 #: ../../../Views/feed/feed_view.php:92
-#, fuzzy
 msgid "Set notification behavior for this feed"
-msgstr "Configurer les notifications"
+msgstr "Configurer les notifications pour ce flux"
 
 #: ../../../Views/feed/feed_view.php:99
 msgid "Delete feed?"
