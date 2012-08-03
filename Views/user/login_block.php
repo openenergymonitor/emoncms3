@@ -12,7 +12,7 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
-global $path, $session;
+global $path, $session, $allowusersregister;
 
 require_once 'Includes/locale.php';
 
@@ -41,16 +41,19 @@ set_lang($accepted_languages);
 				</p>
 
 				<input type="submit" class="btn" value="<?php echo _('Login'); ?>" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/login';" />
-				<br/>
-				<br/>
-				<div style="background-color:#ddd;">
-				<table style="font-size:13px">
-					<tr>
-						<td width="265px">
-							<?php echo _('Or if you are new enter a username and password above and click register'); ?></td><td><input type="submit" class="btn btn-info" value="<?php echo _('Register'); ?>" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />	
-						</td>
-					</tr>
-				</table>
+				<?php if ($allowusersregister) { ?>				
+					<br/>
+					<br/>				
+					<div style="background-color:#ddd;">
+						<table style="font-size:13px">
+							<tr>
+								<td width="265px">
+									<?php echo _('Or if you are new enter a username and password above and click register'); ?></td><td><input type="submit" class="btn btn-info" value="<?php echo _('Register'); ?>" onclick="javascript: form.action='<?php echo $GLOBALS['path']; ?>user/create';" />	
+								</td>
+							</tr>
+						</table>
+					</div>
+				<?php } ?>
 				<?php echo $error; ?>
 			</form>
 		</div>

@@ -30,7 +30,7 @@
 
   function user_controller()
   {
-    global $session, $action,$format;
+    global $session, $action,$format,$allowusersregister;
 
     $output['content'] = "";
     $output['message'] = "";
@@ -72,8 +72,8 @@
     // To disable addtional user creation remove or add higher priviledges to this
     // http://yoursite/emoncms/user/create?name=john&pass=test
     //---------------------------------------------------------------------------------------------------------
-    elseif ($action == 'create')
-    {
+    elseif ($action == 'create' && $allowusersregister)
+    {    	
       $username = preg_replace('/[^\w\s-.]/','',$_POST["name"]);	// filter out all except for alphanumeric white space and dash
       $username = db_real_escape_string($username);
 
@@ -99,7 +99,7 @@
         if ($format == 'html')
         {
           header("Location: ../dashboard/list");
-	}
+				}
         if ($_SESSION['write']){
           create_user_statistics($_SESSION['userid']);
         }
