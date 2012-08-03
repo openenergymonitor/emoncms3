@@ -46,7 +46,10 @@
         {
           i++;
           out += "<tr class='d"+(i & 1)+"' >";
-          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td><td>"+inputs[z]['nodeid']+"</td>";
+
+          var nodeid = "-"; if (inputs[z]['nodeid']!=0) nodeid = inputs[z]['nodeid'];
+
+          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td><td>"+nodeid+"</td>";
 
           var now = (new Date()).getTime();
           var update = (new Date(inputs[z][2])).getTime();

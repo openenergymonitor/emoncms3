@@ -35,7 +35,7 @@ function api_controller()
     foreach ($values as $value)
     {
       $i++; 
-      if ($node) $key = "node".$node."_".$i; else $key = "csv".$i;
+      if ($node) $key = $i; else $key = "csv".$i;
       $datapairs[] = $key.":".$value;
     }
   }	
@@ -75,6 +75,8 @@ function api_controller()
     $datapair = explode(":", $datapair);
     $name = preg_replace('/[^\w\s-.]/','',$datapair[0]); 	// filter out all except for alphanumeric white space and dash
     $value = floatval($datapair[1]);		
+
+    if ($nodeid) $name = "node".$nodeid."_".$name;
 
     $id = get_input_id($userid,$name);				// If input does not exist this return's a zero
 
