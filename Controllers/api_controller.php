@@ -81,7 +81,6 @@ function api_controller()
     $id = get_input_id($userid,$name);				// If input does not exist this return's a zero
 
     if ($id==0) {
-      echo "<br>".$node;
       $id = create_input_timevalue($userid,$name,$nodeid,$time,$value);	// Create input if it does not exist
 
       // auto_configure_inputs($userid,$id,$name);
