@@ -14,7 +14,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 
 ?>
 
-  <h2><?php echo _("User: "); ?><?php echo $user['username']; ?></h2>
+  <h2><?php echo _('User: '); ?><?php echo $user['username']; ?></h2>
   <?php   
   /*
   * Create combo with available languages
@@ -48,34 +48,34 @@ defined('EMONCMS_EXEC') or die('Restricted access');
   ?>
                
   <form class="well" action="changedetails" method="post">
-    <h3><?php echo _("Change details"); ?></h3>
+    <h3><?php echo _('Change details'); ?></h3>
 
-    <label><?php echo _("Username:"); ?></label>
+    <label><?php echo _('Username:'); ?></label>
     <input type="username" name="username" value="<?php echo $user['username']; ?>" />
 
-    <label><?php echo _("Email:"); ?></label>
+    <label><?php echo _('Email:'); ?></label>
     <input type="email" name="email" value="<?php echo $user['email']; ?>" />
     <br>
-    <input type="submit" class="btn btn-danger" value="<?php echo _("Change"); ?>" />
+    <input type="submit" class="btn btn-danger" value="<?php echo _('Change'); ?>" />
   </form>
 
   <form class="well" action="changepass" method="post">
-    <h3><?php echo _("Change password"); ?></h3>
-    <label><?php echo _("Current password:"); ?></label>
+    <h3><?php echo _('Change password'); ?></h3>
+    <label><?php echo _('Current password:'); ?></label>
     <input type="password" name="oldpass" />
         
-    <label><?php echo _("New password:"); ?></label>
+    <label><?php echo _('New password:'); ?></label>
     <input type="password" name="newpass"/>
     <br>
-    <input type="submit" class="btn btn-danger" value="<?php echo _("Change"); ?>" />
+    <input type="submit" class="btn btn-danger" value="<?php echo _('Change'); ?>" />
   </form>
   
   <div class="well">
-    <h3><?php echo _("Account Statistics"); ?></h3>
+    <h3><?php echo _('Account Statistics'); ?></h3>
     <table>
       <tr>
         <td>
-          <?php echo _("Disk space use:"); ?>
+          <?php echo _('Disk space use:'); ?>
         </td>
         <td>
           <?php echo number_format($stats['memory'] / 1024.0, 1); ?> KiB
@@ -83,7 +83,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
      </tr>
      <tr>
         <td>
-          <?php echo _("Up hits:"); ?>
+          <?php echo _('Up hits:'); ?>
         </td>
         <td>
           <?php echo $stats['uphits']; ?>
@@ -91,7 +91,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
      </tr>
      <tr>
         <td>
-          <?php echo _("Down hits:"); ?>
+          <?php echo _('Down hits:'); ?>
         </td>
         <td>
           <?php echo $stats['dnhits']; ?>
