@@ -62,7 +62,7 @@ function get_user_inputs($userid)
         $row['id'],
         $row['name'],
         strtotime($row['time']) * 1000,
-        $row['value']
+        $row['value'], 'nodeid'=>$row['nodeid']
       );
     }
   }
