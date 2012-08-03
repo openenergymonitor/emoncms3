@@ -107,9 +107,10 @@ defined('EMONCMS_EXEC') or die('Restricted access');
  * Compiler (php interpreter will ignore it)
  */
 {
-  _("en_EN");
-  _("es_ES");
-  _("nl_BE");
-  _("nl_NL");     
+  _('en_EN');
+  _('es_ES');
+  _('nl_BE');
+  _('nl_NL');     
+	_('fr_FR');	
 }
 ?>

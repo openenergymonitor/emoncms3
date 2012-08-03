@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-31 13:25+0100\n"
-"PO-Revision-Date: 2012-07-31 13:25+0100\n"
-"Last-Translator: ilde <i.martinez@ismsolar.com>\n"
+"POT-Creation-Date: 2012-08-03 16:00+0100\n"
+"PO-Revision-Date: 2012-08-03 16:01+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Continue to emoncms"
 msgstr ""
 
-#: ../../../setup.php:43
+#: ../../../setup.php:45
 msgid "to run script uncomment runnable"
 msgstr ""
 
@@ -31,15 +31,15 @@ msgstr ""
 msgid "dashboards new"
 msgstr ""
 
-#: ../../../Controllers/dashboard_controller.php:119
+#: ../../../Controllers/dashboard_controller.php:140
 msgid "Logout"
 msgstr ""
 
-#: ../../../Controllers/dashboard_controller.php:222
+#: ../../../Controllers/dashboard_controller.php:243
 msgid "dashboard set"
 msgstr ""
 
-#: ../../../Controllers/dashboard_controller.php:261
+#: ../../../Controllers/dashboard_controller.php:282
 msgid "dashboard set configuration"
 msgstr ""
 
@@ -87,14 +87,17 @@ msgid "Welcome, you are now logged in"
 msgstr ""
 
 #: ../../../Controllers/user_controller.php:84
+#: ../../../Controllers/user_controller.php:140
 msgid "Sorry username already exists"
 msgstr ""
 
 #: ../../../Controllers/user_controller.php:88
+#: ../../../Controllers/user_controller.php:144
 msgid "Please enter a username that is 4 to 30 characters long"
 msgstr ""
 
 #: ../../../Controllers/user_controller.php:92
+#: ../../../Controllers/user_controller.php:116
 msgid "Please enter a password that is 4 to 30 characters long"
 msgstr ""
 
@@ -102,27 +105,31 @@ msgstr ""
 msgid "Your new account has been created"
 msgstr ""
 
-#: ../../../Controllers/user_controller.php:116
+#: ../../../Controllers/user_controller.php:120
 msgid "Your password has been changed"
 msgstr ""
 
-#: ../../../Controllers/user_controller.php:120
-msgid "Invalid old password"
-msgstr ""
-
-#: ../../../Controllers/user_controller.php:132
-msgid "New read apikey: "
+#: ../../../Controllers/user_controller.php:124
+msgid "Invalid password"
 msgstr ""
 
 #: ../../../Controllers/user_controller.php:148
+msgid "No email address present"
+msgstr ""
+
+#: ../../../Controllers/user_controller.php:166
+msgid "New read apikey: "
+msgstr ""
+
+#: ../../../Controllers/user_controller.php:182
 msgid "New write apikey: "
 msgstr ""
 
-#: ../../../Controllers/user_controller.php:165
+#: ../../../Controllers/user_controller.php:199
 msgid "You are logged out"
 msgstr ""
 
-#: ../../../Controllers/user_controller.php:170
+#: ../../../Controllers/user_controller.php:204
 msgid "Invalid token"
 msgstr ""
 
@@ -252,6 +259,7 @@ msgid "These are all the visualisations that are available in emoncms3. To view 
 msgstr ""
 
 #: ../../../Views/api_view.php:88
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:22
 msgid "Name"
 msgstr ""
 
@@ -261,6 +269,8 @@ msgstr ""
 
 #: ../../../Views/api_view.php:94
 #: ../../../Views/dashboard/dashboard_list_view.php:97
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:25
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:34
 msgid "View"
 msgstr ""
 
@@ -273,6 +283,7 @@ msgid "Raw data graph"
 msgstr ""
 
 #: ../../../Views/api_view.php:130
+#: ../../../Views/feed/feed_view.php:38
 msgid "Bar graph"
 msgstr ""
 
@@ -397,6 +408,8 @@ msgstr ""
 #: ../../../Views/notify_settings_view.php:19
 #: ../../../Views/notify_view.php:29
 #: ../../../Views/user_view.php:45
+#: ../../../Views/feed/feed_view.php:69
+#: ../../../Views/feed/feed_view.php:76
 msgid "Save"
 msgstr ""
 
@@ -438,52 +451,69 @@ msgid "Browser language"
 msgstr ""
 
 #: ../../../Views/user_view.php:51
-msgid "Change password"
+msgid "Change details"
 msgstr ""
 
 #: ../../../Views/user_view.php:53
-msgid "Old password:"
+msgid "Username:"
 msgstr ""
 
 #: ../../../Views/user_view.php:56
-msgid "New password:"
+msgid "Email:"
 msgstr ""
 
 #: ../../../Views/user_view.php:59
+#: ../../../Views/user_view.php:70
 msgid "Change"
 msgstr ""
 
 #: ../../../Views/user_view.php:63
-msgid "Account Statistics"
+msgid "Change password"
+msgstr ""
+
+#: ../../../Views/user_view.php:64
+msgid "Current password:"
 msgstr ""
 
 #: ../../../Views/user_view.php:67
+msgid "New password:"
+msgstr ""
+
+#: ../../../Views/user_view.php:74
+msgid "Account Statistics"
+msgstr ""
+
+#: ../../../Views/user_view.php:78
 msgid "Disk space use:"
 msgstr ""
 
-#: ../../../Views/user_view.php:75
+#: ../../../Views/user_view.php:86
 msgid "Up hits:"
 msgstr ""
 
-#: ../../../Views/user_view.php:83
+#: ../../../Views/user_view.php:94
 msgid "Down hits:"
 msgstr ""
 
-#: ../../../Views/user_view.php:99
+#: ../../../Views/user_view.php:110
 msgid "en_EN"
 msgstr "English"
 
-#: ../../../Views/user_view.php:100
+#: ../../../Views/user_view.php:111
 msgid "es_ES"
 msgstr "Spanish"
 
-#: ../../../Views/user_view.php:101
+#: ../../../Views/user_view.php:112
 msgid "nl_BE"
 msgstr "Dutch (Belgium)"
 
-#: ../../../Views/user_view.php:102
+#: ../../../Views/user_view.php:113
 msgid "nl_NL"
 msgstr "Dutch (Netherlands)"
+
+#: ../../../Views/user_view.php:114
+msgid "fr_FR"
+msgstr "French"
 
 #: ../../../Views/admin/admin_view.php:1
 msgid "Admin panel"
@@ -599,6 +629,7 @@ msgid "Draw"
 msgstr ""
 
 #: ../../../Views/dashboard/dashboard_list_view.php:98
+#: ../../../Views/feed/feed_view.php:105
 msgid "Delete"
 msgstr ""
 
@@ -636,6 +667,18 @@ msgstr ""
 
 #: ../../../Views/dashboard/dashboard_menu.php:38
 msgid "List view"
+msgstr ""
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:21
+msgid "User"
+msgstr ""
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:23
+msgid "Alias"
+msgstr ""
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:24
+msgid "Description"
 msgstr ""
 
 #: ../../../Views/feed/feed_view.php:22
@@ -744,6 +787,10 @@ msgstr ""
 msgid "inactive"
 msgstr ""
 
+#: ../../../Views/input/list_view.php:39
+msgid "Node"
+msgstr ""
+
 #: ../../../Views/process/list_view.php:10
 msgid "Input configuration:   "
 msgstr ""
@@ -774,10 +821,6 @@ msgstr ""
 
 #: ../../../Views/process/list_view.php:55
 msgid "Delete input?"
-msgstr ""
-
-#: ../../../Views/user/login_block.php:35
-msgid "Username:"
 msgstr ""
 
 #: ../../../Views/user/login_block.php:39
