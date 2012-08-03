@@ -17,10 +17,10 @@ function create_input($user, $name)
   db_query("INSERT INTO input (userid,name) VALUES ('$user','$name')");
 }
 
-function create_input_timevalue($user, $name, $time, $value)
+function create_input_timevalue($user, $name, $nodeid, $time, $value)
 {
   $time = date("Y-n-j H:i:s", $time);
-  db_query("INSERT INTO input (userid,name,time,value) VALUES ('$user','$name','$time','$value')");
+  db_query("INSERT INTO input (userid,name,nodeid,time,value) VALUES ('$user','$name','$nodeid','$time','$value')");
   $inputid = db_insert_id();
   return $inputid;
 }
