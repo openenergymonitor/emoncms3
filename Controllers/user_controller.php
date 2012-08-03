@@ -41,29 +41,29 @@
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'login')
     {
-      if ($_POST["name"] && $_POST["pass"])
+      if ($_POST['name'] && $_POST['pass'])
       {
-        $username = preg_replace('/[^\w\s-.]/','',$_POST["name"]);	// filter out all except for alphanumeric white space and dash
+        $username = preg_replace('/[^\w\s-.]/','',$_POST['name']);	// filter out all except for alphanumeric white space and dash
         $username = db_real_escape_string($username);
 
-        $password = db_real_escape_string($_POST["pass"]);
+        $password = db_real_escape_string($_POST['pass']);
         $result = user_logon($username,$password);
 	  
         if ($result == 0)
         {
-      	  $output['message'] = _("Invalid username or password");
+      	  $output['message'] = _('Invalid username or password');
         }
         else
         {	      	
-      	  $output['message'] = _("Welcome, you are now logged in");
+      	  $output['message'] = _('Welcome, you are now logged in');
     	  if ($format == 'html'){
-      	    header("Location: ../dashboard/list");
+      	    header('Location: ../dashboard/list');
 	  }
         }
       } 
       else
       {
-        $output['content'] = view("user/login_block.php", array());
+        $output['content'] = view('user/login_block.php', array());
       }
     }
 

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-03 15:59+0100\n"
-"PO-Revision-Date: 2012-08-03 16:00+0100\n"
+"POT-Creation-Date: 2012-08-03 18:17+0100\n"
+"PO-Revision-Date: 2012-08-03 18:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -137,6 +137,22 @@ msgstr "Token inválido"
 #: ../../../Controllers/vis_controller.php:24
 msgid "Restricted access"
 msgstr "Acceso restringido"
+
+#: ../../../Includes/messages.php:33
+msgid "BD Settings error"
+msgstr "Error en la configuración de la conexión a la base de datos"
+
+#: ../../../Includes/messages.php:34
+msgid "Please, check database settings.php file"
+msgstr "Deberías revisar el fichero settings.php"
+
+#: ../../../Includes/messages.php:44
+msgid "No settings.php file found"
+msgstr "No se ha encontrado el fichero settings.php"
+
+#: ../../../Includes/messages.php:45
+msgid "Copy and modify default.settings.php to settings.php"
+msgstr "Usa el fichero default.settings.php como plantilla para crear el fichero settings.php"
 
 #: ../../../Models/mail_model.php:34
 msgid "Message successfully sent!"
@@ -312,6 +328,10 @@ msgstr "kWh/d Comparison"
 msgid "Stacked"
 msgstr "Apliada"
 
+#: ../../../Views/api_view.php:248
+msgid "Threshold"
+msgstr "Threshold"
+
 #: ../../../Views/api_view.php:267
 msgid "Simple zoom"
 msgstr "Zoom sencillo"
@@ -341,8 +361,8 @@ msgid "Hide menu"
 msgstr "Ocultar menu"
 
 #: ../../../Views/api_view.php:354
-msgid "Hide the top menu and footer by adding the attribute <i>&embed=1</i> to the URL."
-msgstr "Puedes ocultar el menu superior y el pié añadiendo el atributo <i>&embed=1</i> en la URL. "
+msgid "Hide the top menu and footer by adding the attribute &embed=1 to the URL."
+msgstr "Puedes ocultar el menu superior y el pié añadiendo el atributo &embed=1 en la URL. "
 
 #: ../../../Views/api_view.php:359
 #: ../../../Views/dashboard/dashboard_list_view.php:54
@@ -366,8 +386,8 @@ msgid "Reset Multigraph"
 msgstr "Inicializar Multigráfico"
 
 #: ../../../Views/api_view.php:375
-msgid "The multigraph can be reset using the <i>&clear=1</i> attribute."
-msgstr "El multigráfico puede ser inicializado usando el atributo <i>&clear=1</i> en la URL."
+msgid "The multigraph can be reset using the &clear=1 attribute."
+msgstr "El multigráfico puede ser inicializado usando el atributo &clear=1 en la URL."
 
 #: ../../../Views/confirm_view.php:17
 msgid "Yes please"
@@ -549,33 +569,45 @@ msgid "Memory use"
 msgstr "Uso de memoria"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:35
-#: ../../../Views/dashboard/dashboard_config.php:15
+#: ../../../Views/dashboard/dashboard_config.php:27
 msgid "Dashboard name: "
 msgstr "Nombre del panel:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:37
-#: ../../../Views/dashboard/dashboard_config.php:19
+#: ../../../Views/dashboard/dashboard_config.php:31
 msgid "Description: "
 msgstr "Descripción"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:42
-#: ../../../Views/dashboard/dashboard_config.php:24
+#: ../../../Views/dashboard/dashboard_config.php:36
 msgid "Main: "
 msgstr "Principal:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:49
-#: ../../../Views/dashboard/dashboard_config.php:31
+#: ../../../Views/dashboard/dashboard_config.php:43
 msgid "Published: "
 msgstr "Publicado:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:56
-#: ../../../Views/dashboard/dashboard_config.php:38
+#: ../../../Views/dashboard/dashboard_config.php:50
 msgid "Public: "
 msgstr "Público:"
 
-#: ../../../Views/dashboard/dashboard_config.php:17
+#: ../../../Views/dashboard/dashboard_config.php:23
+msgid "Dashboard Configuration"
+msgstr "Configuración del panel"
+
+#: ../../../Views/dashboard/dashboard_config.php:29
 msgid "Menu name: (lowercase a-z only)"
 msgstr "Nombre para el menu: (sólo letras de la \"a\" a la \"z\")"
+
+#: ../../../Views/dashboard/dashboard_config.php:59
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../../../Views/dashboard/dashboard_config.php:60
+msgid "Save changes"
+msgstr "Guardar cambios"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:36
 msgid "Id"
@@ -669,6 +701,10 @@ msgstr "Formato iconos"
 #: ../../../Views/dashboard/dashboard_menu.php:38
 msgid "List view"
 msgstr "Formato lista"
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:15
+msgid "Explore Public Dashboards"
+msgstr "Explorar paneles públicos"
 
 #: ../../../Views/dashboard/dashboard_publiclist_view.php:21
 msgid "User"
