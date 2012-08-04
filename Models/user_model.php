@@ -55,7 +55,8 @@ function get_user($userid)
       'email' => $row['email'],
       'apikey_read' => $row['apikey_read'],
       'apikey_write' => $row['apikey_write'],
-      'lang' => $row['lang']
+      'lang' => $row['lang'],
+      'timeoffset' => $row['timeoffset']
     );
   }
   return $user;
@@ -251,6 +252,18 @@ function get_user_lang($userid)
 	$result = db_query("SELECT lang FROM users WHERE id = '$userid';");
 	$row = db_fetch_array($result);
 	return $row['lang'];
+}
+
+function set_user_timeoffset($userid,$timeoffset)
+{
+  db_query("UPDATE users SET timeoffset = '$timeoffset' WHERE id='$userid'");
+}
+
+function get_user_timeoffset($userid)
+{
+  $result = db_query("SELECT timeoffset FROM users WHERE id = '$userid';");
+  $row = db_fetch_array($result);
+  return $row['timeoffset'];
 }
 
 ?>
