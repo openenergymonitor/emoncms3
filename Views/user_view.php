@@ -46,6 +46,15 @@ defined('EMONCMS_EXEC') or die('Restricted access');
   echo '</form>';
   
   ?>
+
+  <form class="well" action="../time/set" method="get">
+    <h3><?php echo _("Local time"); ?></h3>
+
+    <label><?php echo _("Time offset in hours:"); ?></label>
+    <input type="edit" name="offset" value="<?php echo $user['timeoffset']; ?>" />
+
+    <input type="submit" class="btn btn-danger" value="<?php echo _('Set'); ?>" />
+  </form>
                
   <form class="well" action="changedetails" method="post">
     <h3><?php echo _("Change details"); ?></h3>

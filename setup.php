@@ -58,7 +58,8 @@ $schema['users'] = array(
   'apikey_read' => array('type' => 'varchar(64)'),
   'lastlogin' => array('type' => 'datetime'),
   'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
-  'lang' => array('type' => 'varchar(5)')
+  'lang' => array('type' => 'varchar(5)'),
+  'timeoffset' => array('type' => 'int(11)')
 );
 
 $schema['input'] = array(
