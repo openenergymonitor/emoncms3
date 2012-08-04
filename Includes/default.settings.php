@@ -29,6 +29,10 @@
  * Use ckeditor as dashboard editor too
  * CKEditor must be installed separately (see Includes/INSTALL CKEDITOR HERE.TXT)
  */
-  $useckeditor = FALSE;
+  $useckeditor = false;
  
+/*
+ * Public registration
+ */
+ 	$allowusersregister = true;
 ?>

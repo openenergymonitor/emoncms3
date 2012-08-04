@@ -12,17 +12,17 @@ http://openenergymonitor.org
   global $path;
 ?>
 <br>
-<h2>Explore Public Dashboards</h2>
+<h2><?php echo _('Explore Public Dashboards'); ?></h2>
 <br>
 <?php 
   if (isset($dashboards) && count($dashboards)) { ?>
   <table class='catlist'>
     <tr>
-      <th><?php echo _("User"); ?></th>
-      <th><?php echo _("Name"); ?></th>
-      <th><?php echo _("Alias"); ?></th>
-      <th><?php echo _("Description"); ?></th>
-      <th><?php echo _("View"); ?></th> 
+      <th><?php echo _('User'); ?></th>
+      <th><?php echo _('Name'); ?></th>
+      <th><?php echo _('Alias'); ?></th>
+      <th><?php echo _('Description'); ?></th>
+      <th><?php echo _('View'); ?></th> 
     </tr>
   
     <?php foreach ($dashboards as $dashboard) { ?>

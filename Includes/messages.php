@@ -25,13 +25,13 @@ function show_nodashboards_message()
 
 /*
  * DB Settings error
- * TODO: bootstrap style
+ * TODO: bootstrap style and set language before database connect try
  */
 function show_dbsettingserror_message()
 {
   echo '<div class="alert alert-block">';
-  echo '<h4 class="alert-heading">BD Settings error</h4>';
-  echo 'Please, check database settings.php file';
+  echo '<h4 class="alert-heading">'._('BD Settings error').'</h4>';
+  echo _('Please, check database settings.php file');
   echo '</div>';
 }
 
@@ -41,8 +41,8 @@ function show_dbsettingserror_message()
 function show_nosettingsfile_message()
 {
   echo '<div class="alert alert-block">';
-  echo '<h4 class="alert-heading">No settings.php file found</h4>';
-  echo 'Copy and modify default.settings.php to settings.php';
+  echo '<h4 class="alert-heading">'._('No settings.php file found').'</h4>';
+  echo _('Copy and modify default.settings.php to settings.php');
   echo '</div>'; 
 }
 
