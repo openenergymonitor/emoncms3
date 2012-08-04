@@ -21,7 +21,7 @@
 
     if ($action == 'server' && $session['read'])
     {
-      $output['content'] = date('H:i:s');
+      $output['content'] = 't'.date('H,i,s');
     }
 
     return $output;
