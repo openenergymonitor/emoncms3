@@ -153,7 +153,7 @@ function get_process_list()
 function auto_configure_inputs($userid, $id, $name)
 {
   // If a power or solar (power) feed
-  if (preg_match("/power/", $name) || preg_match("/solar/", $name))
+  if (preg_match("/power/i", $name) || preg_match("/solar/i", $name))
   {
     $feedid = create_feed($userid, $name, 1, 1);
     add_input_process($userid, $id, 1, $feedid);
@@ -165,7 +165,7 @@ function auto_configure_inputs($userid, $id, $name)
     add_input_process($userid, $id, 16, $feedid);
   }
 
-  if (preg_match("/temperature/", $name) || preg_match("/temp/", $name))
+  if (preg_match("/temperature/i", $name) || preg_match("/temp/i", $name))
   {
     // 1) log to feed
     $feedid = create_feed($userid, $name, 1, 1);
