@@ -71,7 +71,7 @@
     <!------------------------------------------------------
     FOOTER
     ------------------------------------------------------->
-    <div class="footer">Powered by <a href="http://openenergymonitor.org">openenergymonitor.org</a></div>  
+    <div class="footer"><?php echo _('Powered by '); ?><a href="http://openenergymonitor.org">openenergymonitor.org</a></div>  
     
     
     <!-- Placed at the end of the document so the pages load faster -->
