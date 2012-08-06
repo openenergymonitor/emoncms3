@@ -54,26 +54,33 @@ switch(db_connect()) {
 //---------------------------------------------------------------------------------
 // DECODE URL ARGUMENT
 //---------------------------------------------------------------------------------
-$q = preg_replace('/[^.\/a-z0-9]/', '', $_GET['q']);
-// filter out all except a-z / .
-$q = db_real_escape_string($q);
-// second layer
-$args = preg_split('/[\/]/', $q);
+// Init vars
+$format = "";
+$controller = "";
+$action = "";
+$subaction = "";
+if (isset($_GET['q'])) {
+  $q = preg_replace('/[^.\/a-z0-9]/', '', $_GET['q']);
+  // filter out all except a-z / .
+  $q = db_real_escape_string($q);
+  // second layer
+  $args = preg_split('/[\/]/', $q);
 
-// get format (part of last argument after . i.e view.json)
-$lastarg = sizeof($args) - 1;
-$lastarg_split = preg_split('/[.]/', $args[$lastarg]);
-$format = $lastarg_split[1];
-if ($format!="json" && $format!="html") $format = "html";
-$args[$lastarg] = $lastarg_split[0];
+  // get format (part of last argument after . i.e view.json)
+  $lastarg = sizeof($args) - 1;
+  $lastarg_split = preg_split('/[.]/', $args[$lastarg]);
+  if (count($lastarg_split) > 1) { $format = $lastarg_split[1]; }
+  if ($format!="json" && $format!="html") $format = "html";
+  $args[$lastarg] = $lastarg_split[0];
 
-$controller = $args[0];
-$action = $args[1];
-$subaction = $args[2];
+  if (count($args) > 0) { $controller = $args[0]; }
+  if (count($args) > 1) { $action = $args[1]; }
+  if (count($args) > 2) { $subaction = $args[2]; }
+}
 
-if (!$controller) {$controller = "user"; $action = "login";}
+if (!isset($controller)) {$controller = "user"; $action = "login";}
 
-if ($_GET['embed'])
+if (isset($_GET['embed']) && ($_GET['embed']))
 	$embed = 1;
 else
 	$embed = 0;
@@ -83,7 +90,7 @@ else
 // if the apikey is set then the session is controlled by the apikey
 // otherwise it is controlled by the cookie based php session.
 //---------------------------------------------------------------------------------
-if ($_GET['apikey'])
+if (isset($_GET['apikey']) &&($_GET['apikey']))
 {
   $session = user_apikey_session_control($_GET['apikey']);
 }

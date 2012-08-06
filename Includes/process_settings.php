@@ -30,7 +30,7 @@
     require_once ('settings.php');
     
     // Set display errors
-    if ($display_errors) {
+    if (isset($display_errors) && ($display_errors)) {
       //error_reporting(E_ALL);
       ini_set('display_errors', 'on');
       error_reporting(E_ALL ^ E_NOTICE);      

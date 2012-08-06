@@ -50,6 +50,7 @@ function get_user($userid)
   if ($result)
   {
     $row = db_fetch_array($result);
+    if (!isset($row['email'])) $row['email']="";
     $user = array(
       'username' => $row['username'],
       'email' => $row['email'],
