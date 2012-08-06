@@ -13,7 +13,7 @@
 
 if (!$session['read']) return;
 
-if ($_SESSION['editmode'] == TRUE) { 
+if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) { 
   $logo = get_theme_path() . "/emoncms logo off.png";
   $viewl = $session['username'];
 } else {
@@ -28,11 +28,11 @@ if ($_SESSION['editmode'] == TRUE) {
   <span class="icon-bar"></span>
 </button>*/
 
-  if ($_SESSION['editmode'] == TRUE) { echo "<a class='brand' href='#'>Emoncms3</a>"; }
+  if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) { echo "<a class='brand' href='#'>Emoncms3</a>"; }
 ?>
   <ul class="nav">
     <li><a style="padding:5px;" href="<?php echo $GLOBALS['path'] . $viewl; ?>"><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
-    <?php if ($_SESSION['editmode'] == TRUE) { ?>
+    <?php if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) { ?>
     <li><a href='<?php echo $GLOBALS['path']; ?>input/list'><?php echo _("Inputs"); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>feed/list'><?php echo _("Feeds"); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>dashboard/list'><?php echo _("Dashboards"); ?></a></li>
@@ -40,7 +40,7 @@ if ($_SESSION['editmode'] == TRUE) {
 
   <?php } ?>
   </ul>
-  <?php if ($_SESSION['editmode'] == TRUE) { ?>
+  <?php if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) { ?>
   <ul class="nav pull-right">  
     <?php if ($session['admin']) { ?>
       <li><a href='<?php echo $GLOBALS['path']; ?>admin'><?php echo _("Admin"); ?></a></li>

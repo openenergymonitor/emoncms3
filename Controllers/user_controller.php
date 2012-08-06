@@ -41,7 +41,8 @@
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'login')
     {
-      if ($_POST["name"] && $_POST["pass"])
+      if ((isset($_POST['name']) && isset($_POST['pass'])) &&
+        ($_POST["name"] && $_POST["pass"]))
       {
         $username = preg_replace('/[^\w\s-.]/','',$_POST["name"]);	// filter out all except for alphanumeric white space and dash
         $username = db_real_escape_string($username);
