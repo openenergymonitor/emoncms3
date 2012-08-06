@@ -54,7 +54,7 @@ set_lang($accepted_languages);
 						</table>
 					</div>
 				<?php } ?>
-				<?php echo $error; ?>
+				<?php if (isset($error)) echo $error; ?>
 			</form>
 		</div>
 	</div>

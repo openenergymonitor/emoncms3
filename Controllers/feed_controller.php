@@ -159,7 +159,9 @@
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'list' && $session['read'])
     {
-      $del = intval($_GET["del"]);
+      $del = 0;
+      if (isset($_GET["del"])) $del = intval($_GET["del"]);
+
       $feeds = get_user_feeds($session['userid'],$del);
     
       if ($format == 'json') $output['content'] = json_encode($feeds);
