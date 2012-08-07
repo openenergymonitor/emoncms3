@@ -58,20 +58,20 @@
       $process = get_process($processid);
 
       // If arg type value
-      if ($process[1] == 0)
+      if ($process[1] == ProcessArg::VALUE)
       {
       	$arg = floatval($arg);
 	  }
 
       // If arg type input
-	  elseif ($process[1] == 1)
-	  {
-	  	$arg = get_input_id($session['userid'],$arg);
-	  }
+      elseif ($process[1] == ProcessArg::INPUTID)
+      {
+        $arg = get_input_id($session['userid'],$arg);
+      }
 
       // If arg type feed
-	  elseif ($process[1] == 2)
-	  {
+      elseif ($process[1] == ProcessArg::FEEDID)
+      {
         // First check if feed exists of given feed name and user.
         $id = get_feed_id($_SESSION['userid'],$arg);
         // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
@@ -81,11 +81,6 @@
         $arg = $id;
       }
 
-	  elseif ($process[1] == 3)
-	  {
-	  	$arg = get_feed_id($session['userid'],$arg);
-	  }
-	  
       add_input_process($session['userid'],$inputid,$processid,$arg);
 
       if ($format == 'html')
