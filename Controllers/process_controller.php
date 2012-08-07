@@ -89,6 +89,21 @@
       }
     }
     
+    elseif ($action == "query" && $session['read']) // read access required
+    { 
+      $inputid = intval($_GET["inputid"]);
+      $processid = intval($_GET["type"]);			// get process type
+
+      $arg = preg_replace('/[^\w\s-.]/','',$_GET["arg"]);	// filter out all except for alphanumeric white space and dash
+      $arg = db_real_escape_string($arg);
+
+      $process = get_process($processid);
+
+
+      if ($format == 'json') $output['content'] = json_encode($process);
+//      if ($format == 'html') $output['content'] = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
+    }
+
     elseif ($action == "test" && $_SESSION['write']) // write access required
     {
       set_time_limit(360);  // Increase PHP limit
