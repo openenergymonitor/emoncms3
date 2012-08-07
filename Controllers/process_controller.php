@@ -82,7 +82,7 @@
       	header("Location: list?inputid=".$inputid);
       }
     }
-
+    
     elseif ($action == "test" && $_SESSION['write']) // write access required
     {
       set_time_limit(360);  // Increase PHP limit
