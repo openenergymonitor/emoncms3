@@ -10,8 +10,7 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 */
-
-if (!$session['read']) return;
+if (!isset($session['read']) || (!$session['read'])) return;
 
 if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) { 
   $logo = get_theme_path() . "/emoncms logo off.png";

@@ -53,6 +53,7 @@
         if ($result == 0)
         {
       	  $output['message'] = _("Invalid username or password");
+          $output['content'] = view("user/login_block.php", array());
         }
         else
         {	      	

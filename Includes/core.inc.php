@@ -16,7 +16,6 @@
   {
     $controller = $cat."_controller";
     $controllerScript = "Controllers/".$controller.".php";   
-
     if (is_file($controllerScript))
     {
       require $controllerScript;
@@ -32,7 +31,7 @@
     extract($args);
     ob_start();       
     include "Views/$filepath";   
-    $content = ob_get_clean();    
+    $content = ob_get_clean();
     return $content;
   }
 

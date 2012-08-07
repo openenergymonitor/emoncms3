@@ -30,24 +30,25 @@
     // Gets the user list and user memory use
     // http://yoursite/emoncms/admin/users
     //---------------------------------------------------------------------------------------------------------
+
     if ($action == '' && $session['write'] && $session['admin'])
     {
       $userlist = get_user_list();
       $total_memuse = 0;
-      foreach ($userlist as $user)
-      { // Improved foreach loop
+      for ($i=0;$i<count($userlist);$i++) {
+        $user = $userlist[$i];
         $stats = get_statistics($user['userid']);
         $user['uphits'] = $stats['uphits'];
         $user['dnhits'] = $stats['dnhits'];
         $user['memuse'] = $stats['memory'];
         $total_memuse += $user['memuse'];
+        $userlist[$i] = $user;
       }
-
+        
       usort($userlist, 'user_sort');	// sort by highest memory user first
 
       $output['content'] = view("admin/admin_view.php", array('userlist'=>$userlist,'total_memuse'=>$total_memuse));
     }
-
     return $output;
   }
 

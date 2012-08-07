@@ -54,7 +54,7 @@ switch(db_connect()) {
 //---------------------------------------------------------------------------------
 // Init vars
 $format = "";
-$controller = "";
+$controller = "user";
 $action = "";
 $subaction = "";
 if (isset($_GET['q'])) {
@@ -76,7 +76,8 @@ if (isset($_GET['q'])) {
   if (count($args) > 2) { $subaction = $args[2]; }
 }
 
-if (!isset($controller)) {$controller = "user"; $action = "login";}
+// If controller is set to user (default) and no action selected, force a login action
+if (($controller=="user") && ($action=="")) $action="login";
 
 if (isset($_GET['embed']) && ($_GET['embed']))
 	$embed = 1;
@@ -96,6 +97,7 @@ else
 {
   emon_session_start();
   $session = $_SESSION;
+  if (!isset($session['userid'])) $session['userid'] = 0;
 }
 
 // Set user language on every page load to avoid apache multithread setlocale error

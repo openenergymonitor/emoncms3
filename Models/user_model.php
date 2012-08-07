@@ -18,6 +18,7 @@ function user_apikey_session_control($apikey_in)
   // Check for apikey login
   //----------------------------------------------------
   $apikey_in = db_real_escape_string($apikey_in);
+
   $userid = get_apikey_read_user($apikey_in);
   if ($userid != 0)
   {

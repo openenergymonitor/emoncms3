@@ -3,7 +3,6 @@
 
 <h2><?php echo _("Users"); ?></h2>
 <h3><?php echo sizeof($userlist); ?> <?php echo _("registered users"); ?></h3>
-
 <table class='catlist'>
 <tr><th>id</th><th><?php echo _("Username"); ?></th><th><?php echo _("Up hits"); ?></th><th><?php echo _("Dn hits"); ?></th><th><?php echo _("Memory use"); ?></th><th><?php echo _("Admin"); ?></th></tr>
 
