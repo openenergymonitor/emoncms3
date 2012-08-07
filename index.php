@@ -78,9 +78,6 @@ if (isset($_GET['q'])) {
   if (count($args) > 2) { $subaction = $args[2]; }
 }
 
-// If controller is set to user (default) and no action selected, force a login action
-if (($controller=="user") && ($action=="")) $action="login";
-
 if (isset($_GET['embed']) && ($_GET['embed']))
 	$embed = 1;
 else
@@ -108,6 +105,16 @@ set_emoncms_lang($session['userid']);
 // Set emoncms theme TODO: get from user preferences
 $GLOBALS['theme'] = 'basic';
 
+// Redirect to login screen if user is no longer logged in (eg. after session timeout)
+if ($session['userid'] == 0) {
+  $controller="user";
+  $action="login";
+}
+// Don't show login page if user IS logged in.  Redirect them to dashboard list instead.
+elseif (($session['userid'] > 0) && $action=="login") {
+  header("Location: ".$path."dashboard/list");
+}
+  
 //---------------------------------------------------------------------------------
 // CREATE OUTPUT CONTENT ARRAY
 // All content is stored in the $output array
