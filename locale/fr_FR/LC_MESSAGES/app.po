@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-01 12:11+0100\n"
-"PO-Revision-Date: 2012-08-01 13:25+0100\n"
-"Last-Translator: Baptiste Gaultier <baptiste.gaultier@telecom-bretagne.eu>\n"
+"POT-Creation-Date: 2012-08-03 16:04+0100\n"
+"PO-Revision-Date: 2012-08-03 16:06+0100\n"
+"Last-Translator: \n"
 "Language-Team: Baptiste Gaultier (Télécom Bretagne) <baptiste.gaultier@telecom-bretagne.eu>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Language: French\n"
@@ -28,6 +28,22 @@ msgstr "Continuer vers emoncms"
 #: ../../../setup.php:45
 msgid "to run script uncomment runnable"
 msgstr "Pour ex&eacute;cuter le script, d&eacutecommenter la variable runnable"
+
+#: ../../../Controllers/dashboard_controller.php:39
+msgid "dashboards new"
+msgstr "Nouveau tableau de bord"
+
+#: ../../../Controllers/dashboard_controller.php:140
+msgid "Logout"
+msgstr "D&eacute;connexion"
+
+#: ../../../Controllers/dashboard_controller.php:243
+msgid "dashboard set"
+msgstr "Tableau de bord modifi&eacute;"
+
+#: ../../../Controllers/dashboard_controller.php:282
+msgid "dashboard set configuration"
+msgstr "d&ecute;finir la configuration du tableau de bord"
 
 #: ../../../Controllers/feed_controller.php:52
 msgid "Feed type changed"
@@ -56,21 +72,13 @@ msgstr "Le flux"
 msgid " deleted"
 msgstr "a &eacute;t&eacute; supprim&eacute;"
 
-#: ../../../Controllers/dashboard_controller.php:39
-msgid "dashboards new"
-msgstr "Nouveau tableau de bord"
+#: ../../../Controllers/input_controller.php:48
+msgid "Input deleted"
+msgstr "Source supprim&ecute;e"
 
-#: ../../../Controllers/dashboard_controller.php:140
-msgid "Logout"
-msgstr "D&eacute;connexion"
-
-#: ../../../Controllers/dashboard_controller.php:243
-msgid "dashboard set"
-msgstr "Tableau de bord modifi&eacute;"
-
-#: ../../../Controllers/dashboard_controller.php:282
-msgid "dashboard set configuration"
-msgstr "d&ecute;finir la configuration du tableau de bord"
+#: ../../../Controllers/input_controller.php:55
+msgid "Process list has been reset"
+msgstr "La liste d'actions a &ecute;t&ecute; r&eacute;initialis&eacute;e "
 
 #: ../../../Controllers/user_controller.php:54
 msgid "Invalid username or password"
@@ -127,132 +135,81 @@ msgstr "Vous &ecirc;tes d&eacute;connect&eacute;"
 msgid "Invalid token"
 msgstr "Jeton invalide"
 
-#: ../../../Controllers/input_controller.php:48
-msgid "Input deleted"
-msgstr "Source supprim&ecute;e"
-
-#: ../../../Controllers/input_controller.php:55
-msgid "Process list has been reset"
-msgstr "La liste d'actions a &ecute;t&ecute; r&eacute;initialis&eacute;e "
-
 #: ../../../Controllers/vis_controller.php:24
 msgid "Restricted access"
 msgstr "Acc&egrave;s restreint"
 
-#: ../../../Views/user_view.php:17
-msgid "User: "
-msgstr "Identifiant : "
+#: ../../../Models/mail_model.php:34
+msgid "Message successfully sent!"
+msgstr "Message envoy&eacute; avec succ&egrave;s"
 
-#: ../../../Views/user_view.php:23
-msgid "Select preferred language"
-msgstr "S&eacute;lectionner la langue principale"
+#: ../../../Models/notify_model.php:46
+msgid " is"
+msgstr "est"
 
-#: ../../../Views/user_view.php:28
-#: ../../../Views/user_view.php:30
-msgid "Browser language"
-msgstr "Langue du navigateur"
+#: ../../../Models/notify_model.php:53
+msgid " is inactive"
+msgstr "est inactif"
 
-#: ../../../Views/user_view.php:45
-msgid "Save"
-msgstr "Sauvegarder"
+#: ../../../Models/process_model.php:28
+msgid "Log to feed"
+msgstr "vers flux"
 
-#: ../../../Views/user_view.php:51
-msgid "Change details"
-msgstr "Modification du compte"
+#: ../../../Models/process_model.php:49
+msgid "Power to kWh"
+msgstr "watts vers kWh"
 
-#: ../../../Views/user_view.php:53
-msgid "Username:"
-msgstr "Identifiant : "
+#: ../../../Models/process_model.php:56
+msgid "Power to kWh/d"
+msgstr "watts vers kWh/j"
 
-#: ../../../Views/user_view.php:56
-msgid "Email:"
-msgstr "Correo:"
+#: ../../../Models/process_model.php:63
+msgid "x input"
+msgstr " × source"
 
-#: ../../../Views/user_view.php:59
-#: ../../../Views/user_view.php:70
-msgid "Change"
-msgstr "Modifier"
-
-#: ../../../Views/user_view.php:63
-msgid "Change password"
-msgstr "Modifier le mot de passe"
-
-#: ../../../Views/user_view.php:64
-msgid "Current password:"
-msgstr "Ancien mot de passe : "
-
-#: ../../../Views/user_view.php:67
-msgid "New password:"
-msgstr "Nouveau mot de passe : "
-
-#: ../../../Views/user_view.php:74
-msgid "Account Statistics"
-msgstr "Statistiques du compte"
-
-#: ../../../Views/user_view.php:78
-msgid "Disk space use:"
-msgstr "Espace disque utilis&eacute; : "
-
-#: ../../../Views/user_view.php:86
-msgid "Up hits:"
-msgstr "Up hits : "
-
-#: ../../../Views/user_view.php:94
-msgid "Down hits:"
-msgstr "Down hits : "
-
-#: ../../../Views/user_view.php:110
-msgid "en_EN"
-msgstr "anglais"
-
-#: ../../../Views/user_view.php:111
-msgid "es_ES"
-msgstr "espagnol"
-
-#: ../../../Views/user_view.php:112
-msgid "nl_BE"
-msgstr "flamand"
-
-#: ../../../Views/user_view.php:113
-msgid "nl_NL"
-msgstr "n&eacute;erlandais"
-
-#: ../../../Views/menu_view.php:36
-#: ../../../Views/input/list_view.php:17
-msgid "Inputs"
-msgstr "Sources"
-
-#: ../../../Views/menu_view.php:37
-msgid "Feeds"
-msgstr "Flux"
-
-#: ../../../Views/menu_view.php:38
-msgid "Dashboards"
-msgstr "Tableaux de bord"
-
-#: ../../../Views/menu_view.php:39
-msgid "API"
+#: ../../../Models/process_model.php:70
+msgid "input on-time"
 msgstr ""
 
-#: ../../../Views/menu_view.php:46
-msgid "Admin"
-msgstr "Administration"
+#: ../../../Models/process_model.php:77
+msgid "kWhinc to kWh/d"
+msgstr "kWhinc vers kWh/j"
 
-#: ../../../Views/menu_view.php:48
-msgid "Account"
-msgstr "Compte"
+#: ../../../Models/process_model.php:84
+msgid "kWh to kWh/d"
+msgstr "kWh vers kWh/j"
 
-#: ../../../Views/confirm_view.php:17
-msgid "Yes please"
-msgstr "Oui"
+#: ../../../Models/process_model.php:91
+msgid "update feed @time"
+msgstr "actualiser le flux @temps"
 
-#: ../../../Views/notify_settings_view.php:12
-msgid "Notify settings"
-msgstr "Configuration des notifications"
+#: ../../../Models/process_model.php:98
+msgid "+ input"
+msgstr "+ source"
 
-#: ../../../Views/notify_settings_view.php:14
-msgid "Notification recipiants (To): "
-msgstr "Destinataire : "
+#: ../../../Models/process_model.php:105
+msgid "/ input"
+msgstr "&divide; source"
+
+#: ../../../Models/process_model.php:112
+msgid "phaseshift"
+msgstr "d&eacute;phasage"
+
+#: ../../../Models/process_model.php:119
+msgid "accumulator"
+msgstr "accumulateur"
+
+#: ../../../Models/process_model.php:126
+msgid "rate of change"
+msgstr "variation"
+
+#: ../../../Models/process_model.php:133
+msgid "histogram"
+msgstr "histogramme"
+
+#: ../../../Models/process_model.php:140
+msgid "average"
+msgstr "moyenne"
 
 #: ../../../Views/api_view.php:29
 msgid "API Helper"
@@ -304,7 +261,6 @@ msgid "These are all the visualisations that are available in emoncms3. To view 
 msgstr "Voici les visulations disponibles dans emoncms3. Veuillez entrer un identifiant de flux dans les champs ci-dessous puis cliquer sur >"
 
 #: ../../../Views/api_view.php:88
-#: ../../../Views/input/list_view.php:39
 #: ../../../Views/dashboard/dashboard_publiclist_view.php:22
 msgid "Name"
 msgstr "Nom"
@@ -314,9 +270,9 @@ msgid "URL"
 msgstr "Lien"
 
 #: ../../../Views/api_view.php:94
+#: ../../../Views/dashboard/dashboard_list_view.php:97
 #: ../../../Views/dashboard/dashboard_publiclist_view.php:25
 #: ../../../Views/dashboard/dashboard_publiclist_view.php:34
-#: ../../../Views/dashboard/dashboard_list_view.php:97
 msgid "View"
 msgstr "Afficher"
 
@@ -329,6 +285,7 @@ msgid "Raw data graph"
 msgstr "Donn&eacute;es brutes"
 
 #: ../../../Views/api_view.php:130
+#: ../../../Views/feed/feed_view.php:38
 msgid "Bar graph"
 msgstr "Histogramme"
 
@@ -415,6 +372,51 @@ msgstr "Graphiques multiples"
 msgid "The multigraph can be reset using the <i>&clear=1</i> attribute."
 msgstr "Le graphe peut &ecirc;tre r&eacute;initialis&eacute; en utilisant l'attribut  &clear=1."
 
+#: ../../../Views/confirm_view.php:17
+msgid "Yes please"
+msgstr "Oui"
+
+#: ../../../Views/menu_view.php:36
+msgid "Inputs"
+msgstr "Sources"
+
+#: ../../../Views/menu_view.php:37
+msgid "Feeds"
+msgstr "Flux"
+
+#: ../../../Views/menu_view.php:38
+msgid "Dashboards"
+msgstr "Tableaux de bord"
+
+#: ../../../Views/menu_view.php:39
+msgid "API"
+msgstr ""
+
+#: ../../../Views/menu_view.php:46
+#: ../../../Views/admin/admin_view.php:8
+msgid "Admin"
+msgstr "Administration"
+
+#: ../../../Views/menu_view.php:48
+msgid "Account"
+msgstr "Compte"
+
+#: ../../../Views/notify_settings_view.php:12
+msgid "Notify settings"
+msgstr "Configuration des notifications"
+
+#: ../../../Views/notify_settings_view.php:14
+msgid "Notification recipiants (To): "
+msgstr "Destinataire : "
+
+#: ../../../Views/notify_settings_view.php:19
+#: ../../../Views/notify_view.php:29
+#: ../../../Views/user_view.php:45
+#: ../../../Views/feed/feed_view.php:69
+#: ../../../Views/feed/feed_view.php:76
+msgid "Save"
+msgstr "Sauvegarder"
+
 #: ../../../Views/notify_view.php:13
 msgid "Notify "
 msgstr "Notifier"
@@ -441,98 +443,144 @@ msgstr "Envoyer rapport p&eacute;riodiquement "
 msgid "Edit mail settings"
 msgstr "Configuration email"
 
-#: ../../../Views/user/login_block.php:39
-msgid "Password:"
-msgstr "Mot de passe : "
+#: ../../../Views/user_view.php:17
+msgid "User: "
+msgstr "Identifiant : "
 
-#: ../../../Views/user/login_block.php:43
-msgid "Login"
-msgstr "Connexion"
+#: ../../../Views/user_view.php:23
+msgid "Select preferred language"
+msgstr "S&eacute;lectionner la langue principale"
 
-#: ../../../Views/user/login_block.php:50
-msgid "Or if you are new enter a username and password above and click register"
-msgstr "Ou si vous &ecirc;tes un nouvel utilisateur, indiquer un identifiant et un mot de passe puis cliquer sur S'inscrire"
+#: ../../../Views/user_view.php:28
+#: ../../../Views/user_view.php:30
+msgid "Browser language"
+msgstr "Langue du navigateur"
 
-#: ../../../Views/user/login_block.php:50
-msgid "Register"
-msgstr "S'inscrire"
+#: ../../../Views/user_view.php:51
+msgid "Change details"
+msgstr "Modification du compte"
 
-#: ../../../Views/input/list_view.php:39
-msgid "Updated"
-msgstr "Actualis&eacute;"
+#: ../../../Views/user_view.php:53
+msgid "Username:"
+msgstr "Identifiant : "
 
-#: ../../../Views/input/list_view.php:39
-msgid "Value"
-msgstr "Valeur"
+#: ../../../Views/user_view.php:56
+msgid "Email:"
+msgstr "Correo:"
 
-#: ../../../Views/dashboard/dashboard_publiclist_view.php:21
-msgid "User"
-msgstr "Utilisateur"
+#: ../../../Views/user_view.php:59
+#: ../../../Views/user_view.php:70
+msgid "Change"
+msgstr "Modifier"
 
-#: ../../../Views/dashboard/dashboard_publiclist_view.php:23
-msgid "Alias"
+#: ../../../Views/user_view.php:63
+msgid "Change password"
+msgstr "Modifier le mot de passe"
+
+#: ../../../Views/user_view.php:64
+msgid "Current password:"
+msgstr "Ancien mot de passe : "
+
+#: ../../../Views/user_view.php:67
+msgid "New password:"
+msgstr "Nouveau mot de passe : "
+
+#: ../../../Views/user_view.php:74
+msgid "Account Statistics"
+msgstr "Statistiques du compte"
+
+#: ../../../Views/user_view.php:78
+msgid "Disk space use:"
+msgstr "Espace disque utilis&eacute; : "
+
+#: ../../../Views/user_view.php:86
+msgid "Up hits:"
+msgstr "Up hits : "
+
+#: ../../../Views/user_view.php:94
+msgid "Down hits:"
+msgstr "Down hits : "
+
+#: ../../../Views/user_view.php:110
+msgid "en_EN"
+msgstr "Anglais"
+
+#: ../../../Views/user_view.php:111
+msgid "es_ES"
+msgstr "Espagnol"
+
+#: ../../../Views/user_view.php:112
+msgid "nl_BE"
+msgstr "Flamand"
+
+#: ../../../Views/user_view.php:113
+msgid "nl_NL"
+msgstr "N&eacute;erlandais"
+
+#: ../../../Views/user_view.php:114
+msgid "fr_FR"
+msgstr "Français"
+
+#: ../../../Views/admin/admin_view.php:1
+msgid "Admin panel"
+msgstr "Administration"
+
+#: ../../../Views/admin/admin_view.php:2
+msgid "Total feed data disk space use: "
+msgstr "Espace utilis&eacute; pour le stockage des flux : "
+
+#: ../../../Views/admin/admin_view.php:4
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: ../../../Views/admin/admin_view.php:5
+msgid "registered users"
+msgstr "utilisateurs enregistr&eacute;s"
+
+#: ../../../Views/admin/admin_view.php:8
+msgid "Username"
+msgstr "Nombre d'utilisateur"
+
+#: ../../../Views/admin/admin_view.php:8
+msgid "Up hits"
 msgstr ""
 
-#: ../../../Views/dashboard/dashboard_publiclist_view.php:24
-msgid "Description"
-msgstr "Description"
+#: ../../../Views/admin/admin_view.php:8
+msgid "Dn hits"
+msgstr ""
 
-#: ../../../Views/dashboard/dashboard_config.php:15
+#: ../../../Views/admin/admin_view.php:8
+msgid "Memory use"
+msgstr "M&eacute;moire"
+
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:35
+#: ../../../Views/dashboard/dashboard_config.php:15
 msgid "Dashboard name: "
 msgstr "Nom du tableau de bord : "
+
+#: ../../../Views/dashboard/dashboard_ckeditor_view.php:37
+#: ../../../Views/dashboard/dashboard_config.php:19
+msgid "Description: "
+msgstr "Description : "
+
+#: ../../../Views/dashboard/dashboard_ckeditor_view.php:42
+#: ../../../Views/dashboard/dashboard_config.php:24
+msgid "Main: "
+msgstr "Principal : "
+
+#: ../../../Views/dashboard/dashboard_ckeditor_view.php:49
+#: ../../../Views/dashboard/dashboard_config.php:31
+msgid "Published: "
+msgstr "Publi&eacute; : "
+
+#: ../../../Views/dashboard/dashboard_ckeditor_view.php:56
+#: ../../../Views/dashboard/dashboard_config.php:38
+msgid "Public: "
+msgstr "Public : "
 
 #: ../../../Views/dashboard/dashboard_config.php:17
 msgid "Menu name: (lowercase a-z only)"
 msgstr "Nom dans le menu (minuscules de a-z) : "
-
-#: ../../../Views/dashboard/dashboard_config.php:19
-#: ../../../Views/dashboard/dashboard_ckeditor_view.php:37
-msgid "Description: "
-msgstr "Description : "
-
-#: ../../../Views/dashboard/dashboard_config.php:24
-#: ../../../Views/dashboard/dashboard_ckeditor_view.php:42
-msgid "Main: "
-msgstr "Principal : "
-
-#: ../../../Views/dashboard/dashboard_config.php:31
-#: ../../../Views/dashboard/dashboard_ckeditor_view.php:49
-msgid "Published: "
-msgstr "Publi&eacute; : "
-
-#: ../../../Views/dashboard/dashboard_config.php:38
-#: ../../../Views/dashboard/dashboard_ckeditor_view.php:56
-msgid "Public: "
-msgstr "Public : "
-
-#: ../../../Views/dashboard/dashboard_menu.php:15
-msgid "Dashboards:"
-msgstr "Tableaux de bord : "
-
-#: ../../../Views/dashboard/dashboard_menu.php:23
-msgid "Draw Editor"
-msgstr "&Eacute;diter"
-
-#: ../../../Views/dashboard/dashboard_menu.php:32
-msgid "View mode"
-msgstr "Vue"
-
-#: ../../../Views/dashboard/dashboard_menu.php:35
-msgid "Config"
-msgstr "Configuration"
-
-#: ../../../Views/dashboard/dashboard_menu.php:36
-msgid "New"
-msgstr "Nouveau"
-
-#: ../../../Views/dashboard/dashboard_menu.php:37
-msgid "Thumb view"
-msgstr "Aperçu"
-
-#: ../../../Views/dashboard/dashboard_menu.php:38
-msgid "List view"
-msgstr "Liste"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:36
 msgid "Id"
@@ -587,6 +635,7 @@ msgid "Draw"
 msgstr "&Eacute;diter"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:98
+#: ../../../Views/feed/feed_view.php:105
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -598,93 +647,45 @@ msgstr "Adresse de partage (public)"
 msgid "Private share URL"
 msgstr "Adresse de partage"
 
-#: ../../../Views/process/list_view.php:10
-msgid "Input configuration:   "
-msgstr "Configuration des sources : "
+#: ../../../Views/dashboard/dashboard_menu.php:15
+msgid "Dashboards:"
+msgstr "Tableaux de bord : "
 
-#: ../../../Views/process/list_view.php:13
-msgid "Order"
-msgstr "Ordre"
+#: ../../../Views/dashboard/dashboard_menu.php:23
+msgid "Draw Editor"
+msgstr "&Eacute;diter"
 
-#: ../../../Views/process/list_view.php:13
-msgid "Process"
-msgstr "Action"
+#: ../../../Views/dashboard/dashboard_menu.php:32
+msgid "View mode"
+msgstr "Vue"
 
-#: ../../../Views/process/list_view.php:13
-msgid "Arg"
-msgstr "Param&egrave;tre"
+#: ../../../Views/dashboard/dashboard_menu.php:35
+msgid "Config"
+msgstr "Configuration"
 
-#: ../../../Views/process/list_view.php:35
-msgid "add"
-msgstr "ajouter"
+#: ../../../Views/dashboard/dashboard_menu.php:36
+msgid "New"
+msgstr "Nouveau"
 
-#: ../../../Views/process/list_view.php:43
-msgid "Reset process list?"
-msgstr "R&eacute;initialis&eacute; les actions : "
+#: ../../../Views/dashboard/dashboard_menu.php:37
+msgid "Thumb view"
+msgstr "Aperçu"
 
-#: ../../../Views/process/list_view.php:49
-msgid "Are you sure you want to delete input: "
-msgstr "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette source ? "
+#: ../../../Views/dashboard/dashboard_menu.php:38
+msgid "List view"
+msgstr "Liste"
 
-#: ../../../Views/process/list_view.php:55
-msgid "Delete input?"
-msgstr "Supprimer source ?"
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:21
+msgid "User"
+msgstr "Utilisateur"
 
-#: ../../../Views/admin/admin_view.php:1
-msgid "Admin panel"
-msgstr "Administration"
-
-#: ../../../Views/admin/admin_view.php:2
-msgid "Total feed data disk space use: "
-msgstr "Espace utilis&eacute; pour le stockage des flux : "
-
-#: ../../../Views/admin/admin_view.php:4
-msgid "Users"
-msgstr "Utilisateurs"
-
-#: ../../../Views/admin/admin_view.php:5
-msgid "registered users"
-msgstr "utilisateurs enregistr&eacute;s"
-
-#: ../../../Views/admin/admin_view.php:8
-msgid "Username"
-msgstr "Nombre d'utilisateur"
-
-#: ../../../Views/admin/admin_view.php:8
-msgid "Up hits"
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:23
+msgid "Alias"
 msgstr ""
 
-#: ../../../Views/admin/admin_view.php:8
-msgid "Dn hits"
-msgstr ""
-
-#: ../../../Views/admin/admin_view.php:8
-msgid "Memory use"
-msgstr "M&eacute;moire"
-
-#: ../../../Views/feed/list_view.php:40
-msgid "Tag"
-msgstr "Tag"
-
-#: ../../../Views/feed/list_view.php:40
-msgid "Size"
-msgstr "Taille"
-
-#: ../../../Views/feed/list_view.php:66
-msgid "s ago"
-msgstr " secondes"
-
-#: ../../../Views/feed/list_view.php:68
-msgid " mins ago"
-msgstr " minutes"
-
-#: ../../../Views/feed/list_view.php:69
-msgid " hours ago"
-msgstr "heures"
-
-#: ../../../Views/feed/list_view.php:70
-msgid "inactive"
-msgstr "inactif"
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:24
+msgid "Description"
+msgstr "Description"
 
 #: ../../../Views/feed/feed_view.php:22
 msgid "Select graph type:"
@@ -758,77 +759,91 @@ msgstr "&Ecirc;tes vous s&ucirc;r de vouloir supprimer ce flux : "
 msgid "feed/delete"
 msgstr "flux/supprimer"
 
-#: ../../../Models/process_model.php:28
-msgid "Log to feed"
-msgstr "vers flux"
+#: ../../../Views/feed/list_view.php:40
+msgid "Tag"
+msgstr "Tag"
 
-#: ../../../Models/process_model.php:49
-msgid "Power to kWh"
-msgstr "watts vers kWh"
+#: ../../../Views/feed/list_view.php:40
+msgid "Size"
+msgstr "Taille"
 
-#: ../../../Models/process_model.php:56
-msgid "Power to kWh/d"
-msgstr "watts vers kWh/j"
+#: ../../../Views/feed/list_view.php:40
+#: ../../../Views/input/list_view.php:39
+msgid "Updated"
+msgstr "Actualis&eacute;"
 
-#: ../../../Models/process_model.php:63
-msgid "x input"
-msgstr " × source"
+#: ../../../Views/feed/list_view.php:40
+#: ../../../Views/input/list_view.php:39
+msgid "Value"
+msgstr "Valeur"
 
-#: ../../../Models/process_model.php:70
-msgid "input on-time"
+#: ../../../Views/feed/list_view.php:66
+msgid "s ago"
+msgstr " secondes"
+
+#: ../../../Views/feed/list_view.php:68
+msgid " mins ago"
+msgstr " minutes"
+
+#: ../../../Views/feed/list_view.php:69
+msgid " hours ago"
+msgstr "heures"
+
+#: ../../../Views/feed/list_view.php:70
+msgid "inactive"
+msgstr "inactif"
+
+#: ../../../Views/input/list_view.php:39
+msgid "Node"
 msgstr ""
 
-#: ../../../Models/process_model.php:77
-msgid "kWhinc to kWh/d"
-msgstr "kWhinc vers kWh/j"
+#: ../../../Views/process/list_view.php:10
+msgid "Input configuration:   "
+msgstr "Configuration des sources : "
 
-#: ../../../Models/process_model.php:84
-msgid "kWh to kWh/d"
-msgstr "kWh vers kWh/j"
+#: ../../../Views/process/list_view.php:13
+msgid "Order"
+msgstr "Ordre"
 
-#: ../../../Models/process_model.php:91
-msgid "update feed @time"
-msgstr "actualiser le flux @temps"
+#: ../../../Views/process/list_view.php:13
+msgid "Process"
+msgstr "Action"
 
-#: ../../../Models/process_model.php:98
-msgid "+ input"
-msgstr "+ source"
+#: ../../../Views/process/list_view.php:13
+msgid "Arg"
+msgstr "Param&egrave;tre"
 
-#: ../../../Models/process_model.php:105
-msgid "/ input"
-msgstr "&divide; source"
+#: ../../../Views/process/list_view.php:35
+msgid "add"
+msgstr "ajouter"
 
-#: ../../../Models/process_model.php:112
-msgid "phaseshift"
-msgstr "d&eacute;phasage"
+#: ../../../Views/process/list_view.php:43
+msgid "Reset process list?"
+msgstr "R&eacute;initialis&eacute; les actions : "
 
-#: ../../../Models/process_model.php:119
-msgid "accumulator"
-msgstr "accumulateur"
+#: ../../../Views/process/list_view.php:49
+msgid "Are you sure you want to delete input: "
+msgstr "&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette source ? "
 
-#: ../../../Models/process_model.php:126
-msgid "rate of change"
-msgstr "variation"
+#: ../../../Views/process/list_view.php:55
+msgid "Delete input?"
+msgstr "Supprimer source ?"
 
-#: ../../../Models/process_model.php:133
-msgid "histogram"
-msgstr "histogramme"
+#: ../../../Views/user/login_block.php:39
+msgid "Password:"
+msgstr "Mot de passe : "
 
-#: ../../../Models/process_model.php:140
-msgid "average"
-msgstr "moyenne"
+#: ../../../Views/user/login_block.php:43
+msgid "Login"
+msgstr "Connexion"
 
-#: ../../../Models/notify_model.php:46
-msgid " is"
-msgstr "est"
+#: ../../../Views/user/login_block.php:50
+msgid "Or if you are new enter a username and password above and click register"
+msgstr "Ou si vous &ecirc;tes un nouvel utilisateur, indiquer un identifiant et un mot de passe puis cliquer sur S'inscrire"
 
-#: ../../../Models/notify_model.php:53
-msgid " is inactive"
-msgstr "est inactif"
-
-#: ../../../Models/mail_model.php:34
-msgid "Message successfully sent!"
-msgstr "Message envoy&eacute; avec succ&egrave;s"
+#: ../../../Views/user/login_block.php:50
+msgid "Register"
+msgstr "S'inscrire"
 
 #~ msgid "Old password:"
 #~ msgstr "Mot de passe actuel : "

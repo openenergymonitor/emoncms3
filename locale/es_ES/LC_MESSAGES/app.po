@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-31 13:40+0100\n"
-"PO-Revision-Date: 2012-07-31 13:43+0100\n"
-"Last-Translator: ilde <i.martinez@ismsolar.com>\n"
+"POT-Creation-Date: 2012-08-03 18:17+0100\n"
+"PO-Revision-Date: 2012-08-03 18:17+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr "Script de creación de la base de datos de Emoncms"
 msgid "Continue to emoncms"
 msgstr "Continuar a emoncms"
 
-#: ../../../setup.php:43
+#: ../../../setup.php:45
 msgid "to run script uncomment runnable"
 msgstr "para ejecutar el código descomenta 'runnable'"
 
@@ -32,15 +32,15 @@ msgstr "para ejecutar el código descomenta 'runnable'"
 msgid "dashboards new"
 msgstr "Nuevo panel"
 
-#: ../../../Controllers/dashboard_controller.php:119
+#: ../../../Controllers/dashboard_controller.php:140
 msgid "Logout"
 msgstr "Desconectar"
 
-#: ../../../Controllers/dashboard_controller.php:222
+#: ../../../Controllers/dashboard_controller.php:243
 msgid "dashboard set"
 msgstr "establecer panel"
 
-#: ../../../Controllers/dashboard_controller.php:261
+#: ../../../Controllers/dashboard_controller.php:282
 msgid "dashboard set configuration"
 msgstr "establecer configuración del panel"
 
@@ -88,14 +88,17 @@ msgid "Welcome, you are now logged in"
 msgstr "Bienvenido, ya estás conectado"
 
 #: ../../../Controllers/user_controller.php:84
+#: ../../../Controllers/user_controller.php:140
 msgid "Sorry username already exists"
 msgstr "El usuario ya existe"
 
 #: ../../../Controllers/user_controller.php:88
+#: ../../../Controllers/user_controller.php:144
 msgid "Please enter a username that is 4 to 30 characters long"
 msgstr "Por favor introduzca un nombre de usuario de 4 a 40 caracteres"
 
 #: ../../../Controllers/user_controller.php:92
+#: ../../../Controllers/user_controller.php:116
 msgid "Please enter a password that is 4 to 30 characters long"
 msgstr "Por favor introduzca una contraseña de 4 a 30 caracteres"
 
@@ -103,33 +106,53 @@ msgstr "Por favor introduzca una contraseña de 4 a 30 caracteres"
 msgid "Your new account has been created"
 msgstr "Tu nueva cuenta ha sido creada"
 
-#: ../../../Controllers/user_controller.php:116
+#: ../../../Controllers/user_controller.php:120
 msgid "Your password has been changed"
 msgstr "Tu contraseña ha sido cambiada"
 
-#: ../../../Controllers/user_controller.php:120
-msgid "Invalid old password"
-msgstr "Contraseña antigua errónea"
+#: ../../../Controllers/user_controller.php:124
+msgid "Invalid password"
+msgstr "Contraseña inválida"
 
-#: ../../../Controllers/user_controller.php:132
+#: ../../../Controllers/user_controller.php:148
+msgid "No email address present"
+msgstr "Email no presente"
+
+#: ../../../Controllers/user_controller.php:166
 msgid "New read apikey: "
 msgstr "Nueva clave de lectura (API):"
 
-#: ../../../Controllers/user_controller.php:148
+#: ../../../Controllers/user_controller.php:182
 msgid "New write apikey: "
 msgstr "Nueva clave de escritura (API):"
 
-#: ../../../Controllers/user_controller.php:165
+#: ../../../Controllers/user_controller.php:199
 msgid "You are logged out"
 msgstr "Te has desconectado"
 
-#: ../../../Controllers/user_controller.php:170
+#: ../../../Controllers/user_controller.php:204
 msgid "Invalid token"
 msgstr "Token inválido"
 
 #: ../../../Controllers/vis_controller.php:24
 msgid "Restricted access"
 msgstr "Acceso restringido"
+
+#: ../../../Includes/messages.php:33
+msgid "BD Settings error"
+msgstr "Error en la configuración de la conexión a la base de datos"
+
+#: ../../../Includes/messages.php:34
+msgid "Please, check database settings.php file"
+msgstr "Deberías revisar el fichero settings.php"
+
+#: ../../../Includes/messages.php:44
+msgid "No settings.php file found"
+msgstr "No se ha encontrado el fichero settings.php"
+
+#: ../../../Includes/messages.php:45
+msgid "Copy and modify default.settings.php to settings.php"
+msgstr "Usa el fichero default.settings.php como plantilla para crear el fichero settings.php"
 
 #: ../../../Models/mail_model.php:34
 msgid "Message successfully sent!"
@@ -253,6 +276,7 @@ msgid "These are all the visualisations that are available in emoncms3. To view 
 msgstr "Estas son todas la formas de visualización disponibles en Emoncms3. Para ejecutar una vista introduce los datos apropiados en las cajas de texto y pulsa en el boton >."
 
 #: ../../../Views/api_view.php:88
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:22
 msgid "Name"
 msgstr "Nombre:"
 
@@ -262,6 +286,8 @@ msgstr "Enlace"
 
 #: ../../../Views/api_view.php:94
 #: ../../../Views/dashboard/dashboard_list_view.php:97
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:25
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:34
 msgid "View"
 msgstr "Vista"
 
@@ -274,6 +300,7 @@ msgid "Raw data graph"
 msgstr "Gráfico de datos brutos"
 
 #: ../../../Views/api_view.php:130
+#: ../../../Views/feed/feed_view.php:38
 msgid "Bar graph"
 msgstr "Gráfico de barras"
 
@@ -300,6 +327,10 @@ msgstr "kWh/d Comparison"
 #: ../../../Views/api_view.php:231
 msgid "Stacked"
 msgstr "Apliada"
+
+#: ../../../Views/api_view.php:248
+msgid "Threshold"
+msgstr "Threshold"
 
 #: ../../../Views/api_view.php:267
 msgid "Simple zoom"
@@ -330,8 +361,8 @@ msgid "Hide menu"
 msgstr "Ocultar menu"
 
 #: ../../../Views/api_view.php:354
-msgid "Hide the top menu and footer by adding the attribute <i>&embed=1</i> to the URL."
-msgstr "Puedes ocultar el menu superior y el pié añadiendo el atributo <i>&embed=1</i> en la URL. "
+msgid "Hide the top menu and footer by adding the attribute &embed=1 to the URL."
+msgstr "Puedes ocultar el menu superior y el pié añadiendo el atributo &embed=1 en la URL. "
 
 #: ../../../Views/api_view.php:359
 #: ../../../Views/dashboard/dashboard_list_view.php:54
@@ -355,8 +386,8 @@ msgid "Reset Multigraph"
 msgstr "Inicializar Multigráfico"
 
 #: ../../../Views/api_view.php:375
-msgid "The multigraph can be reset using the <i>&clear=1</i> attribute."
-msgstr "El multigráfico puede ser inicializado usando el atributo <i>&clear=1</i> en la URL."
+msgid "The multigraph can be reset using the &clear=1 attribute."
+msgstr "El multigráfico puede ser inicializado usando el atributo &clear=1 en la URL."
 
 #: ../../../Views/confirm_view.php:17
 msgid "Yes please"
@@ -398,6 +429,8 @@ msgstr "Destinatarios de las notificaciones (To):"
 #: ../../../Views/notify_settings_view.php:19
 #: ../../../Views/notify_view.php:29
 #: ../../../Views/user_view.php:45
+#: ../../../Views/feed/feed_view.php:69
+#: ../../../Views/feed/feed_view.php:76
 msgid "Save"
 msgstr "Guardar"
 
@@ -439,52 +472,69 @@ msgid "Browser language"
 msgstr "Lenguaje del navegador"
 
 #: ../../../Views/user_view.php:51
-msgid "Change password"
-msgstr "Cambiar contraseña"
+msgid "Change details"
+msgstr "Cambiar detalles"
 
 #: ../../../Views/user_view.php:53
-msgid "Old password:"
-msgstr "Contraseña antigua:"
+msgid "Username:"
+msgstr "Nombre de usuario:"
 
 #: ../../../Views/user_view.php:56
-msgid "New password:"
-msgstr "Nueva contraseña:"
+msgid "Email:"
+msgstr "Correo:"
 
 #: ../../../Views/user_view.php:59
+#: ../../../Views/user_view.php:70
 msgid "Change"
 msgstr "Cambiar"
 
 #: ../../../Views/user_view.php:63
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: ../../../Views/user_view.php:64
+msgid "Current password:"
+msgstr "Contraseña actual:"
+
+#: ../../../Views/user_view.php:67
+msgid "New password:"
+msgstr "Nueva contraseña:"
+
+#: ../../../Views/user_view.php:74
 msgid "Account Statistics"
 msgstr "Estadísticas de Cuenta"
 
-#: ../../../Views/user_view.php:67
+#: ../../../Views/user_view.php:78
 msgid "Disk space use:"
 msgstr "Uso de espacio en disco:"
 
-#: ../../../Views/user_view.php:75
+#: ../../../Views/user_view.php:86
 msgid "Up hits:"
 msgstr "Up hits:"
 
-#: ../../../Views/user_view.php:83
+#: ../../../Views/user_view.php:94
 msgid "Down hits:"
 msgstr "Down hits:"
 
-#: ../../../Views/user_view.php:99
+#: ../../../Views/user_view.php:110
 msgid "en_EN"
 msgstr "Inglés"
 
-#: ../../../Views/user_view.php:100
+#: ../../../Views/user_view.php:111
 msgid "es_ES"
 msgstr "Español"
 
-#: ../../../Views/user_view.php:101
+#: ../../../Views/user_view.php:112
 msgid "nl_BE"
 msgstr "Belga"
 
-#: ../../../Views/user_view.php:102
+#: ../../../Views/user_view.php:113
 msgid "nl_NL"
 msgstr "Holandés"
+
+#: ../../../Views/user_view.php:114
+msgid "fr_FR"
+msgstr "Francés"
 
 #: ../../../Views/admin/admin_view.php:1
 msgid "Admin panel"
@@ -519,33 +569,45 @@ msgid "Memory use"
 msgstr "Uso de memoria"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:35
-#: ../../../Views/dashboard/dashboard_config.php:15
+#: ../../../Views/dashboard/dashboard_config.php:27
 msgid "Dashboard name: "
 msgstr "Nombre del panel:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:37
-#: ../../../Views/dashboard/dashboard_config.php:19
+#: ../../../Views/dashboard/dashboard_config.php:31
 msgid "Description: "
 msgstr "Descripción"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:42
-#: ../../../Views/dashboard/dashboard_config.php:24
+#: ../../../Views/dashboard/dashboard_config.php:36
 msgid "Main: "
 msgstr "Principal:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:49
-#: ../../../Views/dashboard/dashboard_config.php:31
+#: ../../../Views/dashboard/dashboard_config.php:43
 msgid "Published: "
 msgstr "Publicado:"
 
 #: ../../../Views/dashboard/dashboard_ckeditor_view.php:56
-#: ../../../Views/dashboard/dashboard_config.php:38
+#: ../../../Views/dashboard/dashboard_config.php:50
 msgid "Public: "
 msgstr "Público:"
 
-#: ../../../Views/dashboard/dashboard_config.php:17
+#: ../../../Views/dashboard/dashboard_config.php:23
+msgid "Dashboard Configuration"
+msgstr "Configuración del panel"
+
+#: ../../../Views/dashboard/dashboard_config.php:29
 msgid "Menu name: (lowercase a-z only)"
 msgstr "Nombre para el menu: (sólo letras de la \"a\" a la \"z\")"
+
+#: ../../../Views/dashboard/dashboard_config.php:59
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../../../Views/dashboard/dashboard_config.php:60
+msgid "Save changes"
+msgstr "Guardar cambios"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:36
 msgid "Id"
@@ -600,6 +662,7 @@ msgid "Draw"
 msgstr "Diseñar"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:98
+#: ../../../Views/feed/feed_view.php:105
 msgid "Delete"
 msgstr "Borrar"
 
@@ -638,6 +701,22 @@ msgstr "Formato iconos"
 #: ../../../Views/dashboard/dashboard_menu.php:38
 msgid "List view"
 msgstr "Formato lista"
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:15
+msgid "Explore Public Dashboards"
+msgstr "Explorar paneles públicos"
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:21
+msgid "User"
+msgstr "Usuario"
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:23
+msgid "Alias"
+msgstr "Alias"
+
+#: ../../../Views/dashboard/dashboard_publiclist_view.php:24
+msgid "Description"
+msgstr "Descripción"
 
 #: ../../../Views/feed/feed_view.php:22
 msgid "Select graph type:"
@@ -745,6 +824,10 @@ msgstr " horas atrás"
 msgid "inactive"
 msgstr "inactivo"
 
+#: ../../../Views/input/list_view.php:39
+msgid "Node"
+msgstr "Nodo"
+
 #: ../../../Views/process/list_view.php:10
 msgid "Input configuration:   "
 msgstr "Configuración de entrada:"
@@ -777,10 +860,6 @@ msgstr "¿Estás seguro de que quieres borrar la entrada:"
 msgid "Delete input?"
 msgstr "¿Borrar entrada?"
 
-#: ../../../Views/user/login_block.php:35
-msgid "Username:"
-msgstr "Nombre de usuario:"
-
 #: ../../../Views/user/login_block.php:39
 msgid "Password:"
 msgstr "Contraseña:"
@@ -796,6 +875,9 @@ msgstr "O si eres un nuevo usuario introduce un nombre de usuario y contraseña 
 #: ../../../Views/user/login_block.php:50
 msgid "Register"
 msgstr "Registrase"
+
+#~ msgid "Old password:"
+#~ msgstr "Contraseña antigua:"
 
 #~ msgid "CKEditor"
 #~ msgstr "CKEditor"
@@ -813,9 +895,6 @@ msgstr "Registrase"
 
 #~ msgid "Preview"
 #~ msgstr "Vista previa"
-
-#~ msgid "Email:"
-#~ msgstr "Correo:"
 
 #~ msgid "Language"
 #~ msgstr "Lenguaje"

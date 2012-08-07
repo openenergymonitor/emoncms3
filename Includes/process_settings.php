@@ -16,6 +16,7 @@
 
   // Variable initialization
   $useckeditor = false;
+	$allowusersregister = true;
 
   // Check if settings.php file exists
   if(!file_exists(dirname(__FILE__)."/settings.php"))
@@ -36,6 +37,5 @@
     }    
     
   }
-
 
 ?>
