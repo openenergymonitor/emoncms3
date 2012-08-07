@@ -7,7 +7,7 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 -->
-  <h2><?php echo _("Input configuration:   "); ?><?php echo get_input_name($inputid); ?></h2>
+  <h2><?php echo _('Input configuration:   '); echo get_input_name($inputid); ?></h2>
 
   <?php if (isset($input_processlist)) { ?>
   <table class='catlist'><tr><th><?php echo _("Order"); ?></th><th><?php echo _("Process"); ?></th><th><?php echo _("Arg"); ?></th></tr>

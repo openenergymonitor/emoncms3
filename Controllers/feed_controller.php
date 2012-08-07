@@ -38,7 +38,7 @@
     $output['message'] = "";
 
     //---------------------------------------------------------------------------------------------------------
-    // Set feed datatype: 0: undefined type, 1: real-time data, 2: daily data, 3: histogram data
+    // Set feed datatype: DataType::UNDEFINED|REALTIME|DAILY|HISTOGRAM
     // http://yoursite/emoncms/feed/type?id=1&type=1
     //---------------------------------------------------------------------------------------------------------
     if ($action == "type" && $session['write'])

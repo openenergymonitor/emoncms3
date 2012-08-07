@@ -21,6 +21,8 @@ require "Includes/process_settings.php";
 
 require "Includes/core.inc.php";
 
+require "Includes/enum.php";
+
 require_once "Includes/locale.php";
 
 // Default to http protocol
