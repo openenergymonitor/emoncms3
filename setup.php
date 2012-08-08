@@ -101,7 +101,8 @@ $schema['dashboard'] = array(
   'description' => array('type' => "varchar(255)", 'default'=>'no description'),
   'main' => array('type' => 'tinyint(1)', 'default'=>false),
   'public' => array('type' => 'tinyint(1)', 'default'=>false),
-  'published' => array('type' => 'tinyint(1)', 'default'=>false)
+  'published' => array('type' => 'tinyint(1)', 'default'=>false),
+	'showdescription' => array('type' => 'tinyint(1)', 'default'=>false)  
 );
 
 $schema['notify'] = array(

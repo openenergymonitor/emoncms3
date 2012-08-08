@@ -23,8 +23,8 @@ require_once "Includes/messages.php";
 
 <!-- tool menu TODO:is the same at dashboard_thumb_view so it could be include from one place to share code -->
 <div align="right">
-  <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});"><i class="icon-plus-sign"></i></a>
-  <a href="<?php echo $path; ?>dashboard/thumb"><i class="icon-th-large"></i></a>
+  <a href="#" title="<?php echo _("New dashboard"); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});"><i class="icon-plus-sign"></i></a>
+  <a href="<?php echo $path; ?>dashboard/thumb" title="<?php echo _("Thumb view"); ?>"><i class="icon-th-large"></i></a>
   <!--<a href="<?php echo $path; ?>dashboard/list"><i class="icon-th-list"></i></a>-->
 </div>
 

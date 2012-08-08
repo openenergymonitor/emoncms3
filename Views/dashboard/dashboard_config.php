@@ -45,14 +45,21 @@ global $session,$path;
             if ($dashboard['published'] == true)
               echo 'checked';
             ?> /></td>
-          </tr>
+        </tr>
         <tr>
           <td><?php echo _('Public: '); ?></td>
           <td><input type="checkbox" name="public" id="chk_public" value="1" <?php
             if ($dashboard['public'] == true)
               echo 'checked';
             ?> /></td>
-          </tr>
+        </tr>
+        <tr>
+          <td><?php echo _('Show description: '); ?></td>
+          <td><input type="checkbox" name="showdescription" id="chk_showdescription" value="1" <?php
+            if ($dashboard['showdescription'] == true)
+              echo 'checked';
+            ?> /></td>
+        </tr>
       </table>
   </div>
   <div class="modal-footer">
@@ -72,17 +79,19 @@ global $session,$path;
   	$main = '0';  
   	$public = '0';
   	$published = '0';
+  	$showdescription = '0';
   	
   	if ($("#chk_main").is(":checked")) $main = '1';
 		if ($("#chk_public").is(":checked")) $public = '1';
   	if ($("#chk_published").is(":checked")) $published = '1';
+		if ($("#chk_showdescription").is(":checked")) $showdescription = '1';  	
   	//
   	
     $.ajax({
       type : "POST",
       url :  path+"dashboard/setconf",
       //data : $('#confform').serialize()+"&id="+dashid,   // serialize doesnt return unchecked checkboxes
-      data : $('#confform').serialize()+"&id="+dashid+"&main="+$main+"&public="+$public+"&published="+$published,      
+      data : $('#confform').serialize()+"&id="+dashid+"&main="+$main+"&public="+$public+"&published="+$published+"&showdescription="+$showdescription,      
       dataType : 'json',
       success : function() {}
       //success : location.reload()    //// if reload, the editor content not saved is lost!! what to do?

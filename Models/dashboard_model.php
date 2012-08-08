@@ -37,7 +37,7 @@ function get_dashboard_list($userid, $public, $published)
 {
   if ($public) $qB = " and public=1";
   if ($published) $qC = " and published=1";
-  $result = db_query("SELECT id, name, alias, description, main, published, public FROM dashboard WHERE userid='$userid'".$qB.$qC);
+  $result = db_query("SELECT id, name, alias, description, main, published, public, showdescription FROM dashboard WHERE userid='$userid'".$qB.$qC);
 
   $list = array();
   while ($row = db_fetch_array($result)) $list[] = $row;
@@ -176,6 +176,17 @@ function set_dashboard_public($userid, $id, $public)
     db_query("UPDATE dashboard SET public = FALSE WHERE userid='$userid' AND id='$id'");
 }
 
+/*
+ * Set showdescription property
+ */
+function set_dashboard_showdescription($userid, $id, $showdescription)
+{
+  if ($showdescription == '1')  
+    db_query("UPDATE dashboard SET showdescription = TRUE WHERE userid='$userid' AND id='$id'");
+  else
+    db_query("UPDATE dashboard SET showdescription = FALSE WHERE userid='$userid' AND id='$id'");
+}
+
 function build_dashboard_menu($userid,$location)
 {
   global $path, $session;
@@ -185,14 +196,28 @@ function build_dashboard_menu($userid,$location)
   $dashboards = get_dashboard_list($userid, $public, $published);
   foreach ($dashboards as $dashboard)
   {
+  	// Check show description
+  	if ($dashboard['showdescription']) 
+  	{		 
+  		$desc = ' title="'.$dashboard['description'].'"';
+  	}
+		else 
+		{
+			$desc = '';
+		} 
+		
+		// Set URL using alias or id
     if ($dashboard['alias'])
     {
-      $topmenu.='<li><a href="'.$path.$dashpath."/".$dashboard['alias'].'">'.$dashboard['name'].'</a></li>';
+    	$aliasurl = "/".$dashboard['alias'];
     }
     else
     {
-      $topmenu.='<li><a href="'.$path.$dashpath.'&id='.$dashboard['id'].'">'.$dashboard['name'].'</a></li>';
+    	$aliasurl = '&id='.$dashboard['id'];    	
     }
+
+		// Build the menu item
+  	$topmenu.='<li><a href="'.$path.$dashpath.$aliasurl.'"'.$desc.'>'.$dashboard['name'].'</a></li>';		
   }
   return $topmenu;
 }

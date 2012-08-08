@@ -277,6 +277,9 @@
       if (isset($_POST['description']))
         set_dashboard_description($session['userid'],$id,$description);
       
+			if (isset($_POST['showdescription']))
+        set_dashboard_showdescription($session['userid'],$id,intval($_POST['showdescription']));
+      
       //set_dashboard_conf($session['userid'],$id,$name,$alias,$description,$main,$public,$published);
 	  
       $output['message'] = _("dashboard set configuration");
