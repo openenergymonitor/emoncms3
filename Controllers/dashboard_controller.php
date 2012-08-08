@@ -151,8 +151,12 @@
       //{
         $apikey = get_apikey_read($session['userid']);
         $output['content'] = view("dashboard/dashboard_view.php", array('dashboard'=>$dashboard, "apikey_read"=>$apikey));
-
+	
+			// If run mode avoid include dashboard configuration (this makes dashboard page lighter)
+			if ($action!="run") {
         $output['content'] .= view("dashboard/dashboard_config.php", array('dashboard'=>$dashboard));
+			}
+      
       //}
       //else
       //{

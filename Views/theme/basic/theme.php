@@ -30,9 +30,12 @@
     <title>Emoncms</title>
   </head>
   <body style="padding-top:42px;" >
-    <!------------------------------------------------------
-    HEADER
-    ------------------------------------------------------->
+  	<?php
+    /*------------------------------------------------------
+     * HEADER
+     *------------------------------------------------------
+		 */
+		?>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -46,21 +49,26 @@
       <button class="close" data-dismiss="alert">×</button>
       <strong>Message: </strong><?php print $message; ?>
     </div>
-    <?php } ?>
+    <?php } 
 
-    <!------------------------------------------------------
-    GREY SUBMENU
-    ------------------------------------------------------->
-    <?php if ($submenu) { ?>  
+    /*------------------------------------------------------
+     * GREY SUBMENU
+     *------------------------------------------------------
+		 */
+
+		if ($submenu) { ?>  
     <div style="width:100%; background-color:#ddd; height:27px;">
       <div style="margin: 0px auto; text-align:left; width:940px;">
         <?php echo $submenu; ?> 
       </div>
     </div>
-    <?php } ?>
-    <!------------------------------------------------------
-    CONTENT
-    ------------------------------------------------------->     	
+    <?php } 
+    /*------------------------------------------------------
+     * CONTENT
+     *------------------------------------------------------
+		 */
+    ?>     	
+    
     <div class="content">
       <?php if (!$fullwidth) {?><div style="margin: 0px auto; max-width:940px; padding:10px;"><?php } ?>
         <?php print $content; ?>
@@ -68,30 +76,8 @@
     </div>
 
     <div style="clear:both; height:37px;"></div> 
-    <!------------------------------------------------------
-    FOOTER
-    ------------------------------------------------------->
+
     <div class="footer"><?php echo _('Powered by '); ?><a href="http://openenergymonitor.org">openenergymonitor.org</a></div>  
-    
-    
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!-- do not remove, for dev tests -->
-    <!-- 
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/jquery.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/google-code-prettify/prettify.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-alert.js"></script>    
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-tab.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-popover.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-button.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/bootstrap-typeahead.js"></script>
-    <script src="<?php print $GLOBALS['path']; ?>Includes/lib/bootstrap/js/application.js"></script>
-    -->
     
     <!-- needed for modal -->
     <!-- MOVED TO DASHBOARD_CONFIG_VIEW (declaring jquery here conflics with the jquery lib loaded by the visualisations)-->
