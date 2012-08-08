@@ -93,9 +93,26 @@
 
       $process = get_process($processid);
 
+      $newprocess[0] = $process[1]; // Process arg type
+      switch($process[1]) {
+      case ProcessArg::VALUE:
+        $newprocess[1] = "Value";
+        break;
+      case ProcessArg::INPUTID:
+        $newprocess[1] = "Input";
+        $newprocess[2] = get_user_input_names($session['userid']);
+        break;
+      case ProcessArg::FEEDID:
+        $newprocess[1] = "Feed";
+        $newprocess[2] = get_user_feed_names($session['userid']);
+        break;
+      default:
+        $newprocess[1] = "ERROR";
+      }
 
-      if ($format == 'json') $output['content'] = json_encode($process);
-//      if ($format == 'html') $output['content'] = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
+
+      if ($format == 'json') $output['content'] = json_encode($newprocess);
+      //if ($format == 'html') $output['content'] = $argboxhtml;
     }
 
     elseif ($action == "test" && $_SESSION['write']) // write access required

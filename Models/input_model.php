@@ -50,6 +50,9 @@ function reset_input_process($userid, $id)
   set_input_processlist($id, "");
 }
 
+  //-----------------------------------------------------------------------------------------------
+  // This function gets a users input list, its used to create the input/list page
+  //-----------------------------------------------------------------------------------------------
 function get_user_inputs($userid)
 {
   $result = db_query("SELECT * FROM input WHERE userid = '$userid'");
@@ -67,6 +70,21 @@ function get_user_inputs($userid)
     }
   }
   return $inputs;
+}
+
+  //-----------------------------------------------------------------------------------------------
+  // Return a list of users input ids and names
+  //-----------------------------------------------------------------------------------------------
+function get_user_input_names($userid)
+{
+  $result = db_query("SELECT id,name FROM input WHERE userid = $userid ORDER BY name ASC");
+    $inputs = array();
+    if ($result) {
+      while ($row = db_fetch_array($result)) {
+        $inputs[] = array($row['id'],$row['name']);
+      }
+    }
+    return $inputs;
 }
 
 function get_input_id($user, $name)
