@@ -25,7 +25,7 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
  
 <?php if (!$embed) { ?>
-<h2>Raw data: <?php echo $feedname; ?></h2>
+<h2>Bar graph: <?php echo $feedname; ?></h2>
 <?php } ?>
 
     <div id="graph_bound" style="height:400px; width:100%; position:relative; ">

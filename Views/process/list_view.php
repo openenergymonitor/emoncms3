@@ -14,8 +14,8 @@
 
 <script type="text/javascript" src="https://test.mrwire.co.uk/emoncms3/Includes/flot/jquery.min.js"></script>
 
-<h2><?php echo _("Input configuration:   "); echo get_input_name($inputid); ?></h2>
-<p><?php echo _("Input processes are executed sequentially with the result being passed back for further processing by the next processor in the input processing list."); ?></p>
+<h2><?php echo _('Input configuration:   '); echo get_input_name($inputid); ?></h2>
+<p><?php echo _('Input processes are executed sequentially with the result being passed back for further processing by the next processor in the input processing list.'); ?></p>
 
 <?php if (isset($input_processlist)) { ?>
 <table class='catlist'><tr><th><?php echo _("Order"); ?></th><th><?php echo _("Process"); ?></th><th><?php echo _("Arg"); ?></th></tr>

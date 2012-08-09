@@ -89,7 +89,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["power","kwhd"],
+      "options":["power","kwhd","currency","pricekwh"],
       "html":""
     },
 
