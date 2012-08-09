@@ -47,7 +47,7 @@
     // Add process
     // http://yoursite/emoncms/process/add?inputid=1&type=1&arg=power
     //---------------------------------------------------------------------------------------------------------
-	elseif ($action == "add" && $session['write']) // write access required
+    elseif ($action == "add" && $session['write']) // write access required
     { 
       $inputid = intval($_GET["inputid"]);
       $processid = intval($_GET["type"]);			// get process type
@@ -70,7 +70,7 @@
         // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
         if ($id == 0){
         	$id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
-		}
+        }
         $arg = $id;
         break;
       }
@@ -80,10 +80,10 @@
       if ($format == 'html')
       {
       	header("Location: list?inputid=".$inputid);
-	  }
+      }
     }
 
-	elseif ($action == "test" && $_SESSION['write']) // write access required
+    elseif ($action == "test" && $_SESSION['write']) // write access required
     {
       set_time_limit(360);  // Increase PHP limit
       // Create Histogram data - (to feed, from feed, from date, to date).
