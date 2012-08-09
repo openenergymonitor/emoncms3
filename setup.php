@@ -58,13 +58,15 @@ $schema['users'] = array(
   'apikey_read' => array('type' => 'varchar(64)'),
   'lastlogin' => array('type' => 'datetime'),
   'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
-  'lang' => array('type' => 'varchar(5)')
+  'lang' => array('type' => 'varchar(5)'),
+  'timeoffset' => array('type' => 'int(11)')
 );
 
 $schema['input'] = array(
   'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'userid' => array('type' => 'text'),
   'name' => array('type' => 'text'),
+  'nodeid' => array('type' => 'int(11)'),
   'processList' => array('type' => 'text'),
   'time' => array('type' => 'datetime'),
   'value' => array('type' => 'float')
