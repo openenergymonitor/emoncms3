@@ -58,13 +58,13 @@
       $process = get_process($processid);
 
       switch ($process[1]) {
-      case ProcessArg::VALUE  // If arg type value
+      case ProcessArg::VALUE:  // If arg type value
         $arg = floatval($arg);
         break;
-      case ProcessArg::INPUTID  // If arg type input
+      case ProcessArg::INPUTID:  // If arg type input
         $arg = get_input_id($session['userid'],$arg);
         break;
-      case ProcessArg::FEEDID   // If arg type feed
+      case ProcessArg::FEEDID:   // If arg type feed
         // First check if feed exists of given feed name and user.
         $id = get_feed_id($_SESSION['userid'],$arg);
         // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
