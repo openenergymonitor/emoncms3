@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-05 14:35+0100\n"
-"PO-Revision-Date: 2012-08-05 14:35+0100\n"
+"POT-Creation-Date: 2012-08-09 12:36+0100\n"
+"PO-Revision-Date: 2012-08-09 12:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,11 +36,11 @@ msgstr "Nuevo panel"
 msgid "Logout"
 msgstr "Desconectar"
 
-#: ../../../Controllers/dashboard_controller.php:243
+#: ../../../Controllers/dashboard_controller.php:247
 msgid "dashboard set"
 msgstr "establecer panel"
 
-#: ../../../Controllers/dashboard_controller.php:282
+#: ../../../Controllers/dashboard_controller.php:289
 msgid "dashboard set configuration"
 msgstr "establecer configuración del panel"
 
@@ -610,13 +610,27 @@ msgstr "Configuración del panel"
 msgid "Menu name: (lowercase a-z only)"
 msgstr "Nombre para el menu: (sólo letras de la \"a\" a la \"z\")"
 
-#: ../../../Views/dashboard/dashboard_config.php:59
+#: ../../../Views/dashboard/dashboard_config.php:57
+msgid "Show description: "
+msgstr "Mostrar descripción:"
+
+#: ../../../Views/dashboard/dashboard_config.php:66
 msgid "Close"
 msgstr "Cerrar"
 
-#: ../../../Views/dashboard/dashboard_config.php:60
+#: ../../../Views/dashboard/dashboard_config.php:67
 msgid "Save changes"
 msgstr "Guardar cambios"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:26
+#: ../../../Views/dashboard/dashboard_thumb_view.php:32
+msgid "New dashboard"
+msgstr "Nuevo panel"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:27
+#: ../../../Views/dashboard/dashboard_menu.php:37
+msgid "Thumb view"
+msgstr "Formato iconos"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:36
 msgid "Id"
@@ -702,11 +716,8 @@ msgstr "Configuración"
 msgid "New"
 msgstr "Nuevo"
 
-#: ../../../Views/dashboard/dashboard_menu.php:37
-msgid "Thumb view"
-msgstr "Formato iconos"
-
 #: ../../../Views/dashboard/dashboard_menu.php:38
+#: ../../../Views/dashboard/dashboard_thumb_view.php:34
 msgid "List view"
 msgstr "Formato lista"
 
@@ -881,7 +892,7 @@ msgstr "¿Estás seguro de que quieres borrar la entrada:"
 msgid "Delete input?"
 msgstr "¿Borrar entrada?"
 
-#: ../../../Views/theme/basic/theme.php:74
+#: ../../../Views/theme/basic/theme.php:80
 msgid "Powered by "
 msgstr "Creado con "
 
