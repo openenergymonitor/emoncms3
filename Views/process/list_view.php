@@ -18,7 +18,12 @@
 <p><?php echo _('Input processes are executed sequentially with the result being passed back for further processing by the next processor in the input processing list.'); ?></p>
 
 <?php if (isset($input_processlist)) { ?>
-<table class='catlist'><tr><th><?php echo _("Order"); ?></th><th><?php echo _("Process"); ?></th><th><?php echo _("Arg"); ?></th></tr>
+<table class='catlist'>
+  <tr>
+    <th style='width:15%;'><?php echo _("Order"); ?></th>
+    <th style='width:35%;'><?php echo _("Process"); ?></th>
+    <th style='width:40%;'><?php echo _("Arg"); ?></th>
+  </tr>
 <?php 
   $i = 0;
   foreach ($input_processlist as $input_process)// For all input processes
@@ -29,22 +34,26 @@
     echo "</tr>";
   }
 ?>
-
-    <tr><td><?php echo _("New"); ?></td><td>
+</table>
     <form action="add" method="get">
+<table class='catlist'>
+    <tr><td style='width:15%;'><?php echo _("New"); ?></td>
+      <td style='width:35%;'>
       <input type="hidden" name="inputid" value="<?php echo $inputid; ?>">
       <select class="processSelect" name="type">
         <?php for ($i=1; $i<=count($process_list); $i++) { ?>
         <option value="<?php echo $i; ?>"><?php echo $process_list[$i][0]; ?></option>
         <?php } ?>
       </select></td>
-      <td><div id="processArg"><input type="text" name="arg" id="procBox" class="processBox" style="width:100px;" /></div></td>
+      <td style='width:40%;'><div id="newProcessArgField"></div></td>
     </tr>
     <tr>
-      <td></td><td></td><td><input type="submit" value="<?php echo _("add"); ?>" class="button06" style="width:100px;"/></td>
+      <td></td>
+      <td></td>
+      <td><input type="submit" value="<?php echo _("add"); ?>" class="button06" style="width:100px;"/></td>
     </tr>
-  </form>
   </table>
+  </form>
   <?php } ?>
 
   <form action="../input/resetprocess" method="get">
@@ -64,14 +73,11 @@
     <input type="submit" value="<?php echo _("Delete input?"); ?>" class="btn btn-danger"/>
   </form>
 
-
 <script type="text/javascript">
 
-  var path = "<?php echo $path; ?>";
+var path = "<?php echo $path; ?>";
 
-//  $process = get_process($processid)
-
-function get_process_arg_type()
+function generate_process_arg_box()
 {
   var out = "";
   $.ajax({
@@ -95,14 +101,17 @@ function get_process_arg_type()
         out +='</select>';
         break;
       }
-//      out += "</p>";
-      $('#processArg').html(out);
+      $('#newProcessArgField').html(out);
     }
   });
 }
+
 $('.processSelect').change(function() {
-get_process_arg_type();
+  generate_process_arg_box();
 });
-  
+
+$(document).ready(function() {
+  generate_process_arg_box();
+}); 
 
 </script>
