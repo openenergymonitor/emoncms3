@@ -40,7 +40,7 @@
       $input_processlist = get_input_processlist_desc($session['userid'],$inputid);
 
       if ($format == 'json') $output['content'] = json_encode($input_processlist);
-      if ($format == 'html') $output['content'] = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
+      elseif ($format == 'html') $output['content'] = view("process/list_view.php", array('inputid'=>$inputid, 'input_processlist' => $input_processlist, 'process_list'=>get_process_list()));
     }
 
     //---------------------------------------------------------------------------------------------------------
@@ -57,33 +57,63 @@
 
       $process = get_process($processid);
 
+      $valid = false; // Flag to determine if argument is valid
+
       switch ($process[1]) {
       case ProcessArg::VALUE:  // If arg type value
         $arg = floatval($arg);
+        if ($arg != '') {
+          $valid = true;
+        } 
+        else {
+          $output['message'] = 'ERROR: Argument must be a valid number greater or less than 0.';
+        }
         break;
       case ProcessArg::INPUTID:  // If arg type input
-        $arg = get_input_id($session['userid'],$arg);
+        // Check if input exists (returns 0 if invalid)
+        $name = get_input_name($arg);
+        if ($name == '') {
+          $output['message'] = 'ERROR: Input does not exist!';
+        }
+        else {
+          $valid = true;
+        }
         break;
       case ProcessArg::FEEDID:   // If arg type feed
-        // First check if feed exists of given feed name and user.
-        $id = get_feed_id($_SESSION['userid'],$arg);
-        // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
-        if ($id == 0){
-        	$id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
+        // First check if feed exists of given feed id and user.
+        $name = get_feed_name($arg);
+        if ($name == '') {
+          $output['message'] = 'ERROR: Feed does not exist!';
+          // TODO: Create feed
+          // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
+          //if ($id == 0){
+          //	$id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
+          //}
         }
-        $arg = $id;
+        else {
+          $valid = true;
+        }
         break;
       }
 
-      add_input_process($session['userid'],$inputid,$processid,$arg);
-
-      if ($format == 'html')
-      {
-      	header("Location: list?inputid=".$inputid);
+      if ($valid) {
+        add_input_process($session['userid'],$inputid,$processid,$arg);
       }
+
+      if ($format == 'json') {
+        $input_processlist = get_input_processlist_desc($session['userid'],$inputid);
+        $output['content'] = json_encode($input_processlist);
+      }
+      elseif ($format == 'html') header('Location: list?inputid='.$inputid);
     }
     
-    elseif ($action == "query" && $session['read']) // read access required
+    //--------------------------------------------------------------------------
+    // Query process
+    // http://yoursite/emoncms/process/query?type=1
+    // Returns ProcessArg type as int; String description; Array of feedids and names
+    //  eg. [2,"Feed",[["1","power"],["3","power-histogram"],["2","power-kwhd"]]]
+    //--------------------------------------------------------------------------
+    elseif ($action == 'query' && $session['read']) // read access required
     { 
       $inputid = intval($_GET["inputid"]);
       $processid = intval($_GET["type"]);			// get process type
