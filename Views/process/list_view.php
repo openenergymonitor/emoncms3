@@ -12,41 +12,18 @@
   global $path, $session;
 ?>
 
-<script type="text/javascript" src="https://test.mrwire.co.uk/emoncms3/Includes/flot/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
 <h2><?php echo _('Input configuration:   '); echo get_input_name($inputid); ?></h2>
 <p><?php echo _('Input processes are executed sequentially with the result being passed back for further processing by the next processor in the input processing list.'); ?></p>
-<?php print_r($input_processlist); ?>
-<?php /*
-<?php if (isset($input_processlist)) { ?>
-<table class='catlist'>
-  <tr>
-    <th style='width:15%;'><?php echo _("Order"); ?></th>
-    <th style='width:35%;'><?php echo _("Process"); ?></th>
-    <th style='width:40%;'><?php echo _("Arg"); ?></th>
-  </tr>
-<?php 
-  $i = 0;
-  foreach ($input_processlist as $input_process)// For all input processes
-  {
-    $i++;
-    echo "<tr class='d" . ($i & 1) . "' >";
-    echo "<td>" . $i . "</td><td>" . $input_process[0] . "</td><td>" . $input_process[1] . "</td>";
-    echo "</tr>";
-  }
 
-?>
-
-</table>
-*/
-?>
 <div id='processlist'></div>
 
-    <form action="add.json" method="get">
+    <form action="">
 <table class='catlist'>
     <tr><td style='width:15%;'><?php echo _("New"); ?></td>
       <td style='width:35%;'>
       <input type="hidden" name="inputid" value="<?php echo $inputid; ?>">
-      <select class="processSelect" name="type">
+      <select class="processSelect" name="type" id="type">
         <?php for ($i=1; $i<=count($process_list); $i++) { ?>
         <option value="<?php echo $i; ?>"><?php echo $process_list[$i][0]; ?></option>
         <?php } ?>
@@ -56,7 +33,7 @@
     <tr>
       <td></td>
       <td></td>
-      <td><input type="submit" value="<?php echo _("add"); ?>" class="button06" style="width:100px;"/></td>
+      <td><input type="submit" value="<?php echo _("add"); ?>" class="button06" id="submit_add" style="width:100px;"/></td>
     </tr>
   </table>
   </form>
@@ -87,14 +64,12 @@ var processlist = <?php echo json_encode($input_processlist); ?>;
 function update_list()
 {
   $.ajax({
-      url: path+"process/list.json",
+      url: path+"process/list.json?inputid=<?php echo $inputid; ?>",
       dataType: 'json',
       async: false,
       success: function(data)
       {
-        alert(processlist);
-alert(data);
-//        processlist = data;
+        processlist = data;
 
         var i = 0;
 
@@ -129,11 +104,11 @@ function generate_process_arg_box()
       out = data[1]+": ";
       switch (data[0]) {
       case 0:
-        out += '<input type="text" name="arg" class="processBox" style="width:100px;" />';
+        out += '<input type="text" name="arg" class="processBox" style="width:100px;" id="arg" />';
         break;
       case 1:
       case 2:
-        out +='<select class="processBox" name="arg">'
+        out +='<select class="processBox" name="arg" id="arg">'
         for (arg in data[2]) {
           out += '<option value="'+data[2][arg][0]+'">'+data[2][arg][1]+'</option>';
         }
@@ -144,6 +119,28 @@ function generate_process_arg_box()
     }
   });
 }
+
+function process_add() {
+  // inputid=x&type=y&arg=z
+  var datastring = '?inputid='+<?php echo $inputid; ?>+'&type='+$('select#type').val()+'&arg='+$('#arg').val();
+  
+  $.ajax({
+    url: path+"process/add.json"+datastring,
+    dataType: 'json',
+    async: false,
+    success: function(data)
+    {
+      if (data.length > 0) alert(data);
+      update_list();
+    }
+  });
+}
+
+$('#submit_add').click(function() {
+  process_add();
+  generate_process_arg_box();
+  return false;
+});
 
 $('.processSelect').change(function() {
   generate_process_arg_box();
