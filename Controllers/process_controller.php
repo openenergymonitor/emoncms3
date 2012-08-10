@@ -101,8 +101,7 @@
       }
 
       if ($format == 'json') {
-        $input_processlist = get_input_processlist_desc($session['userid'],$inputid);
-        $output['content'] = json_encode($input_processlist);
+        $output['message'] = json_encode($output['message']);
       }
       elseif ($format == 'html') header('Location: list?inputid='.$inputid);
     }
