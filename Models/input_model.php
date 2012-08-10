@@ -143,13 +143,10 @@ function get_input_processlist_desc($userid, $id)
 
       $processDescription = $process[0];
       // gets process description
-      if ($process[1] == 1)
+      if ($process[1] == ProcessArg::INPUTID)
         $arg = get_input_name($arg);
       // if input: get input name
-      if ($process[1] == 2)
-        $arg = get_feed_name($arg);
-      // if feed: get feed name
-      if ($process[1] == 3)
+      elseif ($process[1] == ProcessArg::FEEDID)
         $arg = get_feed_name($arg);
       // if feed: get feed name
 
