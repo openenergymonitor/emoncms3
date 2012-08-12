@@ -96,6 +96,7 @@ require_once "Includes/messages.php";
 	  			<?php if ($useckeditor) { ?><a href="#" onclick="$(window.location).attr('href',path+'dashboard/ckeditor&id=<?php echo $dashboard['id']; ?>')"><img src="<?php echo $path; ?>/Includes/editors/images/ckicon.png" style="margin-top:-5px;" /></a><?php } ?>
           <a href="#" title="<?php echo _('View'); ?>" onclick="$(window.location).attr('href',path+'dashboard/view&id=<?php echo $dashboard['id']; ?>')"><i class='icon-eye-open'></i></a>
           <a href="#" title="<?php echo _('Delete'); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/delete',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><i class='icon-trash'></i></a>
+          <a href="#" title="<?php echo _('Clone'); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/clone',data : '&id=<?php echo $dashboard['id']; ?>',dataType : 'json',success : location.reload()});"><i class='icon-random'></i></a>          
         </div>            
       </td> 
       <td>

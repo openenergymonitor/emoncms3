@@ -33,6 +33,20 @@ function delete_dashboard($userid, $id)
   return $result;
 }
 
+function clone_dashboard($userid, $id)
+{
+	// Get content, name and description from origin dashboard
+  $result = db_query("SELECT content,name,description FROM dashboard WHERE userid = '$userid' AND id='$id'");
+  $row = db_fetch_array($result);
+	
+	// Name for cloned dashboard
+	$name = $row['name']._(' clone');
+
+  db_query("INSERT INTO dashboard (`userid`,`content`,`name`,`description`) VALUES ('$userid','{$row['content']}','$name','{$row['description']}')");
+	
+	return db_insert_id();
+}
+
 function get_dashboard_list($userid, $public, $published)
 {
   if ($public) $qB = " and public=1";
@@ -60,6 +74,9 @@ function set_dashboard_content($userid, $content, $id)
   }
 }
 
+/*
+ * Sets dashboard $id of $userid with $name
+ */
 function set_dashboard_name($userid, $id, $name)
 {
   db_query("UPDATE dashboard SET name = '$name' WHERE userid='$userid' AND id='$id'"); 

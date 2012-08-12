@@ -10,15 +10,16 @@
     http://openenergymonitor.org
   */
 
-  // dashboard/new				New dashboard
-  // dashboard/delete POST: id=			Delete dashboard
-  // dashboard/thumb 				List dashboards
-  // dashboard/list         List mode
+  // dashboard/new						New dashboard
+  // dashboard/delete 				POST: id=			Delete dashboard
+  // dashboard/clone					POST: id=			Clone dashboard
+  // dashboard/thumb 					List dashboards
+  // dashboard/list         	List mode
   // dashboard/view?id=1			View and run dashboard (id)
   // dashboard/edit?id=1			Edit dashboard (id) with the draw editor
-  // dashboard/ckeditor?id=1			Edit dashboard (id) with the CKEditor
+  // dashboard/ckeditor?id=1	Edit dashboard (id) with the CKEditor
   // dashboard/set POST				Set dashboard
-  // dashboard/setconf POST 			Set dashboard configuration
+  // dashboard/setconf POST 	Set dashboard configuration
 
   defined('EMONCMS_EXEC') or die('Restricted access');
 
@@ -51,7 +52,15 @@
     {
       $output['message'] = delete_dashboard($session['userid'], intval($_POST["id"]));
     }
-
+		
+    //----------------------------------------------------------------------------------------------------------------------
+    // Clone dashboard
+    //----------------------------------------------------------------------------------------------------------------------
+    elseif ($action == 'clone' && $session['write']) // write access required
+    {
+      $output['message'] = clone_dashboard($session['userid'], intval($_POST["id"]));
+    }
+		
     //----------------------------------------------------------------------------------------------------------------------
     // List dashboards
     //----------------------------------------------------------------------------------------------------------------------
