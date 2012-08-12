@@ -49,11 +49,13 @@
     //---------------------------------------------------------------------------------------------------------
     elseif ($action == "add" && $session['write']) // write access required
     { 
-      $inputid = intval($_GET["inputid"]);
-      $processid = intval($_GET["type"]);			// get process type
+      $inputid = intval($_GET['inputid']);
+      $processid = intval($_GET['type']);			// get process type (ProcessArg::)
+      $arg = floatval($_GET['arg']);                              // This is actual value, inputid or feedid
 
-      $arg = preg_replace('/[^\w\s-.]/','',$_GET["arg"]);	// filter out all except for alphanumeric white space and dash
-      $arg = db_real_escape_string($arg);
+      //arg2 is feed name if arg=-1 (create new feed)
+      $arg2 = preg_replace('/[^\w\s-.]/','',$_GET['arg2']);	// filter out all except for alphanumeric white space and dash
+      $arg2 = db_real_escape_string($arg2);
 
       $process = get_process($processid);
 
@@ -62,6 +64,7 @@
       switch ($process[1]) {
       case ProcessArg::VALUE:  // If arg type value
         $arg = floatval($arg);
+        $id = $arg;
         if ($arg != '') {
           $valid = true;
         } 
@@ -72,7 +75,8 @@
       case ProcessArg::INPUTID:  // If arg type input
         // Check if input exists (returns 0 if invalid)
         $name = get_input_name($arg);
-        if ($name == '') {
+        $id = get_input_id($_SESSION['userid'],$name);
+        if (($name == '') || ($id == '')) {
           $output['message'] = 'ERROR: Input does not exist!';
         }
         else {
@@ -82,13 +86,18 @@
       case ProcessArg::FEEDID:   // If arg type feed
         // First check if feed exists of given feed id and user.
         $name = get_feed_name($arg);
-        if ($name == '') {
-          $output['message'] = 'ERROR: Feed does not exist!';
-          // TODO: Create feed
+        $id = get_feed_id($_SESSION['userid'],$name);
+        if (($name == '') || ($id == '')) {
           // If it doesnt then create a feed, $process[3] is the number of datafields in the feed table
-          //if ($id == 0){
-          //	$id = create_feed($_SESSION['userid'],$arg, $process[3], $process[4]);
-          //}
+          $id = create_feed($_SESSION['userid'],$arg2, $process[3], $process[4]);
+          // Check feed was created successfully
+          $name = get_feed_name($id);
+          if ($name == '') {
+            $output['message'] = 'ERROR: Could not create new feed!';
+          }
+          else {
+            $valid = true;
+          }
         }
         else {
           $valid = true;
@@ -97,7 +106,7 @@
       }
 
       if ($valid) {
-        add_input_process($session['userid'],$inputid,$processid,$arg);
+        add_input_process($session['userid'],$inputid,$processid,$id);
       }
 
       if ($format == 'json') {

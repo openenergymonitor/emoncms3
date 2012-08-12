@@ -104,11 +104,12 @@ function generate_process_arg_box()
       out = data[1]+": ";
       switch (data[0]) {
       case 0:
-        out += '<input type="text" name="arg" class="processBox" style="width:100px;" id="arg" />';
+        out += '<input type="text" name="arg" class="processArgBox" id="arg" style="width:100px;" />';
         break;
       case 1:
       case 2:
-        out +='<select class="processBox" name="arg" id="arg">'
+        out +='<select class="processArgBox" name="arg" id="arg" onChange="update_process_arg_box()" style="width:140px;">'
+        if (data[0] == 2) out += '<option value="-1">{ CREATE NEW: }</option>';
         for (arg in data[2]) {
           out += '<option value="'+data[2][arg][0]+'">'+data[2][arg][1]+'</option>';
         }
@@ -118,32 +119,60 @@ function generate_process_arg_box()
       $('#newProcessArgField').html(out);
     }
   });
+
+  update_process_arg_box();
+}
+
+<?php // Add or remove arg2 text box (for new feed name) if Create New feed is selected ?>
+function update_process_arg_box()
+{
+  if ($('.processArgBox').val() == -1) {
+    $('#newProcessArgField').append('<input type="text" name="arg2" class="processArgBox2" style="width:100px;" id="arg2"/>');
+  }
+  else {
+    $('#arg2').remove();
+  }
 }
 
 function process_add() {
-  // inputid=x&type=y&arg=z
+  <?php // inputid=x&type=y&arg=z&arg2=q ?>
   var datastring = '?inputid='+<?php echo $inputid; ?>+'&type='+$('select#type').val()+'&arg='+$('#arg').val();
-  
+
+  <?php //if new feed append arg2 as feed name ?>
+  if ($('#arg').val() == -1) {
+    datastring += '&arg2='+$('#arg2').val();
+    if ($('#arg2').val() == '') {
+      alert('ERROR: You must enter a feed name!');
+      return false;
+    }
+  }
+
   $.ajax({
     url: path+"process/add.json"+datastring,
     dataType: 'json',
     async: false,
     success: function(data)
     {
-      if (data.length > 0) alert(data);
+      if (data != '') alert(data);
       update_list();
     }
   });
+
+  return true;
 }
 
 $('#submit_add').click(function() {
-  process_add();
+  if (!process_add()) return false;
   generate_process_arg_box();
   return false;
 });
 
 $('.processSelect').change(function() {
   generate_process_arg_box();
+});
+
+$('.processArgBox').change(function() {
+  update_process_arg_box();
 });
 
 $(document).ready(function() {
