@@ -36,35 +36,22 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <?php echo $mainmenu.$runmenu; ?> 
+          <?php echo $mainmenu; ?> 
         </div>
       </div>
     </div>
 		
-    <?php if ($message) { ?>     	
+    <?php if (isset($message) && ($message)) { ?>     	
     <div class="alert alert-info">
       <button class="close" data-dismiss="alert">×</button>
       <strong>Message: </strong><?php print $message; ?>
-    </div>
-    <?php } ?>
-
-    <!------------------------------------------------------
-    GREY SUBMENU
-    ------------------------------------------------------->
-    <?php if ($submenu) { ?>  
-    <div style="width:100%; background-color:#ddd; height:27px;">
-      <div style="margin: 0px auto; text-align:left; width:940px;">
-        <?php echo $submenu; ?> 
-      </div>
     </div>
     <?php } ?>
     <!------------------------------------------------------
     CONTENT
     ------------------------------------------------------->     	
     <div class="content">
-      <?php if (!$fullwidth) {?><div style="margin: 0px auto; max-width:940px; padding:10px;"><?php } ?>
         <?php print $content; ?>
-      <?php if (!$fullwidth) {?></div><?php } ?>
     </div>
 
     <div style="clear:both; height:37px;"></div> 

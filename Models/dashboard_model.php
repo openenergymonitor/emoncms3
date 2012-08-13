@@ -35,6 +35,7 @@ function delete_dashboard($userid, $id)
 
 function get_dashboard_list($userid, $public, $published)
 {
+  $qB = ""; $qC = "";
   if ($public) $qB = " and public=1";
   if ($published) $qC = " and published=1";
   $result = db_query("SELECT id, name, alias, description, main, published, public FROM dashboard WHERE userid='$userid'".$qB.$qC);
@@ -183,6 +184,7 @@ function build_dashboard_menu($userid,$location)
   if ($location!="run") { $dashpath = 'dashboard/'.$location; } else { $dashpath = $session['username'];   $public = !$session['write']; $published = 1;}
 
   $dashboards = get_dashboard_list($userid, $public, $published);
+  $topmenu="";
   foreach ($dashboards as $dashboard)
   {
     if ($dashboard['alias'])

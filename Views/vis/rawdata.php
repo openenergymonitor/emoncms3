@@ -11,6 +11,9 @@
 <?php
   $apikey = $_GET["apikey"];
   global $path, $embed;
+
+  $fill = $_GET["fill"]?$_GET["fill"]:true;
+  $units = $_GET["units"]?$_GET["units"]:"W";
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -52,6 +55,10 @@
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
 
+  var plotfill = <?php echo $fill; ?>;
+  if (plotfill==1) plotfill = true; else plotfill = false;
+  var units = "<?php echo $units; ?>";
+
   var embed = <?php echo $embed; ?>;
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
@@ -74,13 +81,15 @@
   {
     graph_data = get_feed_data(feedid,start,end,1000);
     var stats = power_stats(graph_data);
-    $("#stats").html("Average: "+stats['average'].toFixed(0)+"W | "+stats['kwh'].toFixed(2)+" kWh");
+    var out = "Average: "+stats['average'].toFixed(0)+units;
+    if (units=='W') out+= " | "+stats['kwh'].toFixed(2)+" kWh";
+    $("#stats").html(out);   
     plot();
   }
 
   function plot()
   {
-    var plot = $.plot($("#graph"), [{data: graph_data, lines: { show: true, fill: true }}], {
+    var plot = $.plot($("#graph"), [{data: graph_data, lines: { show: true, fill: plotfill }}], {
       grid: { show: true, hoverable: true, clickable: true },
       xaxis: { mode: "time", localTimezone: true, min: start, max: end },
       selection: { mode: "xy" }

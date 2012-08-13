@@ -36,7 +36,7 @@
         inputs = data; 
 
         var i = 0;
-        var out = "<table class='catlist'><tr><th><?php echo _('Name'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
+        var out = "<table class='catlist'><tr><th><?php echo _('Name'); ?></th><th><?php echo _('Node'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
 
         if (inputs.length==0) {
           out += "</table><table class='catlist'><tr class='d0' ><td>You have no inputs</td></tr></table>";
@@ -46,7 +46,10 @@
         {
           i++;
           out += "<tr class='d"+(i & 1)+"' >";
-          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td>";
+
+          var nodeid = "-"; if (inputs[z]['nodeid']!=0) nodeid = inputs[z]['nodeid'];
+
+          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td><td>"+nodeid+"</td>";
 
           var now = (new Date()).getTime();
           var update = (new Date(inputs[z][2])).getTime();

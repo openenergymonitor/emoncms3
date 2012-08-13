@@ -30,7 +30,7 @@
     if ($mysqli->connect_error) 
       return 3;
     else                     
-      if (db_query("SELECT id FROM users LIMIT 1"))
+      if (db_query('SELECT id FROM users LIMIT 1'))
         return 1;
       else
         return 4;
@@ -67,7 +67,7 @@
 
   function table_exists($tablename)
   {
-    $result = db_query("SELECT DATABASE()");
+    $result = db_query('SELECT DATABASE()');
     $row = db_fetch_array($result);
     $database = $row[0];
 
@@ -94,7 +94,7 @@
   
   function getdatabaseversion()
   {
-    $result = db_query("SELECT dbversion FROM e3_globals;");
+    $result = db_query('SELECT dbversion FROM e3_globals;');
     $row = db_fetch_array($result);
     return $row['dbversion']; 
   }

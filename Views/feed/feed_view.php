@@ -20,7 +20,7 @@ $status = $feed[7];
 	
 	<div class="well">
 		<h3><?php echo _("Select graph type:"); ?></h3>
-      <?php if ($type==1 || $type==0) { ?>
+      <?php if ($type==DataType::REALTIME || $type==DataType::UNDEFINED) { ?>
       <form action="../vis/realtime" method="get" style="margin-bottom:5px;">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
         <input type="submit" class="button06" style="width:150px;" value="<?php echo _("Real-time"); ?>"></input>
@@ -32,21 +32,21 @@ $status = $feed[7];
       </form>
       <?php } ?>
 
-      <?php if ($type==2 || $type==0) { ?>
+      <?php if ($type==DataType::DAILY || $type==UNDEFINED) { ?>
       <form action="../vis/bargraph" method="get" style="margin-bottom:5px;">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
         <input type="submit" class="button06" style="width:150px;" value="<?php echo _("Bar graph"); ?>"></input>
       </form>
       <?php } ?>
 
-      <?php if ($type==3 || $type==0) { ?>
+      <?php if ($type==DataType::HISTOGRAM || $type==DataType::UNDEFINED) { ?>
       <form action="../vis/histgraph" method="get" style="margin-bottom:5px;">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
         <input type="submit" class="button06" style="width:150px;" value="<?php echo _("Histogram"); ?>"></input>
       </form>
       <?php } ?>
 
-      <?php if ($type!=3) { ?>
+      <?php if ($type!=DataType::HISTOGRAM) { ?>
       <form action="../vis/edit" method="get" style="margin-bottom:5px;">
         <input type="hidden" name="feedid" value="<?php echo $id; ?>">
         <input type="submit" class="button06" style="width:150px;" value="Datapoint Editor"></input>
@@ -60,10 +60,10 @@ $status = $feed[7];
 
       <form action="type" method="get">
         <select name="type" class="span3">
-          <option value="0" <?php if ($type == 0) echo "selected"; ?> ><?php echo _("Undefined"); ?></option>
-          <option value="1" <?php if ($type == 1) echo "selected"; ?> ><?php echo _("Real-time data"); ?></option>
-          <option value="2" <?php if ($type == 2) echo "selected"; ?> ><?php echo _("Daily data"); ?></option>
-          <option value="3" <?php if ($type == 3) echo "selected"; ?> ><?php echo _("Histogram data"); ?></option>
+          <option value="<?php echo DataType::UNDEFINED.'" '; if ($type == DataType::UNDEFINED) echo "selected"; ?> ><?php echo _("Undefined"); ?></option>
+          <option value="<?php echo DataType::REALTIME.'" '; if ($type == DataType::REALTIME) echo "selected"; ?> ><?php echo _("Real-time data"); ?></option>
+          <option value="<?php echo DataType::DAILY.'" '; if ($type == DataType::DAILY) echo "selected"; ?> ><?php echo _("Daily data"); ?></option>
+          <option value="<?php echo DataType::HISTOGRAM.'" '; if ($type == DataType::HISTOGRAM) echo "selected"; ?> ><?php echo _("Histogram data"); ?></option>
         </select>
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <input type="submit" value="<?php echo _('Save'); ?>" class="button05"/>
