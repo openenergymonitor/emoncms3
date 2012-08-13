@@ -137,7 +137,7 @@
     elseif ($action == 'move' && $session['write']) // write access required
      { 
       $inputid = intval($_GET['inputid']);
-      $processid = intval($_GET['process']);
+      $processid = intval($_GET['processid']);
       $moveby = intval($_GET['moveby']);
 
       move_input_process($session['userid'],$inputid,$processid,$moveby);

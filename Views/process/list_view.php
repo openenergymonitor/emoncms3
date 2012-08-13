@@ -73,17 +73,37 @@ function update_list()
 
         var i = 0;
 
-        var out="<table class='catlist'><tr><th style='width:15%;'><?php echo _('Order'); ?></th><th style='width:35%;'><?php echo _('Process'); ?></th><th style='width:40%;'><?php echo _('Arg'); ?></th></tr>";
+        var out="<table class='catlist'><tr><th style='width:10%;'></th><th style='width:5%;'><?php echo _('Order'); ?></th><th style='width:35%;'><?php echo _('Process'); ?></th><th style='width:40%;'><?php echo _('Arg'); ?></th></tr>";
 
         for (z in processlist)
         {
           i++;
           out += '<tr class="d'+(i & 1)+'">';
-          out += '<td><form action="../process/delete" method="GET">';
+          out += '<td><form action="../process/delete" method="GET" class="buttonlistctrl">';
           out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
           out += '<input type="hidden" name="processid" value="'+i+'" />';
-          out += '<input type="submit" value="'+i+'" /></form></td>';
-          out += "<td>"+processlist[z][0]+"</td><td>"+processlist[z][1]+"</td>";
+          out += '<input type="image" src="<?php echo get_theme_path(); ?>/redx.png" alt="delete" name="submit" class="buttonlistctrl" title="Delete" /></form>';
+          if (i > 1) {
+            out += '<form action="../process/move" method="GET" class="buttonlistctrl">';
+            out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
+            out += '<input type="hidden" name="processid" value="'+i+'" />';
+            out += '<input type="hidden" name="moveby" value="-1" />';
+            out += '<input type="image" src="<?php echo get_theme_path(); ?>/uparrow.png" alt="move up" name="submit" class="buttonlistctrl" title="Move Up" /></form>';
+          } 
+          else { 
+            out += '<img src="" alt="spacer" class="buttonlistctrl" /></form>';
+          }
+          if (i < processlist.length) {
+            out += '<form action="../process/move" method="GET" class="buttonlistctrl">';
+            out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
+            out += '<input type="hidden" name="processid" value="'+i+'" />';
+            out += '<input type="hidden" name="moveby" value="1" />';
+            out += '<input type="image" src="<?php echo get_theme_path(); ?>/downarrow.png" alt="move down" name="submit" class="buttonlistctrl" title="Move Down" /></form>';
+          }
+          else { 
+            out += '<img src="" alt="spacer" class="buttonlistctrl" /></form>';
+          }
+          out += "</td><td>"+i+"</td><td>"+processlist[z][0]+"</td><td>"+processlist[z][1]+"</td>";
         }
         
         if (processlist.length==0) {
