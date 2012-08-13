@@ -117,6 +117,35 @@
     }
     
     //--------------------------------------------------------------------------
+    // Delete process 
+    // http://yoursite/emoncms/process/delete?inputid=1&processid=1
+    //--------------------------------------------------------------------------
+    elseif ($action == 'delete' && $session['write']) // write access required
+    { 
+      $inputid = intval($_GET['inputid']);
+      $processid = intval($_GET['processid']);
+
+      delete_input_process($session['userid'],$inputid,$processid);
+
+      if ($format == 'html') header('Location: list?inputid='.$inputid);
+    }
+
+    //--------------------------------------------------------------------------
+    // Move process 
+    // http://yoursite/emoncms/process/move?inputid=1&processid=1&moveby=1/-1
+    //--------------------------------------------------------------------------
+    elseif ($action == 'move' && $session['write']) // write access required
+     { 
+      $inputid = intval($_GET['inputid']);
+      $processid = intval($_GET['process']);
+      $moveby = intval($_GET['moveby']);
+
+      move_input_process($session['userid'],$inputid,$processid,$moveby);
+
+      if ($format == 'html') header('Location: list?inputid='.$inputid);
+    }
+
+    //--------------------------------------------------------------------------
     // Query process
     // http://yoursite/emoncms/process/query?type=1
     // Returns ProcessArg type as int; String description; Array of feedids and names

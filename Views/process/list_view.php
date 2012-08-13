@@ -78,8 +78,12 @@ function update_list()
         for (z in processlist)
         {
           i++;
-          out += "<tr class='d"+(i & 1)+"' >";
-          out += "<td>"+i+"</td><td>"+processlist[z][0]+"</td><td>"+processlist[z][1]+"</td>";
+          out += '<tr class="d'+(i & 1)+'">';
+          out += '<td><form action="../process/delete" method="GET">';
+          out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
+          out += '<input type="hidden" name="processid" value="'+i+'" />';
+          out += '<input type="submit" value="'+i+'" /></form></td>';
+          out += "<td>"+processlist[z][0]+"</td><td>"+processlist[z][1]+"</td>";
         }
         
         if (processlist.length==0) {
