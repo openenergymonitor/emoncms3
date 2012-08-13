@@ -45,6 +45,60 @@ function add_input_process($userid, $id, $type, $arg)
   set_input_processlist($id, $list);
 }
 
+/******
+* delete input process by index
+******/
+function delete_input_process($userid, $id, $index)
+{
+$handle = fopen("/tmp/debug", "w");
+  $process_list = get_input_processlist($userid, $id);
+  $array = explode(",", $process_list);
+  $index = $index - 1; // Array is 0-based. Index from process page is 1-based.
+  
+  $list = array(); // process list array to hold new list
+  // input process list is comma seperated
+
+fwrite($handle, count($array)."\n");
+  for($i = 0; $i < count($array); $i++) { // For all input processes
+
+fwrite($handle, '$i: '.$i.' index: '.$index."\n");
+    if ($i != $index) {
+
+fwrite($handle, 'loop $i: '.$i.' index: '.$index."\n");
+      // Append each process to list except for the one we are deleting
+      $list[end($list)+1] = $array[$i];
+    }
+  }
+fwrite($handle, count($list)."\n");
+fclose($handle);
+  // Save new process list
+  set_input_processlist($id, implode(",", $list));
+}
+
+/******
+* move_input_process - move process up/down list of processes by $moveby (eg. -1, +1)
+******/
+function move_input_process($userid, $id, $index, $moveby)
+{
+  if (($moveby > 1) || ($moveby < -1)) return false;  // Only support +/-1 (logic is easier)
+
+  $process_list = get_input_processlist($userid, $id);
+  $array = explode(",", $process_list);
+ 
+  $newindex = $index + $moveby; // Calc new index in array
+  // Check if $newindex is greater than size of list
+  if ($newindex > (count($array)-1)) $newindex = (count($array)-1);
+  // Check if $newindex is less than 0
+  if ($newindex < 0) $newindex = 0;
+  
+  $replace = $array[$newindex]; // Save entry that will be replaced
+  $array[$newindex] = $array[$index];
+  $array[$index] = $replace;
+
+  // Save new process list
+  set_input_processlist($id, $array);
+}
+
 function reset_input_process($userid, $id)
 {
   set_input_processlist($id, "");
