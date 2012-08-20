@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
    All Emoncms code is released under the GNU Affero General Public License.
    See COPYRIGHT.txt and LICENSE.txt.
 
@@ -6,17 +7,25 @@
     Emoncms - open source energy visualisation
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
--->
-<?php
-  global $path;
- ?>
+*/
+
+	global $path;
+?>
 
 <script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.min.js"></script>
 
-  <h2><?php if ($del) echo "Deleted "; ?><?php echo _("Feeds"); ?></h2>
+  <h2>
+ 		<?php 
+ 			if ($del) 
+ 				echo _('Deleted feeds'); 
+  		else 
+  			echo _('Feeds'); 
+  	?>
+  </h2>
+  
   <div id="feedlist"></div>
-  <?php if (!$del) { ?><br><a href="?del=1" class="btn btn-danger">Deleted feeds</a><?php } ?>
-  <?php if ($del && $feeds) { ?><br><a href="permanentlydelete">Delete feeds permanently</a> (no confirmation)<?php } ?>
+  <?php if (!$del) { ?><br><a href="?del=1" class="btn btn-danger"><?php echo _('Deleted feeds'); ?></a><?php } ?>
+  <?php if ($del && $feeds) { ?><br><a href="permanentlydelete"><?php echo _('Delete feeds permanently'); ?></a> (no confirmation)<?php } ?>
 
 <script type="text/javascript">
   var path =  "<?php echo $path; ?>";
@@ -40,7 +49,7 @@
         var out = "<table class='catlist'><tr><th>id</th><th><?php echo _('Name'); ?></th><th><?php echo _('Tag'); ?></th><th><?php echo _('Size'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
 
         if (feeds.length==0) {
-          out += "</table><table class='catlist'><tr class='d0' ><td>You have no feeds</td></tr></table>";
+          out += "</table><table class='catlist'><tr class='d0' ><td><?php echo _('You have no feeds'); ?></td></tr></table>";
         }
 
         for (z in feeds)
@@ -65,9 +74,9 @@
 
           var updated = secs.toFixed(0)+'<?php echo _("s ago"); ?>';
 
-          if (secs>180) updated = mins.toFixed(0)+'<?php echo _(" mins ago"); ?>';
-          if (secs>(3600*2)) updated = hour.toFixed(0)+'<?php echo _(" hours ago"); ?>';
-          if (hour>24) updated = '<?php echo _("inactive"); ?>';
+          if (secs>180) updated = mins.toFixed(0)+'<?php echo _(' mins ago'); ?>';
+          if (secs>(3600*2)) updated = hour.toFixed(0)+'<?php echo _(' hours ago'); ?>';
+          if (hour>24) updated = '<?php echo _('inactive'); ?>';
 
           var color = "rgb(255,125,20)";
           if (secs<60) color = "rgb(240,180,20)";

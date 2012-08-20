@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-03 18:17+0100\n"
-"PO-Revision-Date: 2012-08-03 18:17+0100\n"
+"POT-Creation-Date: 2012-08-09 12:36+0100\n"
+"PO-Revision-Date: 2012-08-09 12:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,11 +36,11 @@ msgstr "Nuevo panel"
 msgid "Logout"
 msgstr "Desconectar"
 
-#: ../../../Controllers/dashboard_controller.php:243
+#: ../../../Controllers/dashboard_controller.php:247
 msgid "dashboard set"
 msgstr "establecer panel"
 
-#: ../../../Controllers/dashboard_controller.php:282
+#: ../../../Controllers/dashboard_controller.php:289
 msgid "dashboard set configuration"
 msgstr "establecer configuración del panel"
 
@@ -278,7 +278,7 @@ msgstr "Estas son todas la formas de visualización disponibles en Emoncms3. Par
 #: ../../../Views/api_view.php:88
 #: ../../../Views/dashboard/dashboard_publiclist_view.php:22
 msgid "Name"
-msgstr "Nombre:"
+msgstr "Nombre"
 
 #: ../../../Views/api_view.php:91
 msgid "URL"
@@ -300,7 +300,6 @@ msgid "Raw data graph"
 msgstr "Gráfico de datos brutos"
 
 #: ../../../Views/api_view.php:130
-#: ../../../Views/feed/feed_view.php:38
 msgid "Bar graph"
 msgstr "Gráfico de barras"
 
@@ -429,8 +428,6 @@ msgstr "Destinatarios de las notificaciones (To):"
 #: ../../../Views/notify_settings_view.php:19
 #: ../../../Views/notify_view.php:29
 #: ../../../Views/user_view.php:45
-#: ../../../Views/feed/feed_view.php:69
-#: ../../../Views/feed/feed_view.php:76
 msgid "Save"
 msgstr "Guardar"
 
@@ -472,67 +469,79 @@ msgid "Browser language"
 msgstr "Lenguaje del navegador"
 
 #: ../../../Views/user_view.php:51
+msgid "Local time"
+msgstr "Hora local"
+
+#: ../../../Views/user_view.php:53
+msgid "Time offset in hours:"
+msgstr "Diferencia horario en horas:"
+
+#: ../../../Views/user_view.php:56
+msgid "Set"
+msgstr "Establecer"
+
+#: ../../../Views/user_view.php:60
 msgid "Change details"
 msgstr "Cambiar detalles"
 
-#: ../../../Views/user_view.php:53
+#: ../../../Views/user_view.php:62
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
-#: ../../../Views/user_view.php:56
+#: ../../../Views/user_view.php:65
 msgid "Email:"
 msgstr "Correo:"
 
-#: ../../../Views/user_view.php:59
-#: ../../../Views/user_view.php:70
+#: ../../../Views/user_view.php:68
+#: ../../../Views/user_view.php:79
 msgid "Change"
 msgstr "Cambiar"
 
-#: ../../../Views/user_view.php:63
+#: ../../../Views/user_view.php:72
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
-#: ../../../Views/user_view.php:64
+#: ../../../Views/user_view.php:73
 msgid "Current password:"
 msgstr "Contraseña actual:"
 
-#: ../../../Views/user_view.php:67
+#: ../../../Views/user_view.php:76
 msgid "New password:"
 msgstr "Nueva contraseña:"
 
-#: ../../../Views/user_view.php:74
+#: ../../../Views/user_view.php:83
 msgid "Account Statistics"
 msgstr "Estadísticas de Cuenta"
 
-#: ../../../Views/user_view.php:78
+#: ../../../Views/user_view.php:87
 msgid "Disk space use:"
 msgstr "Uso de espacio en disco:"
 
-#: ../../../Views/user_view.php:86
+#: ../../../Views/user_view.php:95
 msgid "Up hits:"
 msgstr "Up hits:"
 
-#: ../../../Views/user_view.php:94
+#: ../../../Views/user_view.php:103
 msgid "Down hits:"
 msgstr "Down hits:"
 
-#: ../../../Views/user_view.php:110
+#: ../../../Views/user_view.php:119
 msgid "en_EN"
 msgstr "Inglés"
 
-#: ../../../Views/user_view.php:111
+#: ../../../Views/user_view.php:120
 msgid "es_ES"
 msgstr "Español"
 
-#: ../../../Views/user_view.php:112
+#: ../../../Views/user_view.php:121
 msgid "nl_BE"
 msgstr "Belga"
 
-#: ../../../Views/user_view.php:113
+#: ../../../Views/user_view.php:122
 msgid "nl_NL"
 msgstr "Holandés"
 
-#: ../../../Views/user_view.php:114
+#: ../../../Views/user_view.php:123
 msgid "fr_FR"
 msgstr "Francés"
 
@@ -601,13 +610,27 @@ msgstr "Configuración del panel"
 msgid "Menu name: (lowercase a-z only)"
 msgstr "Nombre para el menu: (sólo letras de la \"a\" a la \"z\")"
 
-#: ../../../Views/dashboard/dashboard_config.php:59
+#: ../../../Views/dashboard/dashboard_config.php:57
+msgid "Show description: "
+msgstr "Mostrar descripción:"
+
+#: ../../../Views/dashboard/dashboard_config.php:66
 msgid "Close"
 msgstr "Cerrar"
 
-#: ../../../Views/dashboard/dashboard_config.php:60
+#: ../../../Views/dashboard/dashboard_config.php:67
 msgid "Save changes"
 msgstr "Guardar cambios"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:26
+#: ../../../Views/dashboard/dashboard_thumb_view.php:32
+msgid "New dashboard"
+msgstr "Nuevo panel"
+
+#: ../../../Views/dashboard/dashboard_list_view.php:27
+#: ../../../Views/dashboard/dashboard_menu.php:37
+msgid "Thumb view"
+msgstr "Formato iconos"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:36
 msgid "Id"
@@ -662,7 +685,6 @@ msgid "Draw"
 msgstr "Diseñar"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:98
-#: ../../../Views/feed/feed_view.php:105
 msgid "Delete"
 msgstr "Borrar"
 
@@ -694,11 +716,8 @@ msgstr "Configuración"
 msgid "New"
 msgstr "Nuevo"
 
-#: ../../../Views/dashboard/dashboard_menu.php:37
-msgid "Thumb view"
-msgstr "Formato iconos"
-
 #: ../../../Views/dashboard/dashboard_menu.php:38
+#: ../../../Views/dashboard/dashboard_thumb_view.php:34
 msgid "List view"
 msgstr "Formato lista"
 
@@ -790,37 +809,50 @@ msgstr "¿Estás seguro de que quieres borrar la fuente?:"
 msgid "feed/delete"
 msgstr "fuente/borrar"
 
-#: ../../../Views/feed/list_view.php:40
+#: ../../../Views/feed/list_view.php:20
+#: ../../../Views/feed/list_view.php:27
+msgid "Deleted feeds"
+msgstr "Fuentes borradas"
+
+#: ../../../Views/feed/list_view.php:28
+msgid "Delete feeds permanently"
+msgstr "¿Borrar fuentes de manera permanente?"
+
+#: ../../../Views/feed/list_view.php:49
 msgid "Tag"
 msgstr "Etiqueta"
 
-#: ../../../Views/feed/list_view.php:40
+#: ../../../Views/feed/list_view.php:49
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../../../Views/feed/list_view.php:40
+#: ../../../Views/feed/list_view.php:49
 #: ../../../Views/input/list_view.php:39
 msgid "Updated"
 msgstr "Actualizado"
 
-#: ../../../Views/feed/list_view.php:40
+#: ../../../Views/feed/list_view.php:49
 #: ../../../Views/input/list_view.php:39
 msgid "Value"
 msgstr "Valor"
 
-#: ../../../Views/feed/list_view.php:66
+#: ../../../Views/feed/list_view.php:52
+msgid "You have no feeds"
+msgstr "No existen fuentes"
+
+#: ../../../Views/feed/list_view.php:75
 msgid "s ago"
 msgstr " s atrás"
 
-#: ../../../Views/feed/list_view.php:68
+#: ../../../Views/feed/list_view.php:77
 msgid " mins ago"
 msgstr " minutros atrás"
 
-#: ../../../Views/feed/list_view.php:69
+#: ../../../Views/feed/list_view.php:78
 msgid " hours ago"
 msgstr " horas atrás"
 
-#: ../../../Views/feed/list_view.php:70
+#: ../../../Views/feed/list_view.php:79
 msgid "inactive"
 msgstr "inactivo"
 
@@ -860,6 +892,10 @@ msgstr "¿Estás seguro de que quieres borrar la entrada:"
 msgid "Delete input?"
 msgstr "¿Borrar entrada?"
 
+#: ../../../Views/theme/basic/theme.php:80
+msgid "Powered by "
+msgstr "Creado con "
+
 #: ../../../Views/user/login_block.php:39
 msgid "Password:"
 msgstr "Contraseña:"
@@ -868,11 +904,11 @@ msgstr "Contraseña:"
 msgid "Login"
 msgstr "Entrar"
 
-#: ../../../Views/user/login_block.php:50
+#: ../../../Views/user/login_block.php:51
 msgid "Or if you are new enter a username and password above and click register"
 msgstr "O si eres un nuevo usuario introduce un nombre de usuario y contraseña y pulsa en registarse"
 
-#: ../../../Views/user/login_block.php:50
+#: ../../../Views/user/login_block.php:51
 msgid "Register"
 msgstr "Registrase"
 
@@ -928,9 +964,6 @@ msgstr "Registrase"
 
 #~ msgid "Spanish"
 #~ msgstr "Español"
-
-#~ msgid "Set"
-#~ msgstr "Establecer"
 
 #~ msgid "updated"
 #~ msgstr "actualizado"

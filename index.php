@@ -23,13 +23,19 @@ require "Includes/core.inc.php";
 
 require_once "Includes/locale.php";
 
-// Thanks to seanwg for https addition
-$ssl = $_SERVER['HTTPS'];
-echo $ssl;
+// Default to http protocol
 $proto = "http";
-if ($ssl == "on") {
+
+// Detect if we are running HTTPS or proxied HTTPS
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+	// Web server is running native HTTPS
 	$proto = "https";
 }
+elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) == "https") {
+	// Web server is running behind a proxy which is running HTTPS
+	$proto = "https";
+}
+
 $path = dirname("$proto://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']) . "/";
 
 require "Includes/db.php";
