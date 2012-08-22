@@ -39,7 +39,9 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <?php echo $mainmenu; ?> 
+          <?php if (!isset($runmenu)) $runmenu = '';
+                echo $mainmenu.$runmenu;
+          ?> 
         </div>
       </div>
     </div>
@@ -70,7 +72,18 @@
     ?>     	
     
     <div class="content">
-        <?php print $content; ?>
+      <?php
+        if (!isset($fullwidth)) $fullwidth = false;
+        if (!$fullwidth) {
+          echo '<div style="margin: 0px auto; max-width:940px; padding:10px;">';
+          print $content;
+          echo '</div>';
+        }
+        else {
+          print $content;
+        }
+
+      ?>
     </div>
 
     <div style="clear:both; height:37px;"></div> 
