@@ -45,7 +45,7 @@ function input_controller()
   //---------------------------------------------------------------------------------------------------------
 	elseif ($action == 'node' && $session['read'])
   {
-    $inputs = get_user_inputs($session['userid']);
+    $inputs = get_user_inputsbynode($session['userid']);
 
     if ($format == 'json') $output['content'] = json_encode($inputs);
     if ($format == 'html') $output['content'] = view("input/node_view.php", array('inputs' => $inputs));

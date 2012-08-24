@@ -69,6 +69,25 @@ function get_user_inputs($userid)
   return $inputs;
 }
 
+function get_user_inputsbynode($userid)
+{
+  $result = db_query("SELECT * FROM input WHERE userid = '$userid' ORDER BY nodeid");
+  $inputs = array();
+  if ($result)
+  {
+    while ($row = db_fetch_array($result))
+    {
+      $inputs[] = array(
+        $row['id'],
+        $row['name'],
+        strtotime($row['time']) * 1000,
+        $row['value'], 'nodeid'=>$row['nodeid']
+      );
+    }
+  }
+  return $inputs;
+}
+
 function get_input_id($user, $name)
 {
   $result = db_query("SELECT id FROM input WHERE name='$name' AND userid='$user'");

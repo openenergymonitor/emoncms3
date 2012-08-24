@@ -8,12 +8,18 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
 */
-
-  global $path;
+  
+require_once "Includes/messages.php";
+  
+global $path;
 ?>
 
 <script type="text/javascript" src="<?php print $path; ?>Includes/flot/jquery.min.js"></script>
 
+<?php 
+  if (!$inputs) echo show_noinputs_message();
+  else { ?>
+    
 <h2><?php echo _("Node view"); ?></h2>
 
 <div align="right">
@@ -35,7 +41,7 @@
   function update_list()
   {
     $.ajax({                                      
-      url: path+"input/list.json",                
+      url: path+"input/node.json",                
       dataType: 'json',
       async: false,
       success: function(data) 
@@ -43,11 +49,7 @@
         inputs = data; 
         
         var i = 0;
-        var out = "<table class='catlist'><tr><th><?php echo _('Name'); ?></th><th><?php echo _('Node'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
-
-        if (inputs.length==0) {
-          out += "</table><table class='catlist'><tr class='d0' ><td>You have no inputs</td></tr></table>";
-        }
+        var out = "<table class='catlist'><tr><th><?php echo _('Node'); ?></th><th><?php echo _('Name'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
 
         for (z in inputs)
         {
@@ -84,3 +86,5 @@
     });
   }
 </script>
+
+<?php } ?>
