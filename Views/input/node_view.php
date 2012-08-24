@@ -48,8 +48,25 @@ global $path;
       { 
         inputs = data; 
         
+        // Search for node existence
+        var k = 0;     
+        var thnode = false;   
+            
+        while ((k<inputs.length) && (inputs[k]['nodeid']==0)) k++;                       
+            
+        if (k<inputs.length) thnode=true;
+        //       
+          
+        // Table header
         var i = 0;
-        var out = "<table class='catlist'><tr><th><?php echo _('Node'); ?></th><th><?php echo _('Name'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
+        var out = "<table class='catlist'><tr>";
+          
+        // Add node column if some input has node
+        if (thnode) 
+          out += "<th><?php echo _('Node'); ?></th>";
+          
+        out += "<th><?php echo _('Name'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
+        //
 
         for (z in inputs)
         {
@@ -58,8 +75,11 @@ global $path;
 
           var nodeid = "-"; if (inputs[z]['nodeid']!=0) nodeid = inputs[z]['nodeid'];
 
-          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td><td>"+nodeid+"</td>";
-
+          if (thnode) 
+            out += "<td>"+nodeid+"</td>";
+          
+          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td>";          
+                
           var now = (new Date()).getTime();
           var update = (new Date(inputs[z][2])).getTime();
           var lastupdate = (now-update)/1000;
