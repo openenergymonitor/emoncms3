@@ -18,6 +18,7 @@ function user_apikey_session_control($apikey_in)
   // Check for apikey login
   //----------------------------------------------------
   $apikey_in = db_real_escape_string($apikey_in);
+
   $userid = get_apikey_read_user($apikey_in);
   if ($userid != 0)
   {
@@ -50,6 +51,7 @@ function get_user($userid)
   if ($result)
   {
     $row = db_fetch_array($result);
+    if (!isset($row['email'])) $row['email']="";
     $user = array(
       'username' => $row['username'],
       'email' => $row['email'],

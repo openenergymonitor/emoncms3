@@ -30,21 +30,23 @@
     <title>Emoncms</title>
   </head>
   <body style="padding-top:42px;" >
-  	<?php
+    <?php
     /*------------------------------------------------------
      * HEADER
      *------------------------------------------------------
-		 */
-		?>
+     */
+    ?>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <?php echo $mainmenu.$runmenu; ?> 
+          <?php if (!isset($runmenu)) $runmenu = '';
+                echo $mainmenu.$runmenu;
+          ?> 
         </div>
       </div>
     </div>
 		
-    <?php if ($message) { ?>     	
+    <?php if (isset($message) && ($message)) { ?>     	
     <div class="alert alert-info">
       <button class="close" data-dismiss="alert">×</button>
       <strong>Message: </strong><?php print $message; ?>
@@ -54,9 +56,9 @@
     /*------------------------------------------------------
      * GREY SUBMENU
      *------------------------------------------------------
-		 */
+     */
 
-		if ($submenu) { ?>  
+    if (isset($submenu) && ($submenu)) { ?>  
     <div style="width:100%; background-color:#ddd; height:27px;">
       <div style="margin: 0px auto; text-align:left; width:940px;">
         <?php echo $submenu; ?> 
@@ -66,13 +68,22 @@
     /*------------------------------------------------------
      * CONTENT
      *------------------------------------------------------
-		 */
+     */
     ?>     	
     
     <div class="content">
-      <?php if (!$fullwidth) {?><div style="margin: 0px auto; max-width:940px; padding:10px;"><?php } ?>
-        <?php print $content; ?>
-      <?php if (!$fullwidth) {?></div><?php } ?>
+      <?php
+        if (!isset($fullwidth)) $fullwidth = false;
+        if (!$fullwidth) {
+          echo '<div style="margin: 0px auto; max-width:940px; padding:10px;">';
+          print $content;
+          echo '</div>';
+        }
+        else {
+          print $content;
+        }
+
+      ?>
     </div>
 
     <div style="clear:both; height:37px;"></div> 
