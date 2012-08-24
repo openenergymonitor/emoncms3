@@ -29,8 +29,10 @@
     // http://yoursite/emoncms/nodes/list.html
     //---------------------------------------------------------------------------------------------------------
     if ($action == 'list' && $session['write'])
-    {    
-      if ($format == 'html') $output['content'] = view("nodes/nodes_view.php", array());
+    {
+      $nodes = get_user_nodes($session['userid']);
+          
+      if ($format == 'html') $output['content'] = view("nodes/nodes_view.php", array('nodes' => $nodes));
     }
     
 		return $output;
