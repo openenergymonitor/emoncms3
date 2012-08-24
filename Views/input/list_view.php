@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
    All Emoncms code is released under the GNU Affero General Public License.
    See COPYRIGHT.txt and LICENSE.txt.
 
@@ -6,9 +7,8 @@
     Emoncms - open source energy visualisation
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
--->
+*/
 
-<?php
   global $path;
 ?>
 
@@ -34,7 +34,12 @@
       success: function(data) 
       { 
         inputs = data; 
-
+        
+        for (z in inputs)
+        {
+          
+        }
+        
         var i = 0;
         var out = "<table class='catlist'><tr><th><?php echo _('Name'); ?></th><th><?php echo _('Node'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
 
