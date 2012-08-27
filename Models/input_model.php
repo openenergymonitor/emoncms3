@@ -120,9 +120,28 @@ function get_user_inputs($userid)
   return $inputs;
 }
 
-  //-----------------------------------------------------------------------------------------------
-  // Return a list of users input ids and names
-  //-----------------------------------------------------------------------------------------------
+function get_user_inputsbynode($userid)
+{
+  $result = db_query("SELECT * FROM input WHERE userid = '$userid' ORDER BY nodeid");
+  $inputs = array();
+  if ($result)
+  {
+    while ($row = db_fetch_array($result))
+    {
+      $inputs[] = array(
+        $row['id'],
+        $row['name'],
+        strtotime($row['time']) * 1000,
+        $row['value'], 'nodeid'=>$row['nodeid']
+      );
+    }
+  }
+  return $inputs;
+}
+
+//-----------------------------------------------------------------------------------------------
+// Return a list of users input ids and names
+//-----------------------------------------------------------------------------------------------
 function get_user_input_names($userid)
 {
   $result = db_query("SELECT id,name FROM input WHERE userid = $userid ORDER BY name ASC");
