@@ -37,7 +37,7 @@ switch(db_connect()) {
   case 0: break;
   case 1: break;  
   case 3: show_dbsettingserror_message(); die ;
-  case 4: $runnable==true; break;
+  case 4: $runnable = true; break;
 }
 
 if (!$runnable)
