@@ -142,6 +142,26 @@ function get_process_list()
     DataType::DAILY
   );
 
+  $list[18] = array(
+    _("heat flux"),
+    2,
+    "heat_flux",
+    1,
+    1
+  );
+
+
+  $list[19] = array(
+    _("power gained to kWh/d"),
+    2,
+    "power_acc_to_kwhd",
+    1,
+    1
+  );
+
+
+
+
   return $list;
 }
 
@@ -584,4 +604,91 @@ function average($feedid, $time_now, $value)
  return $rows;
  }
  */
+ 
+ 
+   //------------------------------------------------------------------------------------------------------
+  // Calculate the energy used to heat up water based on the rate of change for the current and a previous temperature reading
+  // See http://harizanov.com/2012/05/measuring-the-solar-yield/ for more info on how to use it
+  //------------------------------------------------------------------------------------------------------
+  function heat_flux($feedid,$time_now,$value)
+  {
+ // Get the feed
+	$feedname = "feed_".trim($feedid)."";
+     
+	// Get the current input id 
+	$result = db_query("Select * from input where processList like '%:$feedid%';");
+	$rowfound = db_fetch_array($result);
+	if ($rowfound)
+	{
+		$inputid = trim($rowfound['id']);
+		$processlist = $rowfound['processList'];
+		// Now get the feed for the log to feed command for the input 
+		$logfeed = preg_match('/1:(\d+)/',$processlist,$matches);
+		$logfeedid = trim($matches[1]);
+		// Now need to get the last but one value in the main log to feed table
+		$oldfeedname = "feed_".trim($logfeedid)."";
+
+		// Read previous N readings, starting not from the latest one, but the one before it (LIMIT 1,N)
+		// Find a previous reading that is at least 10 minutes apart from the current reading and average the in-between readings to smooth out fluctuations
+		// Without this we will get unstable readings
+
+		
+		$lastentry = db_query("Select * from $oldfeedname order by time desc LIMIT 1,128;");  
+		$lastentryrow = db_fetch_array($lastentry); 
+
+		$time_prev  = trim($lastentryrow['time']);	//Read the time of previous reading
+		$prevValue  = trim($lastentryrow['data']);	//Get previous reading
+
+		while($lastentryrow = db_fetch_array($lastentry)) {
+
+		$time_prev  = trim($lastentryrow['time']);
+		$prevValue  = trim($lastentryrow['data']);	 
+		if(($time_now-$time_prev)> 60*10) {
+			break;
+		}
+		}
+
+		$ratechange = $value - $prevValue;
+		$TimeDelta  = $time_now - $time_prev;		//Calculate time in seconds that has elapsed since then
+		
+		$ratechange = ($ratechange*4186/$TimeDelta);     //Calculate the temperature change per second
+									//Specific heat of Water (4186 J/kg/K)
+									//Multiply by the volume in liters in emoncms as a next step of the processing
+    }
+	return($ratechange);
+  }
+
+
+//For solar hot water heater, I need the positive amounts only to be able to calculate the energy harvested in a day. 
+//Negative values are when the hot water tank loses energy i.e. due to heat loss OR when being used for a shower, but I want the daily gain in energy only
+
+  function power_acc_to_kwhd($feedid,$time_now,$value)
+  {
+
+    if($value>0) {
+ 
+    $new_kwh = 0;
+
+    // Get last value
+    $last = get_feed_timevalue($feedid);
+    $last_kwh = $last['value'];
+    $last_time = strtotime($last['time']);
+
+    if ($last_time) {
+      // kWh calculation
+      $time_elapsed = ($time_now - $last_time);
+      $kwh_inc = ($time_elapsed * $value) / 3600000;
+      $new_kwh = $last_kwh + $kwh_inc;
+    }
+
+    $feedtime = mktime(0, 0, 0, date("m") , date("d") , date("Y"));
+    update_feed_data($feedid,$time_now,$feedtime,$new_kwh);
+
+    return $value;
+
+
+  }
+  }
+
+
 ?>

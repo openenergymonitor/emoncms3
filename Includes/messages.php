@@ -24,6 +24,18 @@ function show_nodashboards_message()
 } 
 
 /*
+ * Shown when not inputs exists and want to list
+ */ 
+function show_noinputs_message()
+{
+  // TODO optimize output format (now is better readable)
+  echo '<div class="alert alert-block">';
+  echo '<h4 class="alert-heading">No inputs created</h4>';
+  echo 'Inputs must be sent by your monitoring device. For more information visit <a href="http://openenergymonitor.org">OpenEnergyMonitor.org</a>';
+  echo '</div>';
+} 
+
+/*
  * DB Settings error
  * TODO: bootstrap style and set language before database connect try
  */

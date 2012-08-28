@@ -102,7 +102,7 @@ $schema['dashboard'] = array(
   'main' => array('type' => 'tinyint(1)', 'default'=>false),
   'public' => array('type' => 'tinyint(1)', 'default'=>false),
   'published' => array('type' => 'tinyint(1)', 'default'=>false),
-	'showdescription' => array('type' => 'tinyint(1)', 'default'=>false)  
+  'showdescription' => array('type' => 'tinyint(1)', 'default'=>false)  
 );
 
 $schema['notify'] = array(
@@ -136,6 +136,12 @@ $schema['statistics'] = array(
 $schema['multigraph'] = array(
   'userid' => array('type' => 'int(11)'),
   'feedlist' => array('type' => 'text')
+);
+
+$schema['nodes'] = array(
+  'nodeid' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
+  'name' => array('type' => "varchar(30)", 'default'=>'no name'),
+  'description' => array('type' => "varchar(255)", 'default'=>'no description')
 );
 
 //$schema['e3_globals'] = array(

@@ -1,15 +1,15 @@
-<!--
-   All Emoncms code is released under the GNU Affero General Public License.
-   See COPYRIGHT.txt and LICENSE.txt.
-
-    ---------------------------------------------------------------------
-    Emoncms - open source energy visualisation
-    Part of the OpenEnergyMonitor project:
-    http://openenergymonitor.org
--->
-
 <?php
-  global $path, $session;
+/*
+ All Emoncms code is released under the GNU Affero General Public License.
+ See COPYRIGHT.txt and LICENSE.txt.
+
+  ---------------------------------------------------------------------
+  Emoncms - open source energy visualisation
+  Part of the OpenEnergyMonitor project:
+  http://openenergymonitor.org
+*/
+  
+global $path, $session;
 ?>
 
 <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
@@ -61,6 +61,24 @@
 var path = "<?php echo $path; ?>";
 var processlist = <?php echo json_encode($input_processlist); ?>;
 
+function delete_process(inputid, processid)
+{
+  $.ajax({
+    url: path+"process/delete.json?inputid="+inputid+"&processid="+processid,
+    dataType: 'json',
+    success: location.reload()
+  })
+}
+
+function move_process(inputid, processid, upordown)
+{
+  $.ajax({
+    url: path+"process/move.json?inputid="+inputid+"&processid="+processid+"&moveby="+upordown,
+    dataType: 'json',
+    success: location.reload()
+  })  
+}
+
 function update_list()
 {
   $.ajax({
@@ -73,37 +91,30 @@ function update_list()
 
         var i = 0;
 
-        var out="<table class='catlist'><tr><th style='width:10%;'></th><th style='width:5%;'><?php echo _('Order'); ?></th><th style='width:35%;'><?php echo _('Process'); ?></th><th style='width:40%;'><?php echo _('Arg'); ?></th></tr>";
+        var out="<table class='catlist'><tr><th style='width:10%;'></th><th style='width:5%;'><?php echo _('Order'); ?></th><th style='width:35%;'><?php echo _('Process'); ?></th><th style='width:40%;'><?php echo _('Arg'); ?></th><th><?php echo _('Actions'); ?></th></tr>";
 
         for (z in processlist)
         {
           i++;
-          out += '<tr class="d'+(i & 1)+'">';
-          out += '<td><form action="../process/delete" method="GET" class="buttonlistctrl">';
-          out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
-          out += '<input type="hidden" name="processid" value="'+i+'" />';
-          out += '<input type="image" src="<?php echo get_theme_path(); ?>/redx.png" alt="delete" name="submit" class="buttonlistctrl" title="Delete" /></form>';
+          out += '<tr class="d'+(i & 1)+'">';                             
+          out += '<td>';                   
+          
           if (i > 1) {
-            out += '<form action="../process/move" method="GET" class="buttonlistctrl">';
-            out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
-            out += '<input type="hidden" name="processid" value="'+i+'" />';
-            out += '<input type="hidden" name="moveby" value="-1" />';
-            out += '<input type="image" src="<?php echo get_theme_path(); ?>/uparrow.png" alt="move up" name="submit" class="buttonlistctrl" title="Move Up" /></form>';
+            out += '<a href="#" title="<?php echo _('Move up'); ?>" onclick="move_process(<?php echo $inputid; ?>,'+i+',-1)" ><i class="icon-arrow-up"></i></a>';           
           } 
           else { 
-            out += '<img src="" alt="spacer" class="buttonlistctrl" /></form>';
+            out += '<img src="" alt="spacer" class="buttonlistctrl" />';
           }
           if (i < processlist.length) {
-            out += '<form action="../process/move" method="GET" class="buttonlistctrl">';
-            out += '<input type="hidden" name="inputid" value="<?php echo $inputid; ?>" />';
-            out += '<input type="hidden" name="processid" value="'+i+'" />';
-            out += '<input type="hidden" name="moveby" value="1" />';
-            out += '<input type="image" src="<?php echo get_theme_path(); ?>/downarrow.png" alt="move down" name="submit" class="buttonlistctrl" title="Move Down" /></form>';
+            out += '<a href="#" title="<?php echo _('Move up'); ?>" onclick="move_process(<?php echo $inputid; ?>,'+i+',1)" ><i class="icon-arrow-down"></i></a>';            
           }
           else { 
-            out += '<img src="" alt="spacer" class="buttonlistctrl" /></form>';
+            out += '<img src="" alt="spacer" class="buttonlistctrl" />';
           }
           out += "</td><td>"+i+"</td><td>"+processlist[z][0]+"</td><td>"+processlist[z][1]+"</td>";
+          out += "<td>";
+          out += '<a href="#" title="<?php echo _('Delete'); ?>" onclick="delete_process(<?php echo $inputid; ?>,'+i+')" ><i class="icon-trash"></i></a>';
+          out += "</td>";
         }
         
         if (processlist.length==0) {

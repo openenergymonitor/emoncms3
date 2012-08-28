@@ -77,6 +77,19 @@ global $path;
         <a href="<?php echo $testjson; ?>" class="btn btn-info"><?php echo _('try me'); ?></a>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><b><?php echo _('Using Node addressing'); ?></b><br></p>
+        <?php
+          $testjson = $GLOBALS['path']."api/post?apikey=".$user['apikey_write']."&node=nodeid0&json={power:252.4,temperature:15.4}"
+        ?>      
+        <?php echo $testjson; ?>
+        <p><span class="label label-warning"><?php echo _('Change node_id from URL with the node identification'); ?></span></p>
+      </td>
+      <td>
+        <a href="<?php echo $testjson; ?>" class="btn btn-info"><?php echo _('try me'); ?></a>
+      </td>
+    </tr>
   </table>
 
   <br><h2><?php echo _('Visualisation API'); ?></h2>
