@@ -288,7 +288,7 @@ function power_to_kwhd($feedid, $time_now, $value)
     $new_kwh = $last_kwh + $kwh_inc;
   }
 
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
   update_feed_data($feedid, $time_now, $feedtime, $new_kwh);
 
   return $value;
@@ -305,7 +305,7 @@ function kwhinc_to_kwhd($feedid, $time_now, $value)
   $kwh_inc = $value / 1000.0;
   $new_kwh = $last_kwh + $kwh_inc;
 
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
   update_feed_data($feedid, $time_now, $feedtime, $new_kwh);
 
   return $value;
@@ -329,7 +329,7 @@ function input_ontime($feedid, $time_now, $value)
     $ontime = $last_ontime + $time_elapsed;
   }
 
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
   update_feed_data($feedid, $time_now, $feedtime, $ontime);
 
   return $value;
@@ -340,7 +340,7 @@ function input_ontime($feedid, $time_now, $value)
 //---------------------------------------------------------------------------------
 function kwh_to_kwhd($feedid, $time_now, $value)
 {
-  $time = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $time = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
 
   // First we check if there is an entry for the feed in the kwhdproc table
   $result = db_query("SELECT * FROM kwhdproc WHERE feedid = '$feedid'");
@@ -469,7 +469,7 @@ function histogram($feedid, $time_now, $value)
   }
   $new_value = round($value / $pot, 0, PHP_ROUND_HALF_UP) * $pot;
 
-  $time = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $time = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
 
   // Get the last time
   $result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
@@ -516,7 +516,7 @@ function histogram($feedid, $time_now, $value)
 function average($feedid, $time_now, $value)
 {
   $feedname = "feed_" . trim($feedid) . "";
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
 
   $result = db_query("SELECT * FROM $feedname WHERE time = '$feedtime'");
   $row = db_fetch_array($result);
@@ -681,7 +681,7 @@ function average($feedid, $time_now, $value)
       $new_kwh = $last_kwh + $kwh_inc;
     }
 
-    $feedtime = mktime(0, 0, 0, date("m") , date("d") , date("Y"));
+    $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
     update_feed_data($feedid,$time_now,$feedtime,$new_kwh);
 
     return $value;
