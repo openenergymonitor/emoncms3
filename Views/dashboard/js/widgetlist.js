@@ -1,5 +1,12 @@
   var widgets = {
 
+    "feedvalue": 
+    {
+      "offsetx":-40,"offsety":-30,"width":80,"height":60,
+      "menu":"Widgets",
+      "options":["feedname","units"]
+    },
+
     "dial": 
     {
       "offsetx":-80,"offsety":-80,"width":160,"height":160,
