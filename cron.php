@@ -8,12 +8,20 @@ if ($_GET['key'] == "xTC7005d")// IMPORTANT SET THIS TO A UNIQUE PASSWORD OF YOU
   ini_set('display_errors', 'on');
   error_reporting(E_ALL ^ E_NOTICE);
 
+  // Process user settings
+  require "Includes/process_settings.php";
+
   require "Models/notify_model.php";
   require "Models/feed_model.php";
   require "Models/mail_model.php";
 
   require "Includes/db.php";
-  $e = db_connect();
+
+  switch(db_connect()) {
+    case 0: break;
+    case 1: break;  
+    case 3: show_dbsettingserror_message(); die ;
+  }
 
   $users = get_notify_users();
 
