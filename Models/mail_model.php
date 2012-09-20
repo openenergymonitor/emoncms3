@@ -3,6 +3,18 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
+function send_basic_mail($to, $subject, $body)
+{
+  echo "Sending mail".$to.$subject;
+  include "Includes/mail_settings.php";
+
+  $headers = 'From: $mail_from' . "\r\n" .
+  'Reply-To: nospam@zzzzz.com' . "\r\n" .
+  'X-Mailer: PHP/' . phpversion();
+
+  mail($to, $subject, $body, $headers);
+}
+
 function send_mail($to, $subject, $body)
 {
   require_once "Mail.php";
