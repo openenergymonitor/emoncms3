@@ -32,7 +32,6 @@ if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) {
   <ul class="nav">
     <li><a style="padding:5px;" href="<?php echo $GLOBALS['path'] . $viewl; ?>"><img id="emoncms-logo" src="<?php echo $logo; ?>" /></a></li>
     <?php if (isset($_SESSION['editmode']) && ($_SESSION['editmode'] == TRUE)) { ?>
-    <li><a href='<?php echo $GLOBALS['path']; ?>nodes/list'><?php echo _('Nodes'); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>input/list'><?php echo _('Inputs'); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>feed/list'><?php echo _('Feeds'); ?></a></li>
     <li><a href='<?php echo $GLOBALS['path']; ?>dashboard/list'><?php echo _('Dashboards'); ?></a></li>

@@ -35,8 +35,10 @@ global $path;
   var path =  "<?php echo $path; ?>";
   var inputs = <?php echo json_encode($inputs); ?>;
 
+  var nodevis = {};
+
   update_list();
-  setInterval(update_list,2000);
+  setInterval(update_list,5000);
 
   function update_list()
   {
@@ -47,61 +49,80 @@ global $path;
       success: function(data) 
       { 
         inputs = data; 
-        
-        // Search for node existence
-        var k = 0;     
-        var thnode = false;   
-            
-        while ((k<inputs.length) && (inputs[k]['nodeid']==0)) k++;                       
-            
-        if (k<inputs.length) thnode=true;
-        //       
-          
-        // Table header
-        var i = 0;
-        var out = "<table class='catlist'><tr>";
-          
-        // Add node column if some input has node
-        if (thnode) 
-          out += "<th><?php echo _('Node'); ?></th>";
-          
-        out += "<th><?php echo _('Name'); ?></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
-        //
 
+        var nodes = [];
         for (z in inputs)
         {
-          i++;
-          out += "<tr class='d"+(i & 1)+"' >";
-
-          var nodeid = "-"; if (inputs[z]['nodeid']!=0) nodeid = inputs[z]['nodeid'];
-
-          if (thnode) 
-            out += "<td>"+nodeid+"</td>";
-          
-          out += "<td><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+inputs[z][0]+"'><input type='submit' value='"+inputs[z][1]+"' class='button05' style='width:150px'/ ></form></td>";          
-                
-          var now = (new Date()).getTime();
-          var update = (new Date(inputs[z][2])).getTime();
-          var lastupdate = (now-update)/1000;
-
-          var secs = (now-update)/1000;
-          var mins = secs/60;
-          var hour = secs/3600
-
-          var updated = secs.toFixed(0)+"s ago";
-          if (secs>180) updated = mins.toFixed(0)+" mins ago";
-          if (secs>(3600*2)) updated = hour.toFixed(0)+" hours ago";
-          if (hour>24) updated = "inactive";
-
-          var color = "rgb(255,125,20)";
-          if (secs<60) color = "rgb(240,180,20)";
-          if (secs<25) color = "rgb(50,200,50)";
-          out += "<td style='color:"+color+";'>"+updated+"</td><td>"+inputs[z][3]+"</td></tr>";
+          var nodeid = 0; if (inputs[z]['nodeid']!=0) nodeid = inputs[z]['nodeid'];
+          if (!nodes[nodeid]) nodes[nodeid] = [];
+          nodes[nodeid].push(inputs[z]);
+          if (nodevis[nodeid]==undefined) {nodevis[nodeid] = false;} 
         }
 
-        out += "</table>";
+        console.log(nodevis);
+ 
+        var out = "";
+
+        for (z in nodes)
+        {
+          out += "<div style='background-color:#dedede; padding: 2px 2px 2px 2px; margin-bottom:10px;'><div style='padding:10px'>";
+          out += "<i id='iconp"+z+"' node='"+z+"' class='icon-plus' "; if (nodevis[z]==true) out += "style='display:none;'"; out+="></i>";
+          out += "<i id='iconn"+z+"' node='"+z+"' class='icon-minus' "; if (nodevis[z]==false) out += "style='display:none;'"; out+="></i>";
+          out += "<b>Node "+z+"</b></div>";
+
+          out += "<table ";
+          if (nodevis[z]==false) out += "style='display:none;'";
+          out += " class='catlist' id='node"+z+"'><tr>";
+          out += "<th><span ><?php echo _('Name'); ?></span></th><th><?php echo _('Updated'); ?></th><th><?php echo _('Value'); ?></th></tr>";
+
+          for (i in nodes[z])
+          {
+            out += "<tr class='d"+(i & 1)+"' >";
+            out += "<td ><form action='../process/list.html' method='get' style='margin:0px;'><input type='hidden' name='inputid' value='"+nodes[z][i][0]+"'><input type='submit' value='"+nodes[z][i][1]+"' class='button05' style='width:150px'/ ></form></td>";   
+
+            var now = (new Date()).getTime();
+            var update = (new Date(nodes[z][i][2])).getTime();
+            var lastupdate = (now-update)/1000;
+
+            var secs = (now-update)/1000;
+            var mins = secs/60;
+            var hour = secs/3600
+
+            var updated = secs.toFixed(0)+"s ago";
+            if (secs>180) updated = mins.toFixed(0)+" mins ago";
+            if (secs>(3600*2)) updated = hour.toFixed(0)+" hours ago";
+            if (hour>24) updated = "inactive";
+
+            var color = "rgb(255,125,20)";
+            if (secs<60) color = "rgb(240,180,20)";
+            if (secs<25) color = "rgb(50,200,50)";
+            out += "<td style='color:"+color+";'>"+updated+"</td><td>"+nodes[z][i][3]+"</td></tr>";
+   
+          }
+
+          out += "</table></div>";
+        }
+
         out += "<br><a href='../process/autoconfigure'>Autoconfigure inputs</a>";
         $("#inputlist").html(out);
+
+        $(".icon-plus").click(function(){
+          var nid = $(this).attr("node");
+
+          $("#node"+nid).show();
+          $(this).hide();
+          $("#iconn"+nid).show();
+          nodevis[nid]=true;
+        });
+
+        $(".icon-minus").click(function(){
+          var nid = $(this).attr("node");
+          
+          $("#node"+nid).hide();
+          $(this).hide();
+          $("#iconp"+nid).show();
+          nodevis[nid]=false;
+        });
       }
     });
   }
