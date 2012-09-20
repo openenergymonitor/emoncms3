@@ -60,7 +60,7 @@ $controller = "";
 $action = "";
 $subaction = "";
 if (isset($_GET['q'])) {
-  $q = preg_replace('/[^.\/a-z0-9]/', '', $_GET['q']);
+  $q = preg_replace('/[^.\/A-Za-z0-9]/', '', $_GET['q']);
   // filter out all except a-z / .
   $q = db_real_escape_string($q);
   // second layer
