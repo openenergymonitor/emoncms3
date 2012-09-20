@@ -80,7 +80,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["feedid"],
+      "options":["feedid","fill","units"],
       "html":""
     },
 
@@ -152,7 +152,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["clear"],
+      "options":["clear","showoptions"],
       "html":""
     },
 
