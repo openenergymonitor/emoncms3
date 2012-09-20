@@ -8,31 +8,21 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
   */
-  
+
   // no direct access
   defined('EMONCMS_EXEC') or die('Restricted access');
 
-/*
- * Database connection settings
- */
-  $username = "";
-  $password = "";
-  $server   = "";
-  $database = "";
+  class ProcessArg {
+    const VALUE = 0;
+    const INPUTID = 1;
+    const FEEDID = 2;
+  }
 
-/*
- * Error processing
- */
-  $display_errors = true;
- 
-/*
- * Use ckeditor as dashboard editor too
- * CKEditor must be installed separately (see Includes/INSTALL CKEDITOR HERE.TXT)
- */
-  $useckeditor = false;
- 
-/*
- * Public registration
- */
- 	$allowusersregister = true;
+  class DataType {
+    const UNDEFINED = 0;
+    const REALTIME = 1;
+    const DAILY = 2;
+    const HISTOGRAM = 3;
+  }
+
 ?>

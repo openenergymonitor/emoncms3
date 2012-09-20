@@ -14,134 +14,132 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 
 function get_process_list()
 {
-
   $list = array();
 
+  // Process description
   // Arg type
-  // 0 - value
-  // 1 - input id
-  // 2 - feed id
-
-  //		      Process description	Arg type	Function Name		// No. of datafields if creating feed
+  // Function Name
+  // No. of datafields if creating feed
   // Data type
+
   $list[1] = array(
     _("Log to feed"),
-    2,
+    ProcessArg::FEEDID,
     "log_to_feed",
     1,
-    1
+    DataType::REALTIME
   );
   $list[2] = array(
     "x",
-    0,
+    ProcessArg::VALUE,
     "scale",
     0,
-    0
+    DataType::UNDEFINED
   );
   $list[3] = array(
     "+",
-    0,
+    ProcessArg::VALUE,
     "offset",
     0,
-    0
+    DataType::UNDEFINED
   );
   $list[4] = array(
     _("Power to kWh"),
-    2,
+    ProcessArg::FEEDID,
     "power_to_kwh",
     1,
-    1
+    DataType::REALTIME
   );
   $list[5] = array(
     _("Power to kWh/d"),
-    2,
+    ProcessArg::FEEDID,
     "power_to_kwhd",
     1,
-    2
+    DataType::DAILY
   );
   $list[6] = array(
     _("x input"),
-    1,
+    ProcessArg::INPUTID,
     "times_input",
     0,
-    0
+    DataType::UNDEFINED
   );
   $list[7] = array(
     _("input on-time"),
-    2,
+    ProcessArg::FEEDID,
     "input_ontime",
     1,
-    2
+    DataType::DAILY
   );
   $list[8] = array(
     _("kWhinc to kWh/d"),
-    2,
+    ProcessArg::FEEDID,
     "kwhinc_to_kwhd",
     1,
-    2
+    DataType::DAILY
   );
   $list[9] = array(
     _("kWh to kWh/d"),
-    2,
+    ProcessArg::FEEDID,
     "kwh_to_kwhd",
     1,
-    2
+    DataType::DAILY
   );
   $list[10] = array(
     _("update feed @time"),
-    2,
+    ProcessArg::FEEDID,
     "update_feed_data",
     1,
-    0
+    DataType::UNDEFINED
   );
   $list[11] = array(
     _("+ input"),
-    1,
+    ProcessArg::INPUTID,
     "add_input",
     0,
-    0
+    DataType::UNDEFINED
   );
   $list[12] = array(
     _("/ input"),
-    0,
+    ProcessArg::VALUE,
     "divide",
     0,
-    0
+    DataType::UNDEFINED
   );
   $list[13] = array(
     _("phaseshift"),
-    0,
+    ProcessArg::VALUE,
     "phaseshift",
     0,
-    0
+    DataType::UNDEFINED
   );
   $list[14] = array(
     _("accumulator"),
-    2,
+    ProcessArg::FEEDID,
     "accumulator",
     1,
-    1
+    DataType::REALTIME
   );
   $list[15] = array(
     _("rate of change"),
-    2,
+    ProcessArg::FEEDID,
     "ratechange",
     1,
-    1
+    DataType::REALTIME
   );
   $list[16] = array(
     _("histogram"),
-    2,
+    ProcessArg::FEEDID,
     "histogram",
     2,
-    3
+    DataType::HISTOGRAM
   );
   $list[17] = array(
     _("average"),
-    2,
+    ProcessArg::FEEDID,
     "average",
     2,
-    2
+    DataType::DAILY
   );
 
   $list[18] = array(
@@ -175,20 +173,20 @@ function auto_configure_inputs($userid, $id, $name)
   // If a power or solar (power) feed
   if (preg_match("/power/i", $name) || preg_match("/solar/i", $name))
   {
-    $feedid = create_feed($userid, $name, 1, 1);
+    $feedid = create_feed($userid, $name, 1, DataType::REALTIME);
     add_input_process($userid, $id, 1, $feedid);
 
-    $feedid = create_feed($userid, $name . "-kwhd", 1, 2);
+    $feedid = create_feed($userid, $name . "-kwhd", 1, DataType::DAILY);
     add_input_process($userid, $id, 5, $feedid);
 
-    $feedid = create_feed($userid, $name . "-histogram", 2, 3);
+    $feedid = create_feed($userid, $name . "-histogram", 2, DataType::HISTOGRAM);
     add_input_process($userid, $id, 16, $feedid);
   }
 
   if (preg_match("/temperature/i", $name) || preg_match("/temp/i", $name))
   {
     // 1) log to feed
-    $feedid = create_feed($userid, $name, 1, 1);
+    $feedid = create_feed($userid, $name, 1, DataType::REALTIME);
     add_input_process($userid, $id, 1, $feedid);
   }
 }
@@ -290,7 +288,7 @@ function power_to_kwhd($feedid, $time_now, $value)
     $new_kwh = $last_kwh + $kwh_inc;
   }
 
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
   update_feed_data($feedid, $time_now, $feedtime, $new_kwh);
 
   return $value;
@@ -307,7 +305,7 @@ function kwhinc_to_kwhd($feedid, $time_now, $value)
   $kwh_inc = $value / 1000.0;
   $new_kwh = $last_kwh + $kwh_inc;
 
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
   update_feed_data($feedid, $time_now, $feedtime, $new_kwh);
 
   return $value;
@@ -331,7 +329,7 @@ function input_ontime($feedid, $time_now, $value)
     $ontime = $last_ontime + $time_elapsed;
   }
 
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
   update_feed_data($feedid, $time_now, $feedtime, $ontime);
 
   return $value;
@@ -342,7 +340,7 @@ function input_ontime($feedid, $time_now, $value)
 //---------------------------------------------------------------------------------
 function kwh_to_kwhd($feedid, $time_now, $value)
 {
-  $time = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $time = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
 
   // First we check if there is an entry for the feed in the kwhdproc table
   $result = db_query("SELECT * FROM kwhdproc WHERE feedid = '$feedid'");
@@ -471,7 +469,7 @@ function histogram($feedid, $time_now, $value)
   }
   $new_value = round($value / $pot, 0, PHP_ROUND_HALF_UP) * $pot;
 
-  $time = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $time = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
 
   // Get the last time
   $result = db_query("SELECT * FROM feeds WHERE id = '$feedid'");
@@ -518,7 +516,7 @@ function histogram($feedid, $time_now, $value)
 function average($feedid, $time_now, $value)
 {
   $feedname = "feed_" . trim($feedid) . "";
-  $feedtime = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+  $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
 
   $result = db_query("SELECT * FROM $feedname WHERE time = '$feedtime'");
   $row = db_fetch_array($result);
@@ -683,7 +681,7 @@ function average($feedid, $time_now, $value)
       $new_kwh = $last_kwh + $kwh_inc;
     }
 
-    $feedtime = mktime(0, 0, 0, date("m") , date("d") , date("Y"));
+    $feedtime = mktime(0, 0, 0, date("m",$time_now), date("d",$time_now), date("Y",$time_now));
     update_feed_data($feedid,$time_now,$feedtime,$new_kwh);
 
     return $value;

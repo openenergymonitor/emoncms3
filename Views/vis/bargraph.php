@@ -25,7 +25,7 @@
 <script language="javascript" type="text/javascript" src="<?php echo $path; ?>Views/vis/common/proc.js"></script>
  
 <?php if (!$embed) { ?>
-<h2>Raw data: <?php echo $feedname; ?></h2>
+<h2>Bar graph: <?php echo $feedname; ?></h2>
 <?php } ?>
 
     <div id="graph_bound" style="height:400px; width:100%; position:relative; ">
@@ -59,7 +59,7 @@
   $('#graph').height($('#graph_bound').height());
   if (embed) $('#graph').height($(window).height());
 
-  var timeWindow = (3600000*24.0*7);				//Initial time window
+  var timeWindow = (3600000*24.0*30);				//Initial time window
   var start = ((new Date()).getTime())-timeWindow;		//Get start time
   var end = (new Date()).getTime();				//Get end time
 

@@ -33,11 +33,26 @@ function delete_dashboard($userid, $id)
   return $result;
 }
 
+function clone_dashboard($userid, $id)
+{
+	// Get content, name and description from origin dashboard
+  $result = db_query("SELECT content,name,description FROM dashboard WHERE userid = '$userid' AND id='$id'");
+  $row = db_fetch_array($result);
+	
+	// Name for cloned dashboard
+	$name = $row['name']._(' clone');
+
+  db_query("INSERT INTO dashboard (`userid`,`content`,`name`,`description`) VALUES ('$userid','{$row['content']}','$name','{$row['description']}')");
+	
+	return db_insert_id();
+}
+
 function get_dashboard_list($userid, $public, $published)
 {
+  $qB = ""; $qC = "";
   if ($public) $qB = " and public=1";
   if ($published) $qC = " and published=1";
-  $result = db_query("SELECT id, name, alias, description, main, published, public FROM dashboard WHERE userid='$userid'".$qB.$qC);
+  $result = db_query("SELECT id, name, alias, description, main, published, public, showdescription FROM dashboard WHERE userid='$userid'".$qB.$qC);
 
   $list = array();
   while ($row = db_fetch_array($result)) $list[] = $row;
@@ -60,6 +75,9 @@ function set_dashboard_content($userid, $content, $id)
   }
 }
 
+/*
+ * Sets dashboard $id of $userid with $name
+ */
 function set_dashboard_name($userid, $id, $name)
 {
   db_query("UPDATE dashboard SET name = '$name' WHERE userid='$userid' AND id='$id'"); 
@@ -176,6 +194,17 @@ function set_dashboard_public($userid, $id, $public)
     db_query("UPDATE dashboard SET public = FALSE WHERE userid='$userid' AND id='$id'");
 }
 
+/*
+ * Set showdescription property
+ */
+function set_dashboard_showdescription($userid, $id, $showdescription)
+{
+  if ($showdescription == '1')  
+    db_query("UPDATE dashboard SET showdescription = TRUE WHERE userid='$userid' AND id='$id'");
+  else
+    db_query("UPDATE dashboard SET showdescription = FALSE WHERE userid='$userid' AND id='$id'");
+}
+
 function build_dashboard_menu($userid,$location)
 {
   global $path, $session;
@@ -183,16 +212,31 @@ function build_dashboard_menu($userid,$location)
   if ($location!="run") { $dashpath = 'dashboard/'.$location; } else { $dashpath = $session['username'];   $public = !$session['write']; $published = 1;}
 
   $dashboards = get_dashboard_list($userid, $public, $published);
+  $topmenu="";
   foreach ($dashboards as $dashboard)
   {
+  	// Check show description
+  	if ($dashboard['showdescription']) 
+  	{		 
+  		$desc = ' title="'.$dashboard['description'].'"';
+  	}
+		else 
+		{
+			$desc = '';
+		} 
+		
+		// Set URL using alias or id
     if ($dashboard['alias'])
     {
-      $topmenu.='<li><a href="'.$path.$dashpath."/".$dashboard['alias'].'">'.$dashboard['name'].'</a></li>';
+    	$aliasurl = "/".$dashboard['alias'];
     }
     else
     {
-      $topmenu.='<li><a href="'.$path.$dashpath.'&id='.$dashboard['id'].'">'.$dashboard['name'].'</a></li>';
+    	$aliasurl = '&id='.$dashboard['id'];    	
     }
+
+		// Build the menu item
+  	$topmenu.='<li><a href="'.$path.$dashpath.$aliasurl.'"'.$desc.'>'.$dashboard['name'].'</a></li>';		
   }
   return $topmenu;
 }

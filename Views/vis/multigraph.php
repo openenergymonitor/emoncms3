@@ -12,6 +12,10 @@
   global $session, $path, $embed;
   $clear = $_GET["clear"];
   $apikey = $_GET["apikey"];
+  $showoptions = $_GET["showoptions"]?$_GET["showoptions"]:0;
+
+  // Show options if not embeded
+  if (!$embed) $showoptions = 1;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -51,10 +55,12 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
+  var showoptions = <?php echo $showoptions; ?>;
+
   var embed = <?php echo $embed; ?>;
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
-  if (embed) $('#graph').height($(window).height());
+  if (embed && showoptions==0) $('#graph').height($(window).height());
 
   var clear = "<?php echo $clear; ?>";
   var path = "<?php echo $path; ?>";
@@ -99,12 +105,12 @@
     }
 
     out += "<tr  class='d"+(i & 1)+"' ><td><label>" + feedlist[i].plot.label + '</label></td>';
-    out += '<td><input type="checkbox" id="' + feedlist[i].id + '"' + checkedA + 'axis="1" ></td>';
     out += '<td><input type="checkbox" id="' + feedlist[i].id + '"' + checkedB + 'axis="2" ></td>';
+    out += '<td><input type="checkbox" id="' + feedlist[i].id + '"' + checkedA + 'axis="1" ></td>';
     out += '<td><input type="checkbox" id="' + feedlist[i].id + '"' + checkedC + 'name="fill" ></td></tr>';
   }
   out += "</table>";
-  $("#choices").html(out);
+  if (showoptions==1) $("#choices").html(out);
 
   $("#choices").find("input[type='checkbox'][name!='fill']").click(function() {
     var id = $(this).attr("id");
@@ -138,7 +144,8 @@
 
   $(window).resize(function(){
     $('#graph').width($('#graph_bound').width());
-    if (embed) $('#graph').height($(window).height());
+    if (embed && showoptions==0) $('#graph').height($(window).height());
+    if (embed && showoptions==1) $('#graph').height(400);
     plot();
   });
 

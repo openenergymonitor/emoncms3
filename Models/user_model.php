@@ -18,6 +18,7 @@ function user_apikey_session_control($apikey_in)
   // Check for apikey login
   //----------------------------------------------------
   $apikey_in = db_real_escape_string($apikey_in);
+
   $userid = get_apikey_read_user($apikey_in);
   if ($userid != 0)
   {
@@ -50,12 +51,14 @@ function get_user($userid)
   if ($result)
   {
     $row = db_fetch_array($result);
+    if (!isset($row['email'])) $row['email']="";
     $user = array(
       'username' => $row['username'],
       'email' => $row['email'],
       'apikey_read' => $row['apikey_read'],
       'apikey_write' => $row['apikey_write'],
-      'lang' => $row['lang']
+      'lang' => $row['lang'],
+      'timeoffset' => $row['timeoffset']
     );
   }
   return $user;
@@ -251,6 +254,18 @@ function get_user_lang($userid)
 	$result = db_query("SELECT lang FROM users WHERE id = '$userid';");
 	$row = db_fetch_array($result);
 	return $row['lang'];
+}
+
+function set_user_timeoffset($userid,$timeoffset)
+{
+  db_query("UPDATE users SET timeoffset = '$timeoffset' WHERE id='$userid'");
+}
+
+function get_user_timeoffset($userid)
+{
+  $result = db_query("SELECT timeoffset FROM users WHERE id = '$userid';");
+  $row = db_fetch_array($result);
+  return $row['timeoffset'];
 }
 
 ?>

@@ -6,11 +6,33 @@
     Emoncms - open source energy visualisation
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
+
+    The intention for this script is to allow a completely manual specification of a multigraph.
+
+    SPECIFICATION
+    You specify the multigraph you'd like to load using the feedlist:
+    feedlist[0] = {id: 1, selected: 1, plot: {data: null, label: "power", lines: { show: true, fill: true } } };
+    feedlist[1] = {id: 4, selected: 1, plot: {data: null, label: "temp", lines: { show: true, fill: false }, yaxis:2} };
+
+    BROWSER URL
+    To view the multigraph, load the script directly in your browser using:
+    http://localhost/emoncms3/Views/vis/multigraph_manual.php?apikey=YOURAPIKEY
+
+    EMBED AS AN IFRAME
+    To embed the multigraph in an iframe use the following code:
+    <iframe style="width:400px; height:300px;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://localhost/emoncms3/Views/vis/multigraph_manual.php?embed=1"></iframe>
+
+    DASHBOARDS
+    You can include this in a dashboard by entering it in the html options box for the paragraph widget type.
+
+    For further discussion on manual multigraph see this forum discussion:
+    http://openenergymonitor.org/emon/node/968
 -->
 
 <?php
+  $path = "../../";
+  $embed = intval($_GET["embed"]);
   $apikey = $_GET["apikey"];
-  global $path, $embed;
 ?>
 
 <!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
@@ -44,8 +66,10 @@
 
 <script id="source" language="javascript" type="text/javascript">
 
+  var embed = <?php echo $embed; ?>;
   $('#graph').width($('#graph_bound').width());
   $('#graph').height($('#graph_bound').height());
+  if (embed) $('#graph').height($(window).height());
 
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
@@ -58,9 +82,17 @@
 
   var feedlist = [];
   feedlist[0] = {id: 1, selected: 1, plot: {data: null, label: "power", lines: { show: true, fill: true } } };
-  feedlist[1] = {id: 4, selected: 1, plot: {data: null, label: "voltage", lines: { show: true, fill: false }, yaxis:2} };
+  feedlist[1] = {id: 4, selected: 1, plot: {data: null, label: "temp", lines: { show: true, fill: false }, yaxis:2} };
 
+
+  var plotdata = [];
   vis_feed_data();
+
+  $(window).resize(function(){
+    $('#graph').width($('#graph_bound').width());
+    if (embed) $('#graph').height($(window).height());
+    plot();
+  });
 
   /*
 
@@ -75,23 +107,28 @@
   */
   function vis_feed_data()
   {
-    var plotdata = [];
+    plotdata = [];
     for(var i in feedlist) {
       if (timeWindowChanged) feedlist[i].plot.data = null;
       if (feedlist[i].selected) {        
-        if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,2);
+        if (!feedlist[i].plot.data) feedlist[i].plot.data = get_feed_data(feedlist[i].id,start,end,1000);
         if ( feedlist[i].plot.data) plotdata.push(feedlist[i].plot);
       }
     }
 
-    var plot = $.plot($("#graph"), plotdata, {
+    plot();
+
+    timeWindowChanged=0;
+  }
+
+  function plot()
+  {
+    $.plot($("#graph"), plotdata, {
       grid: { show: true, hoverable: true, clickable: true },
-      xaxis: { mode: "time", min: start, max: end },
+      xaxis: { mode: "time", localTimezone: true, min: start, max: end },
       selection: { mode: "xy" },
       legend: { position: "nw"}
     });
-
-    timeWindowChanged=0;
   }
 
   //--------------------------------------------------------------------------------------
