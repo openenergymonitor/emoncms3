@@ -31,7 +31,7 @@
 
     <div id="graph_bound" style="width:100%; height:400px; position:relative; ">
       <div id="graph"></div>
-      <div style="position:absolute; top:20px; right:20px;">
+      <div style="position:absolute; top:20px; left:40px;">
 
         <input class="time" type="button" value="D" time="1"/>
         <input class="time" type="button" value="W" time="7"/>
@@ -45,7 +45,7 @@
 
       </div>
 
-        <h3 style="position:absolute; top:20px; left:50px;"><span id="stats"></span></h3>
+        <h3 style="position:absolute; top:20px; left:310px;"><span id="stats"></span></h3>
     </div>
 
 <script id="source" language="javascript" type="text/javascript">
