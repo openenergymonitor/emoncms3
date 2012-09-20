@@ -81,11 +81,27 @@
   //-----------------------------------------------------------------------------------------------------------
   function get_user_feed_ids($userid)
   {
-    $result = db_query("SELECT * FROM feed_relation WHERE userid = '$userid'");
+    $result = db_query("SELECT feedid FROM feed_relation WHERE userid = '$userid'");
     $feeds = array();
     if ($result) {
       while ($row = db_fetch_array($result)) {
-        $feeds[]['id'] = $row['feedid'];
+        $feeds[] = $row['feedid'];
+      }
+    }
+    return $feeds;
+  }
+ 
+  //-----------------------------------------------------------------------------------------------------------
+  // Get a list of users feed ids and names
+  //-----------------------------------------------------------------------------------------------------------
+  function get_user_feed_names($userid)
+  {
+    $result = db_query("SELECT name, id FROM feeds WHERE id IN (
+SELECT feedid FROM feed_relation WHERE userid = $userid) ORDER BY name ASC");
+    $feeds = array();
+    if ($result) {
+      while ($row = db_fetch_array($result)) {
+        $feeds[] = array($row['id'],$row['name']);
       }
     }
     return $feeds;

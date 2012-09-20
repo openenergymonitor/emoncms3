@@ -1,5 +1,12 @@
   var widgets = {
 
+    "feedvalue": 
+    {
+      "offsetx":-40,"offsety":-30,"width":80,"height":60,
+      "menu":"Widgets",
+      "options":["feedname","units"]
+    },
+
     "dial": 
     {
       "offsetx":-80,"offsety":-80,"width":160,"height":160,
@@ -73,7 +80,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["feedid"],
+      "options":["feedid","fill","units"],
       "html":""
     },
 
@@ -89,7 +96,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["power","kwhd"],
+      "options":["power","kwhd","currency","pricekwh"],
       "html":""
     },
 
@@ -145,7 +152,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["clear"],
+      "options":["clear","showoptions"],
       "html":""
     },
 

@@ -266,6 +266,18 @@ input.nobox {
   cursor: pointer
 }
 
+.buttonlistctrl {
+  width : 20px;
+  height : 20px;
+  border: none;
+  color: transparent;
+  font-size: 0;
+  float: left;
+  padding: 0px;
+  margin: 3px;
+  display: inline;
+}
+
 table.catlist {
   width: 100%;
   border: 1px solid #DFDFDF;
@@ -453,6 +465,14 @@ table.catlist th:last-of-type {
   font-size:24px;
   padding-top:20px;
   text-align:center;
+}
+
+.feedvalue {
+  font-weight:bold;
+  font-size:24px;
+  padding-top:20px;
+  text-align:center;
+  color:#4444CC;
 }
 
 .heading {

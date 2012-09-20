@@ -35,7 +35,7 @@ function api_controller()
     foreach ($values as $value)
     {
       $i++; 
-      if ($node) $key = "node".$node."_".$i; else $key = "csv".$i;
+      if ($node) $key = $i; else $key = "csv".$i;
       $datapairs[] = $key.":".$value;
     }
   }	
@@ -54,7 +54,7 @@ function api_controller()
     {
       $time = intval($_GET["time"]);	// - or use sent timestamp if present 
     }
-    $inputs = register_inputs($session['userid'],$datapairs,$time);          // register inputs
+    $inputs = register_inputs($session['userid'],$node,$datapairs,$time);          // register inputs
     process_inputs($session['userid'],$inputs,$time);                        // process inputs to feeds etc
     $output['message'] = "ok";
   }
@@ -63,9 +63,8 @@ function api_controller()
 }
 
   //-------------------------------------------------------------------------
-  function register_inputs($userid,$datapairs,$time)
+  function register_inputs($userid,$nodeid,$datapairs,$time)
   {
-
   //--------------------------------------------------------------------------------------------------------------
   // 2) Register incoming inputs
   //--------------------------------------------------------------------------------------------------------------
@@ -76,10 +75,12 @@ function api_controller()
     $name = preg_replace('/[^\w\s-.]/','',$datapair[0]); 	// filter out all except for alphanumeric white space and dash
     $value = floatval($datapair[1]);		
 
+    if ($nodeid) $name = "node".$nodeid."_".$name;
+
     $id = get_input_id($userid,$name);				// If input does not exist this return's a zero
 
     if ($id==0) {
-      $id = create_input_timevalue($userid,$name,$time,$value);	// Create input if it does not exist
+      $id = create_input_timevalue($userid,$name,$nodeid,$time,$value);	// Create input if it does not exist
 
       // auto_configure_inputs($userid,$id,$name);
 

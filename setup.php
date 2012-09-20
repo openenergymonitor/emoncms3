@@ -37,7 +37,7 @@ switch(db_connect()) {
   case 0: break;
   case 1: break;  
   case 3: show_dbsettingserror_message(); die ;
-  case 4: $runnable==true; break;
+  case 4: $runnable = true; break;
 }
 
 if (!$runnable)
@@ -58,13 +58,15 @@ $schema['users'] = array(
   'apikey_read' => array('type' => 'varchar(64)'),
   'lastlogin' => array('type' => 'datetime'),
   'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
-  'lang' => array('type' => 'varchar(5)')
+  'lang' => array('type' => 'varchar(5)'),
+  'timeoffset' => array('type' => 'int(11)')
 );
 
 $schema['input'] = array(
   'id' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'userid' => array('type' => 'text'),
   'name' => array('type' => 'text'),
+  'nodeid' => array('type' => 'int(11)'),
   'processList' => array('type' => 'text'),
   'time' => array('type' => 'datetime'),
   'value' => array('type' => 'float')
@@ -99,7 +101,8 @@ $schema['dashboard'] = array(
   'description' => array('type' => "varchar(255)", 'default'=>'no description'),
   'main' => array('type' => 'tinyint(1)', 'default'=>false),
   'public' => array('type' => 'tinyint(1)', 'default'=>false),
-  'published' => array('type' => 'tinyint(1)', 'default'=>false)
+  'published' => array('type' => 'tinyint(1)', 'default'=>false),
+  'showdescription' => array('type' => 'tinyint(1)', 'default'=>false)  
 );
 
 $schema['notify'] = array(
@@ -133,6 +136,12 @@ $schema['statistics'] = array(
 $schema['multigraph'] = array(
   'userid' => array('type' => 'int(11)'),
   'feedlist' => array('type' => 'text')
+);
+
+$schema['nodes'] = array(
+  'nodeid' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
+  'name' => array('type' => "varchar(30)", 'default'=>'no name'),
+  'description' => array('type' => "varchar(255)", 'default'=>'no description')
 );
 
 //$schema['e3_globals'] = array(

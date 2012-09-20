@@ -135,6 +135,18 @@ function update(apikey_read)
     else
       draw_led(widgetcanvas[id], val);
   });
+
+  $('.feedvalue').each(function(index)
+  {
+    var feed = $(this).attr("feedname");
+    var units = $(this).attr("units");
+    var val = assoc[feed];
+
+    if (feed==undefined) val = 0;
+    if (units==undefined) units = '';
+
+    $(this).html(val+units);
+  });
 }
 
 function fast_update(apikey_read)

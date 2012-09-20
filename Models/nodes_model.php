@@ -8,31 +8,24 @@
     Part of the OpenEnergyMonitor project:
     http://openenergymonitor.org
   */
-  
+
   // no direct access
   defined('EMONCMS_EXEC') or die('Restricted access');
 
-/*
- * Database connection settings
- */
-  $username = "";
-  $password = "";
-  $server   = "";
-  $database = "";
+function get_user_nodes($userid)
+{
+  $result = db_query("SELECT DISTINCT nodeid FROM input WHERE userid = '$userid' AND nodeid <> 0");
+  $nodes = array();
+  if ($result)
+  {
+    while ($row = db_fetch_array($result))
+    {
+      $nodes[] = array(
+        'nodeid'=>$row['nodeid']
+      );
+    }
+  }
+  return $nodes;
+}
 
-/*
- * Error processing
- */
-  $display_errors = true;
- 
-/*
- * Use ckeditor as dashboard editor too
- * CKEditor must be installed separately (see Includes/INSTALL CKEDITOR HERE.TXT)
- */
-  $useckeditor = false;
- 
-/*
- * Public registration
- */
- 	$allowusersregister = true;
 ?>
