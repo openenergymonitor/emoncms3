@@ -144,6 +144,14 @@ $schema['nodes'] = array(
   'description' => array('type' => "varchar(255)", 'default'=>'no description')
 );
 
+$schema['importqueue'] = array(
+  'queid' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
+  'baseurl' => array('type' => 'text'),
+  'apikey' => array('type' => 'text'),
+  'feedid' => array('type' => 'int(11)'),
+  'localfeedid' => array('type' => 'int(11)')
+);
+
 //$schema['e3_globals'] = array(
 //	'dbversion' => array('type' => 'int unsigned not null default 2012062900')
 //);
