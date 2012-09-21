@@ -431,8 +431,4 @@ SELECT feedid FROM feed_relation WHERE userid = $userid) ORDER BY name ASC");
     }
     return $feeds;
   }
-
-
-
-
 ?>
