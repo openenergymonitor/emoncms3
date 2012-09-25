@@ -11,9 +11,9 @@ Remote apikey: <input type="edit" name="remotekey" value="<?php echo $remotekey;
 
 <?php if ($feeds) { ?>
 <table class='catlist'>
-<tr><th>Feed name</th><th>Status</th><th>Sync</th></tr>
+<tr><th>Feed name</th><th>Remote ahead by:</th><th>Queue Position</th><th>Sync</th></tr>
 <?php foreach ($feeds as $items) {  $i++;  ?>
-<tr class="<?php echo 'd' . ($i & 1); ?> "><td><?php echo $items[1]; ?></td><td><?php echo $items['inque']; ?></td><td><a href="<?php echo $path; ?>sync/feed?url=<?php echo urlencode($url); ?>&remotekey=<?php echo $remotekey; ?>&id=<?php echo $items[0]; ?>&name=<?php echo $items[1]; ?>">></a></td></tr>
+<tr class="<?php echo 'd' . ($i & 1); ?> "><td><?php echo $items[1]; ?></td><td><?php echo $items['synctime']; ?></td><td><?php echo $items['inque']; ?></td><td><a href="<?php echo $path; ?>sync/feed?url=<?php echo urlencode($url); ?>&remotekey=<?php echo $remotekey; ?>&id=<?php echo $items[0]; ?>&name=<?php echo $items[1]; ?>">></a></td></tr>
 <?php } ?>
 </table>
 <?php } ?>
