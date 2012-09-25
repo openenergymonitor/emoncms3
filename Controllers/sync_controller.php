@@ -32,15 +32,16 @@
     $output['content'] = "";
     $output['message'] = "";
 
+    $url = urldecode($_GET['url']);
+    $remotekey = db_real_escape_string(preg_replace('/[^.\/A-Za-z0-9]/', '', $_GET['remotekey']));
+
     // Register a feed to be downloaded action
     // sync/feed?url=URL &remotekey=REMOTEKEY &id=FEEDID &name=FEEDNAME
     if ($action=="feed" && $session['write'])
     {
       $id = intval($_GET['id']);
-      $url = urldecode($_GET['url']);
-      $remotekey = $_GET['remotekey'];
+      $name = preg_replace('/[^\w\s-.]/','',$_GET["name"]);
 
-      $name = $_GET['name'];
       $localfeedid = get_feed_id($session['userid'],$name);
 
       if (!$localfeedid) $localfeedid = create_feed($session['userid'],$name,1,0);
@@ -56,10 +57,19 @@
     // SYNC Page display
     if ($session['write'])
     {
-      $url = urldecode($_GET['url']);
-      $remotekey = $_GET['remotekey'];
+      $settingsarray = get_user_settingsarray($session['userid']);
+
+      if (!$url || !$remotekey)
+      {
+        $url = $settingsarray->remoteurl;
+        $remotekey = $settingsarray->remotekey;
+      }
 
       if ($url && $remotekey){
+
+        $settingsarray->remoteurl = $url;
+        $settingsarray->remotekeye = $remotekey;
+        set_user_settingsarray($session['userid'], $settingsarray);
 
       // Request feed list
       $fh = @fopen($url."/feed/list.json?apikey=".$remotekey, 'r' );

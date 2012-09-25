@@ -59,7 +59,8 @@ $schema['users'] = array(
   'lastlogin' => array('type' => 'datetime'),
   'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
   'lang' => array('type' => 'varchar(5)'),
-  'timeoffset' => array('type' => 'int(11)')
+  'timeoffset' => array('type' => 'int(11)'),
+  'settingsarray' => array('type' => 'text')
 );
 
 $schema['input'] = array(

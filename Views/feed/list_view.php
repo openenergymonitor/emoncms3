@@ -26,6 +26,8 @@
   <div id="feedlist"></div>
   <?php if (!$del) { ?><br><a href="?del=1" class="btn btn-danger"><?php echo _('Deleted feeds'); ?></a><?php } ?>
   <?php if ($del && $feeds) { ?><br><a href="permanentlydelete"><?php echo _('Delete feeds permanently'); ?></a> (no confirmation)<?php } ?>
+<?php if (!$del) { ?>
+<a href="<?php echo $path.'sync'; ?>" class="btn btn-info"><?php echo _('Sync feeds'); ?></a><?php } ?>
 
 <script type="text/javascript">
   var path =  "<?php echo $path; ?>";
