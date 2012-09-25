@@ -268,4 +268,17 @@ function get_user_timeoffset($userid)
   return $row['timeoffset'];
 }
 
+function get_user_settingsarray($userid)
+{
+  $result = db_query("SELECT settingsarray FROM users WHERE id = '$userid';");
+  $row = db_fetch_array($result);
+  return json_decode($row['settingsarray']);
+}
+
+function set_user_settingsarray($userid, $settingsarray)
+{
+  $settingsarray = json_encode($settingsarray);
+  db_query("UPDATE users SET settingsarray = '$settingsarray' WHERE id='$userid'");
+}
+
 ?>
