@@ -14,6 +14,11 @@
 
   */
 
+  // IMPORTANT SET THIS TO A UNIQUE PASSWORD OF YOUR CHOICE
+  if ($_GET['key'] != "xTC7005d") die;
+
+  set_time_limit (120);
+
   // Ensure only one instance of the script can run at any one time.
   $fp = fopen("importlock", "w");
   if (! flock($fp, LOCK_EX | LOCK_NB)) { echo "Already running\n"; die; }
