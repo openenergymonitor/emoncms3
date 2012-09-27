@@ -59,7 +59,8 @@ $schema['users'] = array(
   'lastlogin' => array('type' => 'datetime'),
   'admin' => array('type' => 'int(11)', 'Null'=>'NO'),
   'lang' => array('type' => 'varchar(5)'),
-  'timeoffset' => array('type' => 'int(11)')
+  'timeoffset' => array('type' => 'int(11)'),
+  'settingsarray' => array('type' => 'text')
 );
 
 $schema['input'] = array(
@@ -142,6 +143,14 @@ $schema['nodes'] = array(
   'nodeid' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
   'name' => array('type' => "varchar(30)", 'default'=>'no name'),
   'description' => array('type' => "varchar(255)", 'default'=>'no description')
+);
+
+$schema['importqueue'] = array(
+  'queid' => array('type' => 'int(11)', 'Null'=>'NO', 'Key'=>'PRI', 'Extra'=>'auto_increment'),
+  'baseurl' => array('type' => 'text'),
+  'apikey' => array('type' => 'text'),
+  'feedid' => array('type' => 'int(11)'),
+  'localfeedid' => array('type' => 'int(11)')
 );
 
 //$schema['e3_globals'] = array(
