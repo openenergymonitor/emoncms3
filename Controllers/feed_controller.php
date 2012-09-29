@@ -340,5 +340,3 @@
     return $output;
   }
 ?>
-
-
