@@ -76,5 +76,3 @@ function input_controller()
 }
 
 ?>
-
-
