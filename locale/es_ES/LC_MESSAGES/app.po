@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-30 20:59+0100\n"
-"PO-Revision-Date: 2012-09-30 21:01+0100\n"
+"POT-Creation-Date: 2012-09-30 21:31+0100\n"
+"PO-Revision-Date: 2012-09-30 21:31+0100\n"
 "Last-Translator: Ildefonso Martínez Marchena <i.martinezmarchena@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -153,10 +153,8 @@ msgid "No settings.php file found"
 msgstr "No se ha encontrado el fichero settings.php"
 
 #: ../../../Includes/messages.php:57
-msgid "Copy and modify default.settings.php to settings.php"
+msgid "Copy and modify Includes/default.settings.php to Includes/settings.php"
 msgstr ""
-"Usa el fichero default.settings.php como plantilla para crear el fichero "
-"settings.php"
 
 #: ../../../Models/dashboard_model.php:43
 msgid " clone"
