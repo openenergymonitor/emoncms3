@@ -54,7 +54,7 @@ function show_nosettingsfile_message()
 {
   echo '<div class="alert alert-block">';
   echo '<h4 class="alert-heading">'._('No settings.php file found').'</h4>';
-  echo _('Copy and modify default.settings.php to settings.php');
+  echo _('Copy and modify Includes/default.settings.php to Includes/settings.php');
   echo '</div>'; 
 }
 
