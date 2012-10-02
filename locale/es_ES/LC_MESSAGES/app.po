@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emoncms3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-30 21:31+0100\n"
-"PO-Revision-Date: 2012-09-30 21:31+0100\n"
+"POT-Creation-Date: 2012-10-02 16:49+0100\n"
+"PO-Revision-Date: 2012-10-02 16:50+0100\n"
 "Last-Translator: Ildefonso Martínez Marchena <i.martinezmarchena@gmail.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -155,6 +155,7 @@ msgstr "No se ha encontrado el fichero settings.php"
 #: ../../../Includes/messages.php:57
 msgid "Copy and modify Includes/default.settings.php to Includes/settings.php"
 msgstr ""
+"Copia y modifica Includes/default.settings.php en Includes/settings.php"
 
 #: ../../../Models/dashboard_model.php:43
 msgid " clone"
@@ -468,6 +469,7 @@ msgstr "Destinatarios de las notificaciones (To):"
 
 #: ../../../Views/notify_settings_view.php:19
 #: ../../../Views/notify_view.php:29 ../../../Views/user_view.php:45
+#: ../../../Views/dashboard/dashboard_edit_view.php:30
 #: ../../../Views/feed/feed_view.php:69 ../../../Views/feed/feed_view.php:76
 msgid "Save"
 msgstr "Guardar"
@@ -696,6 +698,21 @@ msgstr "Cerrar"
 msgid "Save changes"
 msgstr "Guardar cambios"
 
+#: ../../../Views/dashboard/dashboard_edit_view.php:26
+msgid "Options"
+msgstr "Opciones"
+
+#: ../../../Views/dashboard/dashboard_edit_view.php:27
+#: ../../../Views/dashboard/dashboard_list_view.php:98
+#: ../../../Views/feed/feed_view.php:105
+#: ../../../Views/process/list_view.php:116
+msgid "Delete"
+msgstr "Borrar"
+
+#: ../../../Views/dashboard/dashboard_edit_view.php:73
+msgid "Saved"
+msgstr "Guardar"
+
 #: ../../../Views/dashboard/dashboard_list_view.php:26
 #: ../../../Views/dashboard/dashboard_thumb_view.php:32
 #: ../../../Views/input/node_view.php:26
@@ -747,12 +764,6 @@ msgstr "Hacer panel público"
 #: ../../../Views/dashboard/dashboard_list_view.php:95
 msgid "Draw"
 msgstr "Diseñar"
-
-#: ../../../Views/dashboard/dashboard_list_view.php:98
-#: ../../../Views/feed/feed_view.php:105
-#: ../../../Views/process/list_view.php:116
-msgid "Delete"
-msgstr "Borrar"
 
 #: ../../../Views/dashboard/dashboard_list_view.php:99
 msgid "Clone"
