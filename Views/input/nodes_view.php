@@ -19,15 +19,30 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 <table class='catlist'>
     <tr>
         <th>
-          <?php echo _('Node Identification'); ?>
+          <?php echo _('Node Identification'); ?><?php print_r( $inputs); ?>
         </th>    
     </tr>
     
+    <div style="border-bottom: black 1px solid; border-left: black 1px solid; overflow-x: auto; overflow-y: hidden; margin-bottom: 15px; height: 530px; border-top: black 1px solid; border-right: black 1px solid" class="syntaxtree">
+<div style="width: 1800px">
+
+<div class="tree">
+<ul>
+    <li>
+      <a href="#">Nodes</a>
+      <ul>
   <?php    
-    foreach ($nodes as $node) {
-      echo '<tr><td>'.$node['nodeid'].'</td></tr>';      
-    }
+
+    foreach ($inputs as $input) {
+    ?>  <li><a href="#">NULL</a></li> <?php     
+      }
   ?>
+  </ul>
+    </li>
+  </ul>
+  </div>
+</div>
+</div>
 </table>
 
 <style type="text/css">

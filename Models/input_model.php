@@ -139,6 +139,37 @@ function get_user_inputsbynode($userid)
   return $inputs;
 }
 
+function get_user_inputsbynode_grouped($userid)
+{
+  $result = db_query("SELECT * FROM input WHERE userid = '$userid' ORDER BY nodeid");
+  $inputs = array();
+  
+  if ($result)
+  {
+    $nodeid_temp = -1;
+    while ($row = db_fetch_array($result))
+    {
+        if ($nodeid_temp <> $row['nodeid'])
+        {
+          $inputs[] = array(
+            'nodeid'=>$row['nodeid']
+          );
+          $nodeid_temp = $row['nodeid'];
+        }
+        
+      /*
+      $inputs[] = array(
+        $row['id'],
+        $row['name'],
+        strtotime($row['time']) * 1000,
+        $row['value'], 'nodeid'=>$row['nodeid']
+      );
+       */
+    }
+  }
+  return $inputs;
+}
+
 //-----------------------------------------------------------------------------------------------
 // Return a list of users input ids and names
 //-----------------------------------------------------------------------------------------------
