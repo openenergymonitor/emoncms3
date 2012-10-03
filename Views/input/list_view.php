@@ -99,7 +99,7 @@ global $path;
   	        }
   	
   	        out += "</table>";
-  	        out += "<br><a href='../process/autoconfigure'>Autoconfigure inputs</a>";
+  	        out += "<br><a href='../process/autoconfigure'><?php echo _('Autoconfigure inputs'); ?></a>";
   	        $("#inputlist").html(out);
   	      }
       });
