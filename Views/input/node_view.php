@@ -103,7 +103,7 @@ global $path;
           out += "</table></div>";
         }
 
-        out += "<br><a href='../process/autoconfigure'>Autoconfigure inputs</a>";
+        out += "<br><a href='../process/autoconfigure'><?php echo _('Autoconfigure inputs'); ?></a>";
         $("#inputlist").html(out);
 
         $(".icon-plus").click(function(){
