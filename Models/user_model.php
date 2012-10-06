@@ -146,8 +146,8 @@ function ckeck_for_user_directory($username)
 	$id = get_user_id($username);
 	
 	// Check if the user directory exists and create it
-	if (!is_dir("./users/$id"))
-		mkdir("./users/$id", 0700);	
+	//if (!is_dir("./users/$id"))
+	//	mkdir("./users/$id", 0700);	
 }
 
 function user_logon($username, $password)
