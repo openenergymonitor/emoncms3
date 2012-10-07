@@ -138,6 +138,12 @@ function create_user($username, $password)
   {
     db_query("UPDATE users SET admin = 1 WHERE id = '$userid'");
   }
+  
+  $user = array();
+  $user['id'] = $userid;
+  $user['writeapikey'] = $apikey_write;
+  $user['readapikey'] = $apikey_read;
+  return $user;
 }
 
 function ckeck_for_user_directory($username)
