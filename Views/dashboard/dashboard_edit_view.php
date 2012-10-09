@@ -55,7 +55,7 @@
   $("#save-dashboard").click(function (){
     console.log("Saving");
     $.ajax({
-      type: "GET",
+      type: "POST",
       url :  path+"dashboard/set.json",
       data : "&content=" + encodeURIComponent($("#page").html())+"&id="+dashid,
       
