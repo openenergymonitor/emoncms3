@@ -68,6 +68,11 @@
       offset = -0.25;
       segment = ["#b7beff","#ffd9d9","#ffbebe","#ff9c9c","#ff6e6e","#ff3d3d"];
     }
+    else if (type == 9)  //temperature dial blue-red, first segment blue should mean below freezing C
+    {
+      offset = 0;
+      segment = ["#e94937","#da4130","#c43626","#ad2b1c","#992113","#86170a"];
+    }
 
     if (position>maxvalue) position = maxvalue;
     var a = 1.75 - ((position/maxvalue) * 1.5) + offset;
@@ -82,7 +87,7 @@
   {
     ctx.fillStyle = segment[z];
     ctx.beginPath();
-    ctx.arc(x,y,size,c+pos,c+pos+width,false);
+    ctx.arc(x,y,size,c+pos,c+pos+width+0.01,false);
     ctx.lineTo(x,y); 
     ctx.closePath();
     ctx.fill();
@@ -123,4 +128,4 @@
   if (position>10) position = position.toFixed(0); else position = position.toFixed(1);
   ctx.fillText(position+units,x,y+(size*0.125));
 
-  }"#046b34"
+  }

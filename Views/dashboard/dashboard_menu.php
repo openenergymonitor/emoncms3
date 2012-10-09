@@ -33,7 +33,7 @@ global $path, $useckeditor;
   <?php } ?>
     
   <a  data-toggle="modal" href="#myModal"><i class="icon-wrench" title="<?php echo _("Config"); ?>"></i></a>
-  <a href="#" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});" title="<?php echo _("New"); ?>"><i class="icon-plus-sign"></i></a>
+  <a href="#" onclick="$.ajax({type : 'POST',url :  '<?php echo $path ?>dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});" title="<?php echo _("New"); ?>"><i class="icon-plus-sign"></i></a>
   <a href="<?php echo $path; ?>dashboard/thumb"><i class="icon-th-large" title="<?php echo _("Thumb view"); ?>"></i></a>
   <a href="<?php echo $path; ?>dashboard/list"><i class="icon-th-list" title="<?php echo _("List view"); ?>"></i></a>   
 </div>

@@ -1,5 +1,5 @@
 <?php global $session, $path; ?>
-
+<!--[if IE]><script language="javascript" type="text/javascript" src="<?php echo $path; ?>Includes/flot/excanvas.min.js"></script><![endif]-->
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.min.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Views/dashboard/js/widgetlist.js"></script>

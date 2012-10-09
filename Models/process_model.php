@@ -101,8 +101,8 @@ function get_process_list()
   );
   $list[12] = array(
     _("/ input"),
-    ProcessArg::VALUE,
-    "divide",
+    ProcessArg::INPUTID,
+    "divide_input",
     0,
     DataType::UNDEFINED
   );
@@ -228,6 +228,18 @@ function times_input($id, $time, $value)
   $row = db_fetch_array($result);
   $value = $value * $row['value'];
   return $value;
+}
+
+function divide_input($id, $time, $value)
+{
+  $result = db_query("SELECT value FROM input WHERE id = '$id'");
+  $row = db_fetch_array($result);
+ 
+  if($row['value'] > 0){
+      return $value / $row['value'];
+  }else{
+      return null; // should this be null for a divide by zero?
+  }
 }
 
 function add_input($id, $time, $value)
