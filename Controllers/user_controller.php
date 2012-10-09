@@ -81,6 +81,9 @@
 
       $password = db_real_escape_string($_POST["pass"]);
 
+      // New option to return apikey on register - for use with drupal auth integration
+      if ($_GET['returnapikey']==true) $returnapikey = true; else $returnapikey = false;
+
       if (get_user_id($username) != 0)
       {
       	$output['message'] = _("Sorry username already exists");
@@ -95,9 +98,16 @@
       }  
       else
       {
-        create_user($username,$password);
-        $result = user_logon($username,$password);
-        $output['message'] = _("Your new account has been created");
+        $user = create_user($username,$password);
+        if (!$returnapikey) 
+        {
+          $result = user_logon($username,$password);
+          $output['message'] = _("Your new account has been created");
+        }
+        else
+        {
+          $output['message'] = $user['readapikey'];
+        }
         if ($format == 'html')
         {
           header("Location: ../dashboard/list");
