@@ -142,21 +142,10 @@ function get_user_inputsbynode($userid)
 function group_array($group_array,$index)
 {
   $groups = array();
-  foreach ($group_array as $item) {
-    $key = $item[$index];
-    if (!isset($groups[$key])) {
-        $groups[$key] = array(
-            'items' => array($item),
-            //'count' => 1,
-        );
-      } else {
-        $groups[$key]['items'][] = $item;
-       // $groups[$key]['count'] += 1;
-      }
-  }
-
+    foreach ($group_array as $entry)       
+      $groups[$entry[$index]][]= $entry;      
+  
   return $groups;
-
 }
 
 function get_user_inputsbynode_grouped($userid)
@@ -165,8 +154,7 @@ function get_user_inputsbynode_grouped($userid)
   $inputs = array();
   
   if ($result)
-  {
-    $nodeid_temp = -1;
+  {    
     while ($row = db_fetch_array($result))
     { 
       $inputs[] = array(
@@ -179,7 +167,7 @@ function get_user_inputsbynode_grouped($userid)
        
     }
   }
-  
+    
   return group_array($inputs, 'nodeid');
 }
 
