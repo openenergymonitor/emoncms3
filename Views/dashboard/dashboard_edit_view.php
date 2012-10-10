@@ -1,4 +1,16 @@
-<?php global $session,$path; ?>
+<?php 
+/*
+   All Emoncms code is released under the GNU Affero General Public License.
+   See COPYRIGHT.txt and LICENSE.txt.
+
+    ---------------------------------------------------------------------
+    Emoncms - open source energy visualisation
+    Part of the OpenEnergyMonitor project:
+    http://openenergymonitor.org
+*/
+
+  global $session,$path,$grid_size; 
+?>
 
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.min.js"></script>
   <script type="text/javascript" src="<?php echo $path; ?>Includes/flot/jquery.flot.min.js"></script>
@@ -11,11 +23,11 @@
 <div style="background-color:#ddd; padding:4px;">
   <span id="widget-buttons"></span>
   <span id="when-selected">
-  <button id="options-button">Options</button>
-  <button id="delete-button">Delete</button>
+    <button id="options-button"><?php echo _('Options'); ?></button>
+    <button id="delete-button"><?php echo _('Delete'); ?></button>
   </span>
 
-  <button style="float:right; margin:6px;" id="save-dashboard">Save</button>
+  <button style="float:right; margin:6px;" id="save-dashboard"><?php echo _('Save'); ?></button>
   <span id="state"  style="float:right; margin-top:9px; color:#888;"></span>
 </div>
 
@@ -42,7 +54,7 @@
   var redraw = 0;
   var reloadiframe = 0;
 
-  var grid_size = 20;
+  var grid_size = <?php echo $grid_size; ?>;
 
   dashboard_designer("#can",grid_size,widgets);
 
@@ -53,13 +65,11 @@
   setInterval(function() { slow_update("<?php echo $apikey_read; ?>"); }, 60000);
 
   $("#save-dashboard").click(function (){
-    console.log("Saving");
     $.ajax({
       type: "POST",
       url :  path+"dashboard/set.json",
       data : "&content=" + encodeURIComponent($("#page").html())+"&id="+dashid,
-      
-      success : function(data) { if (data=="ok") $("#state").html("Saved"); } 
+      success : function(data) { if (data=="ok") $("#state").html("<?php echo _('Saved'); ?>"); } 
     });
   });
 </script>

@@ -23,9 +23,8 @@ global $path;
 <h2><?php echo _("Node view"); ?></h2>
 
 <div align="right">
-  <!--<a href="#" title="<?php echo _("New dashboard"); ?>" onclick="$.ajax({type : 'POST',url :  path + 'dashboard/new.json  ',data : '',dataType : 'json',success : location.reload()});"><i class="icon-plus-sign"></i></a>-->
-  <a href="<?php echo $path; ?>input/list" title="<?php echo _("Node view"); ?>"><i class="icon-th"></i></a>
-  <!--<a href="<?php echo $path; ?>dashboard/list"><i class="icon-th-list"></i></a>-->
+  <a href="<?php echo $path; ?>input/list" title="<?php echo _("List view"); ?>"><i class="icon-list-alt"></i></a>
+  <a href="<?php echo $path; ?>input/nodes" title="<?php echo _("Node view"); ?>"><i class="icon-leaf"></i></a>
 </div>
 
 <div id="inputlist"></div>
