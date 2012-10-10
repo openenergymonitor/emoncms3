@@ -19,7 +19,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
 <table class='catlist'>
     <tr>
         <th>
-          <?php echo _('Node Identification'); ?><?php print_r( $inputs); ?>
+          <?php echo _('Node Identification'); ?><?php var_dump( $inputs); ?>
         </th>    
     </tr>
     
@@ -34,7 +34,7 @@ defined('EMONCMS_EXEC') or die('Restricted access');
   <?php    
 
     foreach ($inputs as $input) {
-    ?>  <li><a href="#">NULL</a></li> <?php     
+    ?>  <li><a href="#"><?php echo $input['nodeid']; ?></a></li> <?php     
       }
   ?>
   </ul>

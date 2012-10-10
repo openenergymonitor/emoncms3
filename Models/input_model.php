@@ -139,6 +139,26 @@ function get_user_inputsbynode($userid)
   return $inputs;
 }
 
+function group_array($group_array,$index)
+{
+  $groups = array();
+  foreach ($group_array as $item) {
+    $key = $item[$index];
+    if (!isset($groups[$key])) {
+        $groups[$key] = array(
+            'items' => array($item),
+            //'count' => 1,
+        );
+      } else {
+        $groups[$key]['items'][] = $item;
+       // $groups[$key]['count'] += 1;
+      }
+  }
+
+  return $groups;
+
+}
+
 function get_user_inputsbynode_grouped($userid)
 {
   $result = db_query("SELECT * FROM input WHERE userid = '$userid' ORDER BY nodeid");
@@ -148,26 +168,19 @@ function get_user_inputsbynode_grouped($userid)
   {
     $nodeid_temp = -1;
     while ($row = db_fetch_array($result))
-    {
-        if ($nodeid_temp <> $row['nodeid'])
-        {
-          $inputs[] = array(
-            'nodeid'=>$row['nodeid']
-          );
-          $nodeid_temp = $row['nodeid'];
-        }
-        
-      /*
+    { 
       $inputs[] = array(
+        'nodeid'=>$row['nodeid'],
         $row['id'],
         $row['name'],
         strtotime($row['time']) * 1000,
-        $row['value'], 'nodeid'=>$row['nodeid']
+        $row['value']
       );
-       */
+       
     }
   }
-  return $inputs;
+  
+  return group_array($inputs, 'nodeid');
 }
 
 //-----------------------------------------------------------------------------------------------
