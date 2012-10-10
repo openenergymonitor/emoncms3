@@ -66,7 +66,7 @@
 
   $("#save-dashboard").click(function (){
     $.ajax({
-      type: "GET",
+      type: "POST",
       url :  path+"dashboard/set.json",
       data : "&content=" + encodeURIComponent($("#page").html())+"&id="+dashid,
       success : function(data) { if (data=="ok") $("#state").html("<?php echo _('Saved'); ?>"); } 
