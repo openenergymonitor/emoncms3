@@ -17,7 +17,8 @@
   // Variable initialization
   $useckeditor = false;
 	$allowusersregister = true;
-
+  $grid_size = 20;
+    
   // Check if settings.php file exists
   if(!file_exists(dirname(__FILE__)."/settings.php"))
   {

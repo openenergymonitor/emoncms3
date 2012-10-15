@@ -35,4 +35,10 @@
  * Public registration
  */
  	$allowusersregister = true;
+  
+/*
+ * Designer
+ */
+  $grid_size = 20;
+
 ?>

@@ -12,23 +12,42 @@
 // no direct access
 defined('EMONCMS_EXEC') or die('Restricted access');
 
+global $path;
 ?>
 
-<h2><?php echo _('Nodes'); ?></h2>
- 
-<table class='catlist'>
-    <tr>
-        <th>
-          <?php echo _('Node Identification'); ?>
-        </th>    
-    </tr>
-    
-  <?php    
-    foreach ($nodes as $node) {
-      echo '<tr><td>'.$node['nodeid'].'</td></tr>';      
-    }
-  ?>
-</table>
+<h2><?php echo _('Tree View'); ?></h2>
+<div align="right">
+  <a href="<?php echo $path; ?>input/list" title="<?php echo _("List view"); ?>"><i class="icon-list-alt"></i></a>
+  <a href="<?php echo $path; ?>input/node" title="<?php echo _("Node view"); ?>"><i class="icon-th"></i></a>  
+</div>
+
+        
+<div style="border-bottom: black 1px solid; border-left: black 1px solid; overflow-x: auto; overflow-y: hidden; margin-bottom: 15px; height: 530px; border-top: black 1px solid; border-right: black 1px solid" class="syntaxtree">
+<div style="width: 900px">
+
+<div class="tree">
+<ul>
+    <li>
+      <a href="#">Nodes</a>
+      <ul>
+      <?php    
+  
+        foreach ($inputs as $nodeid => $nodes) {
+          if ($nodeid == '') $nodeid = 'No node associed';
+          else $nodeid = _('Node').' '.$nodeid;
+      
+          echo '<li><a href="#">'.$nodeid.'</a><ul>';            
+          foreach ($nodes as $node) 
+            echo '<li><a href="#">'.$node[1].'</a></li>';            
+          echo '</ul></li>';
+        }
+      ?>
+      </ul>
+    </li>
+  </ul>
+  </div>
+</div>
+</div>
 
 <style type="text/css">
 * {margin: 0; padding: 0;}
@@ -130,84 +149,3 @@ right connector from last child*/
 .tree li a:hover+ul ul::before{
   border-color:  #94a0b4;
 }
-
-/*Thats all. I hope you enjoyed it.
-Thanks :)*/
-</style>
-<!--
-We will create a family tree using just CSS(3)
-The markup will be simple nested lists
--->
-<div style="border-bottom: black 1px solid; border-left: black 1px solid; overflow-x: auto; overflow-y: hidden; margin-bottom: 15px; height: 530px; border-top: black 1px solid; border-right: black 1px solid" class="syntaxtree">
-<div style="width: 1800px">
-<div class="tree">
-  <ul>
-    <li>
-      <a href="#">Nodes</a>
-      <ul>
-        <li>
-          <a href="#">99</a>
-          <ul>
-  
-                <li>
-                  <a href="#">node99_power</a>
-                </li>
-                <li>
-                  <a href="#">node99_temperature</a>
-                                <ul>
-                <li>
-                  <a href="#">power</a>
-                </li>
-                <li>
-                  <a href="#">power-kwhd</a>
-                </li>
-                <li>
-                  <a href="#">power-histogram</a>
-                </li>
-              </ul>
-                </li>
-              </ul>          
-  
-        </li>
-        <li>
-          <a href="#">Orphan inputs</a>
-          <ul>
-            <li><a href="#">Power</a>
-              <ul>
-                <li>
-                  <a href="#">power</a>
-                </li>
-                <li>
-                  <a href="#">power-kwhd</a>
-                </li>
-                <li>
-                  <a href="#">power-histogram</a>
-                                <ul>
-                <li>
-                  <a href="#">power</a>
-                </li>
-                <li>
-                  <a href="#">power-kwhd</a>
-                </li>
-                <li>
-                  <a href="#">power-histogram</a>
-                </li>
-              </ul>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Temperature</a>
-              
-            </li>          
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
-</div>
-</div>
-
-  
-

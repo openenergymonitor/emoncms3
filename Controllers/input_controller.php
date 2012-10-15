@@ -52,6 +52,19 @@ function input_controller()
   }
 	
   //---------------------------------------------------------------------------------------------------------
+  // List inputs tree mode
+  // http://yoursite/emoncms/input/list.html
+  // http://yoursite/emoncms/input/list.json
+  //---------------------------------------------------------------------------------------------------------
+  elseif ($action == 'nodes' && $session['read'])
+  {
+    $inputs = get_user_inputsbynode_grouped($session['userid']);
+
+    if ($format == 'json') $output['content'] = json_encode($inputs);
+    if ($format == 'html') $output['content'] = view("input/nodes_view.php", array('inputs' => $inputs));
+  }
+  
+  //---------------------------------------------------------------------------------------------------------
   // Delete an input
   // http://yoursite/emoncms/input/delete?id=1
   //---------------------------------------------------------------------------------------------------------
