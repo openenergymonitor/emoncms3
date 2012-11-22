@@ -13,6 +13,7 @@
   global $path, $embed;
 
   $fill = $_GET["fill"]?$_GET["fill"]:true;
+  $steps = $_GET["steps"]?$_GET["steps"]:0;
   $units = $_GET["units"]?$_GET["units"]:"W";
 ?>
 
@@ -55,6 +56,8 @@
   var path = "<?php echo $path; ?>";
   var apikey = "<?php echo $apikey; ?>";
 
+  var plotsteps = <?php echo $steps; ?>;
+  if (plotsteps==1) plotsteps = true; else plotsteps = false;
   var plotfill = <?php echo $fill; ?>;
   if (plotfill==1) plotfill = true; else plotfill = false;
   var units = "<?php echo $units; ?>";
@@ -89,7 +92,7 @@
 
   function plot()
   {
-    var plot = $.plot($("#graph"), [{data: graph_data, lines: { show: true, fill: plotfill }}], {
+    var plot = $.plot($("#graph"), [{data: graph_data, lines: { show: true, fill: plotfill, steps:plotsteps}}], {
       grid: { show: true, hoverable: true, clickable: true },
       xaxis: { mode: "time", localTimezone: true, min: start, max: end },
       selection: { mode: "xy" }

@@ -140,12 +140,14 @@ function update(apikey_read)
   {
     var feed = $(this).attr("feedname");
     var units = $(this).attr("units");
+    var steps = $(this).attr("steps");
     var val = assoc[feed];
 
     if (feed==undefined) val = 0;
     if (units==undefined) units = '';
+    if (steps==undefined) steps = 0;
 
-    $(this).html(val+units);
+    $(this).html(val+units+steps);
   });
 }
 
