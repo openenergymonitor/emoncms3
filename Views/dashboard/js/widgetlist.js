@@ -80,7 +80,7 @@
     {
       "offsetx":0,"offsety":0,"width":400,"height":300,
       "menu":"Visualisations",
-      "options":["feedid","fill","units"],
+      "options":["feedid","fill","steps","units"],
       "html":""
     },
 
