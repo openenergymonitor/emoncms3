@@ -110,9 +110,9 @@ require_once "Includes/messages.php";
   } // endif  
   else { ?>
   <div class="alert alert-block">
-  <h4 class="alert-heading">No dashboards created</h4>
-  <p>Maybe you would like to add your first dashboard using the 
-  <a href="#" onclick="$.ajax({type : 'POST',url:'<?php echo $path; ?>dashboard/new.json',data : '',dataType : 'json',success : location.reload()});"><i class="icon-plus-sign"></i></a> button
+  <h4 class="alert-heading"><?php echo _("No dashboard created"); ?></h4>
+  <p><?php echo _("Maybe you would like to add your first dashboard using the"); ?> 
+  <a href="#" onclick="$.ajax({type : 'POST',url:'<?php echo $path; ?>dashboard/new.json',data : '',dataType : 'json',success : location.reload()});"><i class="icon-plus-sign"></i></a> <?php echo _("button"); ?>
   </div>
   <?php } ?>
 </table>
