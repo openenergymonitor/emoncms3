@@ -139,6 +139,8 @@ if ($output == null)
 // 3) Add the main menu
 $output['mainmenu'] = view("menu_view.php", array());
 
+$output['message'] .= "This is the old version of emoncms, Download the current version from the new repository at github.com/emoncms/emoncms";
+
 //---------------------------------------------------------------------------------
 // PRINT THE CONTENT
 //---------------------------------------------------------------------------------
